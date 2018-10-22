@@ -1,27 +1,19 @@
-package objects;
+package main.objects;
 
-public class Subtopic extends Topic {
+public class SubTopic extends Topic {
 
     private String subTopicName;
 
-    public Subtopic() {
-        setSubTopicName = "";
-    }
-
-    public Subtopic(String subTopicName) {
-        this.subTopicName = subTopicName;
-    }
-
-    public Subtopic(String subTopicName) {
+    public SubTopic(String subTopicName) {
         this.subTopicName = subTopicName;
     }
 
     public String getSubTopicName() {
-        return getSubTopicName;
+        return subTopicName;
     }
 
     public void setSubTopicName(String subTopicName) {
-        this.setSubTopicName = subTopicName;
+        this.subTopicName = subTopicName;
     }
 }
 

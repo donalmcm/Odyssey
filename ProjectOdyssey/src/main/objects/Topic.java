@@ -1,5 +1,4 @@
-
-package objects;
+package main.objects;
 
 public class Topic {
 
@@ -9,19 +8,11 @@ public class Topic {
         topicName = "";
     }
 
-    public Topic(String topicName) {
-        this.topicName = topicName;
-    }
-
-    public Topic(String topicName) {
-        this.topicName = topicName;
-    }
-
     public String getTopicName() {
         return topicName;
     }
 
     public void setTopicName(String topicName) {
-         this.topicName = topicName;
+        this.topicName = topicName;
     }
 }

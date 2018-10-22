@@ -1,6 +1,8 @@
-package objects;
+package main.objects;
+
+import java.util.List;
 
 public class AllEmployees {
-    private List<Employee> allEmployees = new List<Employees>();
+    private List<Employee> allEmployees;
 
 }
