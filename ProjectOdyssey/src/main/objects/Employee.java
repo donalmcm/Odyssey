@@ -5,14 +5,15 @@ import java.util.List;
 
 public class Employee {
 
-    private boolean isManager;
     private String name;
     private String title;
     private String email; //regex
-    private List<Topic> skills = new ArrayList<>();
     private boolean isMentor;
     private boolean isMentee;
+    private boolean isManager;
     private boolean isAdmin;
+    private List<SubTopic> skills = new ArrayList<>();
+    private List<Employee> allEmployees = new ArrayList<>();
     //availability
 
     public Employee() {
@@ -59,11 +60,11 @@ public class Employee {
         this.email = email;
     }
 
-    public List<Topic> getSkills() {
+    public List<SubTopic> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<Topic> skills) {
+    public void setSkills(List<SubTopic> skills) {
         this.skills = skills;
     }
 
@@ -89,5 +90,9 @@ public class Employee {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public List<Employee> getAllEmployees() {
+        return allEmployees;
     }
 }

@@ -1,4 +1,6 @@
 package main.objects;
 
-public class TimeOfDay {
+public enum TimeOfDay {
+
+    AFTERNOON, MORNING;
 }

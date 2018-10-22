@@ -1,4 +1,6 @@
 package main.objects;
 
-public class OdysseyStatus {
+public enum OdysseyStatus {
+
+    PENDING, IN_PROGRESS, FINISHED
 }
