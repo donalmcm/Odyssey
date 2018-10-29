@@ -1,21 +1,48 @@
 package main.objects;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+ 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+ 
+@Entity
+@Table(name = "employee")
+public class Employee implements Serializable {
 
-public class Employee {
-
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
+	@Column(name = "name")
     private String name;
-    private String title;
-    private String email; //regex
+
+    @Column(name = "title")
+	private String title;
+
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "isMentor")
     private boolean isMentor;
-    private boolean isMentee;
-    private boolean isManager;
-    private boolean isAdmin;
+
+	@Column(name = "isMentee")
+	private boolean isMentee;
+
+	@Column(name = "isManager")
+	private boolean isManager;
+
+	@Column(name = "isAdmin")
+	private boolean isAdmin;
+
+
     private List<SubTopic> skills = new ArrayList<>();
+
     private List<Employee> allEmployees = new ArrayList<>();
     //availability
-
     public Employee() {
         name = "";
         title = "";
@@ -26,6 +53,10 @@ public class Employee {
         this.name = name;
         this.title = title;
         this.email = email;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public boolean isManager() {
