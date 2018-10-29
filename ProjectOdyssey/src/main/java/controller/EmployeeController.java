@@ -47,7 +47,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public ResponseEntity<Employee> getBook(@PathVariable("id") Long id) {
+    public ResponseEntity<Employee> getEmployee(@PathVariable("id") Long id) {
         System.out.println("Get Employee by id...");
 
         Optional<Employee> employeeData = employeeRepository.findById(id);
@@ -59,7 +59,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
-    public ResponseEntity<Employee> updateBook(@PathVariable("id") Long id, @RequestBody Employee employee) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long id, @RequestBody Employee employee) {
         System.out.println("Update Employee with ID = " + id + "...");
 
         Optional<Employee> employeeData = employeeRepository.findById(id);
