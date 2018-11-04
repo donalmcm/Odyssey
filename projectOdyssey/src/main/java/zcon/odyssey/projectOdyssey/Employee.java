@@ -11,8 +11,7 @@ import javax.persistence.Version;
 @Data
 @Entity
 public class Employee {
-    private @Id
-    @GeneratedValue Long id;
+    private @Id @GeneratedValue Long id;
 
     private String firstName;
     private String lastName;

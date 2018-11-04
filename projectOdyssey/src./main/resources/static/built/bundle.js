@@ -27665,6 +27665,8 @@ var client = __webpack_require__(/*! ./client */ "./src/main/js/client.js");
 var follow = __webpack_require__(/*! ./follow */ "./src/main/js/follow.js"); // function to hop multiple links by "rel"
 
 
+var stompClient = __webpack_require__(/*! ./websocket-listener */ "./src/main/js/websocket-listener.js");
+
 var root = '/api';
 
 var App =
@@ -27681,6 +27683,7 @@ function (_React$Component) {
     _this.state = {
       employees: [],
       attributes: [],
+      page: 1,
       pageSize: 2,
       links: {}
     };
@@ -27689,9 +27692,10 @@ function (_React$Component) {
     _this.onUpdate = _this.onUpdate.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onDelete = _this.onDelete.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onNavigate = _this.onNavigate.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.refreshCurrentPage = _this.refreshCurrentPage.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.refreshAndGoToLastPage = _this.refreshAndGoToLastPage.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
-  } // tag::follow-2[]
-
+  }
 
   _createClass(App, [{
     key: "loadFromServer",
@@ -27716,6 +27720,7 @@ function (_React$Component) {
           return employeeCollection;
         });
       }).then(function (employeeCollection) {
+        _this2.page = employeeCollection.entity.page;
         return employeeCollection.entity._embedded.employees.map(function (employee) {
           return client({
             method: 'GET',
@@ -27726,23 +27731,20 @@ function (_React$Component) {
         return when.all(employeePromises);
       }).done(function (employees) {
         _this2.setState({
+          page: _this2.page,
           employees: employees,
           attributes: Object.keys(_this2.schema.properties),
           pageSize: pageSize,
           links: _this2.links
         });
       });
-    } // end::follow-2[]
-    // tag::create[]
+    } // tag::on-create[]
 
   }, {
     key: "onCreate",
     value: function onCreate(newEmployee) {
-      var _this3 = this;
-
-      var self = this;
-      follow(client, root, ['employees']).then(function (response) {
-        return client({
+      follow(client, root, ['employees']).done(function (response) {
+        client({
           method: 'POST',
           path: response.entity._links.self.href,
           entity: newEmployee,
@@ -27750,28 +27752,12 @@ function (_React$Component) {
             'Content-Type': 'application/json'
           }
         });
-      }).then(function (response) {
-        return follow(client, root, [{
-          rel: 'employees',
-          params: {
-            'size': self.state.pageSize
-          }
-        }]);
-      }).done(function (response) {
-        if (typeof response.entity._links.last !== "undefined") {
-          _this3.onNavigate(response.entity._links.last.href);
-        } else {
-          _this3.onNavigate(response.entity._links.self.href);
-        }
       });
-    } // end::create[]
-    // tag::update[]
+    } // end::on-create[]
 
   }, {
     key: "onUpdate",
     value: function onUpdate(employee, updatedEmployee) {
-      var _this4 = this;
-
       client({
         method: 'PUT',
         path: employee.entity._links.self.href,
@@ -27781,39 +27767,32 @@ function (_React$Component) {
           'If-Match': employee.headers.Etag
         }
       }).done(function (response) {
-        _this4.loadFromServer(_this4.state.pageSize);
+        /* Let the websocket handler update the state */
       }, function (response) {
         if (response.status.code === 412) {
           alert('DENIED: Unable to update ' + employee.entity._links.self.href + '. Your copy is stale.');
         }
       });
-    } // end::update[]
-    // tag::delete[]
-
+    }
   }, {
     key: "onDelete",
     value: function onDelete(employee) {
-      var _this5 = this;
-
       client({
         method: 'DELETE',
         path: employee.entity._links.self.href
-      }).done(function (response) {
-        _this5.loadFromServer(_this5.state.pageSize);
       });
-    } // end::delete[]
-    // tag::navigate[]
-
+    }
   }, {
     key: "onNavigate",
     value: function onNavigate(navUri) {
-      var _this6 = this;
+      var _this3 = this;
 
       client({
         method: 'GET',
         path: navUri
       }).then(function (employeeCollection) {
-        _this6.links = employeeCollection.entity._links;
+        _this3.links = employeeCollection.entity._links;
+        _this3.page = employeeCollection.entity.page;
         return employeeCollection.entity._embedded.employees.map(function (employee) {
           return client({
             method: 'GET',
@@ -27823,30 +27802,90 @@ function (_React$Component) {
       }).then(function (employeePromises) {
         return when.all(employeePromises);
       }).done(function (employees) {
-        _this6.setState({
+        _this3.setState({
+          page: _this3.page,
           employees: employees,
-          attributes: Object.keys(_this6.schema.properties),
-          pageSize: _this6.state.pageSize,
-          links: _this6.links
+          attributes: Object.keys(_this3.schema.properties),
+          pageSize: _this3.state.pageSize,
+          links: _this3.links
         });
       });
-    } // end::navigate[]
-    // tag::update-page-size[]
-
+    }
   }, {
     key: "updatePageSize",
     value: function updatePageSize(pageSize) {
       if (pageSize !== this.state.pageSize) {
         this.loadFromServer(pageSize);
       }
-    } // end::update-page-size[]
-    // tag::follow-1[]
+    } // tag::websocket-handlers[]
+
+  }, {
+    key: "refreshAndGoToLastPage",
+    value: function refreshAndGoToLastPage(message) {
+      var _this4 = this;
+
+      follow(client, root, [{
+        rel: 'employees',
+        params: {
+          size: this.state.pageSize
+        }
+      }]).done(function (response) {
+        if (response.entity._links.last !== undefined) {
+          _this4.onNavigate(response.entity._links.last.href);
+        } else {
+          _this4.onNavigate(response.entity._links.self.href);
+        }
+      });
+    }
+  }, {
+    key: "refreshCurrentPage",
+    value: function refreshCurrentPage(message) {
+      var _this5 = this;
+
+      follow(client, root, [{
+        rel: 'employees',
+        params: {
+          size: this.state.pageSize,
+          page: this.state.page.number
+        }
+      }]).then(function (employeeCollection) {
+        _this5.links = employeeCollection.entity._links;
+        _this5.page = employeeCollection.entity.page;
+        return employeeCollection.entity._embedded.employees.map(function (employee) {
+          return client({
+            method: 'GET',
+            path: employee._links.self.href
+          });
+        });
+      }).then(function (employeePromises) {
+        return when.all(employeePromises);
+      }).then(function (employees) {
+        _this5.setState({
+          page: _this5.page,
+          employees: employees,
+          attributes: Object.keys(_this5.schema.properties),
+          pageSize: _this5.state.pageSize,
+          links: _this5.links
+        });
+      });
+    } // end::websocket-handlers[]
+    // tag::register-handlers[]
 
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.loadFromServer(this.state.pageSize);
-    } // end::follow-1[]
+      stompClient.register([{
+        route: '/topic/newEmployee',
+        callback: this.refreshAndGoToLastPage
+      }, {
+        route: '/topic/updateEmployee',
+        callback: this.refreshCurrentPage
+      }, {
+        route: '/topic/deleteEmployee',
+        callback: this.refreshCurrentPage
+      }]);
+    } // end::register-handlers[]
 
   }, {
     key: "render",
@@ -27855,6 +27894,7 @@ function (_React$Component) {
         attributes: this.state.attributes,
         onCreate: this.onCreate
       }), React.createElement(EmployeeList, {
+        page: this.state.page,
         employees: this.state.employees,
         links: this.state.links,
         pageSize: this.state.pageSize,
@@ -27868,8 +27908,7 @@ function (_React$Component) {
   }]);
 
   return App;
-}(React.Component); // tag::create-dialog[]
-
+}(React.Component);
 
 var CreateDialog =
 /*#__PURE__*/
@@ -27877,28 +27916,28 @@ function (_React$Component2) {
   _inherits(CreateDialog, _React$Component2);
 
   function CreateDialog(props) {
-    var _this7;
+    var _this6;
 
     _classCallCheck(this, CreateDialog);
 
-    _this7 = _possibleConstructorReturn(this, _getPrototypeOf(CreateDialog).call(this, props));
-    _this7.handleSubmit = _this7.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this7)));
-    return _this7;
+    _this6 = _possibleConstructorReturn(this, _getPrototypeOf(CreateDialog).call(this, props));
+    _this6.handleSubmit = _this6.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this6)));
+    return _this6;
   }
 
   _createClass(CreateDialog, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this8 = this;
+      var _this7 = this;
 
       e.preventDefault();
       var newEmployee = {};
       this.props.attributes.forEach(function (attribute) {
-        newEmployee[attribute] = ReactDOM.findDOMNode(_this8.refs[attribute]).value.trim();
+        newEmployee[attribute] = ReactDOM.findDOMNode(_this7.refs[attribute]).value.trim();
       });
       this.props.onCreate(newEmployee);
       this.props.attributes.forEach(function (attribute) {
-        ReactDOM.findDOMNode(_this8.refs[attribute]).value = ''; // clear out the dialog's inputs
+        ReactDOM.findDOMNode(_this7.refs[attribute]).value = ''; // clear out the dialog's inputs
       });
       window.location = "#";
     }
@@ -27931,9 +27970,7 @@ function (_React$Component2) {
   }]);
 
   return CreateDialog;
-}(React.Component); // end::create-dialog[]
-// tag::update-dialog[]
-
+}(React.Component);
 
 var UpdateDialog =
 /*#__PURE__*/
@@ -27941,24 +27978,24 @@ function (_React$Component3) {
   _inherits(UpdateDialog, _React$Component3);
 
   function UpdateDialog(props) {
-    var _this9;
+    var _this8;
 
     _classCallCheck(this, UpdateDialog);
 
-    _this9 = _possibleConstructorReturn(this, _getPrototypeOf(UpdateDialog).call(this, props));
-    _this9.handleSubmit = _this9.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this9)));
-    return _this9;
+    _this8 = _possibleConstructorReturn(this, _getPrototypeOf(UpdateDialog).call(this, props));
+    _this8.handleSubmit = _this8.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this8)));
+    return _this8;
   }
 
   _createClass(UpdateDialog, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this10 = this;
+      var _this9 = this;
 
       e.preventDefault();
       var updatedEmployee = {};
       this.props.attributes.forEach(function (attribute) {
-        updatedEmployee[attribute] = ReactDOM.findDOMNode(_this10.refs[attribute]).value.trim();
+        updatedEmployee[attribute] = ReactDOM.findDOMNode(_this9.refs[attribute]).value.trim();
       });
       this.props.onUpdate(this.props.employee, updatedEmployee);
       window.location = "#";
@@ -27966,23 +28003,21 @@ function (_React$Component3) {
   }, {
     key: "render",
     value: function render() {
-      var _this11 = this;
+      var _this10 = this;
 
       var inputs = this.props.attributes.map(function (attribute) {
         return React.createElement("p", {
-          key: _this11.props.employee.entity[attribute]
+          key: _this10.props.employee.entity[attribute]
         }, React.createElement("input", {
           type: "text",
           placeholder: attribute,
-          defaultValue: _this11.props.employee.entity[attribute],
+          defaultValue: _this10.props.employee.entity[attribute],
           ref: attribute,
           className: "field"
         }));
       });
       var dialogId = "updateEmployee-" + this.props.employee.entity._links.self.href;
-      return React.createElement("div", {
-        key: this.props.employee.entity._links.self.href
-      }, React.createElement("a", {
+      return React.createElement("div", null, React.createElement("a", {
         href: "#" + dialogId
       }, "Update"), React.createElement("div", {
         id: dialogId,
@@ -28000,27 +28035,24 @@ function (_React$Component3) {
   return UpdateDialog;
 }(React.Component);
 
-; // end::update-dialog[]
-
 var EmployeeList =
 /*#__PURE__*/
 function (_React$Component4) {
   _inherits(EmployeeList, _React$Component4);
 
   function EmployeeList(props) {
-    var _this12;
+    var _this11;
 
     _classCallCheck(this, EmployeeList);
 
-    _this12 = _possibleConstructorReturn(this, _getPrototypeOf(EmployeeList).call(this, props));
-    _this12.handleNavFirst = _this12.handleNavFirst.bind(_assertThisInitialized(_assertThisInitialized(_this12)));
-    _this12.handleNavPrev = _this12.handleNavPrev.bind(_assertThisInitialized(_assertThisInitialized(_this12)));
-    _this12.handleNavNext = _this12.handleNavNext.bind(_assertThisInitialized(_assertThisInitialized(_this12)));
-    _this12.handleNavLast = _this12.handleNavLast.bind(_assertThisInitialized(_assertThisInitialized(_this12)));
-    _this12.handleInput = _this12.handleInput.bind(_assertThisInitialized(_assertThisInitialized(_this12)));
-    return _this12;
-  } // tag::handle-page-size-updates[]
-
+    _this11 = _possibleConstructorReturn(this, _getPrototypeOf(EmployeeList).call(this, props));
+    _this11.handleNavFirst = _this11.handleNavFirst.bind(_assertThisInitialized(_assertThisInitialized(_this11)));
+    _this11.handleNavPrev = _this11.handleNavPrev.bind(_assertThisInitialized(_assertThisInitialized(_this11)));
+    _this11.handleNavNext = _this11.handleNavNext.bind(_assertThisInitialized(_assertThisInitialized(_this11)));
+    _this11.handleNavLast = _this11.handleNavLast.bind(_assertThisInitialized(_assertThisInitialized(_this11)));
+    _this11.handleInput = _this11.handleInput.bind(_assertThisInitialized(_assertThisInitialized(_this11)));
+    return _this11;
+  }
 
   _createClass(EmployeeList, [{
     key: "handleInput",
@@ -28033,9 +28065,7 @@ function (_React$Component4) {
       } else {
         ReactDOM.findDOMNode(this.refs.pageSize).value = pageSize.substring(0, pageSize.length - 1);
       }
-    } // end::handle-page-size-updates[]
-    // tag::handle-nav[]
-
+    }
   }, {
     key: "handleNavFirst",
     value: function handleNavFirst(e) {
@@ -28059,21 +28089,20 @@ function (_React$Component4) {
     value: function handleNavLast(e) {
       e.preventDefault();
       this.props.onNavigate(this.props.links.last.href);
-    } // end::handle-nav[]
-    // tag::employee-list-render[]
-
+    }
   }, {
     key: "render",
     value: function render() {
-      var _this13 = this;
+      var _this12 = this;
 
+      var pageInfo = this.props.page.hasOwnProperty("number") ? React.createElement("h3", null, "Employees - Page ", this.props.page.number + 1, " of ", this.props.page.totalPages) : null;
       var employees = this.props.employees.map(function (employee) {
         return React.createElement(Employee, {
           key: employee.entity._links.self.href,
           employee: employee,
-          attributes: _this13.props.attributes,
-          onUpdate: _this13.props.onUpdate,
-          onDelete: _this13.props.onDelete
+          attributes: _this12.props.attributes,
+          onUpdate: _this12.props.onUpdate,
+          onDelete: _this12.props.onDelete
         });
       });
       var navLinks = [];
@@ -28106,18 +28135,16 @@ function (_React$Component4) {
         }, ">>"));
       }
 
-      return React.createElement("div", null, React.createElement("input", {
+      return React.createElement("div", null, pageInfo, React.createElement("input", {
         ref: "pageSize",
         defaultValue: this.props.pageSize,
         onInput: this.handleInput
       }), React.createElement("table", null, React.createElement("tbody", null, React.createElement("tr", null, React.createElement("th", null, "First Name"), React.createElement("th", null, "Last Name"), React.createElement("th", null, "Email"), React.createElement("th", null), React.createElement("th", null)), employees)), React.createElement("div", null, navLinks));
-    } // end::employee-list-render[]
-
+    }
   }]);
 
   return EmployeeList;
-}(React.Component); // tag::employee[]
-
+}(React.Component);
 
 var Employee =
 /*#__PURE__*/
@@ -28125,13 +28152,13 @@ function (_React$Component5) {
   _inherits(Employee, _React$Component5);
 
   function Employee(props) {
-    var _this14;
+    var _this13;
 
     _classCallCheck(this, Employee);
 
-    _this14 = _possibleConstructorReturn(this, _getPrototypeOf(Employee).call(this, props));
-    _this14.handleDelete = _this14.handleDelete.bind(_assertThisInitialized(_assertThisInitialized(_this14)));
-    return _this14;
+    _this13 = _possibleConstructorReturn(this, _getPrototypeOf(Employee).call(this, props));
+    _this13.handleDelete = _this13.handleDelete.bind(_assertThisInitialized(_assertThisInitialized(_this13)));
+    return _this13;
   }
 
   _createClass(Employee, [{
@@ -28153,8 +28180,7 @@ function (_React$Component5) {
   }]);
 
   return Employee;
-}(React.Component); // end::employee[]
-
+}(React.Component);
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('react'));
 
@@ -28241,6 +28267,38 @@ module.exports = function follow(api, rootPath, relArray) {
     return entity._embedded && entity._embedded.hasOwnProperty(rel);
   }
 };
+
+/***/ }),
+
+/***/ "./src/main/js/websocket-listener.js":
+/*!*******************************************!*\
+  !*** ./src/main/js/websocket-listener.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var SockJS = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'sockjs-client'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())); // <1>
+
+
+__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'stompjs'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())); // <2>
+
+
+function register(registrations) {
+  var socket = SockJS('/projectOdyssey'); // <3>
+
+  var stompClient = Stomp.over(socket);
+  stompClient.connect({}, function (frame) {
+    registrations.forEach(function (registration) {
+      // <4>
+      stompClient.subscribe(registration.route, registration.callback);
+    });
+  });
+}
+
+module.exports.register = register;
 
 /***/ }),
 
