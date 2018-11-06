@@ -1,10 +1,12 @@
 package zcon.odyssey.projectOdyssey;
 
+import lombok.Data;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Data
 @Entity
 public class Odyssey {
 

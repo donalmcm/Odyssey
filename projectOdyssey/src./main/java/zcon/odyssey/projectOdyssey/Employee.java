@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import javax.persistence.*;
 import java.util.List;
 
-//@Data
+@Data
 @Entity
 public class Employee {
 
