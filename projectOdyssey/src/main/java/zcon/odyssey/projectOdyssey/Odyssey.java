@@ -13,10 +13,10 @@ public class Odyssey {
     private Long id;
 
     @Column(nullable = false)
-    private String mentee;
+    private Employee mentee; // perform check?
 
     @Column(nullable = false)
-    private String mentor;
+    private Employee mentor; // perform check?
 
     @ManyToOne
     @JoinColumn(name = "odyssey")
@@ -31,8 +31,9 @@ public class Odyssey {
     private Topic topic;
 
 
-    public Odyssey(String mentee, String mentor) {
-        this.mentee = mentee;
-        this.mentor = mentor;
+    public Odyssey(Employee mentee, Employee mentor, Topic topic) { // needs to take in two employee objects and a topic
+        // mentee must have isMentee = true
+        // mentor must have isMentor = true
+        // an odyssey must have a topic
     }
 }

@@ -14,4 +14,8 @@ public class Topic {
 
     @OneToOne(mappedBy = "topic")
     private Odyssey odyssey;
+
+    public Topic(String topic) {
+        this.topic = topic;
+    }
 }
