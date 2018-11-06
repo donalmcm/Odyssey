@@ -2,22 +2,31 @@ package zcon.odyssey.projectOdyssey;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.data.rest.core.annotation.RestResource;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.*;
+import java.util.List;
 
-@Data
+//@Data
 @Entity
 public class Employee {
-    private @Id @GeneratedValue Long id;
 
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @Column(nullable = false)
     private String firstName;
+
+    @Column(nullable = false)
     private String lastName;
+
+    @Column(nullable = false)
     private String email;
 
-    private @Version @JsonIgnore Long version;
+    // private @Version @JsonIgnore Long version;
+    @OneToMany(mappedBy = "odyssey")
+    private List<Odyssey> odyssey;
 
     private Employee(){}
 
