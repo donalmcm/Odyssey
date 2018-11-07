@@ -15,15 +15,15 @@ public class OdysseyMeeting {
     @Column // could this field be empty for remote calls or should skype be the location?
     private String location;
 
-    @Column(nullable = false)
-    private Date date = new Date();
+    // @Column(nullable = false)
+    // private Date date = new Date();
 
     @ManyToOne
     @JoinColumn(name = "odyssey_id")
     private Odyssey odyssey;
 
-    public OdysseyMeeting(String location, Date date) {
+    public OdysseyMeeting(String location/*, Date date*/) {
         this.location = location;
-        this.date = date;
+        // this.date = date;
     }
 }

@@ -1,6 +1,7 @@
 package zcon.odyssey.projectOdyssey;
 
 import lombok.Data;
+import org.junit.jupiter.api.Test;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
@@ -38,4 +39,5 @@ public class Odyssey {
         // mentor must have isMentor = true
         // an odyssey must have a topic
     }
+
 }
