@@ -21,14 +21,17 @@ public class Employee {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     // private @Version @JsonIgnore Long version;
-    @OneToMany(mappedBy = "odyssey")
-    private List<Odyssey> odyssey;
+    @OneToMany(mappedBy = "mentor", cascade = CascadeType.ALL)
+    private List<Odyssey> mentor_odyssey;
 
-    private Employee(){}
+    @OneToMany(mappedBy = "mentee", cascade = CascadeType.ALL)
+    private List<Odyssey> mentee_odyssey;
+
+    public Employee(){}
 
     public Employee(String firstName, String lastName, String email) {
         this.firstName = firstName;

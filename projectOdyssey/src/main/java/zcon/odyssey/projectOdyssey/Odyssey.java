@@ -15,17 +15,15 @@ public class Odyssey {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
-    private Employee mentee; // perform check?
-
-    @Column(nullable = false)
-    private Employee mentor; // perform check?
+    @ManyToOne
+    @JoinColumn(name = "mentor_odyssey")
+    private Employee mentor;
 
     @ManyToOne
-    @JoinColumn(name = "odyssey")
-    private Employee employee;
+    @JoinColumn(name = "mentee_odyssey")
+    private Employee mentee;
 
-    @OneToMany(mappedBy = "odyssey_meeting")
+    @OneToMany(mappedBy = "odyssey")
     private List<OdysseyMeeting> odysseyMeetings;
 
     @OneToOne
@@ -33,11 +31,12 @@ public class Odyssey {
     @RestResource(path = "odysseyTopic", rel = "topic")
     private Topic topic;
 
+    public Odyssey(){}
 
     public Odyssey(Employee mentee, Employee mentor, Topic topic) { // needs to take in two employee objects and a topic
-        // mentee must have isMentee = true
-        // mentor must have isMentor = true
-        // an odyssey must have a topic
+        this.mentee = mentee; // must have isMentee = true
+        this.mentor = mentor;// mentor must have isMentor = true
+        this.topic = topic;// an odyssey must have a topic
     }
 
 }

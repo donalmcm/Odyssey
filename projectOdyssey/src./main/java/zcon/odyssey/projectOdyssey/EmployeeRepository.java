@@ -9,5 +9,4 @@ import javax.transaction.Transactional;
 
 @Transactional// (readOnly = true)
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-    Page<Employee> findByLastName(String lastName, Pageable pageable);
 }

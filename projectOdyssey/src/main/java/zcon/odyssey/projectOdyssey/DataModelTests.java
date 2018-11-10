@@ -70,7 +70,7 @@ public class DataModelTests {
                 odysseyGetResponse.getBody().toString(), EMPLOYEE_FIRST_NAME);
     }
 
-    // TEST FOR A ONE TO MANY RELATIONSHIP BETWEEN ONE ODYSSEY AND MANY ODYSSEY MEETINGS
+    // ONE TO MANY RELATIONSHIP BETWEEN ONE ODYSSEY AND MANY ODYSSEY MEETINGS
     @Test
     public void odysseyToOdysseyMeetingsRelationship_thenCorrect() {
         Employee employeeDonal = new Employee(EMPLOYEE_FIRST_NAME,EMPLOYEE_LAST_NAME,EMPLOYEE_EMAIL);
@@ -103,7 +103,7 @@ public class DataModelTests {
 
     // ONE TO MANY BETWEEN ONE EMPLOYEE AND MANY ODYSSEYS
     @Test
-    public void employyeToOdysseysRelationship_thenCorrect() {
+    public void employeeToOdysseysRelationship_thenCorrect() {
 
         Employee employeeJoe = new Employee(EMPLOYEE_ONE_FIRST_NAME,EMPLOYEE_ONE_LAST_NAME,EMPLOYEE_ONE_EMAIL);
         Topic topicJava = new Topic(TOPIC_NAME_ONE);
@@ -133,6 +133,10 @@ public class DataModelTests {
                 employeeGetResponse.getBody().toString(), EMPLOYEE_FIRST_NAME);
     }
 
+    @Test
+    public void persistantTest(){
+        Employee employeeJoe = new Employee(EMPLOYEE_ONE_FIRST_NAME,EMPLOYEE_ONE_LAST_NAME,EMPLOYEE_ONE_EMAIL);
 
+    }
 
 }
