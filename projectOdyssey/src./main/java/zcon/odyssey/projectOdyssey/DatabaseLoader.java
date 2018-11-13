@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
@@ -24,19 +27,26 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-        this.employeeRepository.save(new Employee("Donal", "McManus","donal.mcm@gmail.com"));
-        this.employeeRepository.save(new Employee("Ciara", "Walsh","ciara.walsh@gmail.com"));
-        this.employeeRepository.save(new Employee("Ian", "Doyle","ian.doyle@gmail.com"));
-        this.employeeRepository.save(new Employee("Gareth", "McGrath","gareth.mcgrath@gmail.com"));
-
-        this.topicRepository.save(new Topic("Java"));
-
-        this.odysseyRepository.save(new Odyssey(new Employee("John", "Walker", "jwalker@gmail.com"),
-                                    new Employee("John", "Walker", "john@gmail.com"),
-                                    new Topic("Java")));
-
-        this.odysseyMeetingRepository.save(new OdysseyMeeting("Hill of Tara"));
+        List odyssey1Meetings = new ArrayList();
+        Employee donal = new Employee("Donal", "McManus","donal@odyssey.com");
+        Employee ian = new Employee("Ian", "Doyle","ian@odyssey.com");
+        Topic java = new Topic("Java");
+        Topic git = new Topic("Git");
+        OdysseyMeeting meeting1 = new OdysseyMeeting("Hill of Tara");
+        OdysseyMeeting meeting2 = new OdysseyMeeting("Lambay");
+        odyssey1Meetings.add(meeting1);
+        odyssey1Meetings.add(meeting2);
+        Odyssey odyssey1 = new Odyssey(ian ,donal, java, odyssey1Meetings);
 
 
+        this.employeeRepository.save(donal);
+        this.employeeRepository.save(ian);
+
+        this.topicRepository.save(java);
+
+        this.odysseyMeetingRepository.save(meeting1);
+        this.odysseyMeetingRepository.save(meeting2);
+
+        this.odysseyRepository.save(odyssey1);
     }
 }

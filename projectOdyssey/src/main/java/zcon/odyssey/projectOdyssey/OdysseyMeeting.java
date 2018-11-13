@@ -12,13 +12,13 @@ public class OdysseyMeeting {
     @Id
     @GeneratedValue Long id;
 
-    @Column // could this field be empty for remote calls or should skype be the location?
+    @Column(unique = true)// could this field be empty for remote calls or should skype be the location?
     private String location;
 
     // @Column(nullable = false)
-    // private Date date = new Date();
+    // private Date date = new Date(); use calender
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "odyssey_id")
     private Odyssey odyssey;
 

@@ -12,10 +12,10 @@ public class Topic {
     @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String topic;
 
-    @OneToOne(mappedBy = "topic")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "topic")
     private Odyssey odyssey;
 
     public Topic(){};
