@@ -25,10 +25,10 @@ public class Employee {
     private String email;
 
     // private @Version @JsonIgnore Long version;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mentor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "mentor", cascade = CascadeType.ALL)
     private List<Odyssey> mentor_odyssey;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mentee", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "mentee", cascade = CascadeType.ALL)
     private List<Odyssey> mentee_odyssey;
 
     public Employee(){}
@@ -37,5 +37,9 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public long getId() {
+        return id;
     }
 }

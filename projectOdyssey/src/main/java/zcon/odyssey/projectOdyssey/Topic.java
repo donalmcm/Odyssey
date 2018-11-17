@@ -15,7 +15,7 @@ public class Topic {
     @Column(nullable = false, unique = true)
     private String topic;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "topic")
+    @OneToOne(mappedBy = "topic")
     private Odyssey odyssey;
 
     public Topic(){};

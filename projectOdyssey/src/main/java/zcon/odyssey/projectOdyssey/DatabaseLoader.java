@@ -5,6 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Component
@@ -27,13 +29,13 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-        List odyssey1Meetings = new ArrayList();
+        List<OdysseyMeeting> odyssey1Meetings = new ArrayList<OdysseyMeeting>();
         Employee donal = new Employee("Donal", "McManus","donal@odyssey.com");
         Employee ian = new Employee("Ian", "Doyle","ian@odyssey.com");
         Topic java = new Topic("Java");
         Topic git = new Topic("Git");
-        OdysseyMeeting meeting1 = new OdysseyMeeting("Hill of Tara");
-        OdysseyMeeting meeting2 = new OdysseyMeeting("Lambay");
+        OdysseyMeeting meeting1 = new OdysseyMeeting("Hill of Tara",new GregorianCalendar(2018,Calendar.NOVEMBER, 20));
+        OdysseyMeeting meeting2 = new OdysseyMeeting("Lambay",new GregorianCalendar(2018, Calendar.DECEMBER, 22));
         odyssey1Meetings.add(meeting1);
         odyssey1Meetings.add(meeting2);
         Odyssey odyssey1 = new Odyssey(ian ,donal, java, odyssey1Meetings);
@@ -48,5 +50,7 @@ public class DatabaseLoader implements CommandLineRunner {
         this.odysseyMeetingRepository.save(meeting2);
 
         this.odysseyRepository.save(odyssey1);
+
+        this.topicRepository.save(new Topic("Public Speaking"));
     }
 }

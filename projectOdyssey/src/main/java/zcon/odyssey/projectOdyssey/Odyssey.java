@@ -15,27 +15,27 @@ public class Odyssey {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "mentor_odyssey")
     private Employee mentor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "mentee_odyssey")
     private Employee mentee;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "odyssey")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "odyssey", cascade = CascadeType.ALL)
     private List<OdysseyMeeting> odysseyMeetings;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "topic_id")
     @RestResource(path = "odysseyTopic", rel = "topic")
     private Topic topic;
 
     public Odyssey(){}
 
-    public Odyssey(Employee mentee ,Employee mentor, Topic topic, List<OdysseyMeeting> odysseyMeetings) {
-        this.mentee = mentee; // must have isMentee = true
+    public Odyssey(Employee mentor ,Employee mentee, Topic topic, List<OdysseyMeeting> odysseyMeetings) {
         this.mentor = mentor;// mentor must have isMentor = true
+        this.mentee = mentee; // must have isMentee = true
         this.topic = topic; // an odyssey must have a topic
         this.odysseyMeetings = odysseyMeetings; // an odyssey will have a list of meetings
     }
