@@ -12,7 +12,8 @@ import java.util.GregorianCalendar;
 public class OdysseyMeeting {
 
     @Id
-    @GeneratedValue Long id;
+    @GeneratedValue
+    private long id;
 
     @Column(unique = true)// could this field be empty for remote calls or should skype be the location?
     private String location;

@@ -13,7 +13,7 @@ public class Odyssey {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "mentor_odyssey")

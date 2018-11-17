@@ -31,12 +31,19 @@ public class Employee {
     @OneToMany(mappedBy = "mentee", cascade = CascadeType.ALL)
     private List<Odyssey> mentee_odyssey;
 
+    @OneToOne
+    @JoinColumn(name= "availability_id")
+    @RestResource(path = "employeeAvailability", rel = "availability")
+    private Availability availability;
+
     public Employee(){}
 
-    public Employee(String firstName, String lastName, String email) {
+    public Employee(String firstName, String lastName, String email, Availability availability) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+
+        this.availability = availability;
     }
 
     public long getId() {

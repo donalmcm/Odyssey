@@ -16,14 +16,16 @@ public class DatabaseLoader implements CommandLineRunner {
     private final OdysseyRepository odysseyRepository;
     private final TopicRepository topicRepository;
     private final OdysseyMeetingRepository odysseyMeetingRepository;
+    private final AvailabilityRepository availabilityRepository;
 
     @Autowired
     public DatabaseLoader(EmployeeRepository employeeRepository, OdysseyRepository odysseyRepository,
-                          TopicRepository topicRepository, OdysseyMeetingRepository odysseyMeetingRepository) {
+                          TopicRepository topicRepository, OdysseyMeetingRepository odysseyMeetingRepository, AvailabilityRepository availabilityRepository) {
         this.employeeRepository = employeeRepository;
         this.odysseyRepository = odysseyRepository;
         this.topicRepository = topicRepository;
         this.odysseyMeetingRepository = odysseyMeetingRepository;
+        this.availabilityRepository = availabilityRepository;
     }
 
     @Override
@@ -31,8 +33,13 @@ public class DatabaseLoader implements CommandLineRunner {
 
         List<OdysseyMeeting> odyssey1Meetings = new ArrayList<OdysseyMeeting>();
 
-        Employee donal = new Employee("Donal", "McManus","donal@odyssey.com");
-        Employee ian = new Employee("Ian", "Doyle","ian@odyssey.com");
+        Availability availability = new Availability();
+        Availability noFridays = new Availability(true,true,true,true,false);
+        this.availabilityRepository.save(availability);
+        this.availabilityRepository.save(noFridays);
+
+        Employee donal = new Employee("Donal", "McManus","donal@odyssey.com", availability);
+        Employee ian = new Employee("Ian", "Doyle","ian@odyssey.com", noFridays);
 
         Topic java = new Topic("Java");
         Topic git = new Topic("Git");
@@ -47,7 +54,6 @@ public class DatabaseLoader implements CommandLineRunner {
         odyssey1Meetings.add(meeting2);
 
         Odyssey odyssey1 = new Odyssey(ian ,donal, java, odyssey1Meetings);
-
 
         this.employeeRepository.save(donal);
         this.employeeRepository.save(ian);
