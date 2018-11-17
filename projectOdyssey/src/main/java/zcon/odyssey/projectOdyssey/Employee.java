@@ -36,14 +36,19 @@ public class Employee {
     @RestResource(path = "employeeAvailability", rel = "availability")
     private Availability availability;
 
+    @OneToOne
+    @JoinColumn(name= "employeeRoles_id")
+    @RestResource(path = "employeeEmployeeRoles", rel = "employeeRoles")
+    private EmployeeRoles employeeRoles;
+
     public Employee(){}
 
-    public Employee(String firstName, String lastName, String email, Availability availability) {
+    public Employee(String firstName, String lastName, String email, Availability availability, EmployeeRoles employeeRoles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-
         this.availability = availability;
+        this.employeeRoles = employeeRoles;
     }
 
     public long getId() {
