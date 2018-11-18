@@ -3,6 +3,7 @@ package zcon.odyssey.projectOdyssey;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,6 +18,9 @@ public class Topic {
 
     @OneToOne(mappedBy = "topic")
     private Odyssey odyssey;
+
+    @OneToMany(mappedBy = "topic")
+    private List<SubTopic> subTopics;
 
     public Topic(){};
 

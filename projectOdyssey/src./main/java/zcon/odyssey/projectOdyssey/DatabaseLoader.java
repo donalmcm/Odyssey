@@ -15,6 +15,7 @@ public class DatabaseLoader implements CommandLineRunner {
     private final EmployeeRepository employeeRepository;
     private final OdysseyRepository odysseyRepository;
     private final TopicRepository topicRepository;
+    private final SubTopicRepository subTopicRepository;
     private final OdysseyMeetingRepository odysseyMeetingRepository;
     private final AvailabilityRepository availabilityRepository;
     private final EmployeeRolesRepository employeeRolesRepository;
@@ -22,10 +23,12 @@ public class DatabaseLoader implements CommandLineRunner {
     @Autowired
     public DatabaseLoader(EmployeeRepository employeeRepository, OdysseyRepository odysseyRepository,
                           TopicRepository topicRepository, OdysseyMeetingRepository odysseyMeetingRepository,
-                          AvailabilityRepository availabilityRepository, EmployeeRolesRepository employeeRolesRepository) {
+                          AvailabilityRepository availabilityRepository, EmployeeRolesRepository employeeRolesRepository,
+                          SubTopicRepository subTopicRepository) {
         this.employeeRepository = employeeRepository;
         this.odysseyRepository = odysseyRepository;
         this.topicRepository = topicRepository;
+        this.subTopicRepository = subTopicRepository;
         this.odysseyMeetingRepository = odysseyMeetingRepository;
         this.availabilityRepository = availabilityRepository;
         this.employeeRolesRepository = employeeRolesRepository;
@@ -59,6 +62,12 @@ public class DatabaseLoader implements CommandLineRunner {
         Topic git = new Topic("Git");
         this.topicRepository.save(java);
         this.topicRepository.save(git);
+
+        // Creating subTopic's from Topics above
+        SubTopic jpa = new SubTopic(java,"JPA");
+        SubTopic branching = new SubTopic(git, "branching");
+        this.subTopicRepository.save(jpa);
+        this.subTopicRepository.save(branching);
 
         // Creating Odyssey meetings with a date and location
         Calendar meeting1date = new GregorianCalendar(2018,Calendar.NOVEMBER, 20);
