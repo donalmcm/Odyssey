@@ -19,8 +19,8 @@ public class EventHandler {
 
     private final EntityLinks entityLinks;
 
-@Autowired                                                                          // error message for websocket
-    public EventHandler(SimpMessagingTemplate websocket, EntityLinks entityLinks) { // Could not autowire. No beans of 'SimpMessagingTemplate' type found.
+    @Autowired
+    public EventHandler(SimpMessagingTemplate websocket, EntityLinks entityLinks) {
         this.websocket = websocket;
         this.entityLinks = entityLinks;
     }
