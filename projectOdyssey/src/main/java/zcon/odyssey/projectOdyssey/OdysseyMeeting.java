@@ -28,8 +28,9 @@ public class OdysseyMeeting {
 
     public OdysseyMeeting(){};
 
-    public OdysseyMeeting(String location, Calendar date) {
+    public OdysseyMeeting(String location, Calendar date, Odyssey odyssey) {
         this.location = location;
         this.date = date;
+        this.odyssey = odyssey;
     }
 }

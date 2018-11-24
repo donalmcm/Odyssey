@@ -24,7 +24,20 @@ public class Employee {
     @Column(nullable = false, unique = true)
     private String email;
 
-    // private @Version @JsonIgnore Long version;
+    @Column
+    private boolean isManager = false;
+
+    @Column
+    private boolean isAdmin = false;
+
+    @Column
+    private boolean isMentee = false;
+
+    @Column
+    private boolean isMentor = false;
+
+    private @Version @JsonIgnore Long version;
+
     @OneToMany(mappedBy = "mentor", cascade = CascadeType.ALL)
     private List<Odyssey> mentor_odyssey;
 
@@ -36,19 +49,12 @@ public class Employee {
     @RestResource(path = "employeeAvailability", rel = "availability")
     private Availability availability;
 
-    @OneToOne
-    @JoinColumn(name= "employeeRoles_id")
-    @RestResource(path = "employeeEmployeeRoles", rel = "employeeRoles")
-    private EmployeeRoles employeeRoles;
-
     public Employee(){}
 
-    public Employee(String firstName, String lastName, String email, Availability availability, EmployeeRoles employeeRoles) {
+    public Employee(String firstName, String lastName, String email) { // availability
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.availability = availability;
-        this.employeeRoles = employeeRoles;
     }
 
     public long getId() {

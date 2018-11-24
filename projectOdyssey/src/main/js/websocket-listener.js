@@ -1,7 +1,7 @@
 'use strict';
 
 const SockJS = require('sockjs-client'); // <1>
-require('stompjs'); // <2>
+require('stompjs/lib/stomp.js'); // <2>
 
 function register(registrations) {
     const socket = SockJS('/projectOdyssey'); // <3>

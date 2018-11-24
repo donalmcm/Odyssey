@@ -23,7 +23,7 @@ public class Odyssey {
     @JoinColumn(name = "mentee_odyssey")
     private Employee mentee;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "odyssey", cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "odyssey", cascade = CascadeType.ALL)
     private List<OdysseyMeeting> odysseyMeetings;
 
     @OneToOne
