@@ -11,13 +11,16 @@ public class Topic {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String topic;
 
     @OneToOne(mappedBy = "topic")
     private Odyssey odyssey;
+
+    @OneToOne(mappedBy = "topic")
+    private Employee employee;
 
     @OneToMany(mappedBy = "topic")
     private List<SubTopic> subTopics;

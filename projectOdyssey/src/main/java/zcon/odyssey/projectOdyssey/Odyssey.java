@@ -13,7 +13,7 @@ public class Odyssey {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "mentor_odyssey")
@@ -35,9 +35,11 @@ public class Odyssey {
 
     public Odyssey(Employee mentor ,Employee mentee, Topic topic, List<OdysseyMeeting> odysseyMeetings) {
         this.mentor = mentor;// mentor must have isMentor = true
-        this.mentee = mentee; // must have isMentee = true
+        this.mentee = mentee;
         this.topic = topic; // an odyssey must have a topic
         this.odysseyMeetings = odysseyMeetings; // an odyssey will have a list of meetings
+
+        // mentee.becomeMentee(); to set mentee flag to true at beginning of odyssey
     }
 
 }

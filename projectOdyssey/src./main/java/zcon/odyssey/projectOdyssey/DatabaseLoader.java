@@ -38,10 +38,16 @@ public class DatabaseLoader implements CommandLineRunner {
         List<OdysseyMeeting> odyssey1Meetings = new ArrayList<OdysseyMeeting>();
 
         // Creating and saving availabilities
-        Availability availability = new Availability();
+        Availability fullAvailability = new Availability();
         Availability noFridays = new Availability(true,true,true,true,false);
-        this.availabilityRepository.save(availability);
+        this.availabilityRepository.save(fullAvailability);
         this.availabilityRepository.save(noFridays);
+
+        // Creating and saving Topic's
+        Topic java = new Topic("Java");
+        Topic git = new Topic("Git");
+        this.topicRepository.save(java);
+        this.topicRepository.save(git);
 
         // Creating and saving Employees
         Employee donal = new Employee("Donal", "McManus","donal@odyssey.com");
@@ -49,16 +55,20 @@ public class DatabaseLoader implements CommandLineRunner {
         Employee joe = new Employee("Joe","Bloggs","joe@bloggs");
         Employee mary = new Employee("Mary","Bloggs","mary@bloggs");
 
+        donal.becomeMentor(java,noFridays);
+        ian.becomeMentor(git,fullAvailability);
+
         this.employeeRepository.save(donal);
         this.employeeRepository.save(ian);
         this.employeeRepository.save(joe);
         this.employeeRepository.save(mary);
 
-        // Creating and saving Topic's
-        Topic java = new Topic("Java");
-        Topic git = new Topic("Git");
-        this.topicRepository.save(java);
-        this.topicRepository.save(git);
+        this.employeeRepository.findByMentorIsTrue(); // find all mentors
+        this.employeeRepository.findByMentorIsTrueAndTopic(java); // find all mentors by topic
+        this.employeeRepository.findByMentorIsTrueAndTopic(git);
+                                                                                            // these will display a list of mentors with a particular availability and topic
+        this.employeeRepository.findByMentorIsTrueAndTopicAndAvailability(git,noFridays); // should not display anyone
+        this.employeeRepository.findByMentorIsTrueAndTopicAndAvailability(git,fullAvailability); // should not display anyone
 
         // Creating subTopic's from Topics above
         SubTopic jpa = new SubTopic(java,"JPA");

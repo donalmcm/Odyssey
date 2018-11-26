@@ -24,17 +24,17 @@ public class Employee {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column
+    @Column(nullable = false)
     private boolean isManager = false;
 
-    @Column
+    @Column(nullable = false)
     private boolean isAdmin = false;
 
-    @Column
+    @Column(nullable = false)
     private boolean isMentee = false;
 
-    @Column
-    private boolean isMentor = false;
+    @Column(nullable = false)
+    private boolean mentor = false;
 
     private @Version @JsonIgnore Long version;
 
@@ -43,6 +43,11 @@ public class Employee {
 
     @OneToMany(mappedBy = "mentee", cascade = CascadeType.ALL)
     private List<Odyssey> mentee_odyssey;
+
+    @OneToOne
+    @JoinColumn(name= "topic_id")
+    @RestResource(path = "employeeTopic", rel = "topic")
+    private Topic topic;
 
     @OneToOne
     @JoinColumn(name= "availability_id")
@@ -59,5 +64,15 @@ public class Employee {
 
     public long getId() {
         return id;
+    }
+
+    public void becomeMentor(Topic topic, Availability availability) {
+        this.topic = topic;
+        this.availability = availability;
+        mentor = true;
+    }
+
+    public void becomeMentee() {
+        isMentee = true;
     }
 }

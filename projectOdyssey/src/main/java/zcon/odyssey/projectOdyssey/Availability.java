@@ -10,7 +10,7 @@ public class Availability {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column
     private boolean monday = true;
@@ -40,4 +40,16 @@ public class Availability {
         this.friday = friday;
     }
 
+    @Override
+    public String toString() {
+        String s =
+            "Availability" +
+            "\nmonday=" + monday +
+            "\ntuesday=" + tuesday +
+            "\nwednesday=" + wednesday +
+            "\nthursday=" + thursday +
+            "\nfriday=" + friday;
+
+        return s;
+    }
 }
