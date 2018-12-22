@@ -77,7 +77,7 @@ public class DatabaseLoader implements CommandLineRunner {
         this.subTopicRepository.save(branching);
 
         // Creating an Odyssey from previously saved objects
-        Odyssey odyssey1 = new Odyssey(ian ,donal, java, odyssey1Meetings);
+        Odyssey odyssey1 = new Odyssey(ian ,donal, java);
 
 
         // Creating Odyssey meetings with a date and location
@@ -89,6 +89,9 @@ public class DatabaseLoader implements CommandLineRunner {
         odyssey1Meetings.add(meeting2);
 
         this.odysseyRepository.save(odyssey1);
+
+        // display list of meetings according to the odyssey provided
+        this.odysseyMeetingRepository.findByOdyssey(odyssey1);
 
     }
 }

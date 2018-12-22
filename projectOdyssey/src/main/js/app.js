@@ -16,8 +16,8 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {employees: [], attributes: []};
+        this.onCreateOdyssey = this.onCreateOdyssey.bind(this);
     }
-
 
     render(){
         return(
@@ -26,6 +26,17 @@ class App extends React.Component {
                               attributes={this.state.attributes}/>
             </div>
         )
+    }
+
+    onCreateOdyssey(newOdyssey) {
+        follow(client, root, ['odysseys']).done(response => {
+            client({
+                method: 'POST',
+                path: response.entity._links.self.href,
+                entity: newOdyssey,
+                headers: {'Content-Type': 'application/json'}
+            })
+        })
     }
 }
 
@@ -66,6 +77,7 @@ class Mentor extends React.Component {
     constructor(props) {
         super(props);
     }
+
     render(){
         return (
             <tr>

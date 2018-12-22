@@ -33,7 +33,7 @@ public class Odyssey {
 
     public Odyssey(){}
 
-    public Odyssey(Employee mentor ,Employee mentee, Topic topic, List<OdysseyMeeting> odysseyMeetings) {
+    public Odyssey(Employee mentor ,Employee mentee, Topic topic) {
         this.mentor = mentor;// mentor must have isMentor = true
         this.mentee = mentee;
         this.topic = topic; // an odyssey must have a topic
