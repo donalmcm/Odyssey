@@ -11,4 +11,9 @@ public class HomeController {
         return "index";
     } // maps to index.html
 
+    @RequestMapping(value = "/becomeMentor")
+    public String becomeMentor() {
+        return "becomeMentor";
+    }
+
 }

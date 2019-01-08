@@ -1,5 +1,7 @@
 'use strict';
 
+import {FormGroup, ControlLabel, FormControl, Button, Checkbox, Table} from "react-bootstrap";
+
 const React = require('react');
 const ReactDOM = require('react-dom');
 const when = require('when');
@@ -13,30 +15,13 @@ const root = '/api';
 
 class App extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {employees: [], attributes: []};
-        this.onCreateOdyssey = this.onCreateOdyssey.bind(this);
-    }
 
     render(){
         return(
             <div>
-                <MentorList employees={this.state.employees}
-                              attributes={this.state.attributes}/>
+                <MentorList />
             </div>
         )
-    }
-
-    onCreateOdyssey(newOdyssey) {
-        follow(client, root, ['odysseys']).done(response => {
-            client({
-                method: 'POST',
-                path: response.entity._links.self.href,
-                entity: newOdyssey,
-                headers: {'Content-Type': 'application/json'}
-            })
-        })
     }
 }
 
@@ -48,48 +33,71 @@ class MentorList extends React.Component {
 
     render(){
 
-        const employees = this.props.employees.map(employee =>
-            <Employee key={employee.entity._links.self.href}
-                      employee={employee}
-                      attributes={this.props.attributes}/>
-        );
-
         return (
             <div>
-                <table>
-                    <tbody>
-                    <tr>
-                        <th>Topic</th>
-                        <th>Availability</th>
-                        <th></th>
-                    </tr>
-                    {employees}
-                    </tbody>
-                </table>
+                <form>
+                    <FormGroup controlId="formControlsSelect">
+                        <ControlLabel>Select Topic</ControlLabel>
+                        <FormControl componentClass="select" placeholder="select">
+                            <option value="gosu">Gosu</option>
+                            <option value="java">Java</option>
+                            <option value="javaScript">JavaScript</option>
+                            <option value="git">Git</option>
+                        </FormControl>
+                    </FormGroup>
+                    <FormGroup controlId="formControlsSelect">
+                        <ControlLabel>Select Duration of Mentoring in weeks</ControlLabel>
+                        <FormControl componentClass="select" placeholder="select">
+                            <option value="one">1</option>
+                            <option value="two">2</option>
+                            <option value="three">3</option>
+                            <option value="four">4</option>
+                        </FormControl>
+                    </FormGroup>
+                    <FormGroup>
+                        <Table striped bordered condensed hover>
+                            <thead>
+                                <tr>
+                                    <th>Time of Day</th>
+                                    <th>Monday</th>
+                                    <th>Tuesday</th>
+                                    <th>Wednesday</th>
+                                    <th>Thursday</th>
+                                    <th>Friday</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><strong>AM</strong></td>
+                                <td><Checkbox value="mondayAM"></Checkbox></td>
+                                <td><Checkbox value="tuesdayAM"></Checkbox></td>
+                                <td><Checkbox value="wednesdayAM"></Checkbox></td>
+                                <td><Checkbox value="thursdayAM"></Checkbox></td>
+                                <td><Checkbox value="fridayAM"></Checkbox></td>
+                            </tr>
+                            <tr>
+                                <td><strong>PM</strong></td>
+                                <td><Checkbox value="mondayPM"></Checkbox></td>
+                                <td><Checkbox value="tuesdayPM"></Checkbox></td>
+                                <td><Checkbox value="wednesdayPM"></Checkbox></td>
+                                <td><Checkbox value="thursdayPM"></Checkbox></td>
+                                <td><Checkbox value="fridayPM"></Checkbox></td>
+                            </tr>
+                            </tbody>
+                        </Table>
+                    </FormGroup>
+                    <Checkbox>
+                        Remote
+                    </Checkbox>
+
+                    <Button type="submit">Become Mentor</Button>
+                </form>
             </div>
         )
 
     }
 }
 
-class Mentor extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    render(){
-        return (
-            <tr>
-                <td>{this.props.employee.entity.topic}</td>
-                <td>{this.props.employee.entity.availability}</td>
-                <td>
-                    <button>Create Odyssey</button>
-                </td>
-            </tr>
-        )
-    }
-}
 
 ReactDOM.render(
     <App />,
