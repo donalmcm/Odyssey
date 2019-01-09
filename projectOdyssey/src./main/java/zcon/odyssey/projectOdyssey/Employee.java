@@ -36,6 +36,12 @@ public class Employee {
     @Column(nullable = false)
     private boolean mentor = false;
 
+//    @Column
+//    private boolean remote;
+
+    @Column
+    private int mentorDuration;
+
     private @Version @JsonIgnore Long version;
 
     @OneToMany(mappedBy = "mentor", cascade = CascadeType.ALL)
@@ -66,13 +72,18 @@ public class Employee {
         return id;
     }
 
-    public void becomeMentor(Topic topic, Availability availability) {
+    public void becomeMentor(Topic topic, Availability availability, int mentorDuration) {
         this.topic = topic;
         this.availability = availability;
-        mentor = true;
+        this.mentorDuration = mentorDuration;
+        this.mentor = true;
     }
 
     public void becomeMentee() {
         isMentee = true;
+    }
+
+    public int getMentorDuration() {
+        return mentorDuration;
     }
 }

@@ -3,9 +3,7 @@ package zcon.odyssey.projectOdyssey;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 @Data
 @Entity
@@ -15,10 +13,10 @@ public class OdysseyMeeting {
     @GeneratedValue
     private long id;
 
-    @Column(unique = true)// could this field be empty for remote calls or should skype be the location?
+    @Column(unique = false)// could this field be empty for remote calls or should skype be the location?
     private String location;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = false)
     private Calendar date = new GregorianCalendar();
 
 
@@ -32,5 +30,15 @@ public class OdysseyMeeting {
         this.location = location;
         this.date = date;
         this.odyssey = odyssey;
+    }
+
+    public List<OdysseyMeeting> createMeetings(int duration) {
+        List<OdysseyMeeting> odysseyMeetingList = new ArrayList<>();
+
+        for(int i=0; i < duration; i++) {
+            odysseyMeetingList.add(new OdysseyMeeting("Dublin" ,new GregorianCalendar(2019, Calendar.NOVEMBER, (i+1)), odyssey));
+        }
+
+        return odysseyMeetingList;
     }
 }

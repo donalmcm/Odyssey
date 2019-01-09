@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Data
@@ -37,9 +40,16 @@ public class Odyssey {
         this.mentor = mentor;// mentor must have isMentor = true
         this.mentee = mentee;
         this.topic = topic; // an odyssey must have a topic
-        this.odysseyMeetings = odysseyMeetings; // an odyssey will have a list of meetings
 
-        // mentee.becomeMentee(); to set mentee flag to true at beginning of odyssey
+        OdysseyMeeting odysseyMeetingsCreator= new OdysseyMeeting();
+
+        odysseyMeetings = odysseyMeetingsCreator.createMeetings(mentor.getMentorDuration());
+        // an odyssey will create a list of meetings
+        mentee.becomeMentee(); // to set mentee flag to true at beginning of odyssey
     }
+
+
+
+
 
 }

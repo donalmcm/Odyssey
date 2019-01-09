@@ -1,6 +1,7 @@
 'use strict';
 
 import {FormGroup, ControlLabel, FormControl, Button, Checkbox, Table} from "react-bootstrap";
+import {Card, CardTitle, CardSubtitle, CardBody, CardDeck, ListGroup, ListGroupItem, CardText } from 'reactstrap';
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -19,13 +20,14 @@ class App extends React.Component {
     render(){
         return(
             <div>
-                <MentorList />
+                <h1>Search for a Mentor</h1>
+                <MenteeList />
             </div>
         )
     }
 }
 
-class MentorList extends React.Component {
+class MenteeList extends React.Component {
 
     constructor(props) {
         super(props);
@@ -36,8 +38,9 @@ class MentorList extends React.Component {
         return (
             <div>
                 <form>
+                    <h3>Filter By</h3>
                     <FormGroup controlId="formControlsSelect">
-                        <ControlLabel>Select Topic</ControlLabel>
+                        <ControlLabel>Topic</ControlLabel>
                         <FormControl componentClass="select" placeholder="select">
                             <option value="gosu">Gosu</option>
                             <option value="java">Java</option>
@@ -46,7 +49,7 @@ class MentorList extends React.Component {
                         </FormControl>
                     </FormGroup>
                     <FormGroup controlId="formControlsSelect">
-                        <ControlLabel>Select Duration of Mentoring in weeks</ControlLabel>
+                        <ControlLabel>Duration of Mentoring in weeks</ControlLabel>
                         <FormControl componentClass="select" placeholder="select">
                             <option value="one">1</option>
                             <option value="two">2</option>
@@ -89,9 +92,62 @@ class MentorList extends React.Component {
                     <Checkbox>
                         Remote
                     </Checkbox>
-
-                    <Button type="submit">Become Mentor</Button>
                 </form>
+                <CardDeck>
+                    <h3>List of Mentors</h3>
+                    <Card>
+                        <CardBody>
+                            <CardTitle>Topic : Java</CardTitle>
+                            <CardSubtitle>Subtopic : JPA</CardSubtitle>
+                            <CardSubtitle>Duration : 4 weeks</CardSubtitle>
+                            <CardSubtitle>Remote : Unavailable</CardSubtitle>
+                            <CardSubtitle>Availability</CardSubtitle>
+                            <CardText>Monday AM</CardText>
+                            <CardText>Monday PM</CardText>
+                            <CardText>Wednesday AM</CardText>
+                            <Button type="submit">Begin Odyssey</Button>
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardBody>
+                            <CardTitle>Topic : Management</CardTitle>
+                            <CardSubtitle>Subtopic : Leadership</CardSubtitle>
+                            <CardSubtitle>Duration : 3 weeks</CardSubtitle>
+                            <CardSubtitle>Remote : Unavailable</CardSubtitle>
+                            <CardSubtitle>Availability</CardSubtitle>
+                            <CardText>Monday AM</CardText>
+                            <CardText>Monday PM</CardText>
+                            <CardText>Wednesday AM</CardText>
+                            <Button type="submit">Begin Odyssey</Button>
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardBody>
+                            <CardTitle>Topic: Git</CardTitle>
+                            <CardSubtitle>Subtopic : Branching</CardSubtitle>
+                            <CardSubtitle>Duration : 1 weeks</CardSubtitle>
+                            <CardSubtitle>Remote : Available</CardSubtitle>
+                            <CardSubtitle>Availability</CardSubtitle>
+                            <CardText>Monday AM</CardText>
+                            <CardText>Monday PM</CardText>
+                            <CardText>Wednesday AM</CardText>
+                            <Button type="submit">Begin Odyssey</Button>
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardBody>
+                            <CardTitle>Topic : Gosu</CardTitle>
+                            <CardSubtitle>Subtopic : Policy Center</CardSubtitle>
+                            <CardSubtitle>Duration : 8 weeks</CardSubtitle>
+                            <CardSubtitle>Remote : Unavailable</CardSubtitle>
+                            <CardSubtitle>Availability</CardSubtitle>
+                            <CardText>Monday AM</CardText>
+                            <CardText>Monday PM</CardText>
+                            <CardText>Wednesday AM</CardText>
+                            <Button type="submit">Begin Odyssey</Button>
+                        </CardBody>
+                    </Card>
+                </CardDeck>
             </div>
         )
 

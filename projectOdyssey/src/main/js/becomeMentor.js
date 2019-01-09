@@ -20,14 +20,14 @@ class BecomeMentor extends React.Component {
     render(){
         return(
             <div>
-                <h1>Becoming a Mentor</h1>
-                <MentorForm />
+                <h1>Becoming a Mentee</h1>
+                <MenteeForm />
             </div>
         )
     }
 }
 
-class MentorForm extends React.Component {
+class MenteeForm extends React.Component {
 
     constructor(props) {
         super(props);
