@@ -21,6 +21,8 @@ public class OdysseyMeeting {
     @Column(nullable = false)
     private Calendar date = new GregorianCalendar();
 
+    @Column(nullable = false)
+    private boolean completed;
 
     @ManyToOne
     @JoinColumn(name = "odysseyMeeting")
@@ -32,5 +34,13 @@ public class OdysseyMeeting {
         this.location = location;
         this.date = date;
         this.odyssey = odyssey;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public boolean getIsCompleted() {
+        return completed;
     }
 }

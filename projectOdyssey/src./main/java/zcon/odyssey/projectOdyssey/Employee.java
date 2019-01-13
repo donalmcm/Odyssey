@@ -60,4 +60,14 @@ public class Employee {
     public long getId() {
         return id;
     }
+
+    public void setMentee(boolean mentee) {
+        isMentee = mentee;
+    }
+
+    public void setMentor(boolean mentor) {
+        isMentor = mentor;
+    }
+
+
 }
