@@ -65,6 +65,11 @@ public class Employee {
         isMentee = mentee;
     }
 
+    public void becomeManager(List<Employee> employees) {
+        // create relationship between a manager and their employees
+        isManager = true;
+    }
+
     public void setMentor(boolean mentor) {
         isMentor = mentor;
     }
