@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head><title>HTTP Status 500 – Internal Server Error</title>
+    <style type="text/css">h1 {
+        font-family: Tahoma, Arial, sans-serif;
+        color: white;
+        background-color: #525D76;
+        font-size: 22px;
+    }
+
+    h2 {
+        font-family: Tahoma, Arial, sans-serif;
+        color: white;
+        background-color: #525D76;
+        font-size: 16px;
+    }
+
+    h3 {
+        font-family: Tahoma, Arial, sans-serif;
+        color: white;
+        background-color: #525D76;
+        font-size: 14px;
+    }
+
+    body {
+        font-family: Tahoma, Arial, sans-serif;
+        color: black;
+        background-color: white;
+    }
+
+    b {
+        font-family: Tahoma, Arial, sans-serif;
+        color: white;
+        background-color: #525D76;
+    }
+
+    p {
+        font-family: Tahoma, Arial, sans-serif;
+        background: white;
+        color: black;
+        font-size: 12px;
+    }
+
+    a {
+        color: black;
+    }
+
+    a.name {
+        color: black;
+    }
+
+    .line {
+        height: 1px;
+        background-color: #525D76;
+        border: none;
+    }</style>
+</head>
+<body><h1>HTTP Status 500 – Internal Server Error</h1>
+<hr class="line"/>
+<p><b>Type</b> Exception Report</p>
+<p><b>Message</b> failed to lazily initialize a collection of role: com.odyssey.model.Employee.mentor_odyssey, could not
+    initialize proxy - no Session (through reference chain: java.util.ArrayList[0]-&gt;com.odyssey.model.Employee[&quot;mentor_odyssey&quot;])
+</p>
+<p><b>Description</b> The server encountered an unexpected condition that prevented it from fulfilling the request.</p>
+<p><b>Exception</b></p>
+<pre>org.codehaus.jackson.map.JsonMappingException: failed to lazily initialize a collection of role: com.odyssey.model.Employee.mentor_odyssey, could not initialize proxy - no Session (through reference chain: java.util.ArrayList[0]-&gt;com.odyssey.model.Employee[&quot;mentor_odyssey&quot;])
+	org.codehaus.jackson.map.JsonMappingException.wrapWithPath(JsonMappingException.java:218)
+	org.codehaus.jackson.map.JsonMappingException.wrapWithPath(JsonMappingException.java:183)
+	org.codehaus.jackson.map.ser.std.SerializerBase.wrapAndThrow(SerializerBase.java:140)
+	org.codehaus.jackson.map.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:158)
+	org.codehaus.jackson.map.ser.BeanSerializer.serialize(BeanSerializer.java:112)
+	org.codehaus.jackson.map.ser.std.StdContainerSerializers$IndexedListSerializer.serializeContents(StdContainerSerializers.java:122)
+	org.codehaus.jackson.map.ser.std.StdContainerSerializers$IndexedListSerializer.serializeContents(StdContainerSerializers.java:71)
+	org.codehaus.jackson.map.ser.std.AsArraySerializerBase.serialize(AsArraySerializerBase.java:86)
+	org.codehaus.jackson.map.ser.StdSerializerProvider._serializeValue(StdSerializerProvider.java:610)
+	org.codehaus.jackson.map.ser.StdSerializerProvider.serializeValue(StdSerializerProvider.java:256)
+	org.codehaus.jackson.map.ObjectMapper.writeValue(ObjectMapper.java:1604)
+	org.codehaus.jackson.jaxrs.JacksonJsonProvider.writeTo(JacksonJsonProvider.java:558)
+	com.sun.jersey.json.impl.provider.entity.JacksonProviderProxy.writeTo(JacksonProviderProxy.java:160)
+	com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+	com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+	com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+	com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+	com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+	com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:558)
+	com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:733)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+</pre>
+<p><b>Root Cause</b></p>
+<pre>org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.odyssey.model.Employee.mentor_odyssey, could not initialize proxy - no Session
+	org.hibernate.collection.internal.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:582)
+	org.hibernate.collection.internal.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:201)
+	org.hibernate.collection.internal.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:561)
+	org.hibernate.collection.internal.AbstractPersistentCollection.read(AbstractPersistentCollection.java:132)
+	org.hibernate.collection.internal.PersistentBag.iterator(PersistentBag.java:277)
+	org.codehaus.jackson.map.ser.std.CollectionSerializer.serializeContents(CollectionSerializer.java:45)
+	org.codehaus.jackson.map.ser.std.CollectionSerializer.serializeContents(CollectionSerializer.java:23)
+	org.codehaus.jackson.map.ser.std.AsArraySerializerBase.serialize(AsArraySerializerBase.java:86)
+	org.codehaus.jackson.map.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:446)
+	org.codehaus.jackson.map.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:150)
+	org.codehaus.jackson.map.ser.BeanSerializer.serialize(BeanSerializer.java:112)
+	org.codehaus.jackson.map.ser.std.StdContainerSerializers$IndexedListSerializer.serializeContents(StdContainerSerializers.java:122)
+	org.codehaus.jackson.map.ser.std.StdContainerSerializers$IndexedListSerializer.serializeContents(StdContainerSerializers.java:71)
+	org.codehaus.jackson.map.ser.std.AsArraySerializerBase.serialize(AsArraySerializerBase.java:86)
+	org.codehaus.jackson.map.ser.StdSerializerProvider._serializeValue(StdSerializerProvider.java:610)
+	org.codehaus.jackson.map.ser.StdSerializerProvider.serializeValue(StdSerializerProvider.java:256)
+	org.codehaus.jackson.map.ObjectMapper.writeValue(ObjectMapper.java:1604)
+	org.codehaus.jackson.jaxrs.JacksonJsonProvider.writeTo(JacksonJsonProvider.java:558)
+	com.sun.jersey.json.impl.provider.entity.JacksonProviderProxy.writeTo(JacksonProviderProxy.java:160)
+	com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+	com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+	com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+	com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+	com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+	com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:558)
+	com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:733)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+</pre>
+<p><b>Note</b> The full stack trace of the root cause is available in the server logs.</p>
+<hr class="line"/>
+<h3>Apache Tomcat/9.0.14</h3></body>
+</html>
