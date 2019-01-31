@@ -1,10 +1,12 @@
 package com.odyssey.model;
 
+import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -21,27 +23,35 @@ public class Employee {
     @GeneratedValue
     private int id;
 
+    @Expose
     @Column(nullable = false)
     private String firstName;
 
+    @Expose
     @Column(nullable = false)
-    private String lastName;
+    @XmlElement private String lastName;
 
+    @Expose
     @Column(nullable = false, unique = true)
-    private String email;
+    @XmlElement private String email;
 
+    @Expose
     @Column
     private boolean isManager = false;
 
+    @Expose
     @Column
     private boolean isAdmin = false;
 
+    @Expose
     @Column
     private boolean isMentee = false;
 
+    @Expose
     @Column
     private boolean isMentor = false;
 
+    @Expose
     @Column
     private int mentorDuration = 0;
 
@@ -53,6 +63,7 @@ public class Employee {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentee")
     private List<Odyssey> menteeOdyssey;
 
+    @Expose
     @OneToOne
     private Topic topic;
 

@@ -96,19 +96,19 @@ public class EmployeeAPI {
 
     // create an employee
     @POST
-    @Path("testCreate/{firstName}/{lastName}/{email}")
+    @Path("testCreate")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response createEmployee(@PathParam("firstName") String firstName,@PathParam("lastName") String lastName,
-                                   @PathParam("email") String email) {
-
+    public Response createEmployee(@FormParam("firstName") String firstName,
+                                   @FormParam("lastName") String lastName,
+                                   @FormParam("email") String email) {
         session.getTransaction().begin();
-        Employee testEmployee = new Employee(firstName,lastName,email);
 
-        session.persist(testEmployee);
+        Employee newEmployee = new Employee(firstName,lastName,email);
+        session.persist(newEmployee);
         session.getTransaction().commit();
         session.close();
-        return Response.ok(testEmployee, MediaType.APPLICATION_JSON).build();
+        return Response.ok(newEmployee, MediaType.APPLICATION_JSON).build();
     }
 
 }
