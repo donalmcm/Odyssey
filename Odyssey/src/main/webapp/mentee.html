@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <title>Odyssey - Mentee</title>
     <link rel="stylesheet" type="text/css" href="static/css/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
-<body>
+<body class="body">
+<div class="banner">
+    <div class="banner-logo">
+        <a href="index.html">
+            <img src="static/img/odysseyLogo.png" alt="Odyssey Logo">
+        </a>
+    </div>
+    <div class="banner-title">
+        <h1>Odyssey</h1>
+    </div>
+    <div class="profile-pic">
+        <a href="profile.html">
+            <img src="static/img/profilePic.png" alt="Profile Picture">
+        </a>
+    </div>
+</div>
 <div class="sidenav">
     <a class="active" href="index.html">Home</a>
     <a href="mentor.html">Mentor</a>
@@ -13,15 +29,9 @@
     <a href="manager.html">Manager</a>
     <a href="admin.html">Admin</a>
 </div>
-<div>
-    <form action="getMentorsByTopic" target="_blank" method="GET">
-        <select>
-            <option value="java">Java</option>
-            <option value="git">Git</option>
-        </select>
-    </form>
+<div class="main">
+    <div id="mentor-list"></div>
 </div>
-<div id="mentors"></div>
 <script src="static/js/mentee.js"></script>
 </body>
 </html>
