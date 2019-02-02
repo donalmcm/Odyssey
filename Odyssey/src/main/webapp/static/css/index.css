@@ -1,74 +1,33 @@
-/* The sidebar menu */
-.sidenav {
-    height: 90%; /* Full-height: remove this if you want "auto" height */
-    width: 12%;
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-     /* Stay at the top */
-    left: 0;
-    background-color: #eee;
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 2.5em;
-}
-
-/* The navigation menu links */
-.sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 1.5em;
-    color: #2196F3;
-    display: block;
-}
-
-/* When you mouse over the navigation links, change their color */
-sidenav a:hover {
-    color: #f1f1f1;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-/*@media screen and (max-height: 700px) {*/
-    /*.sidenav {*/
-        /*padding-top: 1em;*/
-        /*width: 100%;*/
-        /*height: 15%;*/
-    /*}*/
-    /*.sidenav a {font-size: 1em;}*/
-/*}*/
-
-.body {
-    margin: 0;
+html,body {
+    height: 100%;
 }
 
 .main {
-    width: 88%;
     height: 100%;
-    float: right;
 }
+
+.side-nav {
+    background-color: #eeeeee;
+    padding: 0;
+}
+
+.side-nav li{
+    width: 100%;
+    margin-top: 2em;
+    text-align: center;
+}
+
 .banner {
-    height: 4.5em; /* Full-height: remove this if you want "auto" height */
-    width: 100%;
-    z-index: 1; /* Stay on top */
-    margin-top: 0;
-    top: 0;
-    margin-left: 0;
-    margin-right: 0;
+    height: 5em; /* Full-height: remove this if you want "auto" height */
     background-color: #2196F3;
-    overflow-y: hidden; /* Disable vertical scroll */
 }
 
-.banner img {
-    float: right;
+.banner-logo {
+    padding: 0;
 }
 
-.banner-logo{
-    width: 10%;
-    height: 4.5em;
-    float: left;
-}
-
-.banner-logo img{
-    height: 4.5em;
-    width: 100%;
+.banner-logo img {
+    height: 5em;
 }
 
 .banner-title {
@@ -80,14 +39,21 @@ sidenav a:hover {
     color: white;
 }
 
-.profile-pic {
-    float: right;
-    width: 5%;
+.profile-icon{
+    height: 5em;
+    padding-top: .75em;
+}
+.profile-icon i {
+    color: white;
 }
 
-.profile-pic img{
-    width: 100%;
-    height: 4.5em;
+.log-out-icon {
+    height: 5em;
+    padding-top: .75em;
+}
+
+.log-out-icon i{
+    color: white;
 }
 
 .odyssey-card {
@@ -125,38 +91,23 @@ sidenav a:hover {
     float: bottom;
 }
 
-.login-form {
-    width: 50%;
-    margin-right: auto;
-    margin-left: auto;
-}
-
 .login-form input[type=text], input[type=password]{
     border: 0;
     outline: 0;
     background: transparent;
     border-bottom: 2px solid #2196F3;
     width: 100%;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    text-align: center;
+    font-size: x-large;
+    margin-bottom: 1em;
 }
 .login-logo {
-    width: 50%;
-    margin-top: 0;
-    margin-right: auto;
-    margin-left: auto;
+   margin-top: 5em;
 }
-.login-logo img{
-    height: 18em;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 
 .login-button {
-    width: 100%;
     height: 4em;
+    width: 100%;
     border-radius: 1em;
     background-color: #2196F3;
     color: white;
