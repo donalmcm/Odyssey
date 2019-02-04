@@ -96,7 +96,7 @@ public class EmployeeAPI {
 
     // create an employee
     @POST
-    @Path("testCreate")
+    @Path("create")
     @Consumes("application/json")
     @Produces("application/json")
     public Response createEmployee(@FormParam("firstName") String firstName,
@@ -109,6 +109,24 @@ public class EmployeeAPI {
         session.getTransaction().commit();
         session.close();
         return Response.ok(newEmployee, MediaType.APPLICATION_JSON).build();
+    }
+
+    // create an employee
+    @POST
+    @Path("becomeMentor")
+    @Consumes("application/json")
+    @Produces("application/json")   // pass in an employee
+    public Response becomeMentor(@FormParam("topic") String topic,
+                                 @FormParam("mentorDuration") int mentorDuration,
+                                 @FormParam("availability") List<String> availability) {
+
+        Topic topicIn = new Topic(topic);
+        Availability availabilityIn = new Availability(); // get list from form
+        Employee EmployeeIn = new Employee();
+
+        EmployeeIn.becomeMentor(topicIn,availabilityIn,mentorDuration);
+
+        return Response.ok(EmployeeIn, MediaType.APPLICATION_JSON).build();
     }
 
 }

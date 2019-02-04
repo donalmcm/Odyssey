@@ -1,43 +1,130 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
+    <title>Odyssey - Administration</title>
     <meta charset="UTF-8">
-    <title>Odyssey - Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="static/css/index.css">
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/odysseyLogo.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body class="body">
-<div class="banner">
-    <div class="banner-logo">
-        <a href="index.html">
-            <img src="static/img/odysseyLogo.png" alt="Odyssey Logo">
-        </a>
+<body>
+<div class="container-fluid">
+    <div class="row banner">
+        <div class="col-md-2 text-center banner-logo">
+            <img alt="Odyssey Logo" src="static/img/odysseyLogo.png" class="rounded" />
+        </div>
+        <div class="col-md-8 banner-title">
+            <h1>
+                Odyssey
+            </h1>
+        </div>
+        <div class="col-md-1 text-center profile-icon">
+            <a href="profile.html"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
+        </div>
+        <div class="col-md-1 text-center log-out-icon">
+            <a href="logIn.html"><i class="fas fa-sign-out-alt fa-3x" class="rounded"></i></a>
+        </div>
     </div>
-    <div class="banner-title">
-        <h1>Odyssey</h1>
-    </div>
-    <div class="profile-pic">
-        <a href="profile.html">
-            <img src="static/img/profilePic.png" alt="Profile Picture">
-        </a>
+    <div class="row main">
+        <div class="col-md-2 side-nav">
+            <ul class="nav flex-column nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="mentor.html">Mentor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="mentee.html">Mentee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="manager.html">Manager</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="admin.html">Admin</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>
+                       Administration
+                    </h3>
+                    <button type="button" class="btn btn-success" id="create-employee">
+                        Create Employee
+                    </button>
+                </div>
+                <div class="col-md-6">
+                </div>
+                <div class="modal fade" id="create-employee-modal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header new-employee-form-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h1><i class="far fa-user-circle fa-3x"></i>   New Employee Form</h1>
+                            </div>
+                            <div class="modal-body" style="padding:40px 50px;">
+                                <form role="form" action="api/employees/create" method="post">
+                                    <div class="form-group">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="text" class="form-control" id="email" placeholder="Enter email">
+                                    </div>
+                                    <!--<div class="form-group">-->
+                                        <!--<label for="psw"> Last Name</label>-->
+                                        <!--<input type="password" class="form-control" id="psw" placeholder="Enter password">-->   <!--for when users have passwords -->
+                                    <!--</div>-->
+                                    <button type="submit" class="btn btn-success btn-block">Create</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                First Name
+                            </th>
+                            <th>
+                                Last Name
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="employee-list">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
 </div>
-
-<div class="sidenav">
-    <a class="active" href="index.html">Home</a>
-    <a href="mentor.html">Mentor</a>
-    <a href="mentee.html">Mentee</a>
-    <a href="manager.html">Manager</a>
-    <a href="admin.html">Admin</a>
-</div>
-
-<div class ="main">
-    <form class="create-employee-form" method="POST" action="http://localhost:8080/api/testCreate">
-        <input class="form-control" type="text" required name="firstName" placeholder="First Name">
-        <input class="form-control" type="text" required name="lastName" placeholder="Last Name">
-        <input class="form-control" type="email" required name="emailg" placeholder="test@email.com">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Create Employee</button>
-    </form>
-</div>
-
+<script src="static/js/admin.js"></script>
 </body>
 </html>

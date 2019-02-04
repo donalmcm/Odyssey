@@ -13,3 +13,9 @@ $.getJSON(url, function (data) {
         dropdown.append($('<option></option>').attr('value', entry.name).text(entry.name));
     })
 });
+
+$(document).ready(function(){
+    $("#become-mentor").click(function(){
+        $("#become-mentor-modal").modal();
+    });
+});
