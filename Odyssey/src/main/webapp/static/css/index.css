@@ -131,7 +131,12 @@ html,body {
     color: white;
 }
 
+.mentor-availability-table {
+    width: 100%;
+}
 
-
+.mentor-availability-table th, td{
+    text-align: center;
+}
 
 

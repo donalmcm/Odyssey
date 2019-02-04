@@ -1,80 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Odyssey - Mentor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="static/css/index.css">
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/odysseyLogo.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body class="body">
-<div class="banner">
-    <div class="banner-logo">
-        <a href="index.html">
-            <img src="static/img/odysseyLogo.png" alt="Odyssey Logo">
-        </a>
+<body>
+<div class="container-fluid">
+    <div class="row banner">
+        <div class="col-md-2 text-center banner-logo">
+            <img alt="Odyssey Logo" src="static/img/odysseyLogo.png" class="rounded" />
+        </div>
+        <div class="col-md-8 banner-title">
+            <h1>
+                Odyssey
+            </h1>
+        </div>
+        <div class="col-md-1 text-center profile-icon">
+            <a href="profile.html"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
+        </div>
+        <div class="col-md-1 text-center log-out-icon">
+            <a href="logIn.html"><i class="fas fa-sign-out-alt fa-3x" class="rounded"></i></a>
+        </div>
     </div>
-    <div class="banner-title">
-        <h1>Odyssey</h1>
-    </div>
-    <div class="profile-pic">
-        <a href="profile.html">
-            <img src="static/img/profilePic.png" alt="Profile Picture">
-        </a>
+    <div class="row main">
+        <div class="col-md-2 side-nav">
+            <ul class="nav flex-column nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="mentor.html">Mentor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="mentee.html">Mentee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="manager.html">Manager</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="admin.html">Admin</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>
+                        Mentoring
+                    </h3>
+                    <button type="button" class="btn btn-success" id="become-mentor">
+                        Become a mentor
+                    </button>
+                </div>
+                <div class="col-md-6">
+                </div>
+                <div class="modal fade" id="become-mentor-modal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header new-employee-form-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h1><i class="far fa-user-circle fa-3x"></i>   Become Mentor Form</h1>
+                            </div>
+                            <div class="modal-body" style="padding:40px 50px;">
+                                <form role="form" action="api/employees/becomeMentor" method="post">
+                                    <div class="form-group">
+                                        <label for="topic-dropdown">Select a topic to mentor In</label>
+                                        <select class="form-control" id="topic-dropdown" name="topics"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mentorDuration">Select the number of weeks to mentor</label>
+                                        <select class="form-control" id="mentorDuration" placeholder="Enter last name">
+                                            <option value="one">1</option>
+                                            <option value="two">2</option>
+                                            <option value="three">3</option>
+                                            <option value="four">4</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="availability">Select your availability</label>
+                                        <table id="availability" class="mentor-availability-table">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Monday</th>
+                                                <th>Tuesday</th>
+                                                <th>Wednesday</th>
+                                                <th>Thursday</th>
+                                                <th>Friday</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><strong>AM</strong></td>
+                                                <td><input type="checkbox" value="mondayAM"></td>
+                                                <td><input type="checkbox" value="tuesdayAM"></td>
+                                                <td><input type="checkbox" value="wednesdayAM"></td>
+                                                <td><input type="checkbox" value="thursdayAM"></td>
+                                                <td><input type="checkbox" value="fridayAM"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>PM</strong></td>
+                                                <td><input type="checkbox" value="mondayPM"></td>
+                                                <td><input type="checkbox" value="tuesdayPM"></td>
+                                                <td><input type="checkbox" value="wednesdayPM"></td>
+                                                <td><input type="checkbox" value="thursdayPM"></td>
+                                                <td><input type="checkbox" value="fridayPM"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-block">Become Mentor</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-    <div class="sidenav">
-        <a class="active" href="index.html">Home</a>
-        <a href="mentor.html">Mentor</a>
-        <a href="mentee.html">Mentee</a>
-        <a href="manager.html">Manager</a>
-        <a href="admin.html">Admin</a>
-    </div>
-    <div class="become-mentor-form">
-        <h1>Become a Mentor</h1>
-        <form action="index.html" method="POST">
-            <h3>Please Select a Topic to mentor in</h3>
-            <select id="topic-dropdown" name="topics"></select><br>
-            <h3>Please Select the number of weeks you are willing to Mentor</h3>
-            <select>
-                <option value="one">1</option>
-                <option value="two">2</option>
-                <option value="three">3</option>
-                <option value="four">4</option>
-            </select><br>
-            <h3>Select what times you are available during the week</h3>
-            <table>
-                <thead>
-                <tr>
-                    <th>Time of Day</th>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><strong>AM</strong></td>
-                    <td><input type="checkbox" value="mondayAM"></td>
-                    <td><input type="checkbox" value="tuesdayAM"></td>
-                    <td><input type="checkbox" value="wednesdayAM"></td>
-                    <td><input type="checkbox" value="thursdayAM"></td>
-                    <td><input type="checkbox" value="fridayAM"></td>
-                </tr>
-                <tr>
-                    <td><strong>PM</strong></td>
-                    <td><input type="checkbox" value="mondayPM"></td>
-                    <td><input type="checkbox" value="tuesdayPM"></td>
-                    <td><input type="checkbox" value="wednesdayPM"></td>
-                    <td><input type="checkbox" value="thursdayPM"></td>
-                    <td><input type="checkbox" value="fridayPM"></td>
-                </tr>
-                </tbody>
-            </table>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-    <script src="static/js/mentor.js"></script>
+</div>
+<script src="static/js/mentor.js"></script>
 </body>
 </html>
