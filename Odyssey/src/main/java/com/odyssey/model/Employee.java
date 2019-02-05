@@ -13,7 +13,8 @@ import java.util.List;
 @NamedQueries({ @NamedQuery(name = "Employee.findAllEmployees", query = "select e from Employee e"),
         @NamedQuery(name = "Employee.findById", query = "select e from Employee e where e.id=:id"),
         @NamedQuery(name="Employee.findMentors", query = "select e from Employee e where e.isMentor=true"),
-        @NamedQuery(name="Employee.findMentees", query = "select e from Employee e where e.isMentee=true")})
+        @NamedQuery(name="Employee.findMentees", query = "select e from Employee e where e.isMentee=true"),
+        @NamedQuery(name="Employee.findMenteesByTopic", query = "select e from Employee e where e.isMentee=true and e.topic=:topic")})
 
 @XmlRootElement
 @Entity
