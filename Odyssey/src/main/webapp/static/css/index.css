@@ -131,7 +131,9 @@ html,body {
     color: white;
 }
 
-
+.employee-table th,td{
+    text-align: center;
+}
 
 
 
