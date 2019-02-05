@@ -20,9 +20,6 @@ public class EmployeeAPI {
     SessionFactory factory = HibernateUtils.getSessionFactory();
     Session session = factory.getCurrentSession();
 
-    Availability testAvailabilty = new Availability(true,false,true,false,true);
-    Topic testTopic = new Topic("testTopic");
-
     @GET
     @Produces("application/json")
     public Response getAllEmployees() {
@@ -94,6 +91,22 @@ public class EmployeeAPI {
         return Response.ok(menteeList, MediaType.APPLICATION_JSON).build();
     }
 
+    // get all mentees by topic
+    @GET
+    @Path("mentors/{topic}")
+    @Produces("application/json")
+    public Response getMenteesByTopic(@PathParam("topic") String topic) {
+        session.getTransaction().begin();
+
+        Query<Employee> query = session.createNamedQuery("Employee.findMenteesByTopic",Employee.class);
+        query.setParameter("topic",topic);
+
+        List<Employee> menteesByTopicList = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return Response.ok(menteesByTopicList, MediaType.APPLICATION_JSON).build();
+    }
+
     // create an employee
     @POST
     @Path("create")
@@ -111,7 +124,7 @@ public class EmployeeAPI {
         return Response.ok(newEmployee, MediaType.APPLICATION_JSON).build();
     }
 
-    // create an employee
+    // create a mentor
     @POST
     @Path("becomeMentor")
     @Consumes("application/json")

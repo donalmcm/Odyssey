@@ -1,37 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Odyssey - Mentee</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="static/css/index.css">
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/odysseyLogo.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body class="body">
-<div class="banner">
-    <div class="banner-logo">
-        <a href="index.html">
-            <img src="static/img/odysseyLogo.png" alt="Odyssey Logo">
-        </a>
+<body>
+<div class="container-fluid">
+    <div class="row banner">
+        <div class="col-md-2 text-center banner-logo">
+            <img alt="Odyssey Logo" src="static/img/odysseyLogo.png" class="rounded" />
+        </div>
+        <div class="col-md-8 banner-title">
+            <h1>
+                Odyssey
+            </h1>
+        </div>
+        <div class="col-md-1 text-center profile-icon">
+            <a href="profile.html"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
+        </div>
+        <div class="col-md-1 text-center log-out-icon">
+            <a href="logIn.html"><i class="fas fa-sign-out-alt fa-3x" class="rounded"></i></a>
+        </div>
     </div>
-    <div class="banner-title">
-        <h1>Odyssey</h1>
-    </div>
-    <div class="profile-pic">
-        <a href="profile.html">
-            <img src="static/img/profilePic.png" alt="Profile Picture">
-        </a>
+    <div class="row main">
+        <div class="col-md-2 side-nav">
+            <ul class="nav flex-column nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="mentor.html">Mentor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="mentee.html">Mentee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="manager.html">Manager</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="admin.html">Admin</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>
+                        Mentee
+                    </h3>
+                    <form role="form">
+                        <label for="topic-dropdown">Filter by a topic</label>
+                        <select class="form-control" id="topic-dropdown" name="topics" onclick="getMentorsByTopic(this.value)"></select>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="mentor-list">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div class="sidenav">
-    <a class="active" href="index.html">Home</a>
-    <a href="mentor.html">Mentor</a>
-    <a href="mentee.html">Mentee</a>
-    <a href="manager.html">Manager</a>
-    <a href="admin.html">Admin</a>
-</div>
-<div class="main">
-    <div id="mentor-list"></div>
 </div>
 <script src="static/js/mentee.js"></script>
+<script src="static/js/mentor.js"></script>
 </body>
 </html>
