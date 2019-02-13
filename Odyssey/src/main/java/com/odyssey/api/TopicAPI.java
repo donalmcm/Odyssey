@@ -2,14 +2,11 @@ package com.odyssey.api;
 
 
 import com.odyssey.model.Topic;
-import com.HibernateUtils;
+import com.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -18,7 +15,7 @@ import java.util.List;
 @Path("topics")
 public class TopicAPI {
 
-    SessionFactory factory = HibernateUtils.getSessionFactory();
+    SessionFactory factory = HibernateUtil.getSessionFactory();
     Session session = factory.getCurrentSession();
 
     // Get all topics

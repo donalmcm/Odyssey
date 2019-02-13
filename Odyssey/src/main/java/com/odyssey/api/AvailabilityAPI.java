@@ -1,6 +1,6 @@
 package com.odyssey.api;
 
-import com.HibernateUtils;
+import com.HibernateUtil;
 import com.odyssey.model.Availability;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Path("/availabilities")
 public class AvailabilityAPI {
-    SessionFactory factory = HibernateUtils.getSessionFactory();
+    SessionFactory factory = HibernateUtil.getSessionFactory();
     Session session = factory.getCurrentSession();
 
     @GET

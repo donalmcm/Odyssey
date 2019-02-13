@@ -2,11 +2,11 @@ package com.odyssey.api;
 
 import com.odyssey.model.Availability;
 import com.odyssey.model.Employee;
-import com.HibernateUtils;
+import com.HibernateUtil;
 import com.odyssey.model.Topic;
-import com.odyssey.writers.EmployeeBodyWriter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import javax.ws.rs.*;
@@ -17,15 +17,16 @@ import java.util.List;
 @Path("/employees")
 public class EmployeeAPI {
 
-    SessionFactory factory = HibernateUtils.getSessionFactory();
-    Session session = factory.getCurrentSession();
+
 
     @GET
     @Produces("application/json")
     public Response getAllEmployees() {
 
-        //try{
-            session.getTransaction().begin();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        session.getTransaction().begin();
 
             Query<Employee> query = session.createNamedQuery("Employee.findAllEmployees",Employee.class);
             List<Employee> employees = query.getResultList();
@@ -48,6 +49,8 @@ public class EmployeeAPI {
     @Path("{id}")
     @Produces("application/json")
     public Response getEmployeeById(@PathParam("id") int id) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
         Query<Employee> query = session.createNamedQuery("Employee.findById",Employee.class);
@@ -66,6 +69,8 @@ public class EmployeeAPI {
     @Path("mentors")
     @Produces("application/json")
     public Response getMentors() {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
         Query<Employee> query = session.createNamedQuery("Employee.findMentors",Employee.class);
@@ -81,6 +86,8 @@ public class EmployeeAPI {
     @Path("mentees")
     @Produces("application/json")
     public Response getMentees() {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
         Query<Employee> query = session.createNamedQuery("Employee.findMentees",Employee.class);
@@ -96,6 +103,8 @@ public class EmployeeAPI {
     @Path("mentors/{topic}")
     @Produces("application/json")
     public Response getMenteesByTopic(@PathParam("topic") String topic) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
         Query<Employee> query = session.createNamedQuery("Employee.findMenteesByTopic",Employee.class);
@@ -110,18 +119,32 @@ public class EmployeeAPI {
     // create an employee
     @POST
     @Path("create")
-    @Consumes("application/json")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces("application/json")
     public Response createEmployee(@FormParam("firstName") String firstName,
                                    @FormParam("lastName") String lastName,
                                    @FormParam("email") String email) {
-        session.getTransaction().begin();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try{
+            session.getTransaction().begin();
 
-        Employee newEmployee = new Employee(firstName,lastName,email);
-        session.persist(newEmployee);
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(newEmployee, MediaType.APPLICATION_JSON).build();
+            Employee newEmployee = new Employee();
+            newEmployee.setFirstName(firstName);
+            newEmployee.setLastName(lastName);
+            newEmployee.setEmail(email);
+
+            session.persist(newEmployee);
+            session.getTransaction().commit();
+            session.close();
+
+            return Response.ok(newEmployee, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+            return Response.ok().build();
+        }
+
     }
 
     // create a mentor
