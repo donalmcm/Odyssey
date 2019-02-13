@@ -139,4 +139,36 @@ html,body {
     text-align: center;
 }
 
+.profile-card {
+    border: 1px solid black;
+    border-radius: 4px;
+    margin: 1em;
+    padding: .5em;
+    list-style: none;
+}
+.profile-card li{
+    padding: .5em;
+}
+.edit-button {
+    background-color: greenyellow;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.edit-button:hover{
+    background-color: white;
+    color: greenyellow;
+}
+
+.profile-card-title {
+    border-bottom: 1px solid lightblue;
+}
+
+.profile-subcard {
+    border: 1px solid black;
+    border-radius: 4px;
+    margin: 1em;
+    padding: .5em;
+}
 
