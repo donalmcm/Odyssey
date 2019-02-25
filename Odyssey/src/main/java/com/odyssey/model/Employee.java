@@ -56,6 +56,9 @@ public class Employee {
     @Column
     private int mentorDuration = 0;
 
+    @Column(nullable = false)
+    private String password;
+
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
     private List<Odyssey> mentorOdyssey;
@@ -77,6 +80,13 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public Employee(String firstName, String lastName, String email, String password) { // availability
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
     }
 
     public Employee(String firstName, String lastName, String email, boolean isManager, boolean isAdmin,
@@ -107,6 +117,12 @@ public class Employee {
 
     // ------------- GETTERS AND SETTERS ----------------------------
 
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public Availability getAvailability() {
         return availability;
     }
