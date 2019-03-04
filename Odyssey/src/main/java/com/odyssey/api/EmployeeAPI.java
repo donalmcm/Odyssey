@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.List;
 
 @Path("/employees")
@@ -120,12 +121,13 @@ public class EmployeeAPI {
     @POST
     @Path("create")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces("application/json")
-    public Response createEmployee(@FormParam("firstName") String firstName,
-                                   @FormParam("lastName") String lastName,
-                                   @FormParam("email") String email) {
+    @Produces(MediaType.TEXT_HTML)
+    public Response createEmployee(@FormParam(value = "firstName") String firstName,
+                                   @FormParam(value = "lastName") String lastName,
+                                   @FormParam(value = "email") String email) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
+        URI location;
         try{
             session.getTransaction().begin();
 
@@ -138,13 +140,13 @@ public class EmployeeAPI {
             session.getTransaction().commit();
             session.close();
 
-            return Response.ok(newEmployee, MediaType.APPLICATION_JSON).build();
+            location = new URI("http://localhost:8080/index.html");
+            return Response.temporaryRedirect(location).build();
         } catch (Exception e) {
             session.getTransaction().rollback();
             e.printStackTrace();
-            return Response.ok().build();
         }
-
+        return null;
     }
 
     // create a mentor
