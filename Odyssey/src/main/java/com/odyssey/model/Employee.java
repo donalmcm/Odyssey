@@ -6,7 +6,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -30,11 +29,11 @@ public class Employee {
 
     @Expose
     @Column(nullable = false)
-    @XmlElement private String lastName;
+    private String lastName;
 
     @Expose
     @Column(nullable = false, unique = true)
-    @XmlElement private String email;
+    private String email;
 
     @Expose
     @Column
@@ -107,6 +106,15 @@ public class Employee {
 
     // ------------- GETTERS AND SETTERS ----------------------------
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public Availability getAvailability() {
         return availability;
     }

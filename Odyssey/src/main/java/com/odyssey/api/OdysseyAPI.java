@@ -2,7 +2,7 @@ package com.odyssey.api;
 
 import com.odyssey.model.Employee;
 import com.odyssey.model.Odyssey;
-import com.HibernateUtils;
+import com.HibernateUtil;
 import com.odyssey.model.Topic;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,12 +10,11 @@ import org.hibernate.SessionFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("/odyssey")
 public class OdysseyAPI {
 
-    SessionFactory factory = HibernateUtils.getSessionFactory();
+    SessionFactory factory = HibernateUtil.getSessionFactory();
     Session session = factory.getCurrentSession();
 
     @GET
