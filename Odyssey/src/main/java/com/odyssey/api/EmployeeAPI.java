@@ -122,9 +122,9 @@ public class EmployeeAPI {
     @Path("create")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
-    public Response createEmployee(@FormParam(value = "firstName") String firstName,
-                                   @FormParam(value = "lastName") String lastName,
-                                   @FormParam(value = "email") String email) {
+    public Response createEmployee(@FormParam("firstName") String firstName,
+                                   @FormParam("lastName") String lastName,
+                                   @FormParam("email") String email) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         URI location;
