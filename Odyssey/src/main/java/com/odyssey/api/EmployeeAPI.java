@@ -99,22 +99,22 @@ public class EmployeeAPI {
         return Response.ok(menteeList, MediaType.APPLICATION_JSON).build();
     }
 
-    // get all mentees by topic
+    // get all mentors by topic
     @GET
-    @Path("mentors/{topic}")
+    @Path("mentorsByTopic/{topic}")
     @Produces("application/json")
     public Response getMenteesByTopic(@PathParam("topic") String topic) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findMenteesByTopic",Employee.class);
+        Query<Employee> query = session.createNamedQuery("Employee.findMentorsByTopic",Employee.class);
         query.setParameter("topic",topic);
 
-        List<Employee> menteesByTopicList = query.getResultList();
+        List<Employee> mentorsByTopicList = query.getResultList();
         session.getTransaction().commit();
         session.close();
-        return Response.ok(menteesByTopicList, MediaType.APPLICATION_JSON).build();
+        return Response.ok(mentorsByTopicList, MediaType.APPLICATION_JSON).build();
     }
 
     // create an employee

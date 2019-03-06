@@ -53,9 +53,10 @@
                     <h3>
                         Mentee
                     </h3>
-                    <form role="form">
+                    <form role="form" method="get">
                         <label for="topic-dropdown">Filter by a topic</label>
-                        <select class="form-control" id="topic-dropdown" name="topics" onclick="getMentorsByTopic(this.value)"></select>
+                        <select class="form-control" id="topic-dropdown" name="topic"></select>
+                        <button type="submit" class="btn btn-success btn-block" onclick="getMentorsByTopic();">Filter</button>
                     </form>
                 </div>
                 <div class="col-md-6">
