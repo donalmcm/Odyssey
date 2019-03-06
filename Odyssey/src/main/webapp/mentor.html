@@ -72,15 +72,15 @@
                                 <form role="form" action="api/employees/becomeMentor" method="post">
                                     <div class="form-group">
                                         <label for="topic-dropdown">Select a topic to mentor In</label>
-                                        <select class="form-control" id="topic-dropdown" name="topics"></select>
+                                        <select class="form-control" id="topic-dropdown" name="topic"></select>
                                     </div>
                                     <div class="form-group">
                                         <label for="mentorDuration">Select the number of weeks to mentor</label>
-                                        <select class="form-control" id="mentorDuration" placeholder="Enter last name">
-                                            <option value="one">1</option>
-                                            <option value="two">2</option>
-                                            <option value="three">3</option>
-                                            <option value="four">4</option>
+                                        <select name="mentorDuration" class="form-control" id="mentorDuration" placeholder="Enter last name">
+                                            <option value=1>1</option>
+                                            <option value=2 >2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -88,7 +88,6 @@
                                         <table id="availability" class="mentor-availability-table">
                                             <thead>
                                             <tr>
-                                                <th></th>
                                                 <th>Monday</th>
                                                 <th>Tuesday</th>
                                                 <th>Wednesday</th>
@@ -98,20 +97,11 @@
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <td><strong>AM</strong></td>
-                                                <td><input type="checkbox" value="mondayAM"></td>
-                                                <td><input type="checkbox" value="tuesdayAM"></td>
-                                                <td><input type="checkbox" value="wednesdayAM"></td>
-                                                <td><input type="checkbox" value="thursdayAM"></td>
-                                                <td><input type="checkbox" value="fridayAM"></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>PM</strong></td>
-                                                <td><input type="checkbox" value="mondayPM"></td>
-                                                <td><input type="checkbox" value="tuesdayPM"></td>
-                                                <td><input type="checkbox" value="wednesdayPM"></td>
-                                                <td><input type="checkbox" value="thursdayPM"></td>
-                                                <td><input type="checkbox" value="fridayPM"></td>
+                                                <td><input type="checkbox" name="monday" value=true></td>
+                                                <td><input type="checkbox" name="tuesday" value=true></td>
+                                                <td><input type="checkbox" name="wednesday" value=true></td>
+                                                <td><input type="checkbox" name="thursday" value=true></td>
+                                                <td><input type="checkbox" name="friday" value=true></td>
                                             </tr>
                                             </tbody>
                                         </table>

@@ -152,19 +152,47 @@ public class EmployeeAPI {
     // create a mentor
     @POST
     @Path("becomeMentor")
-    @Consumes("application/json")
-    @Produces("application/json")   // pass in an employee
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_HTML)
     public Response becomeMentor(@FormParam("topic") String topic,
                                  @FormParam("mentorDuration") int mentorDuration,
-                                 @FormParam("availability") List<String> availability) {
+                                 @FormParam("monday") boolean monday,
+                                 @FormParam("tuesday") boolean tuesday,
+                                 @FormParam("wednesday") boolean wednesday,
+                                 @FormParam("thursday") boolean thursday,
+                                 @FormParam("friday") boolean friday) {
 
-        Topic topicIn = new Topic(topic);
-        Availability availabilityIn = new Availability(); // get list from form
-        Employee EmployeeIn = new Employee();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        URI location;
+        try{
+            session.getTransaction().begin();
 
-        EmployeeIn.becomeMentor(topicIn,availabilityIn,mentorDuration);
+            // use the current users id below - temporarily hardcoded  
+            Query<Employee> query = session.createNamedQuery("Employee.findById",Employee.class);
+            query.setParameter("id",25);
+            Employee employee = query.getSingleResult();
 
-        return Response.ok(EmployeeIn, MediaType.APPLICATION_JSON).build();
+            Query<Topic> topicQuery = session.createNamedQuery("Topic.findById",Topic.class);
+            topicQuery.setParameter("id",topic);
+            Topic topicIn = topicQuery.getSingleResult();
+
+            Availability employeeAvailability = new Availability(monday,tuesday,wednesday,thursday,friday);
+            session.persist(employeeAvailability);
+
+            employee.becomeMentor(topicIn,employeeAvailability,mentorDuration);
+
+            session.save(employee);
+            session.getTransaction().commit();
+            session.close();
+
+            location = new URI("http://localhost:8080/index.html");
+            return Response.temporaryRedirect(location).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
