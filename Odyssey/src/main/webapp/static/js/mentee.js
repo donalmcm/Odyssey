@@ -26,7 +26,7 @@ function myFunction(topic,mentorDuration,mentorId,availability) {
     document.getElementById("mentorId").value = mentorId;
     document.getElementById("topicId").value = topic;
     document.getElementById("mentorDuration").value = mentorDuration;
-    //document.getElementById("userId").value = userId;
+    document.getElementById("userId").value = 1;
 
     let dropdown = $('#availability-dropdown');
     dropdown.empty();
