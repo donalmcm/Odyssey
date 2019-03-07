@@ -126,6 +126,12 @@ html,body {
 }
 
 .new-employee-form-header {
+     padding:35px 50px;
+     background-color: #2196F3;
+     color: white;
+ }
+
+.new-odyssey-form-header {
     padding:35px 50px;
     background-color: #2196F3;
     color: white;
