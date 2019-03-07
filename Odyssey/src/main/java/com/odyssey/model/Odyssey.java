@@ -40,10 +40,11 @@ public class Odyssey {
     public Odyssey(){}
 
     public Odyssey(Employee mentor ,Employee mentee, Topic topic) {
-        this.mentor = mentor;// mentor must have isMentor = true
-        this.mentee = mentee; // must have isMentee = true
-        this.topic = topic; // an odyssey must have a topic
-
+        this.mentor = mentor;
+        this.mentee = mentee;
+        this.topic = topic;
+        mentor.getMentorDuration(); // use the create a list of meetings
+        mentor.getTopic(); // use to tell the odyssey what topic the odyssey is
         isActive = true;
     }
 
