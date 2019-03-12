@@ -13,6 +13,7 @@ $.getJSON(url, function (data) {
         mentorList.append($('<p></p>').attr('value', entry.availability.friday).text("Friday: " + entry.availability.friday));
         var inputElement = document.createElement('input');
         inputElement.type = "button";
+        inputElement.value = "Select Mentor";
         inputElement.addEventListener('click', function(){
             myFunction(entry.topic.name,entry.mentorDuration,entry.id,entry.availability);
         });
