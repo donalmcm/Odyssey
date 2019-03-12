@@ -25,16 +25,16 @@ public class OdysseyAPI {
         return " ";
     }
 
-    // create an employee
+    // create an odyssey
     @POST
     @Path("create")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
-    public Response createEmployee(@FormParam("userId")int userId,
+    public Response createOdyssey(@FormParam("userId")int userId,
                                    @FormParam("mentorId") int mentorId,
                                    @FormParam("mentorDuration") int mentorDuration,
                                    @FormParam("topicId") String topic,
-                                   @FormParam("availableDay") String day) {
+                                   @FormParam("availableDay") String availableDay) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         URI location;
@@ -43,7 +43,7 @@ public class OdysseyAPI {
 
             // use the current users id below - temporarily hardcoded
             Query<Employee> userQuery = session.createNamedQuery("Employee.findById",Employee.class);
-            userQuery.setParameter("id",userId);
+            userQuery.setParameter("id",31);
             Employee user = userQuery.getSingleResult();
 
             Query<Employee> mentorQuery = session.createNamedQuery("Employee.findById",Employee.class);
@@ -54,9 +54,10 @@ public class OdysseyAPI {
             topicQuery.setParameter("id",topic);
             Topic topicIn = topicQuery.getSingleResult();
 
-            Odyssey newOdyssey = new Odyssey(mentor,user,topicIn);
+            Odyssey newOdyssey = new Odyssey(mentor,user);
+            newOdyssey.generateOdysseyMeetings(mentorDuration,availableDay);
 
-            session.save(newOdyssey);
+            session.persist(newOdyssey);
             session.getTransaction().commit();
             session.close();
 
