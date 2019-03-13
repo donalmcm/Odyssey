@@ -58,22 +58,20 @@ public class Odyssey {
 
     public void generateOdysseyMeetings(int odysseyDuration, String dayOfMeetings) {
         List<OdysseyMeeting> odysseyMeetings = new ArrayList<OdysseyMeeting>();
-        int dayOfWeek=0;
-        int hourOfMeeting = 10; // 10 AM
-        int minuteOfMeeting = 0;
-        int secondOfMeeting = 0;
-        int weekLength = 7;
+        // to be set by employees
+        int dayOfWeek=0,hourOfMeeting = 10,minuteOfMeeting = 0,secondOfMeeting = 0,weekLength = 7;
+        String monday = "monday",tuesday = "tuesday",wednesday = "wednesday",thursday = "thursday", friday = "friday";
 
         // make enum?
-        if(dayOfMeetings == "monday") {
+        if(dayOfMeetings.equalsIgnoreCase(monday)) {
             dayOfWeek = 2;
-        } else if(dayOfMeetings == "tuesday") {
+        } else if(dayOfMeetings.equalsIgnoreCase(tuesday)) {
             dayOfWeek = 3;
-        } else if(dayOfMeetings == "wednesday") {
+        } else if(dayOfMeetings.equalsIgnoreCase(wednesday)) {
             dayOfWeek = 4;
-        } else if(dayOfMeetings == "thursday") {
+        } else if(dayOfMeetings.equalsIgnoreCase(thursday)) {
             dayOfWeek = 5;
-        } else if(dayOfMeetings == "friday") {
+        } else if(dayOfMeetings.equalsIgnoreCase(friday)) {
             dayOfWeek = 6;
         }
 
