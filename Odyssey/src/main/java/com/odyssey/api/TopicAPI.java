@@ -10,20 +10,20 @@ import org.hibernate.query.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.List;
 
 @Path("topics")
 public class TopicAPI {
-
-    SessionFactory factory = HibernateUtil.getSessionFactory();
-    Session session = factory.getCurrentSession();
 
     // Get all topics
     @GET
     @Produces("application/json")
     public Response getAllTopics() {
 
-        //try {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
             session.getTransaction().begin();
 
             Query<Topic> query = session.createNamedQuery("Topic.findAll",Topic.class);
@@ -32,7 +32,7 @@ public class TopicAPI {
             session.getTransaction().commit();
             session.close();
             return Response.ok(topics, MediaType.APPLICATION_JSON).build();
-        //} catch ()
+
     }
 
     // Get a topic by id
@@ -40,6 +40,8 @@ public class TopicAPI {
     @Path("{id}")
     @Produces("application/json")
     public Response getEmployeeById(@PathParam("id") String id) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
         Query<Topic> query = session.createNamedQuery("Topic.findById",Topic.class);
@@ -54,17 +56,31 @@ public class TopicAPI {
     }
 
     @POST
-    @Path("create/{name}")
-    @Consumes("application/json")
-    @Produces("application/json")
-    public Response createTopic(@PathParam("name") String name) {
+    @Path("create")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_HTML)
+    public Response createTopic(@FormParam("topicName") String name) {
 
-        session.getTransaction().begin();
-        Topic newTopic = new Topic(name);
-        session.persist(newTopic);
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(newTopic, MediaType.APPLICATION_JSON).build();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        URI location;
+        try{
+            session.getTransaction().begin();
+
+            Topic newTopic= new Topic();
+            newTopic.setName(name);
+
+            session.persist(newTopic);
+            session.getTransaction().commit();
+            session.close();
+
+            location = new URI("http://localhost:8080/index.html");
+            return Response.temporaryRedirect(location).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

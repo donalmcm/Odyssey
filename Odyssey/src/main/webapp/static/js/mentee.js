@@ -1,6 +1,6 @@
 let mentorList = $('#mentor-list');
-const url = 'http://localhost:8080/api/employees/mentors';
-$.getJSON(url, function (data) {
+const menteeUrl = 'http://localhost:8080/api/employees/mentors';
+$.getJSON(menteeUrl, function (data) {
     $.each(data, function (key, entry) {
         mentorList.append($('<div>'));
         mentorList.append($('<p></p>').attr('value', entry.topic.name).text("Topic: " + entry.topic.name));

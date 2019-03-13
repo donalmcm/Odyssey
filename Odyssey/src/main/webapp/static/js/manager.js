@@ -1,10 +1,10 @@
 let mentorList = $('#managers-team');
 
 // const managersTeam = 'http://localhost:8080/api/employees/byManager/' + managerId; // id passed in from current user
-const url = 'http://localhost:8080/api/employees';
+const managersEmployeesUrl = 'http://localhost:8080/api/employees';
 
 // Populate dropdown with list of topics
-$.getJSON(url, function (data) {
+$.getJSON(managersEmployeesUrl, function (data) {
     $.each(data, function (key, entry) {
         mentorList.append($('<tr>'));
         mentorList.append($('<td></td>').attr('value', entry.id).text(entry.id));
