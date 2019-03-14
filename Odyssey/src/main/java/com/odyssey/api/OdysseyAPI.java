@@ -1,9 +1,11 @@
 package com.odyssey.api;
 
+import com.google.gson.JsonObject;
 import com.odyssey.model.Employee;
 import com.odyssey.model.Odyssey;
 import com.HibernateUtil;
 import com.odyssey.model.Topic;
+import com.odyssey.writers.OdysseyDetails;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -12,8 +14,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.List;
 
-@Path("/odyssey")
+@Path("/odysseys")
 public class OdysseyAPI {
 
     SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -21,8 +24,64 @@ public class OdysseyAPI {
 
     @GET
     @Produces("application/json")
-    public String getAllOdysseys() {
-        return " ";
+    public Response getAllOdysseys() {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        session.getTransaction().begin();
+
+        Query<Odyssey> query = session.createNamedQuery("Odyssey.findAllOdysseys",Odyssey.class);
+        List<Odyssey> odysseys = query.getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+        return Response.ok(odysseys, MediaType.APPLICATION_JSON).build();
+    }
+
+
+    @GET
+    @Path("percentageComplete/{id}")
+    @Produces("application/json")
+    public double getPercentageCompleteOfOdysseys(@PathParam("id") int id) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        session.getTransaction().begin();
+
+        Query<Odyssey> query = session.createNamedQuery("Odyssey.findByOdysseyId",Odyssey.class);
+        query.setParameter("id",id);
+        Odyssey odyssey = query.getSingleResult();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return odyssey.getPercentageCompleteOfOdyssey();
+    }
+
+    @GET
+    @Path("details/{id}")
+    @Produces("application/json")
+    public Response getOdysseyDetails(@PathParam("id") int id) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        session.getTransaction().begin();
+
+        Query<Odyssey> query = session.createNamedQuery("Odyssey.findByOdysseyId",Odyssey.class);
+        query.setParameter("id",id);
+        Odyssey odyssey = query.getSingleResult();
+
+        session.getTransaction().commit();
+        session.close();
+
+        OdysseyDetails odysseyDetails = new OdysseyDetails();
+        odysseyDetails.setTopic(odyssey.getTopic().getName());
+        odysseyDetails.setMentor(odyssey.getMentor().getFirstName());
+        odysseyDetails.setMentee(odyssey.getMentee().getFirstName());
+        odysseyDetails.setDuration(odyssey.getMentor().getMentorDuration());
+        odysseyDetails.setPercentageComplete(odyssey.getPercentageCompleteOfOdyssey());
+
+        return Response.ok(odysseyDetails, MediaType.APPLICATION_JSON).build();
     }
 
     // create an odyssey
