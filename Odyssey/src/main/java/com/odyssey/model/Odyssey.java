@@ -11,7 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 @NamedQueries({ @NamedQuery(name = "Odyssey.findAllOdysseys", query = "select o from Odyssey o"),
-        @NamedQuery(name = "Odyssey.findByOdysseyId", query = "select o from Odyssey o where o.id=:id"), })
+        @NamedQuery(name = "Odyssey.findByOdysseyId", query = "select o from Odyssey o where o.id=:id"),
+        @NamedQuery(name = "Odyssey.findOdysseysByEmployee", query = "select o from Odyssey o where o.mentor=:id or o.mentee=:id")})
 
 @XmlRootElement
 @Entity
@@ -91,26 +92,35 @@ public class Odyssey {
         this.odysseyMeetings =  odysseyMeetings;
     }
 
-    public int getPercentageCompleteOfOdyssey(Odyssey odyssey) {
+    public int getPercentageCompleteOfOdyssey() {
 
-        int noOfMeetings = odyssey.odysseyMeetings.size();
-        int noOfCompletedMeetings = 0;
+        double noOfCompletedMeetings = 0.0,noOfMeetings = odysseyMeetings.size();
 
-        for (OdysseyMeeting meeting : odyssey.odysseyMeetings) {
-            if(meeting.getIsCompleted() == true) {
+        for (OdysseyMeeting meeting : odysseyMeetings) {
+            if(meeting.getIsCompleted()) {
                 noOfCompletedMeetings ++;
             }
         }
-        int percentageComplete = (noOfCompletedMeetings/noOfMeetings) * 100;
-
-        return percentageComplete;
+        double percentageComplete = (noOfCompletedMeetings/noOfMeetings) * 100;
+        return (int)percentageComplete;
     }
 
     public long getId() {
         return id;
     }
-
     public Topic getTopic() {
         return topic;
+    }
+    public Employee getMentor() {
+        return mentor;
+    }
+    public Employee getMentee() {
+        return mentee;
+    }
+    public boolean isActive() {
+        return isActive;
+    }
+    public List<OdysseyMeeting> getOdysseyMeetings() {
+        return odysseyMeetings;
     }
 }
