@@ -16,7 +16,7 @@ public class OdysseyMeeting {
     @Column(unique = true)// could this field be empty for remote calls or should skype be the location?
     private String location;
 
-    @Column(nullable = false)
+    @Column(nullable = false) //
     private Calendar date = new GregorianCalendar();
 
     @Column(nullable = false)
