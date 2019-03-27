@@ -15,13 +15,14 @@ import java.util.List;
 
 @Path("/availabilities")
 public class AvailabilityAPI {
-    SessionFactory factory = HibernateUtil.getSessionFactory();
-    Session session = factory.getCurrentSession();
+
 
     @GET
     @Produces("application/json")
     public Response getAllEmployees() {
 
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
         //try{
         session.getTransaction().begin();
 
