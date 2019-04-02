@@ -5,7 +5,6 @@ import com.odyssey.model.Employee;
 import com.odyssey.model.Odyssey;
 import com.HibernateUtil;
 import com.odyssey.model.Topic;
-import com.odyssey.writers.OdysseyDetails;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -58,42 +57,41 @@ public class OdysseyAPI {
         return odyssey.getPercentageCompleteOfOdyssey();
     }
 
-    @GET
-    @Path("details/{id}")
-    @Produces("application/json")
-    public Response getOdysseyDetails(@PathParam("id") int id) {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.getCurrentSession();
-
-        session.getTransaction().begin();
-
-        Query<Odyssey> query = session.createNamedQuery("Odyssey.findByOdysseyId",Odyssey.class);
-        query.setParameter("id",id);
-        Odyssey odyssey = query.getSingleResult();
-
-        session.getTransaction().commit();
-        session.close();
-
-        OdysseyDetails odysseyDetails = new OdysseyDetails();
-        odysseyDetails.setTopic(odyssey.getTopic().getName());
-        odysseyDetails.setMentor(odyssey.getMentor().getFirstName());
-        odysseyDetails.setMentee(odyssey.getMentee().getFirstName());
-        odysseyDetails.setDuration(odyssey.getMentor().getMentorDuration());
-        odysseyDetails.setPercentageComplete(odyssey.getPercentageCompleteOfOdyssey());
-
-        return Response.ok(odysseyDetails, MediaType.APPLICATION_JSON).build();
-    }
+//    @GET
+//    @Path("details/{id}")
+//    @Produces("application/json")
+//    public Response getOdysseyDetails(@PathParam("id") int id) {
+//        SessionFactory factory = HibernateUtil.getSessionFactory();
+//        Session session = factory.getCurrentSession();
+//
+//        session.getTransaction().begin();
+//
+//        Query<Odyssey> query = session.createNamedQuery("Odyssey.findByOdysseyId",Odyssey.class);
+//        query.setParameter("id",id);
+//        Odyssey odyssey = query.getSingleResult();
+//
+//        session.getTransaction().commit();
+//        session.close();
+//
+//        OdysseyDetails odysseyDetails = new OdysseyDetails();
+//        odysseyDetails.setTopic(odyssey.getTopic().getName());
+//        odysseyDetails.setMentor(odyssey.getMentor().getFirstName());
+//        odysseyDetails.setMentee(odyssey.getMentee().getFirstName());
+//        odysseyDetails.setDuration(odyssey.getMentor().getMentorDuration());
+//        odysseyDetails.setPercentageComplete(odyssey.getPercentageCompleteOfOdyssey());
+//
+//        return Response.ok(odysseyDetails, MediaType.APPLICATION_JSON).build();
+//    }
 
     // create an odyssey
     @POST
     @Path("create")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
-    public Response createOdyssey(@FormParam("userId")int userId,
-                                   @FormParam("mentorId") int mentorId,
+    public Response createOdyssey(@FormParam("topicId")int topicId,
                                    @FormParam("mentorDuration") int mentorDuration,
-                                   @FormParam("topicId") String topic,
-                                   @FormParam("availableDay") String availableDay) {
+                                   @FormParam("dayOfMeetings") String dayOfMeetings,
+                                   @FormParam("timeOfMeetings") int timeOfMeetings) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         URI location;
@@ -102,19 +100,19 @@ public class OdysseyAPI {
 
             // use the current users id below - temporarily hardcoded
             Query<Employee> userQuery = session.createNamedQuery("Employee.findById",Employee.class);
-            userQuery.setParameter("id",31);
+            userQuery.setParameter("id",1);
             Employee user = userQuery.getSingleResult();
 
             Query<Employee> mentorQuery = session.createNamedQuery("Employee.findById",Employee.class);
-            mentorQuery.setParameter("id",mentorId);
+            mentorQuery.setParameter("id",2);
             Employee mentor = mentorQuery.getSingleResult();
 
             Query<Topic> topicQuery = session.createNamedQuery("Topic.findById",Topic.class);
-            topicQuery.setParameter("id",topic);
+            topicQuery.setParameter("id",topicId);
             Topic topicIn = topicQuery.getSingleResult();
 
             Odyssey newOdyssey = new Odyssey(mentor,user);
-            newOdyssey.generateOdysseyMeetings(mentorDuration,availableDay);
+            newOdyssey.generateOdysseyMeetings(mentorDuration,dayOfMeetings,timeOfMeetings);
 
             session.persist(newOdyssey);
             session.getTransaction().commit();

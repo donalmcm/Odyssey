@@ -57,10 +57,10 @@ public class Odyssey {
         odyssey.mentee.setMentee(false);
     }
 
-    public void generateOdysseyMeetings(int odysseyDuration, String dayOfMeetings) {
-        List<OdysseyMeeting> odysseyMeetings = new ArrayList<OdysseyMeeting>();
+    public void generateOdysseyMeetings(int odysseyDuration, String dayOfMeetings,int timeOfMeeting) {
+        List<OdysseyMeeting> odysseyMeetings = new ArrayList<>();
         // to be set by employees
-        int dayOfWeek=0,hourOfMeeting = 10,minuteOfMeeting = 0,secondOfMeeting = 0,weekLength = 7;
+        int dayOfWeek=0,minuteOfMeeting = 0,secondOfMeeting = 0,weekLength = 7;
         String monday = "monday",tuesday = "tuesday",wednesday = "wednesday",thursday = "thursday", friday = "friday";
 
         // make enum?
@@ -81,7 +81,7 @@ public class Odyssey {
         for(int i=0; i<odysseyDuration;i++) {
             Calendar temp = Calendar.getInstance();
             temp.set(Calendar.DAY_OF_WEEK,dayOfWeek);
-            temp.set(Calendar.HOUR_OF_DAY,hourOfMeeting);
+            temp.set(Calendar.HOUR_OF_DAY,timeOfMeeting);
             temp.set(Calendar.MINUTE,minuteOfMeeting);
             temp.set(Calendar.SECOND,secondOfMeeting);
             temp.add(Calendar.DATE,weekLength);

@@ -8,7 +8,7 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/odyssey_db?useSSL=false</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/odysseydb?useSSL=false</property>
         <property name="connection.username">root</property>
         <property name="connection.password">password</property>
 
@@ -16,10 +16,12 @@
         <property name="connection.pool_size">10</property>
 
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL55Dialect</property>
 
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
+
+        <property name="hbm2ddl.auto">update</property>
 
         <!-- Disable the second-level cache -->
         <!--<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>-->

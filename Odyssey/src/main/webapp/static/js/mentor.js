@@ -1,16 +1,16 @@
-let dropdown = $('#topic-dropdown');
+let mentorDropdown = $('#topic-dropdown');
 
-dropdown.empty();
+mentorDropdown.empty();
 
-dropdown.append('<option selected="true" disabled>Choose Topic</option>');
-dropdown.prop('selectedIndex', 0);
+mentorDropdown.append('<option selected="true" disabled>Choose Topic</option>');
+mentorDropdown.prop('selectedIndex', 0);
 
 const topicMentorUrl = 'http://localhost:8080/api/topics';
 
 // Populate dropdown with list of topics
 $.getJSON(topicMentorUrl, function (data) {
     $.each(data, function (key, entry) {
-        dropdown.append($('<option></option>').attr('value', entry.name).text(entry.name));
+        mentorDropdown.append($('<option></option>').attr('value', entry.name).text(entry.name));
     })
 });
 

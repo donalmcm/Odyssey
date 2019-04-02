@@ -178,3 +178,56 @@ html,body {
     padding: .5em;
 }
 
+.ck-button {
+    margin:4px;
+    border: solid green 2px;
+    color: green;
+    overflow:auto;
+    float:left;
+}
+
+.ck-button label {
+    float:left;
+    width:5.0em;
+    margin: 0;
+}
+
+.ck-button label span {
+    text-align:center;
+    padding:.5em;
+    display:block;
+}
+
+.ck-button label input {
+    position:absolute;
+    top:-9999px;
+}
+
+.ck-button input:checked + span {
+    background-color:green;
+    color:#fff;
+}
+
+.ck-button input:disabled + span {
+    background-color: darkgrey;
+    color: white;
+    cursor: not-allowed;
+}
+
+.ck-button input:hover:enabled + span {
+    background-color: cornflowerblue;
+    color: white;
+    cursor: pointer;
+}
+
+.mentor-card {
+    background-color: aliceblue;
+    width: auto;
+    border: solid 1px green;
+    padding: 16px;
+    margin: 16px;
+}
+
+
+
+
