@@ -61,7 +61,7 @@
                                     name="topicFilter"></select>
                         </div>
                         <div class="form-group">
-                            <label for="duration-dropdown">Select Duration</label>
+                            <label for="duration-dropdown">Select duration in weeks</label>
                             <select onchange="getAvailabilitiesByTopicAndDuration(this.value)" class="form-control"
                                     id="duration-dropdown" name="duration"></select>
                         </div>
@@ -73,22 +73,27 @@
                             <ul class="nav nav-pills" id="select-day">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-toggle="pill"
-                                       style="border: solid 2px cornflowerblue;margin-right: 4px" href="#home">Monday</a>
+                                       style="border: solid 2px cornflowerblue;margin-right: 4px"
+                                       href="#home">Monday</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" style="border: solid 2px cornflowerblue;margin-right: 4px"
+                                    <a class="nav-link" data-toggle="pill"
+                                       style="border: solid 2px cornflowerblue;margin-right: 4px"
                                        href="#tuesday">Tuesday</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" style="border: solid 2px cornflowerblue;margin-right: 4px"
+                                    <a class="nav-link" data-toggle="pill"
+                                       style="border: solid 2px cornflowerblue;margin-right: 4px"
                                        href="#wednesday">Wednesday</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" style="border: solid 2px cornflowerblue;margin-right: 4px"
+                                    <a class="nav-link" data-toggle="pill"
+                                       style="border: solid 2px cornflowerblue;margin-right: 4px"
                                        href="#thursday">Thursday</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" style="border: solid 2px cornflowerblue;margin-right: 4px"
+                                    <a class="nav-link" data-toggle="pill"
+                                       style="border: solid 2px cornflowerblue;margin-right: 4px"
                                        href="#friday">Friday</a>
                                 </li>
                             </ul>
@@ -207,7 +212,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" onclick="populateModal()" class="btn btn-success btn-block">Confirm</button>
+                        <button type="submit" onclick="populateModal()" class="btn btn-success btn-block" id="begin-odyssey">Confirm
+                        </button>
                     </form>
                     <div class="modal fade" id="odyssey-modal" role="dialog">
                         <div class="modal-dialog">
@@ -221,22 +227,22 @@
                                     <form role="form" action="api/odyssey/create" method="post">
                                         <div class="form-group">
                                             <label for="topicId">Topic</label>
-                                            <input type="text" class="form-control" id="topicId" name="topicId"
+                                            <input class="form-control" id="topicId" name="topicId"
                                                    readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="mentorDuration">Odyssey Duration In Weeks</label>
-                                            <input type="number" class="form-control" id="mentorDuration"
+                                            <input class="form-control" id="mentorDuration"
                                                    name="mentorDuration" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="mentorDuration">Day of Meetings</label>
-                                            <input type="text" class="form-control" id="dayOfMeetings"
+                                            <input class="form-control" id="dayOfMeetings"
                                                    name="dayOfMeetings" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="mentorDuration">Time of Meetings</label>
-                                            <input type="text" class="form-control" id="timeOfMeetings"
+                                            <input class="form-control" id="timeOfMeetings"
                                                    name="timeOfMeetings" readonly>
                                         </div>
                                         <button type="submit" class="btn btn-success btn-block">Begin Odyssey</button>
@@ -261,6 +267,5 @@
 </div>
 </div>
 <script src="static/js/mentee.js"></script>
-<script src="static/js/mentor.js"></script>
 </body>
 </html>

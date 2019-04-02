@@ -1,31 +1,3 @@
-let mentorList = $('#mentor-list');
-const menteeUrl = 'http://localhost:8080/api/employees/mentors';
-$.getJSON(menteeUrl, function (data) {
-    $.each(data, function (key, entry) {
-        mentorList.append($('<div>'));
-        mentorList.append($('<p></p>').attr('value', entry.topic.name).text("Topic: " + entry.topic.name));
-        mentorList.append($('<p></p>').attr('value', entry.mentorDuration).text("Duration: " + entry.mentorDuration));
-        mentorList.append($('<p>Mentor Availability</p>'));
-        mentorList.append($('<p></p>').attr('value', entry.availability.mondayAm).text("Monday AM: " + entry.availability.mondayAm));
-        mentorList.append($('<p></p>').attr('value', entry.availability.mondayPm).text("Monday PM: " + entry.availability.mondayPm));
-        mentorList.append($('<p></p>').attr('value', entry.availability.tuesdayAm).text("Tuesday AM: " + entry.availability.tuesdayAm));
-        mentorList.append($('<p></p>').attr('value', entry.availability.tuesdayPm).text("Tuesday PM: " + entry.availability.tuesdayPm));
-        mentorList.append($('<p></p>').attr('value', entry.availability.wednesdayAm).text("Wednesday AM: " + entry.availability.wednesdayAm));
-        mentorList.append($('<p></p>').attr('value', entry.availability.wednesdayPm).text("Wednesday PM: " + entry.availability.wednesdayPm));
-        mentorList.append($('<p></p>').attr('value', entry.availability.thursdayAm).text("Thursday AM: " + entry.availability.thursdayAm));
-        mentorList.append($('<p></p>').attr('value', entry.availability.thursdayPm).text("Thursday PM: " + entry.availability.thursdayPm));
-        mentorList.append($('<p></p>').attr('value', entry.availability.fridayAm).text("Friday AM: " + entry.availability.fridayAM));
-        mentorList.append($('<p></p>').attr('value', entry.availability.fridayPm).text("Friday AM: " + entry.availability.fridayPM));
-        var inputElement = document.createElement('input');
-        inputElement.type = "button";
-        inputElement.value = "Select Mentor";
-        inputElement.addEventListener('click', function(){
-            myFunction(entry.topic.name,entry.mentorDuration,entry.id,entry.availability);
-        });
-        mentorList.append(inputElement);
-        mentorList.append($('</div>'));
-    })
-});
 
 function populateModal() {
 
@@ -69,7 +41,6 @@ $.getJSON(topicMenteeUrl, function (data) {
     })
 });
 
-let mentorListByTopic = $('#mentor-list-by-topic');
 
 let durationDropdown = $('#duration-dropdown');
 durationDropdown.empty();
