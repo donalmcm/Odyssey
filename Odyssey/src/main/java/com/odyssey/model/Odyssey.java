@@ -51,10 +51,10 @@ public class Odyssey {
     }
 
     // To be called after the last meeting of an odyssey
-    public void completedOdyssey(Odyssey odyssey) {
-        odyssey.isActive = false;
-        odyssey.mentor.setMentorToFalse();
-        odyssey.mentee.setMentee(false);
+    public void completedOdyssey() {
+        isActive = false;
+        mentor.setMentorToFalse();
+        mentee.setMentee(false);
     }
 
     public void generateOdysseyMeetings(int odysseyDuration, String dayOfMeetings,int timeOfMeeting) {
