@@ -4,11 +4,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Query;
 
-class DataQueries {
-    private final String topicCountQuery = "select topic_name, COUNT(*) FROM odyssey group by topic_name";
+public class DataQueries {
+    private String topic;
+    private int occurrences;
 
-    public String getTopicCountQuery() {
-        return topicCountQuery;
+    public DataQueries(String topic, int occurrences) {
+        this.topic = topic;
+        this.occurrences = occurrences;
     }
 }
 

@@ -2,10 +2,12 @@ package com.odyssey.api;
 
 import com.HibernateUtil;
 import com.odyssey.dataAnalytics.DataQueries;
+import com.odyssey.model.Odyssey;
+import com.odyssey.model.Topic;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 
+import javax.persistence.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -25,8 +27,8 @@ public class dataAPI {
         Session session = factory.getCurrentSession();
 
         session.getTransaction().begin();
-        final String query = "select topic_name, COUNT(*) FROM odyssey group by topic_name";
-
+        //final String query = "select topic_name, COUNT(*) FROM odyssey group by topic_name";
+        //Query query1 = session.createQuery(query);
         session.getTransaction().commit();
         session.close();
         return Response.ok().build();
