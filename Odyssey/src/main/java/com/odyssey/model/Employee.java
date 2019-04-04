@@ -1,6 +1,9 @@
 package com.odyssey.model;
 
+import com.HibernateUtil;
 import com.google.gson.annotations.Expose;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Table;
@@ -14,7 +17,8 @@ import java.util.List;
         @NamedQuery(name="Employee.findMentors", query = "select e from Employee e where e.isMentor=true"),
         @NamedQuery(name="Employee.findMentees", query = "select e from Employee e where e.isMentee=true"),
         @NamedQuery(name="Employee.findMentorsByTopic", query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic"),
-        @NamedQuery(name="Employee.findAvailability", query ="select e.availability from Employee e where e.id=:id" )})
+        @NamedQuery(name="Employee.findAvailability", query ="select e.availability from Employee e where e.id=:id" ),
+        @NamedQuery(name="Employee.authenticate",query = "select e from Employee e where e.email=:email and e.password=:password")})
 
 @XmlRootElement
 @Entity
@@ -35,6 +39,10 @@ public class Employee {
     @Expose
     @Column(nullable = false, unique = true)
     private String email;
+
+    // change to more secure option
+    @Column(nullable = false)
+    private String password;
 
     @Expose
     @Column
@@ -104,6 +112,9 @@ public class Employee {
         // create relationship between a manager and their employees
         isManager = true;
     }
+
+
+
 
     // ------------- GETTERS AND SETTERS ----------------------------
 

@@ -20,4 +20,13 @@
         <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+    <!-- ensure there is an active session to visit pages -->
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.servlet.filter.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/myaccount/*</url-pattern>
+    </filter-mapping>
 </web-app>

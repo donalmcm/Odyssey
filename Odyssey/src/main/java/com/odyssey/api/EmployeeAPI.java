@@ -5,6 +5,7 @@ import com.odyssey.model.Availability;
 import com.odyssey.model.Employee;
 import com.HibernateUtil;
 import com.odyssey.model.Topic;
+import com.sun.jersey.spi.inject.Inject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -43,8 +44,6 @@ public class EmployeeAPI {
 //            session.getTransaction().rollback();
 //        }
     }
-
-
 
     // Get an Employee by id
     @GET
@@ -227,4 +226,6 @@ public class EmployeeAPI {
         }
         return null;
     }
+
+
 }
