@@ -23,7 +23,7 @@ public class Topic {
 //    @OneToMany(mappedBy = "topic")
 //    private List<SubTopic> subTopics;
 
-    public Topic(){};
+    public Topic(){}
 
     public Topic(String topic) {
         this.name = topic;

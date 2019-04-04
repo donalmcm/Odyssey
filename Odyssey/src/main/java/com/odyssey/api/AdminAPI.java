@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 @Path("/test")
 public class AdminAPI {
-    final static Logger converterLogger = Logger.getLogger("converter");
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)

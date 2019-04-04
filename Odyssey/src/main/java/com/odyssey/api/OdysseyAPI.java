@@ -18,7 +18,7 @@ import java.util.List;
 @Path("/odysseys")
 public class OdysseyAPI {
 
-    SessionFactory factory = HibernateUtil.getSessionFactory();
+    private final SessionFactory factory = HibernateUtil.getSessionFactory();
     Session session = factory.getCurrentSession();
 
     @GET

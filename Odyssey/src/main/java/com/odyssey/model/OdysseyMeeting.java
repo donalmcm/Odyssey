@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 
 @XmlRootElement
 @Entity
-public class OdysseyMeeting {
+class OdysseyMeeting {
 
     @Id
     @GeneratedValue
@@ -26,7 +26,7 @@ public class OdysseyMeeting {
     @JoinColumn
     private Odyssey odyssey;
 
-    public OdysseyMeeting(){};
+    public OdysseyMeeting(){}
 
     public OdysseyMeeting(Calendar date,Odyssey odyssey) {
         this.date = date;

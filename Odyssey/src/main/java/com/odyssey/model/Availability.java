@@ -87,7 +87,7 @@ public class Availability {
     @OneToOne(mappedBy = "availability")
     private Employee employee;
 
-    public Availability(){};
+    public Availability(){}
 
     public Availability(boolean monday10, boolean monday11, boolean monday12, boolean monday14, boolean monday15,
                         boolean monday16, boolean tuesday10, boolean tuesday11, boolean tuesday12, boolean tuesday14,

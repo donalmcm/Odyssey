@@ -8,19 +8,19 @@ import java.text.ParseException;
 class EmployeeTests {
 
     @Test
-    public void createEmployeeTest() {
+    void createEmployeeTest() {
         Employee e = new Employee("Donal", "McManus", "donalmcm@email.com");
     }
 
     @Test
-    public void makeEmployeeMentorTest() {
+    void makeEmployeeMentorTest() {
         Employee e = new Employee("Donal", "McManus", "donalmcm@email.com");
 
         // run function and perform checks
     }
 
     @Test
-    public void makeEmployeeManagerTest() {
+    void makeEmployeeManagerTest() {
         Employee e = new Employee("Donal", "McManus", "donalmcm@email.com");
 
         // run function and perform checks
