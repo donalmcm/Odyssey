@@ -1,5 +1,11 @@
 package com.servlet.session;
 
+import com.HibernateUtil;
+import com.odyssey.model.Employee;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -18,17 +24,29 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-    private final String email = "donal@email.com"; // change to actual user
-    private final String password = "password";
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
         // get request parameters for username and password
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String emailIn = request.getParameter("email");
+        String passwordIn = request.getParameter("password");
 
-        if (this.email.equals(email) && this.password.equals(password)) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Query<Employee> query = session.createNamedQuery("Employee.findByEmail",Employee.class);
+        query.setParameter("email",emailIn);
+        Employee employee = query.getSingleResult();
+
+         final String email = employee.getEmail(); // change to actual user
+         final String password = employee.getPassword();
+
+        session.getTransaction().commit();
+        session.close();
+
+        if (email.equals(emailIn) && password.equals(passwordIn)) {
             //get the old session and invalidate
             HttpSession oldSession = request.getSession(false);
             if (oldSession != null) {
@@ -41,7 +59,7 @@ public class LoginServlet extends HttpServlet {
             newSession.setMaxInactiveInterval(5*60);
 
             Cookie message = new Cookie("message", "Welcome");
-            Cookie userEmail = new Cookie("email",this.email);
+            Cookie userEmail = new Cookie("email",email);
             response.addCookie(userEmail);
             response.addCookie(message);
             response.sendRedirect("myaccount/LoginSuccess.jsp");

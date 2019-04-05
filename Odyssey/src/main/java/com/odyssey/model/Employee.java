@@ -18,7 +18,7 @@ import java.util.List;
         @NamedQuery(name="Employee.findMentees", query = "select e from Employee e where e.isMentee=true"),
         @NamedQuery(name="Employee.findMentorsByTopic", query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic"),
         @NamedQuery(name="Employee.findAvailability", query ="select e.availability from Employee e where e.id=:id" ),
-        @NamedQuery(name="Employee.authenticate",query = "select e from Employee e where e.email=:email and e.password=:password")})
+        @NamedQuery(name="Employee.findByEmail",query = "select e from Employee e where e.email=:email")})
 
 @XmlRootElement
 @Entity
@@ -118,6 +118,9 @@ public class Employee {
 
     // ------------- GETTERS AND SETTERS ----------------------------
 
+    public String getPassword() {
+        return password;
+    }
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
