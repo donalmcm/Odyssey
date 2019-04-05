@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>restWebService</groupId>
-    <artifactId>restWebService</artifactId>
+    <artifactId>LoginServlet</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>restWebService</name>
@@ -171,11 +171,11 @@
             <artifactId>commons-math3</artifactId>
             <version>3.2</version>
         </dependency>
-        <dependency>
+        <!--<dependency>   Stopped the clean install of mvn
             <groupId>restWebService</groupId>
             <artifactId>restWebService</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
+        </dependency> -->
 
     </dependencies>
 
