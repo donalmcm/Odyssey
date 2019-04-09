@@ -1,4 +1,11 @@
-<!DOCTYPE HTML>
+<%@ page import="com.odyssey.model.Employee" %><%--
+  Created by IntelliJ IDEA.
+  User: iDugin
+  Date: 09/04/2019
+  Time: 13:12
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Odyssey - Mentor</title>
@@ -13,6 +20,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<%
+    String email = null;
+    Cookie[] cookies = request.getCookies();
+    if(cookies != null){
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals("email")) email = cookie.getValue();
+        }
+    }
+    Employee e = new Employee();
+    e = Employee.getEmployeeByEmail(email);
+%>
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
@@ -24,26 +42,26 @@
             </h1>
         </div>
         <div class="col-md-1 text-center profile-icon">
-            <a href="profile.html"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
+            <a href="profile.jsp"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
         </div>
-        <div class="col-md-1 text-center log-out-icon">
-            <a href="../index.html"><i class="fas fa-sign-out-alt fa-3x" class="rounded"></i></a>
-        </div>
+        <form action="LogoutServlet" method="post">
+            <input type="submit" value="Logout" >
+        </form>
     </div>
     <div class="row main">
         <div class="col-md-2 side-nav">
             <ul class="nav flex-column nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" href="mentor.html">Mentor</a>
+                    <a class="nav-link" href="mentor.jsp">Mentor</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="mentee.html">Mentee</a>
+                    <a class="nav-link disabled" href="mentee.jsp">Mentee</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="manager.html">Manager</a>
+                    <a class="nav-link disabled" href="manager.jsp">Manager</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="admin.html">Admin</a>
+                    <a class="nav-link active" href="admin.jsp">Admin</a>
                 </li>
             </ul>
         </div>
@@ -117,108 +135,108 @@
                                             <div class="tab-pane container active" style="padding: 0" id="home">
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="monday10" id="monday10" value="true"
-                                                                                     ><span>10 AM</span></label></div>
+                                                ><span>10 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="monday11" id="monday11" value="true"
-                                                                                     ><span>11 AM</span></label></div>
+                                                ><span>11 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="monday12" id="monday12" value="true"
-                                                                                     ><span>12 AM</span></label></div>
+                                                ><span>12 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="monday14" id="monday14" value="true"
-                                                                                     ><span>2 PM</span></label></div>
+                                                ><span>2 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="monday15" id="monday15" value="true"
-                                                                                     ><span>3 PM</span></label></div>
+                                                ><span>3 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="monday16" id="monday16" value="true"
-                                                                                     ><span>4 PM</span></label></div>
+                                                ><span>4 PM</span></label></div>
                                             </div>
                                             <div class="tab-pane container fade" style="padding: 0" id="tuesday">
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="tuesday10" id="tuesday10" value="true"
-                                                                                     ><span>10 AM</span></label></div>
+                                                ><span>10 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="tuesday11" id="tuesday11" value="true"
-                                                                                     ><span>11 AM</span></label></div>
+                                                ><span>11 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="tuesday12" id="tuesday12" value="true"
-                                                                                     ><span>12 AM</span></label></div>
+                                                ><span>12 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="tuesday14" id="tuesday14" value="true"
-                                                                                     ><span>2 PM</span></label></div>
+                                                ><span>2 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="tuesday15" id="tuesday15" value="true"
-                                                                                     ><span>3 PM</span></label></div>
+                                                ><span>3 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="tuesday16" id="tuesday16" value="true"
-                                                                                     ><span>4 PM</span></label></div>
+                                                ><span>4 PM</span></label></div>
                                             </div>
                                             <div class="tab-pane container fade" style="padding: 0" id="wednesday">
                                                 <div class="ck-button"><label><input  type="checkbox"
-                                                                                     name="wednesday10" id="wednesday10"
-                                                                                     value="true"
-                                                                                     ><span>10 AM</span></label></div>
+                                                                                      name="wednesday10" id="wednesday10"
+                                                                                      value="true"
+                                                ><span>10 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="wednesday11" id="wednesday11"
                                                                                      value="true"
-                                                                                     ><span>11 AM</span></label></div>
+                                                ><span>11 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="wednesday12" id="wednesday12"
                                                                                      value="true"
-                                                                                     ><span>12 AM</span></label></div>
+                                                ><span>12 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="wednesday14" id="wednesday14"
                                                                                      value="true"
-                                                                                     ><span>2 PM</span></label></div>
+                                                ><span>2 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="wednesday15" id="wednesday15"
                                                                                      value="true"
-                                                                                     ><span>3 PM</span></label></div>
+                                                ><span>3 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="wednesday16" id="wednesday16"
                                                                                      value="true"
-                                                                                     ><span>4 PM</span></label></div>
+                                                ><span>4 PM</span></label></div>
                                             </div>
                                             <div class="tab-pane container fade" style="padding: 0" id="thursday">
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="thursday10" id="thursday10" value="true"
-                                                                                     ><span>10 AM</span></label></div>
+                                                ><span>10 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="thursday11" id="thursday11" value="true"
-                                                                                     ><span>11 AM</span></label></div>
+                                                ><span>11 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="thursday12" id="thursday12" value="true"
-                                                                                     ><span>12 AM</span></label></div>
+                                                ><span>12 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="thursday14" id="thursday14" value="true"
-                                                                                     ><span>2 PM</span></label></div>
+                                                ><span>2 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="thursday15" id="thursday15" value="true"
-                                                                                     ><span>3 PM</span></label></div>
+                                                ><span>3 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="thursday16" id="thursday16" value="true"
-                                                                                     ><span>4 PM</span></label></div>
+                                                ><span>4 PM</span></label></div>
                                             </div>
                                             <div class="tab-pane container fade" style="padding: 0" id="friday">
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="friday10" id="friday10" value="true"
-                                                                                     ><span>10 AM</span></label></div>
+                                                ><span>10 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="friday11" id="friday11" value="true"
-                                                                                     ><span>11 AM</span></label></div>
+                                                ><span>11 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="friday12" id="friday12" value="true"
-                                                                                     ><span>12 AM</span></label></div>
+                                                ><span>12 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="friday14" id="friday14" value="true"
-                                                                                     ><span>2 PM</span></label></div>
+                                                ><span>2 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="friday15" id="friday15" value="true"
-                                                                                     ><span>3 PM</span></label></div>
+                                                ><span>3 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="friday16" id="friday16" value="true"
-                                                                                     ><span>4 PM</span></label></div>
+                                                ><span>4 PM</span></label></div>
                                             </div>
                                         </div>
                                     </div>

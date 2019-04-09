@@ -1,4 +1,11 @@
-<!DOCTYPE HTML>
+<%@ page import="com.odyssey.model.Employee" %><%--
+  Created by IntelliJ IDEA.
+  User: iDugin
+  Date: 09/04/2019
+  Time: 13:10
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Odyssey - Mentee</title>
@@ -13,6 +20,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<%
+    String email = null;
+    Cookie[] cookies = request.getCookies();
+    if(cookies != null){
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals("email")) email = cookie.getValue();
+        }
+    }
+    Employee e = new Employee();
+    e = Employee.getEmployeeByEmail(email);
+%>
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
@@ -24,26 +42,26 @@
             </h1>
         </div>
         <div class="col-md-1 text-center profile-icon">
-            <a href="profile.html"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
+            <a href="profile.jsp"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
         </div>
-        <div class="col-md-1 text-center log-out-icon">
-            <a href="../index.html"><i class="fas fa-sign-out-alt fa-3x" class="rounded"></i></a>
-        </div>
+        <form action="LogoutServlet" method="post">
+            <input type="submit" value="Logout" >
+        </form>
     </div>
     <div class="row main">
         <div class="col-md-2 side-nav">
             <ul class="nav flex-column nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" href="mentor.html">Mentor</a>
+                    <a class="nav-link" href="mentor.jsp">Mentor</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="mentee.html">Mentee</a>
+                    <a class="nav-link disabled" href="mentee.jsp">Mentee</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="manager.html">Manager</a>
+                    <a class="nav-link disabled" href="manager.jsp">Manager</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="admin.html">Admin</a>
+                    <a class="nav-link active" href="admin.jsp">Admin</a>
                 </li>
             </ul>
         </div>
