@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Table;
+import org.hibernate.query.Query;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -114,7 +115,23 @@ public class Employee {
     }
 
 
+    public static Employee getEmployeeByEmail(String email) {
+        if(email == null) {
+            return null;
+        } else {
+            SessionFactory factory = HibernateUtil.getSessionFactory();
+            Session session = factory.getCurrentSession();
+            session.getTransaction().begin();
 
+            Query<Employee> query = session.createNamedQuery("Employee.findByEmail", Employee.class);
+            query.setParameter("email", email);
+            Employee employee = query.getSingleResult();
+
+            session.getTransaction().commit();
+            session.close();
+            return employee;
+        }
+    }
 
     // ------------- GETTERS AND SETTERS ----------------------------
 
