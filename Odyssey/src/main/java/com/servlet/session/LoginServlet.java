@@ -64,13 +64,13 @@ public class LoginServlet extends HttpServlet {
                 //cookie.setSecure(true); // will only send over https
                 //cookie.setHttpOnly(true); // help with XSS attacks
             } else {
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
                 PrintWriter out = response.getWriter();
                 out.println("<font color=red>Either username or password is wrong.</font>");
                 rd.include(request, response);
             }
         } else {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             PrintWriter out = response.getWriter();
             out.println("<font color=red>Either username or password is wrong.</font>");
             rd.include(request, response);

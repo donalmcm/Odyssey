@@ -42,11 +42,11 @@
             </h1>
         </div>
         <div class="col-md-1 text-center profile-icon">
-            <a href="profile.html"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
+            <a href="profile.jsp"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
         </div>
-        <div class="col-md-1 text-center log-out-icon">
-            <a href="../index.html"><i class="fas fa-sign-out-alt fa-3x" class="rounded"></i></a>
-        </div>
+        <form action="LogoutServlet" method="post">
+            <input type="submit" value="Logout" >
+        </form>
     </div>
     <div class="row main">
         <div class="col-md-2 side-nav">
