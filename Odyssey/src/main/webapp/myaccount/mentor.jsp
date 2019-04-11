@@ -23,7 +23,7 @@
         }
     }
     Employee e = new Employee();
-    //e = Employee.getEmployeeByEmail(email);
+    e = Employee.getEmployeeByEmail(email);
 %>
 <div class="container-fluid">
     <div class="row banner">
@@ -83,7 +83,7 @@
                                 <h1><i class="far fa-user-circle fa-3x"></i>   Become Mentor Form</h1>
                             </div>
                             <div class="modal-body" style="padding:40px 50px;">
-                                <form role="form" action="api/employees/becomeMentor" method="post">
+                                <form role="form" action="../api/employees/becomeMentor/<%=e.getId()%>" method="post">
                                     <div class="form-group">
                                         <label for="topic-dropdown">Select a topic to mentor In</label>
                                         <select class="form-control" id="topic-dropdown" name="topic"></select>
