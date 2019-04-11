@@ -16,7 +16,7 @@ import java.util.List;
 @NamedQueries({ @NamedQuery(name = "Odyssey.findAllOdysseys", query = "select o from Odyssey o"),
         @NamedQuery(name = "Odyssey.findByOdysseyId", query = "select o from Odyssey o where o.id=:id"),
         @NamedQuery(name = "Odyssey.findTopicCountByOdyssey", query = "select o.topic.name,count(*) from Odyssey o group by o.topic.name"),
-        @NamedQuery(name = "Odyssey.findOdysseysByEmployee", query = "select o from Odyssey o where o.mentor=:id or o.mentee=:id")})
+        @NamedQuery(name = "Odyssey.findOdysseysByEmployee", query = "select o from Odyssey o where o.mentor.id=:id or o.mentee.id=:id")})
 
 @XmlRootElement
 @Entity
@@ -28,12 +28,10 @@ public class Odyssey {
 
     @ManyToOne
     @JoinColumn
-    @JsonBackReference
     private Employee mentor;
 
     @ManyToOne
     @JoinColumn
-    @JsonBackReference
     private Employee mentee;
 
     @Column
@@ -120,6 +118,15 @@ public class Odyssey {
     public boolean isActive() {
         return isActive;
     }
+
+    public Employee getMentor() {
+        return mentor;
+    }
+
+    public Employee getMentee() {
+        return mentee;
+    }
+
     public List<OdysseyMeeting> getOdysseyMeetings() {
         return odysseyMeetings;
     }

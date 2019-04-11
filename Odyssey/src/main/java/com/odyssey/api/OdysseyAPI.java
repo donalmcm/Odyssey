@@ -121,4 +121,20 @@ public class OdysseyAPI {
         return null;
     }
 
+    @GET
+    @Path("getEmployeeOdysseys/{userId}")
+    public Response getOdysseysByEmployee(@PathParam("userId") int userId) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByEmployee",Odyssey.class);
+        query.setParameter("id",userId);
+
+        List<Odyssey> odysseysByEmployee= query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return Response.ok(odysseysByEmployee, MediaType.APPLICATION_JSON).build();
+    }
+
 }
