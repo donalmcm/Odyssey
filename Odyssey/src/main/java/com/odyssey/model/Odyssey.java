@@ -1,5 +1,8 @@
 package com.odyssey.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -12,6 +15,7 @@ import java.util.List;
 
 @NamedQueries({ @NamedQuery(name = "Odyssey.findAllOdysseys", query = "select o from Odyssey o"),
         @NamedQuery(name = "Odyssey.findByOdysseyId", query = "select o from Odyssey o where o.id=:id"),
+        @NamedQuery(name = "Odyssey.findTopicCountByOdyssey", query = "select o.topic.name,count(*) from Odyssey o group by o.topic.name"),
         @NamedQuery(name = "Odyssey.findOdysseysByEmployee", query = "select o from Odyssey o where o.mentor=:id or o.mentee=:id")})
 
 @XmlRootElement
@@ -24,17 +28,19 @@ public class Odyssey {
 
     @ManyToOne
     @JoinColumn
+    @JsonBackReference
     private Employee mentor;
 
     @ManyToOne
     @JoinColumn
+    @JsonBackReference
     private Employee mentee;
 
     @Column
     private boolean isActive = false;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "odyssey",fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<OdysseyMeeting> odysseyMeetings;
 
     @OneToOne
@@ -110,12 +116,6 @@ public class Odyssey {
     }
     public Topic getTopic() {
         return topic;
-    }
-    public Employee getMentor() {
-        return mentor;
-    }
-    public Employee getMentee() {
-        return mentee;
     }
     public boolean isActive() {
         return isActive;

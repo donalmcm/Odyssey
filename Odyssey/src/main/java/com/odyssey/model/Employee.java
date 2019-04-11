@@ -1,6 +1,8 @@
 package com.odyssey.model;
 
 import com.HibernateUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.google.gson.annotations.Expose;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,51 +31,43 @@ public class Employee {
     @GeneratedValue
     private int id;
 
-    @Expose
     @Column(nullable = false)
     private String firstName;
 
-    @Expose
     @Column(nullable = false)
     private String lastName;
 
-    @Expose
     @Column(nullable = false, unique = true)
     private String email;
 
     // change to more secure option
-    @Column(nullable = false)
+    @Column
+    @JsonIgnore
     private String password;
 
-    @Expose
     @Column
     private boolean isManager = false;
 
-    @Expose
     @Column
     private boolean isAdmin = false;
 
-    @Expose
     @Column
     private boolean isMentee = false;
 
-    @Expose
     @Column
     private boolean isMentor = false;
 
-    @Expose
     @Column
     private int mentorDuration = 0;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
+    @JsonManagedReference
     private List<Odyssey> mentorOdyssey;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentee")
+    @JsonManagedReference
     private List<Odyssey> menteeOdyssey;
 
-    @Expose
     @OneToOne
     private Topic topic;
 
@@ -82,10 +76,11 @@ public class Employee {
 
     public Employee(){}
 
-    public Employee(String firstName, String lastName, String email) { // availability
+    public Employee(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
     }
 
     public Employee(String firstName, String lastName, String email, boolean isManager, boolean isAdmin,
@@ -188,12 +183,6 @@ public class Employee {
     }
     public int getMentorDuration() {
         return mentorDuration;
-    }
-    public List<Odyssey> getMentorOdyssey() {
-        return mentorOdyssey;
-    }
-    public List<Odyssey> getMenteeOdyssey() {
-        return menteeOdyssey;
     }
 
 }

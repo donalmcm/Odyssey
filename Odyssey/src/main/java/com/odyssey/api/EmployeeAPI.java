@@ -7,7 +7,6 @@ import com.HibernateUtil;
 import com.odyssey.model.Topic;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import javax.ws.rs.*;
@@ -157,7 +156,7 @@ public class EmployeeAPI {
             session.getTransaction().commit();
             session.close();
 
-            location = new URI("http://localhost:8080/index.html");
+            location = new URI("http://localhost:8080/myaccount/admin.jsp");
             return Response.temporaryRedirect(location).build();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -217,7 +216,7 @@ public class EmployeeAPI {
             session.getTransaction().commit();
             session.close();
 
-            location = new URI("http://localhost:8080/index.html");
+            location = new URI("http://localhost:8080/myaccount/mentor.jsp");
             return Response.temporaryRedirect(location).build();
         } catch (Exception e) {
             session.getTransaction().rollback();

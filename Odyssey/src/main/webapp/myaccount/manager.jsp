@@ -1,10 +1,4 @@
-<%@ page import="com.odyssey.model.Employee" %><%--
-  Created by IntelliJ IDEA.
-  User: iDugin
-  Date: 09/04/2019
-  Time: 13:09
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.odyssey.model.Employee" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
-    tle</title>
+    </title>
 </head>
 <body>
 <%
@@ -34,12 +28,14 @@
         }
     }
     Employee e = new Employee();
-    e = Employee.getEmployeeByEmail(email);
+    //e = Employee.getEmployeeByEmail(email);
 %>
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
-            <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded" />
+            <a href="home.jsp">
+                <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded" />
+            </a>
         </div>
         <div class="col-md-8 banner-title">
             <h1>

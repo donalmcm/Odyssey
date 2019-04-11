@@ -42,6 +42,14 @@ new Chart(document.getElementById("line-chart"), {
     }
 });
 
+const topicCountByOdysseysURL = 'http://localhost:8080/api/odysseys/countTopicsByOdyssey';
+var labels=[], topicCount=[];
+// Populate dropdown with list of topics
+$.getJSON(topicCountByOdysseysURL, function (data) {
+    $.each(data, function (key, entry) {
+        mentorDropdown.append($('<option></option>').attr('value', entry.name).text(entry.name));
+    })
+});
 new Chart(document.getElementById("radar-chart"), {
     type: 'radar',
     data: {

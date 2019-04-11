@@ -54,8 +54,8 @@ public class LoginServlet extends HttpServlet {
                 //generate a new session
                 HttpSession newSession = request.getSession(true);
 
-                //setting session to expiry in 5 mins
-                newSession.setMaxInactiveInterval(5*60);
+                //setting session to expiry in 15 mins
+                newSession.setMaxInactiveInterval(15*60);
 
                 Cookie userEmail = new Cookie("email",email);
                 response.addCookie(userEmail);

@@ -29,7 +29,9 @@
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
-            <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded" />
+            <a href="home.jsp">
+                <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded" />
+            </a>
         </div>
         <div class="col-md-8 banner-title">
             <h1>
