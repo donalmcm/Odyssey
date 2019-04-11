@@ -37,6 +37,24 @@ public class OdysseyAPI {
         return Response.ok(odysseys, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("countTopicsByOdyssey")
+    @Produces("application/json")
+    public Response getTopicCountByOdysseys() {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        session.getTransaction().begin();
+
+        Query<Odyssey> query = session.createNamedQuery("Odyssey.findTopicCountByOdyssey",Odyssey.class);
+        List<Odyssey> odysseys = query.getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return Response.ok(odysseys, MediaType.APPLICATION_JSON).build();
+    }
+
 
     @GET
     @Path("percentageComplete/{id}")
@@ -57,38 +75,14 @@ public class OdysseyAPI {
         return odyssey.getPercentageCompleteOfOdyssey();
     }
 
-//    @GET
-//    @Path("details/{id}")
-//    @Produces("application/json")
-//    public Response getOdysseyDetails(@PathParam("id") int id) {
-//        SessionFactory factory = HibernateUtil.getSessionFactory();
-//        Session session = factory.getCurrentSession();
-//
-//        session.getTransaction().begin();
-//
-//        Query<Odyssey> query = session.createNamedQuery("Odyssey.findByOdysseyId",Odyssey.class);
-//        query.setParameter("id",id);
-//        Odyssey odyssey = query.getSingleResult();
-//
-//        session.getTransaction().commit();
-//        session.close();
-//
-//        OdysseyDetails odysseyDetails = new OdysseyDetails();
-//        odysseyDetails.setTopic(odyssey.getTopic().getName());
-//        odysseyDetails.setMentor(odyssey.getMentor().getFirstName());
-//        odysseyDetails.setMentee(odyssey.getMentee().getFirstName());
-//        odysseyDetails.setDuration(odyssey.getMentor().getMentorDuration());
-//        odysseyDetails.setPercentageComplete(odyssey.getPercentageCompleteOfOdyssey());
-//
-//        return Response.ok(odysseyDetails, MediaType.APPLICATION_JSON).build();
-//    }
 
     // create an odyssey
     @POST
-    @Path("create")
+    @Path("create/{userId}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
-    public Response createOdyssey(@FormParam("topicId")int topicId,
+    public Response createOdyssey(@PathParam("userId")int userId,
+                                  @FormParam("topicId")int topicId,
                                    @FormParam("mentorDuration") int mentorDuration,
                                    @FormParam("dayOfMeetings") String dayOfMeetings,
                                    @FormParam("timeOfMeetings") int timeOfMeetings) {
@@ -98,11 +92,11 @@ public class OdysseyAPI {
         try{
             session.getTransaction().begin();
 
-            // use the current users id below - temporarily hardcoded
             Query<Employee> userQuery = session.createNamedQuery("Employee.findById",Employee.class);
-            userQuery.setParameter("id",1);
+            userQuery.setParameter("id",userId);
             Employee user = userQuery.getSingleResult();
 
+            // find employee with matching availability - if multiple pick random
             Query<Employee> mentorQuery = session.createNamedQuery("Employee.findById",Employee.class);
             mentorQuery.setParameter("id",2);
             Employee mentor = mentorQuery.getSingleResult();
@@ -118,7 +112,7 @@ public class OdysseyAPI {
             session.getTransaction().commit();
             session.close();
 
-            location = new URI("http://localhost:8080/index.html");
+            location = new URI("http://localhost:8080/myaccount/home.jsp");
             return Response.temporaryRedirect(location).build();
         } catch (Exception e) {
             session.getTransaction().rollback();

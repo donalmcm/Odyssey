@@ -9,19 +9,19 @@ class EmployeeTests {
 
     @Test
     public void createEmployeeTest() {
-        Employee e = new Employee("Donal", "McManus", "donalmcm@email.com");
+        Employee e = new Employee("Donal", "McManus", "donalmcm@email.com","password");
     }
 
     @Test
     public void makeEmployeeMentorTest() {
-        Employee e = new Employee("Donal", "McManus", "donalmcm@email.com");
+        Employee e = new Employee("Donal", "McManus", "donalmcm@email.com","password");
 
         // run function and perform checks
     }
 
     @Test
     public void makeEmployeeManagerTest() {
-        Employee e = new Employee("Donal", "McManus", "donalmcm@email.com");
+        Employee e = new Employee("Donal", "McManus", "donalmcm@email.com","password");
 
         // run function and perform checks
     }

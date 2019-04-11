@@ -23,12 +23,14 @@
         }
     }
     Employee e = new Employee();
-    e = Employee.getEmployeeByEmail(email);
+    //e = Employee.getEmployeeByEmail(email);
 %>
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
-            <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded" />
+            <a href="home.jsp">
+                <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded" />
+            </a>
         </div>
         <div class="col-md-8 banner-title">
             <h1>
@@ -37,6 +39,9 @@
         </div>
         <div class="col-md-1 text-center profile-icon">
             <a href="profile.jsp"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
+        </div>
+        <div class="col-md-1 text-center profile-icon">
+            <a action><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
         </div>
         <form action="LogoutServlet" method="post">
             <input type="submit" value="Logout" >

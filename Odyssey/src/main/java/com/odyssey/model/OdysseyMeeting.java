@@ -1,5 +1,7 @@
 package com.odyssey.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
@@ -24,6 +26,7 @@ public class OdysseyMeeting {
 
     @ManyToOne
     @JoinColumn
+    @JsonBackReference
     private Odyssey odyssey;
 
     public OdysseyMeeting(){};
