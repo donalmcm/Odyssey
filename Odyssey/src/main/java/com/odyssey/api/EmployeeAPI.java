@@ -167,10 +167,10 @@ public class EmployeeAPI {
 
     // create a mentor
     @POST
-    @Path("becomeMentor")
+    @Path("becomeMentor/{userId}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
-    public Response becomeMentor(@FormParam("topic") String topic,
+    public Response becomeMentor(@PathParam("userId")int userId, @FormParam("topic") String topic,
                                  @FormParam("mentorDuration") int mentorDuration,
                                  @FormParam("monday10") boolean monday10,@FormParam("monday11") boolean monday11,
                                  @FormParam("monday12") boolean monday12,@FormParam("monday14") boolean monday14,
@@ -194,9 +194,8 @@ public class EmployeeAPI {
         try{
             session.getTransaction().begin();
 
-            // use the current users id below - temporarily hardcoded
             Query<Employee> query = session.createNamedQuery("Employee.findById",Employee.class);
-            query.setParameter("id",1);
+            query.setParameter("id",userId);
             Employee employee = query.getSingleResult();
 
             Query<Topic> topicQuery = session.createNamedQuery("Topic.findById",Topic.class);
@@ -224,6 +223,4 @@ public class EmployeeAPI {
         }
         return null;
     }
-
-
 }

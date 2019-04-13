@@ -1,6 +1,7 @@
 package com.odyssey.model;
 
 import com.HibernateUtil;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.google.gson.annotations.Expose;
@@ -61,11 +62,9 @@ public class Employee {
     private int mentorDuration = 0;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
-    @JsonManagedReference
     private List<Odyssey> mentorOdyssey;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentee")
-    @JsonManagedReference
     private List<Odyssey> menteeOdyssey;
 
     @OneToOne
