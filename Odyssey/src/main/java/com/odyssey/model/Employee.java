@@ -189,6 +189,15 @@ public class Employee {
     public String getEmail() {
         return email;
     }
+
+    public boolean isManager() {
+        return isManager;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
     public boolean isAdmin() {
         return isAdmin;
     }
