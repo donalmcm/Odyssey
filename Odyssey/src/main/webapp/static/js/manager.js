@@ -1,20 +1,26 @@
 let mentorList = $('#managers-team');
 
-function getManagersTeam(managerId) {
-    const managersEmployeesUrl = 'http://localhost:8080/api/employees/getTeamMembers/manager/'+managerId;
+function getManagersTeam(managerId, isManager) {
+    if (isManager === true) {
+        const managersEmployeesUrl = 'http://localhost:8080/api/employees/getTeamMembers/manager/' + managerId;
 
-// Populate dropdown with list of topics
-    $.getJSON(managersEmployeesUrl, function (data) {
-        $.each(data, function (key, entry) {
-            mentorList.append($('<tr>'));
-            mentorList.append($('<td></td>').attr('value', entry.id).text(entry.id));
-            mentorList.append($('<td></td>').attr('value', entry.firstName).text(entry.firstName));
-            mentorList.append($('<td></td>').attr('value', entry.lastName).text(entry.lastName));
-            mentorList.append($('<td></td>').attr('value', entry.email).text(entry.email));
-            mentorList.append($('</tr>'));
+        // Populate dropdown with list of topics
+        $.getJSON(managersEmployeesUrl, function (data) {
+            $.each(data, function (key, entry) {
+                mentorList.append($('<tr>'));
+                mentorList.append($('<td></td>').attr('value', entry.id).text(entry.id));
+                mentorList.append($('<td></td>').attr('value', entry.firstName).text(entry.firstName));
+                mentorList.append($('<td></td>').attr('value', entry.lastName).text(entry.lastName));
+                mentorList.append($('<td></td>').attr('value', entry.email).text(entry.email));
+                mentorList.append($('</tr>'));
 
-        })
-    });
+            })
+        });
+    } else {
+        document.getElementById("manager-page-content").style.display = "none";
+    }
+
+
 }
 
 
@@ -22,14 +28,14 @@ function getManagersTeam(managerId) {
 new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
-        labels: [1,2,3,4,5,6],
+        labels: [1, 2, 3, 4, 5, 6],
         datasets: [{
-            data: [86,114,106,106,107,111],
+            data: [86, 114, 106, 106, 107, 111],
             label: "Mentor",
             borderColor: "#3e95cd",
             fill: false
         }, {
-            data: [282,350,411,502,635,809],
+            data: [282, 350, 411, 502, 635, 809],
             label: "Mentee",
             borderColor: "#8e5ea2",
             fill: false
@@ -66,7 +72,7 @@ new Chart(document.getElementById("radar-chart"), {
                 borderColor: "rgba(179,181,198,1)",
                 pointBorderColor: "#3e95cd",
                 pointBackgroundColor: "rgba(179,181,198,1)",
-                data: [20.0,20.0,20.0,20.0,20.0]
+                data: [20.0, 20.0, 20.0, 20.0, 20.0]
             }
         ]
     },

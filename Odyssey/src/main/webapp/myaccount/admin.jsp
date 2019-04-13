@@ -14,7 +14,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 </head>
-<body>
 <%
     String email = null;
     Cookie[] cookies = request.getCookies();
@@ -26,6 +25,7 @@
     Employee e = new Employee();
     e = Employee.getEmployeeByEmail(email);
 %>
+<body onload="loadAdminPage(<%=e.isAdmin()%>);">
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
@@ -62,7 +62,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-10" id="admin-page-content">
             <div class="row">
                 <div class="col-md-6">
                     <h3>

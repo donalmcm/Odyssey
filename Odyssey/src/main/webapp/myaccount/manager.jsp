@@ -28,8 +28,9 @@
     }
     Employee e = new Employee();
     e = Employee.getEmployeeByEmail(email);
+
 %>
-<body onload="getManagersTeam(<%=e.getId()%>);">
+<body onload="getManagersTeam(<%=e.getId()%>,<%=e.isManager()%>);">
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
@@ -66,7 +67,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-10" id="manager-page-content">
             <div class="row">
                 <div class="col-md-6">
                     <h3>

@@ -69,10 +69,10 @@
                 </div>
                 <div class="col-md-10">
                     <h3>
-                        <strong><%=e.getFirstName()%></strong>
+                        <strong><%=e.getFirstName() +" "+ e.getLastName()%></strong>
                     </h3>
                     <h3>
-                        Software Development Student
+                        <%=e.getTitle()%>
                     </h3>
                 </div>
             </div>
