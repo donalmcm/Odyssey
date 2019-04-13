@@ -1,20 +1,22 @@
 let mentorList = $('#managers-team');
 
-// const managersTeam = 'http://localhost:8080/api/employees/byManager/' + managerId; // id passed in from current user
-const managersEmployeesUrl = 'http://localhost:8080/api/employees';
+function getManagersTeam(managerId) {
+    const managersEmployeesUrl = 'http://localhost:8080/api/employees/getTeamMembers/manager/'+managerId;
 
 // Populate dropdown with list of topics
-$.getJSON(managersEmployeesUrl, function (data) {
-    $.each(data, function (key, entry) {
-        mentorList.append($('<tr>'));
-        mentorList.append($('<td></td>').attr('value', entry.id).text(entry.id));
-        mentorList.append($('<td></td>').attr('value', entry.firstName).text(entry.firstName));
-        mentorList.append($('<td></td>').attr('value', entry.lastName).text(entry.lastName));
-        mentorList.append($('<td></td>').attr('value', entry.email).text(entry.email));
-        mentorList.append($('</tr>'));
+    $.getJSON(managersEmployeesUrl, function (data) {
+        $.each(data, function (key, entry) {
+            mentorList.append($('<tr>'));
+            mentorList.append($('<td></td>').attr('value', entry.id).text(entry.id));
+            mentorList.append($('<td></td>').attr('value', entry.firstName).text(entry.firstName));
+            mentorList.append($('<td></td>').attr('value', entry.lastName).text(entry.lastName));
+            mentorList.append($('<td></td>').attr('value', entry.email).text(entry.email));
+            mentorList.append($('</tr>'));
 
-    })
-});
+        })
+    });
+}
+
 
 // values to be taken from database - hardcoded for demo
 new Chart(document.getElementById("line-chart"), {
@@ -42,14 +44,15 @@ new Chart(document.getElementById("line-chart"), {
     }
 });
 
-const topicCountByOdysseysURL = 'http://localhost:8080/api/odysseys/countTopicsByOdyssey';
-var labels=[], topicCount=[];
-// Populate dropdown with list of topics
-$.getJSON(topicCountByOdysseysURL, function (data) {
-    $.each(data, function (key, entry) {
-        mentorDropdown.append($('<option></option>').attr('value', entry.name).text(entry.name));
-    })
-});
+// const topicCountByOdysseysURL = 'http://localhost:8080/api/odysseys/countTopicsByOdyssey';
+// var labels=[], topicCount=[];
+// // Populate dropdown with list of topics
+// $.getJSON(topicCountByOdysseysURL, function (data) {
+//     $.each(data, function (key, entry) {
+//         mentorDropdown.append($('<option></option>').attr('value', entry.name).text(entry.name));
+//     })
+// });
+
 new Chart(document.getElementById("radar-chart"), {
     type: 'radar',
     data: {

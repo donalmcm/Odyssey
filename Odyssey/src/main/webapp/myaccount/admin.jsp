@@ -24,7 +24,7 @@
         }
     }
     Employee e = new Employee();
-    //e = Employee.getEmployeeByEmail(email);
+    e = Employee.getEmployeeByEmail(email);
 %>
 <div class="container-fluid">
     <div class="row banner">

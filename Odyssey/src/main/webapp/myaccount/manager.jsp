@@ -18,7 +18,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
     </title>
 </head>
-<body>
 <%
     String email = null;
     Cookie[] cookies = request.getCookies();
@@ -28,8 +27,9 @@
         }
     }
     Employee e = new Employee();
-    //e = Employee.getEmployeeByEmail(email);
+    e = Employee.getEmployeeByEmail(email);
 %>
+<body onload="getManagersTeam(<%=e.getId()%>);">
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.google.gson.annotations.Expose;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Table;
@@ -41,6 +42,9 @@ public class Employee {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column
+    private String title;
+
     // change to more secure option
     @Column
     @JsonIgnore
@@ -66,6 +70,15 @@ public class Employee {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentee")
     private List<Odyssey> menteeOdyssey;
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn
+    @JsonIgnore
+    private Employee manager;
+
+    @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Employee> teamMembers;
+
 
     @OneToOne
     private Topic topic;
@@ -129,6 +142,14 @@ public class Employee {
 
     // ------------- GETTERS AND SETTERS ----------------------------
 
+    public List<Employee> getTeamMembers() {
+        return teamMembers;
+    }
+
+    public void setManager(Employee manager) {
+        this.manager = manager;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -167,9 +188,6 @@ public class Employee {
     }
     public String getEmail() {
         return email;
-    }
-    public boolean isManager() {
-        return isManager;
     }
     public boolean isAdmin() {
         return isAdmin;

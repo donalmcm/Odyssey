@@ -18,8 +18,6 @@ import java.util.List;
 @Path("/employees")
 public class EmployeeAPI {
 
-
-
     @GET
     @Produces("application/json")
     public Response getAllEmployees() {
@@ -222,5 +220,25 @@ public class EmployeeAPI {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    // get all team members from a manager
+    @GET
+    @Path("getTeamMembers/manager/{userId}")
+    @Produces("application/json")
+    public Response getManagersTeamMembers(@PathParam("userId") int userId) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Query<Employee> query = session.createNamedQuery("Employee.findById",Employee.class);
+        query.setParameter("id",userId);
+        Employee manager = query.getSingleResult();
+
+        List<Employee> teamMembers = manager.getTeamMembers();
+        session.getTransaction().commit();
+        session.close();
+        return Response.ok(teamMembers, MediaType.APPLICATION_JSON).build();
     }
 }

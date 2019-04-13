@@ -40,9 +40,6 @@
         <div class="col-md-1 text-center profile-icon">
             <a href="profile.jsp"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
         </div>
-        <div class="col-md-1 text-center profile-icon">
-            <a action><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
-        </div>
         <form action="LogoutServlet" method="post">
             <input type="submit" value="Logout" >
         </form>

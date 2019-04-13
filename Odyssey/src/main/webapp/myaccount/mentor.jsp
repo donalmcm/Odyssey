@@ -13,7 +13,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body>
 <%
     String email = null;
     Cookie[] cookies = request.getCookies();
@@ -25,6 +24,7 @@
     Employee e = new Employee();
     e = Employee.getEmployeeByEmail(email);
 %>
+<body>
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
