@@ -1,8 +1,11 @@
 function loadAdminPage(isAdmin) {
 // Populate table with list of employees with id, both names and email
     if (isAdmin !== true) {
+        document.getElementById("admin-page-title").innerHTML = "NOT AUTHORIZED";
+        document.getElementById("admin-page-title").style.color = 'red';
         document.getElementById("admin-page-content").style.display = "none";
     } else {
+        document.getElementById("admin-page-title").innerHTML = "Administration";
         let adminEmployeeList = $('#employee-list');
         const adminEmployeeUrl = 'http://localhost:8080/api/employees';
         $.getJSON(adminEmployeeUrl, function (data) {

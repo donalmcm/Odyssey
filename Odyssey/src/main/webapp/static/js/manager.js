@@ -2,6 +2,9 @@ let mentorList = $('#managers-team');
 
 function getManagersTeam(managerId, isManager) {
     if (isManager === true) {
+
+        document.getElementById("manager-page-title").innerHTML = "Management";
+
         const managersEmployeesUrl = 'http://localhost:8080/api/employees/getTeamMembers/manager/' + managerId;
 
         // Populate dropdown with list of topics
@@ -17,6 +20,8 @@ function getManagersTeam(managerId, isManager) {
             })
         });
     } else {
+        document.getElementById("manager-page-title").innerHTML = "NOT AUTHORIZED";
+        document.getElementById("manager-page-title").style.color = 'red';
         document.getElementById("manager-page-content").style.display = "none";
     }
 

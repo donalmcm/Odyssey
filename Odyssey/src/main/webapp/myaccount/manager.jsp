@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../static/css/index.css">
-    <link rel="shortcut icon" type="image/x-icon" href="../static/img/odysseyLogo.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/odysseyLogo.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -21,9 +21,9 @@
 <%
     String email = null;
     Cookie[] cookies = request.getCookies();
-    if(cookies != null){
-        for(Cookie cookie : cookies){
-            if(cookie.getName().equals("email")) email = cookie.getValue();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("email")) email = cookie.getValue();
         }
     }
     Employee e = new Employee();
@@ -35,7 +35,7 @@
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
             <a href="home.jsp">
-                <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded" />
+                <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded"/>
             </a>
         </div>
         <div class="col-md-8 banner-title">
@@ -47,7 +47,7 @@
             <a href="profile.jsp"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
         </div>
         <form action="LogoutServlet" method="post">
-            <input type="submit" value="Logout" >
+            <input type="submit" value="Logout">
         </form>
     </div>
     <div class="row main">
@@ -67,57 +67,58 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-10" id="manager-page-content">
+        <div class="col-md-10">
             <div class="row">
                 <div class="col-md-6">
-                    <h3>
-                        Management
+                    <h3 id="manager-page-title">
                     </h3>
                 </div>
                 <div class="col-md-6">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4 manager-tabs">
-                    <ul class="nav nav-pills">
-                        <li class="active"><a data-toggle="pill" href="#home">Team Members</a></li>
-                        <li><a data-toggle="pill" href="#reports">Reports</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                </div>
-            </div>
-            <div class="row tab-content">
-                <div id="home" class="col-md-12 row tab-pane fade in active">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>
-                                #
-                            </th>
-                            <th>
-                                First Name
-                            </th>
-                            <th>
-                                Last Name
-                            </th>
-                            <th>
-                                Email
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody id="managers-team">
-                        </tbody>
-                    </table>
-                </div>
-                <div id="reports" class="col-md-12 row tab-pane fade">
-                    <div class="col-md-6">
-                        <canvas id="line-chart" width="500" height="400"></canvas>
+            <div id="manager-page-content">
+                <div class="row">
+                    <div class="col-md-4">
                     </div>
-                    <div class="col-md-6">
-                        <canvas id="radar-chart" width="500" height="400"></canvas>
+                    <div class="col-md-4 manager-tabs">
+                        <ul class="nav nav-pills">
+                            <li class="active"><a data-toggle="pill" href="#home">Team Members</a></li>
+                            <li><a data-toggle="pill" href="#reports">Reports</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+                <div class="row tab-content">
+                    <div id="home" class="col-md-12 row tab-pane fade in active">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    First Name
+                                </th>
+                                <th>
+                                    Last Name
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody id="managers-team">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="reports" class="col-md-12 row tab-pane fade">
+                        <div class="col-md-6">
+                            <canvas id="line-chart" width="500" height="400"></canvas>
+                        </div>
+                        <div class="col-md-6">
+                            <canvas id="radar-chart" width="500" height="400"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
