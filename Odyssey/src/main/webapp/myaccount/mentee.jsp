@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../static/css/index.css">
     <link rel="shortcut icon" type="image/x-icon" href="../static/img/odysseyLogo.png"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"
+          rel="stylesheet"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -16,9 +17,9 @@
 <%
     String email = null;
     Cookie[] cookies = request.getCookies();
-    if(cookies != null){
-        for(Cookie cookie : cookies){
-            if(cookie.getName().equals("email")) email = cookie.getValue();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("email")) email = cookie.getValue();
         }
     }
     Employee e = new Employee();
@@ -41,7 +42,7 @@
             <a href="profile.jsp"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
         </div>
         <form action="LogoutServlet" method="post">
-            <input type="submit" value="Logout" >
+            <input type="submit" value="Logout">
         </form>
     </div>
     <div class="row main">
@@ -72,12 +73,12 @@
                         <div class="form-group">
                             <label for="topic-filter">Select a topic</label>
                             <select onchange="getMentorsByTopic(this.value)" class="form-control" id="topic-filter"
-                                    name="topicFilter"></select>
+                                    name="topicFilter" required></select>
                         </div>
                         <div class="form-group">
                             <label for="duration-dropdown">Select duration in weeks</label>
                             <select onchange="getAvailabilitiesByTopicAndDuration(this.value)" class="form-control"
-                                    id="duration-dropdown" name="duration"></select>
+                                    id="duration-dropdown" name="duration" required></select>
                         </div>
                         <div class="col-md-12" id="mentor-list-by-topic"></div>
 
@@ -226,7 +227,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" onclick="populateModal()" class="btn btn-success btn-block" id="begin-odyssey">Confirm
+                        <button type="button" onclick="populateModal()" class="btn btn-success btn-block"
+                                id="begin-odyssey">Confirm
                         </button>
                     </form>
                     <div class="modal fade" id="odyssey-modal" role="dialog">
@@ -238,7 +240,7 @@
                                     <h1><i class="far fa-user-circle fa-3x"></i> Create Odyssey</h1>
                                 </div>
                                 <div class="modal-body" style="padding:40px 50px;">
-                                    <form role="form" action="api/odyssey/create" method="post">
+                                    <form role="form" action="../api/odyssey/create/<%=e.getId()%>" method="post">
                                         <div class="form-group">
                                             <label for="topicId">Topic</label>
                                             <input class="form-control" id="topicId" name="topicId"

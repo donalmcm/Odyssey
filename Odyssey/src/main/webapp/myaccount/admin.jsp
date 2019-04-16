@@ -99,7 +99,7 @@
                                         <h1><i class="far fa-user-circle fa-3x"></i> New Employee Form</h1>
                                     </div>
                                     <div class="modal-body" style="padding:40px 50px;">
-                                        <form role="form" action="api/employees/create" method="post">
+                                        <form role="form" action="../api/employees/create" method="post">
                                             <div class="form-group">
                                                 <label for="firstName">First Name</label>
                                                 <input type="text" class="form-control" id="firstName" name="firstName"
@@ -166,7 +166,7 @@
                                         <h1><i class="far fa-user-circle fa-3x"></i> New Topic Form</h1>
                                     </div>
                                     <div class="modal-body" style="padding:40px 50px;">
-                                        <form role="form" action="api/topics/create" method="post">
+                                        <form role="form" action="../api/topics/create" method="post">
                                             <div class="form-group">
                                                 <label for="firstName">First Name</label>
                                                 <input type="text" class="form-control" id="topicName" name="topicName"
@@ -203,8 +203,6 @@
         </div>
     </div>
 </div>
-</div>
 <script src="../static/js/admin.js"></script>
-
 </body>
 </html>
