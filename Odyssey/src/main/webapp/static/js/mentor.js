@@ -21,8 +21,8 @@ $(document).ready(function(){
 });
 
 function getOdysseysByMentor(userId) {
-    const adminEmployeeUrl = 'http://localhost:8080/api/odysseys/getOdysseysByMentor/' + userId;
-    $.getJSON(adminEmployeeUrl, function (data) {
+    const mentorOdysseysUrl = 'http://localhost:8080/api/odysseys/getOdysseysByMentor/' + userId;
+    $.getJSON(mentorOdysseysUrl, function (data) {
         $.each(data, function (key, entry) {
 
             var odysseyCard = document.createElement("div"); // outer div

@@ -67,7 +67,7 @@
                     <h2>
                         Mentoring
                     </h2>
-                    <button type="button" class="btn btn-success" id="become-mentor">
+                    <button type="button" class="btn btn-success btn-lg" id="become-mentor">
                         Become a mentor
                     </button>
                 </div>
@@ -249,7 +249,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12" id="mentor-odyssey-cards">
-                    <h2 id="mentor-page-odyssey-title">Your Mentorships</h2>
+                    <h2 id="mentor-page-odyssey-title">Odysseys where you are a mentor</h2>
                     <div id="odyssey-list-by-mentor"></div>
                 </div>
             </div>
