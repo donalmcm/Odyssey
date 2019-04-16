@@ -65,9 +65,9 @@
             <div class="row">
 
                 <div class="col-md-6">
-                    <h3>
+                    <h2>
                         Mentee
-                    </h3>
+                    </h2>
                     <form>
                         <div class="form-group">
                             <label for="topic-filter">Select a topic</label>

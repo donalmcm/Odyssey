@@ -16,7 +16,10 @@ import java.util.List;
 @NamedQueries({ @NamedQuery(name = "Odyssey.findAllOdysseys", query = "select o from Odyssey o"),
         @NamedQuery(name = "Odyssey.findByOdysseyId", query = "select o from Odyssey o where o.id=:id"),
         @NamedQuery(name = "Odyssey.findTopicCountByOdyssey", query = "select o.topic.name,count(*) from Odyssey o group by o.topic.name"),
-        @NamedQuery(name = "Odyssey.findOdysseysByEmployee", query = "select o from Odyssey o where o.mentor.id=:id or o.mentee.id=:id")})
+        @NamedQuery(name = "Odyssey.findOdysseysByEmployee", query = "select o from Odyssey o where o.mentor.id=:id or o.mentee.id=:id"),
+        @NamedQuery(name = "Odyssey.findOdysseysByMentor", query = "select o from Odyssey o where o.mentor.id=:id"),
+        @NamedQuery(name = "Odyssey.findOdysseysByMentee", query = "select o from Odyssey o where o.mentee.id=:id"),
+})
 
 @XmlRootElement
 @Entity

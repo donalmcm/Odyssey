@@ -274,3 +274,13 @@ html,body {
     text-align: right;
     margin-top: 0;
 }
+
+#home-page-title {
+    margin: 16px;
+}
+#mentor-page-odyssey-title {
+    margin: 16px;
+}
+#mentor-odyssey-cards {
+    padding: 0;
+}

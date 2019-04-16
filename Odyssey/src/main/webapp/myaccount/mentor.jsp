@@ -24,7 +24,7 @@
     Employee e = new Employee();
     e = Employee.getEmployeeByEmail(email);
 %>
-<body>
+<body onload="getOdysseysByMentor(<%=e.getId()%>);">
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
@@ -64,9 +64,9 @@
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-6">
-                    <h3>
+                    <h2>
                         Mentoring
-                    </h3>
+                    </h2>
                     <button type="button" class="btn btn-success" id="become-mentor">
                         Become a mentor
                     </button>
@@ -248,14 +248,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-hover">
-                    </table>
+                <div class="col-md-12" id="mentor-odyssey-cards">
+                    <h2 id="mentor-page-odyssey-title">Your Mentorships</h2>
+                    <div id="odyssey-list-by-mentor"></div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <script src="../static/js/mentor.js"></script>
 </body>

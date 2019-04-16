@@ -63,6 +63,9 @@
         </div>
         <div class="col-md-10">
             <div class="row">
+                <h2 id="home-page-title">
+                    Your Odysseys
+                </h2>
                 <div id="odyssey-list"></div>
             </div>
         </div>
