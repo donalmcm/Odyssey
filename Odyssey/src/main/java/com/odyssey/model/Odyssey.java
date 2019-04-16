@@ -109,6 +109,19 @@ public class Odyssey {
         return (int)percentageComplete;
     }
 
+    public String getOdysseyMeetingsCompleteVsOverall() {
+        int noOfCompletedMeetings = 0,noOfMeetings = odysseyMeetings.size();
+        for (OdysseyMeeting meeting : odysseyMeetings) {
+            if(meeting.getIsCompleted()) {
+                noOfCompletedMeetings ++;
+            }
+        }
+        String completedMeetings = String.valueOf(noOfCompletedMeetings);
+        String numberOfMeetings = String.valueOf(noOfMeetings);
+
+        return completedMeetings +"/" + numberOfMeetings;
+    }
+
     public long getId() {
         return id;
     }
