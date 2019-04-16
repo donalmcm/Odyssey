@@ -135,4 +135,36 @@ public class OdysseyAPI {
         return Response.ok(odysseysByEmployee, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("getOdysseysByMentor/{userId}")
+    public Response getOdysseysByMentor(@PathParam("userId") int userId) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByMentor",Odyssey.class);
+        query.setParameter("id",userId);
+
+        List<Odyssey> odysseysByEmployee= query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return Response.ok(odysseysByEmployee, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
+    @Path("getOdysseysByMentee/{userId}")
+    public Response getOdysseysByMentee(@PathParam("userId") int userId) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByMentee",Odyssey.class);
+        query.setParameter("id",userId);
+
+        List<Odyssey> odysseysByEmployee= query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return Response.ok(odysseysByEmployee, MediaType.APPLICATION_JSON).build();
+    }
+
 }

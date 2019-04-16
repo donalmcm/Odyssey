@@ -24,7 +24,7 @@
     Employee e = new Employee();
     e = Employee.getEmployeeByEmail(email);
 %>
-<body onload="getOdysseys(<%=e.getId()%>);">
+<body onload="getOdysseys(<%=e.getId()%>,'<%=e.getFirstName()%>');">
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
@@ -63,26 +63,10 @@
         </div>
         <div class="col-md-10">
             <div class="row">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>
-                            Topic
-                        </th>
-                        <th>
-                            Mentor
-                        </th>
-                        <th>
-                            Mentee
-                        </th>
-                        <th>
-                            Progress
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="odyssey-list">
-                    </tbody>
-                </table>
+                <h2 id="home-page-title">
+                    Your Odysseys
+                </h2>
+                <div id="odyssey-list"></div>
             </div>
         </div>
     </div>

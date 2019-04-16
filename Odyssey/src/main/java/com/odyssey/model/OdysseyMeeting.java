@@ -29,9 +29,10 @@ public class OdysseyMeeting {
     @JsonBackReference
     private Odyssey odyssey;
 
-    public OdysseyMeeting(){};
+    public OdysseyMeeting() {
+    }
 
-    public OdysseyMeeting(Calendar date,Odyssey odyssey) {
+    public OdysseyMeeting(Calendar date, Odyssey odyssey) {
         this.date = date;
         this.odyssey = odyssey;
     }
@@ -42,5 +43,56 @@ public class OdysseyMeeting {
 
     public boolean getIsCompleted() {
         return completed;
+    }
+
+    public String getDate() {
+        String dayOfMonth = String.valueOf(date.get(Calendar.DATE));
+        String monthOfYear = String.valueOf(date.get(Calendar.MONTH) + 1);
+        String year = String.valueOf(date.get(Calendar.YEAR));
+
+        return dayOfMonth +"/"+monthOfYear+"/"+year;
+    }
+
+    public String getDay() {
+        return getDayOfWeek(date.get(Calendar.DAY_OF_WEEK));
+    }
+
+    public String getTime() {
+        int timeOfDay = date.get(Calendar.AM_PM);
+        int hour = date.get(Calendar.HOUR);
+        String time = String.valueOf(hour);
+        if (timeOfDay == 0) {
+            return time + " AM";
+        } else {
+            return time + " PM";
+        }
+    }
+
+    private String getDayOfWeek(int value) {
+        String day = "";
+        switch (value) {
+            case 1:
+                day = "Sunday";
+                break;
+            case 2:
+                day = "Monday";
+                break;
+            case 3:
+                day = "Tuesday";
+                break;
+            case 4:
+                day = "Wednesday";
+                break;
+            case 5:
+                day = "Thursday";
+                break;
+            case 6:
+                day = "Friday";
+                break;
+            case 7:
+                day = "Saturday";
+                break;
+        }
+        return day;
     }
 }

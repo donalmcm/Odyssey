@@ -13,7 +13,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body>
 <%
     String email = null;
     Cookie[] cookies = request.getCookies();
@@ -25,6 +24,7 @@
     Employee e = new Employee();
     e = Employee.getEmployeeByEmail(email);
 %>
+<body onload="getOdysseysByMentee(<%=e.getId()%>);">
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
@@ -65,9 +65,9 @@
             <div class="row">
 
                 <div class="col-md-6">
-                    <h3>
+                    <h2>
                         Mentee
-                    </h3>
+                    </h2>
                     <form>
                         <div class="form-group">
                             <label for="topic-filter">Select a topic</label>
@@ -275,10 +275,13 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-12" id="mentee-odyssey-cards">
+                    <h2 id="mentee-page-odyssey-title">Odysseys where you are a mentee</h2>
+                    <div id="odyssey-list-by-mentee"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <script src="../static/js/mentee.js"></script>
 </body>

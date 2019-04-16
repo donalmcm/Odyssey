@@ -9,6 +9,7 @@ html,body {
 .side-nav {
     background-color: #eeeeee;
     padding: 0;
+    height: inherit;
 }
 
 .side-nav li{
@@ -54,41 +55,6 @@ html,body {
 
 .log-out-icon i{
     color: white;
-}
-
-.odyssey-card {
-    width: 90%;
-    margin: 5%;
-    height: 10%;
-    border: darkgray;
-    background-color: #eeeeee;
-}
-
-.odyssey-type {
-    float: left;
-    width: 30%;
-    padding: auto;
-    font-size: large;
-}
-
-
-.odyssey-progress{
-    float: right;
-    width: 30%;
-}
-
-.odyssey-partner-topic {
-    align-content: center;
-    width: 30%;
-    display: inline-block;
-}
-
-.odyssey-partner {
-    float: top;
-}
-
-.odyssey-topic {
-    float: bottom;
 }
 
 .login-form input[type=text], input[type=password]{
@@ -228,6 +194,107 @@ html,body {
     margin: 16px;
 }
 
+.odyssey-card {
+    border : solid 2px #5cb85c;
+    background-color: #eeeeee;
+    display: flex;
+    height: fit-content;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 16px;
+}
+.odyssey-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    border-right: solid 1px darkgrey;
+    padding-right: 16px;
+}
 
 
+.odyssey-details {
+    width: 20%;
+    border-right: solid 1px darkgrey;
+    padding-left: 16px;
+    padding-right: 16px;
+}
 
+.odyssey-partner {
+    border-bottom: solid 1px darkgrey;
+}
+
+.odyssey-progress {
+    padding-left: 16px;
+    width: 60%;
+
+}
+
+.first-meeting-label {
+    width: 50%;
+    float: left;
+}
+.first-meeting {
+    width: 50%;
+    float: left;
+    margin-top: 0;
+}
+
+
+.last-meeting-label {
+    width:  50%;
+    float: right;
+    text-align: right;
+}
+.last-meeting {
+    width:  50%;
+    float: right;
+    text-align: right;
+    margin-top: 0;
+}
+
+.meetings-details-label {
+    width: 50%;
+    float: left;
+}
+.meetings-details {
+    width: 50%;
+    float: left;
+    margin-top: 0;
+}
+
+.meetings-complete-label {
+    width: 50%;
+    float: right;
+    text-align: right;
+}
+
+.meetings-complete {
+    width: 50%;
+    float: right;
+    text-align: right;
+    margin-top: 0;
+}
+
+#home-page-title {
+    margin: 16px;
+}
+#mentor-page-odyssey-title {
+    margin: 16px;
+}
+#mentor-odyssey-cards {
+    padding: 0;
+}
+
+#become-mentor {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+#mentee-odyssey-cards {
+    padding: 0;
+}
+
+#mentee-page-odyssey-title {
+    margin: 16px;
+}
