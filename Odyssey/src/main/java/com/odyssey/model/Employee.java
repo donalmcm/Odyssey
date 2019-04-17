@@ -1,16 +1,9 @@
 package com.odyssey.model;
 
 import com.HibernateUtil;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.google.gson.annotations.Expose;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.Table;
 import org.hibernate.query.Query;
 
 import javax.persistence.*;
@@ -174,9 +167,6 @@ public class Employee {
     public int getId() {
         return id;
     }
-    public boolean getMentorValue() {
-        return isMentor;
-    }
     public void setMentee(boolean mentee) {
         isMentee = mentee;
     }
@@ -185,6 +175,10 @@ public class Employee {
     }
     public String getLastName() {
         return lastName;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
     public String getEmail() {
         return email;
@@ -198,15 +192,16 @@ public class Employee {
         return title;
     }
 
-    public boolean isAdmin() {
+    public boolean getSsAdmin() {
         return isAdmin;
     }
-    public boolean isMentee() {
+    public boolean getIsMentee() {
         return isMentee;
     }
-    public boolean isMentor() {
+    public boolean getIsMentor() {
         return isMentor;
     }
+    public boolean getIsManager() {return isManager;}
     public int getMentorDuration() {
         return mentorDuration;
     }
