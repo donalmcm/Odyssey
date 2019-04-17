@@ -1,33 +1,57 @@
+import com.odyssey.model.Availability;
 import com.odyssey.model.Employee;
 import com.odyssey.model.Topic;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.text.ParseException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EmployeeTests {
+    Employee employee = new Employee("Joe", "Bloggs","joebloggs@email.com","12345");
+    Availability availability = new Availability(true,true,true,true,
+            true,true,true,true,true,true,true,
+            true,true,true,true,true,true,
+            true,true,true,true,true,true,
+            true,true,true,true,true,true,true);
+    Topic topic = new Topic("Java");
 
     @Test
-    public void createEmployeeTest() {
-        Employee e = new Employee("Donal", "McManus", "donalmcm@email.com","password");
+    void testGetDisplayName() {
+        String displayName = employee.getFullName();
+        assertEquals("Joe Bloggs", displayName);
     }
 
     @Test
-    public void makeEmployeeMentorTest() {
-        Employee e = new Employee("Donal", "McManus", "donalmcm@email.com","password");
-
-        // run function and perform checks
+    void testGetFirstName() {
+        String displayName = employee.getFirstName();
+        assertEquals("Joe", displayName);
     }
 
     @Test
-    public void makeEmployeeManagerTest() {
-        Employee e = new Employee("Donal", "McManus", "donalmcm@email.com","password");
-
-        // run function and perform checks
+    void testGetLastName() {
+        String displayName = employee.getLastName();
+        assertEquals("Bloggs", displayName);
     }
 
+    @Test
+    void testSetFirstName() {
+        employee.setFirstName("Mary");
+        assertEquals("Mary", employee.getFirstName());
+    }
 
+    @Test
+    void testBecomeMentor() {
+        employee.becomeMentor(topic,availability,4);
+        assertEquals(true,employee.getIsMentor());
+    }
 
+    @Test
+    void testGetMentorDuration() {
+        employee.becomeMentor(topic,availability,4);
+        assertEquals(4,employee.getMentorDuration());
+    }
 
-
+    @Test
+    void testGetIsManager() {
+        assertEquals(false,employee.getIsManager());
+    }
 }
