@@ -138,7 +138,8 @@ public class EmployeeAPI {
     @Produces(MediaType.TEXT_HTML)
     public Response createEmployee(@FormParam("firstName") String firstName,
                                    @FormParam("lastName") String lastName,
-                                   @FormParam("email") String email) {
+                                   @FormParam("email") String email,
+                                   @FormParam("password") String password) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         URI location;
@@ -149,6 +150,7 @@ public class EmployeeAPI {
             newEmployee.setFirstName(firstName);
             newEmployee.setLastName(lastName);
             newEmployee.setEmail(email);
+            newEmployee.setPassword(password);
 
             session.persist(newEmployee);
             session.getTransaction().commit();

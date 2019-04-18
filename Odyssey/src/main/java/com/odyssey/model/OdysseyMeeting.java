@@ -45,9 +45,14 @@ public class OdysseyMeeting {
     }
 
     public boolean getIsCompleted() {
-        // if completed is complete return complete else check against current date
-        // check against current date
-
+        if (completed) {
+            return completed;
+        }
+        
+        Calendar currentTime = Calendar.getInstance();
+        if (currentTime.after(date)) {
+            setCompleted(true);
+        }
         return completed;
     }
 
@@ -56,7 +61,7 @@ public class OdysseyMeeting {
         String monthOfYear = String.valueOf(date.get(Calendar.MONTH) + 1);
         String year = String.valueOf(date.get(Calendar.YEAR));
 
-        return dayOfMonth +"/"+monthOfYear+"/"+year;
+        return dayOfMonth + "/" + monthOfYear + "/" + year;
     }
 
     public String getDay() {
