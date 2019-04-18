@@ -40,8 +40,7 @@ public class Employee {
     private String title;
 
     // change to more secure option
-    @Column
-    @JsonIgnore
+    @Column(nullable = false)
     private String password;
 
     @Column
@@ -160,6 +159,10 @@ public class Employee {
 
     public void setManager(Employee manager) {
         this.manager = manager;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPassword() {

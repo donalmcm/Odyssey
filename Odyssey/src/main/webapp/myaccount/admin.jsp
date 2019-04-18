@@ -115,11 +115,11 @@
                                                 <input type="text" class="form-control" id="email" name="email"
                                                        placeholder="Enter email">
                                             </div>
-                                            <!--<div class="form-group">-->
-                                            <!--<label for="psw"> Last Name</label>-->
-                                            <!--<input type="password" class="form-control" id="psw" placeholder="Enter password">-->
-                                            <!--for when users have passwords -->
-                                            <!--</div>-->
+                                            <div class="form-group">
+                                                <label for="password">Password</label>
+                                                <input type="text" class="form-control" id="password"
+                                                       name="password" placeholder="Enter password">
+                                            </div>
                                             <button type="submit" class="btn btn-success btn-block">Create</button>
                                         </form>
                                     </div>
