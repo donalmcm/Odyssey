@@ -41,7 +41,7 @@ class EmployeeTests {
     @Test
     void testBecomeMentor() {
         employee.becomeMentor(topic,availability,4);
-        assertEquals(true,employee.getIsMentor());
+        assertEquals(true,employee.isMentor());
     }
 
     @Test
@@ -52,6 +52,6 @@ class EmployeeTests {
 
     @Test
     void testGetIsManager() {
-        assertEquals(false,employee.getIsManager());
+        assertEquals(false,employee.isManager());
     }
 }

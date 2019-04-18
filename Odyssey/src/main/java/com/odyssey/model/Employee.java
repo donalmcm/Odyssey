@@ -16,7 +16,8 @@ import java.util.List;
         @NamedQuery(name="Employee.findMentees", query = "select e from Employee e where e.isMentee=true"),
         @NamedQuery(name="Employee.findMentorsByTopic", query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic"),
         @NamedQuery(name="Employee.findAvailability", query ="select e.availability from Employee e where e.id=:id" ),
-        @NamedQuery(name="Employee.findByEmail",query = "select e from Employee e where e.email=:email")})
+        @NamedQuery(name="Employee.findByEmail",query = "select e from Employee e where e.email=:email"),
+        @NamedQuery(name="Employee.findMentorForMentee",query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic and mentorDuration=:mentorDuration")})
 
 @XmlRootElement
 @Entity
@@ -133,6 +134,24 @@ public class Employee {
         }
     }
 
+    public static Employee getEmployeeByAvailability(String email) {
+        if(email == null) {
+            return null;
+        } else {
+            SessionFactory factory = HibernateUtil.getSessionFactory();
+            Session session = factory.getCurrentSession();
+            session.getTransaction().begin();
+
+            Query<Employee> query = session.createNamedQuery("Employee.findByEmail", Employee.class);
+            query.setParameter("email", email);
+            Employee employee = query.getSingleResult();
+
+            session.getTransaction().commit();
+            session.close();
+            return employee;
+        }
+    }
+
     // ------------- GETTERS AND SETTERS ----------------------------
 
     public List<Employee> getTeamMembers() {
@@ -184,24 +203,21 @@ public class Employee {
         return email;
     }
 
-    public boolean isManager() {
-        return isManager;
-    }
 
     public String getTitle() {
         return title;
     }
 
-    public boolean getSsAdmin() {
+    public boolean isAdmin() {
         return isAdmin;
     }
-    public boolean getIsMentee() {
+    public boolean isMentee() {
         return isMentee;
     }
-    public boolean getIsMentor() {
+    public boolean isMentor() {
         return isMentor;
     }
-    public boolean getIsManager() {return isManager;}
+    public boolean isManager() {return isManager;}
     public int getMentorDuration() {
         return mentorDuration;
     }
