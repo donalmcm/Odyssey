@@ -10,13 +10,29 @@ function loadAdminPage(isAdmin) {
         const adminEmployeeUrl = 'http://localhost:8080/api/employees';
         $.getJSON(adminEmployeeUrl, function (data) {
             $.each(data, function (key, entry) {
-                adminEmployeeList.append($('<tr>'));
-                adminEmployeeList.append($('<td></td>').attr('value', entry.id).text(entry.id));
-                adminEmployeeList.append($('<td></td>').attr('value', entry.firstName).text(entry.firstName));
-                adminEmployeeList.append($('<td></td>').attr('value', entry.lastName).text(entry.lastName));
-                adminEmployeeList.append($('<td></td>').attr('value', entry.email).text(entry.email));
-                adminEmployeeList.append($('</tr>'));
+                var tr = document.createElement('tr');
 
+                // First name
+                var firstName = document.createElement('td');
+                firstName.innerHTML = entry.firstName;
+                tr.append(firstName);
+
+                // Last name
+                var lastName = document.createElement('td');
+                lastName.innerHTML = entry.lastName;
+                tr.append(lastName);
+
+                // Email
+                var email = document.createElement('td');
+                email.innerHTML = entry.email;
+                tr.append(email);
+
+                // Title
+                var title = document.createElement('td');
+                title.innerHTML = entry.title;
+                tr.append(title);
+
+                adminEmployeeList.append(tr);
             })
         });
 
@@ -25,11 +41,19 @@ function loadAdminPage(isAdmin) {
         const employeeUrl = 'http://localhost:8080/api/topics';
         $.getJSON(employeeUrl, function (data) {
             $.each(data, function (key, entry) {
-                adminTopicList.append($('<tr>'));
-                adminTopicList.append($('<td></td>').attr('value', entry.name).text(entry.name));
-                adminTopicList.append($('<td></td>').attr('value', "N/A").text("N/A"));
-                adminTopicList.append($('</tr>'));
+                var tr = document.createElement('tr');
 
+                // Topic name
+                var topicName = document.createElement('td');
+                topicName.innerHTML = entry.name;
+                tr.append(topicName);
+
+                // Subtopic name
+                var subTopic = document.createElement('td');
+                subTopic.innerHTML = "Not yet assigned";
+                tr.append(subTopic);
+
+                adminTopicList.append(tr);
             })
         });
 

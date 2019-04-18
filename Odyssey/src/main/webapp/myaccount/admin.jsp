@@ -65,8 +65,8 @@
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-6">
-                    <h3 id="admin-page-title">
-                    </h3>
+                    <h2 id="admin-page-title">
+                    </h2>
                 </div>
                 <div class="col-md-6">
                 </div>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="row tab-content">
                     <div id="home" class="col-md-12 row tab-pane fade in active">
-                        <button type="button" class="btn btn-success" id="create-employee">
+                        <button type="button" class="btn btn-success btn-lg margin16" id="create-employee">
                             Create Employee
                         </button>
                         <div class="modal fade" id="create-employee-modal" role="dialog">
@@ -131,12 +131,9 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-hover">
-                            <thead>
+                        <h3 class="margin16">All Employees</h3>
+                        <table class="employee-table">
                             <tr>
-                                <th>
-                                    #
-                                </th>
                                 <th>
                                     First Name
                                 </th>
@@ -146,14 +143,16 @@
                                 <th>
                                     Email
                                 </th>
+                                <th>
+                                    Title
+                                </th>
                             </tr>
-                            </thead>
                             <tbody id="employee-list">
                             </tbody>
                         </table>
                     </div>
                     <div id="topics" class="col-md-12 row tab-pane fade">
-                        <button type="button" class="btn btn-success" id="create-topic">
+                        <button type="button" class="btn btn-success btn-lg margin16" id="create-topic">
                             Create Topic
                         </button>
                         <div class="modal fade" id="create-topic-modal" role="dialog">
@@ -183,8 +182,8 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-hover">
-                            <thead>
+                        <h3 class="margin16">All Topics</h3>
+                        <table class="employee-table">
                             <tr>
                                 <th>
                                     Topic
@@ -193,7 +192,6 @@
                                     Sub Topic
                                 </th>
                             </tr>
-                            </thead>
                             <tbody id="topic-list">
                             </tbody>
                         </table>

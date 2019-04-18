@@ -45,6 +45,9 @@ public class OdysseyMeeting {
     }
 
     public boolean getIsCompleted() {
+        // if completed is complete return complete else check against current date
+        // check against current date
+
         return completed;
     }
 

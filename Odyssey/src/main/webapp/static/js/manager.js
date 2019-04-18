@@ -7,16 +7,39 @@ function getManagersTeam(managerId, isManager) {
 
         const managersEmployeesUrl = 'http://localhost:8080/api/employees/getTeamMembers/manager/' + managerId;
 
+        let isCurrentMentee = "No";
+        let isCurrentMentor = "No";
         // Populate dropdown with list of topics
         $.getJSON(managersEmployeesUrl, function (data) {
             $.each(data, function (key, entry) {
-                mentorList.append($('<tr>'));
-                mentorList.append($('<td></td>').attr('value', entry.id).text(entry.id));
-                mentorList.append($('<td></td>').attr('value', entry.firstName).text(entry.firstName));
-                mentorList.append($('<td></td>').attr('value', entry.lastName).text(entry.lastName));
-                mentorList.append($('<td></td>').attr('value', entry.email).text(entry.email));
-                mentorList.append($('</tr>'));
+                var tr = document.createElement('tr');
 
+                // Full name
+                var fullName = document.createElement('td');
+                fullName.innerHTML = entry.fullName;
+                tr.append(fullName);
+
+                // Email
+                var email = document.createElement('td');
+                email.innerHTML = entry.email;
+                tr.append(email);
+
+                // Is employee a mentor
+                var isCurrentMentor = document.createElement('td');
+                isCurrentMentor.innerHTML = entry.mentor;
+                tr.append(isCurrentMentor);
+
+                // Is employee a mentee
+                var isCurrentMentee = document.createElement('td');
+                isCurrentMentee.innerHTML = entry.mentee;
+                tr.append(isCurrentMentee);
+
+                // count of odysseys
+                var odysseyCount = document.createElement('td');
+                odysseyCount.innerHTML = "SQL COUNT";
+                tr.append(odysseyCount);
+
+                mentorList.append(tr);
             })
         });
     } else {
