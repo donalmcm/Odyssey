@@ -60,6 +60,10 @@ public class OdysseyMeeting {
         return getDayOfWeek(date.get(Calendar.DAY_OF_WEEK));
     }
 
+    public String getMeetingNote() {
+        return meetingNote;
+    }
+
     public String getTime() {
         int timeOfDay = date.get(Calendar.AM_PM);
         int hour = date.get(Calendar.HOUR);
