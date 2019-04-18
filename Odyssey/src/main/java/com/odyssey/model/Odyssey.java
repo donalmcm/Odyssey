@@ -40,8 +40,6 @@ public class Odyssey {
     @Column
     private boolean isActive = false;
 
-
-
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "odyssey",fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<OdysseyMeeting> odysseyMeetings;
