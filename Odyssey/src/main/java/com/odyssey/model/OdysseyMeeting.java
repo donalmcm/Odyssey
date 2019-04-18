@@ -24,6 +24,9 @@ public class OdysseyMeeting {
     @Column(nullable = false)
     private boolean completed;
 
+    @Column
+    private String meetingNote;
+
     @ManyToOne
     @JoinColumn
     @JsonBackReference

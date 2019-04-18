@@ -240,7 +240,7 @@
                                     <h1><i class="far fa-user-circle fa-3x"></i> Create Odyssey</h1>
                                 </div>
                                 <div class="modal-body" style="padding:40px 50px;">
-                                    <form role="form" action="../api/odyssey/create/<%=e.getId()%>" method="post">
+                                    <form role="form" action="../api/odysseys/create/<%=e.getId()%>" method="post">
                                         <div class="form-group">
                                             <label for="topicId">Topic</label>
                                             <input class="form-control" id="topicId" name="topicId"
