@@ -70,8 +70,8 @@
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-6">
-                    <h3 id="manager-page-title">
-                    </h3>
+                    <h2 id="manager-page-title">
+                    </h2>
                 </div>
                 <div class="col-md-6">
                 </div>
@@ -91,23 +91,25 @@
                 </div>
                 <div class="row tab-content">
                     <div id="home" class="col-md-12 row tab-pane fade in active">
-                        <table class="table table-hover">
-                            <thead>
+                        <h3 id="manager-team-title" class="margin16">Your Team</h3>
+                        <table class="employee-table">
                             <tr>
                                 <th>
-                                    #
-                                </th>
-                                <th>
-                                    First Name
-                                </th>
-                                <th>
-                                    Last Name
+                                    Full Name
                                 </th>
                                 <th>
                                     Email
                                 </th>
+                                <th>
+                                    Active Mentor
+                                </th>
+                                <th>
+                                    Active Mentee
+                                </th>
+                                <th>
+                                    Total Odysseys
+                                </th>
                             </tr>
-                            </thead>
                             <tbody id="managers-team">
                             </tbody>
                         </table>
