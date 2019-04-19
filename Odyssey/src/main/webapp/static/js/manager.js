@@ -43,6 +43,7 @@ function getManagersTeam(managerId, isManager) {
             })
         });
         getRadarGraphInfo();
+        getGeoGraphInfo();
 
     } else {
         document.getElementById("manager-page-title").innerHTML = "NOT AUTHORIZED";
@@ -135,7 +136,71 @@ new Chart(document.getElementById("line-chart"), {
         }
     }
 });
-//----------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
+function getGeoGraphInfo() {
+    const employeeURL = 'http://localhost:8080/api/employees';
+    var allEmployeeLocations = [];
+    // Populate list of topics
+    $.getJSON(employeeURL, function (data) {
+        $.each(data, function (key, entry) {
+            allEmployeeLocations.push(entry.location);
+        });
+        getCountriesAndCount(allEmployeeLocations);
+    });
+
+}
+
+function getCountriesAndCount(list) {
+    var prev;
+    var labels = [], countryCount = [];
+
+    list.sort();
+    for (var i = 0; i < list.length; i++) {
+        if (list[i] !== prev) {
+            labels.push(list[i]);
+            countryCount.push(1);
+        } else {
+            countryCount[countryCount.length - 1]++;
+        }
+        prev = list[i];
+    }
+
+    loadGeoGraph(labels,countryCount);
+}
+
+
+function loadGeoGraph(countries, countryCount) {
+    google.charts.load('current', {
+        'packages':['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+    });
+    google.charts.setOnLoadCallback(drawRegionsMap);
+
+    function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+            ['Country', 'Employees'],
+            [countries[0], countryCount[0]],
+            [countries[1], countryCount[1]],
+            [countries[2], countryCount[2]],
+            [countries[3], countryCount[3]],
+            [countries[4], countryCount[4]],
+            [countries[5], countryCount[5]],
+            [countries[6], countryCount[6]],
+            [countries[7], countryCount[7]],
+            [countries[8], countryCount[8]],
+            [countries[9], countryCount[9]],
+            [countries[10], countryCount[10]]
+        ]);
+
+        var options = {};
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, {});
+    }
+}
+
 

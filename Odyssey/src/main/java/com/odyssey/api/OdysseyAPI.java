@@ -169,6 +169,7 @@ public class OdysseyAPI {
         return Response.ok(odysseysByEmployee, MediaType.APPLICATION_JSON).build();
     }
 
+    // look into reflection to improve this function
     private Employee findEmployeeByAvailability(String dayTime,List<Employee> employees) {
         Employee mentor = new Employee();
 
