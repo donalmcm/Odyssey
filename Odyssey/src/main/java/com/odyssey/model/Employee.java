@@ -58,6 +58,9 @@ public class Employee {
     @Column
     private int mentorDuration = 0;
 
+    @Column
+    private String location;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
     private List<Odyssey> mentorOdyssey;
 
@@ -133,25 +136,12 @@ public class Employee {
         }
     }
 
-    public static Employee getEmployeeByAvailability(String email) {
-        if(email == null) {
-            return null;
-        } else {
-            SessionFactory factory = HibernateUtil.getSessionFactory();
-            Session session = factory.getCurrentSession();
-            session.getTransaction().begin();
-
-            Query<Employee> query = session.createNamedQuery("Employee.findByEmail", Employee.class);
-            query.setParameter("email", email);
-            Employee employee = query.getSingleResult();
-
-            session.getTransaction().commit();
-            session.close();
-            return employee;
-        }
-    }
-
     // ------------- GETTERS AND SETTERS ----------------------------
+
+
+    public String getLocation() {
+        return location;
+    }
 
     public List<Employee> getTeamMembers() {
         return teamMembers;
