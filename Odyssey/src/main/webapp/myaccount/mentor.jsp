@@ -86,11 +86,11 @@
                                 <form role="form" action="../api/employees/becomeMentor/<%=e.getId()%>" method="post">
                                     <div class="form-group">
                                         <label for="topic-dropdown">Select a topic to mentor In</label>
-                                        <select class="form-control" id="topic-dropdown" name="topic"></select>
+                                        <select class="form-control" id="topic-dropdown" name="topic" required></select>
                                     </div>
                                     <div class="form-group">
                                         <label for="mentorDuration">Select the number of weeks to mentor</label>
-                                        <select name="mentorDuration" class="form-control" id="mentorDuration" placeholder="Enter last name">
+                                        <select name="mentorDuration" class="form-control" id="mentorDuration" placeholder="Enter last name" required>
                                             <option value=1>1</option>
                                             <option value=2 >2</option>
                                             <option value=3>3</option>
@@ -157,7 +157,7 @@
                                                 ><span>11 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="tuesday12" id="tuesday12" value="true"
-                                                ><span>12 AM</span></label></div>
+                                                ><span>12 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="tuesday14" id="tuesday14" value="true"
                                                 ><span>2 PM</span></label></div>
@@ -180,7 +180,7 @@
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="wednesday12" id="wednesday12"
                                                                                      value="true"
-                                                ><span>12 AM</span></label></div>
+                                                ><span>12 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="wednesday14" id="wednesday14"
                                                                                      value="true"
@@ -203,7 +203,7 @@
                                                 ><span>11 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="thursday12" id="thursday12" value="true"
-                                                ><span>12 AM</span></label></div>
+                                                ><span>12 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="thursday14" id="thursday14" value="true"
                                                 ><span>2 PM</span></label></div>
@@ -223,7 +223,7 @@
                                                 ><span>11 AM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="friday12" id="friday12" value="true"
-                                                ><span>12 AM</span></label></div>
+                                                ><span>12 PM</span></label></div>
                                                 <div class="ck-button"><label><input type="checkbox"
                                                                                      name="friday14" id="friday14" value="true"
                                                 ><span>2 PM</span></label></div>
