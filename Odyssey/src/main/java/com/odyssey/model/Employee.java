@@ -156,15 +156,12 @@ public class Employee {
     public List<Employee> getTeamMembers() {
         return teamMembers;
     }
-
     public void setManager(Employee manager) {
         this.manager = manager;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     public String getPassword() {
         return password;
     }
@@ -198,19 +195,15 @@ public class Employee {
     public String getLastName() {
         return lastName;
     }
-
     public String getFullName() {
         return firstName + " " + lastName;
     }
     public String getEmail() {
         return email;
     }
-
-
     public String getTitle() {
         return title;
     }
-
     public boolean isAdmin() {
         return isAdmin;
     }

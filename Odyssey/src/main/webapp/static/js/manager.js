@@ -42,6 +42,8 @@ function getManagersTeam(managerId, isManager) {
                 mentorList.append(tr);
             })
         });
+        getRadarGraphInfo();
+
     } else {
         document.getElementById("manager-page-title").innerHTML = "NOT AUTHORIZED";
         document.getElementById("manager-page-title").style.color = 'red';
@@ -51,7 +53,63 @@ function getManagersTeam(managerId, isManager) {
 
 }
 
+function getRadarGraphInfo() {
+    const topicCountByOdysseysURL = 'http://localhost:8080/api/odysseys';
+    var allOdysseyTopics = [];
+    // Populate list of topics
+    $.getJSON(topicCountByOdysseysURL, function (data) {
+        $.each(data, function (key, entry) {
+            allOdysseyTopics.push(entry.topic.name);
+        });
+        getLabelsAndCount(allOdysseyTopics);
+    });
 
+}
+
+function getLabelsAndCount(list) {
+    var prev;
+    var labels = [], topicCount = [];
+
+    list.sort();
+    for (var i = 0; i < list.length; i++) {
+        if (list[i] !== prev) {
+            labels.push(list[i]);
+            topicCount.push(1);
+        } else {
+            topicCount[topicCount.length - 1]++;
+        }
+        prev = list[i];
+    }
+
+    loadRadarGraph(labels,topicCount);
+}
+
+function loadRadarGraph(listOfLabels,labelCount) {
+    new Chart(document.getElementById("radar-chart"), {
+        type: 'radar',
+        data: {
+            // get topics
+            labels: listOfLabels,
+            datasets: [
+                {
+                    label: "Managers Employees",
+                    fill: true,
+                    backgroundColor: "rgba(179,181,198,0.2)",
+                    borderColor: "rgba(179,181,198,1)",
+                    pointBorderColor: "#3e95cd",
+                    pointBackgroundColor: "rgba(179,181,198,1)",
+                    data: labelCount
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Distribution in % of Topics'
+            }
+        }
+    });
+}
 // values to be taken from database - hardcoded for demo
 new Chart(document.getElementById("line-chart"), {
     type: 'line',
@@ -77,37 +135,7 @@ new Chart(document.getElementById("line-chart"), {
         }
     }
 });
+//----------------------------------------------------------------------------------------------------------------------
 
-// const topicCountByOdysseysURL = 'http://localhost:8080/api/odysseys/countTopicsByOdyssey';
-// var labels=[], topicCount=[];
-// // Populate dropdown with list of topics
-// $.getJSON(topicCountByOdysseysURL, function (data) {
-//     $.each(data, function (key, entry) {
-//         mentorDropdown.append($('<option></option>').attr('value', entry.name).text(entry.name));
-//     })
-// });
+//----------------------------------------------------------------------------------------------------------------------
 
-new Chart(document.getElementById("radar-chart"), {
-    type: 'radar',
-    data: {
-        // get topics
-        labels: ["JPA", "Gosu", "Git", "API", "Management"],
-        datasets: [
-            {
-                label: "Managers Employees",
-                fill: true,
-                backgroundColor: "rgba(179,181,198,0.2)",
-                borderColor: "rgba(179,181,198,1)",
-                pointBorderColor: "#3e95cd",
-                pointBackgroundColor: "rgba(179,181,198,1)",
-                data: [20.0, 20.0, 20.0, 20.0, 20.0]
-            }
-        ]
-    },
-    options: {
-        title: {
-            display: true,
-            text: 'Distribution in % of Topics'
-        }
-    }
-});

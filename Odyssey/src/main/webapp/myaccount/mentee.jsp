@@ -122,22 +122,22 @@
                                 <div class="tab-pane container active" style="padding: 0" id="home">
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="monday10" id="monday10" value="true"
-                                                                         disabled><span>10AM</span></label></div>
+                                                                         disabled><span>10 AM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="monday11" id="monday11" value="true"
-                                                                         disabled><span>11AM</span></label></div>
+                                                                         disabled><span>11 AM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="monday12" id="monday12" value="true"
-                                                                         disabled><span>12AM</span></label></div>
+                                                                         disabled><span>12 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="monday14" id="monday14" value="true"
-                                                                         disabled><span>14PM</span></label></div>
+                                                                         disabled><span>2 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="monday15" id="monday15" value="true"
-                                                                         disabled><span>15PM</span></label></div>
+                                                                         disabled><span>3 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="monday16" id="monday16" value="true"
-                                                                         disabled><span>16PM</span></label></div>
+                                                                         disabled><span>4 PM</span></label></div>
                                 </div>
                                 <div class="tab-pane container fade" style="padding: 0" id="tuesday">
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
@@ -148,16 +148,16 @@
                                                                          disabled><span>11 AM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="tuesday12" id="tuesday12" value="true"
-                                                                         disabled><span>12 AM</span></label></div>
+                                                                         disabled><span>12 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="tuesday14" id="tuesday14" value="true"
-                                                                         disabled><span>14 AM</span></label></div>
+                                                                         disabled><span>2 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="tuesday15" id="tuesday15" value="true"
-                                                                         disabled><span>15 AM</span></label></div>
+                                                                         disabled><span>3 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="tuesday16" id="tuesday16" value="true"
-                                                                         disabled><span>16 AM</span></label></div>
+                                                                         disabled><span>4 PM</span></label></div>
                                 </div>
                                 <div class="tab-pane container fade" style="padding: 0" id="wednesday">
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
@@ -171,7 +171,7 @@
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="wednesday12" id="wednesday12"
                                                                          value="true"
-                                                                         disabled><span>12 AM</span></label></div>
+                                                                         disabled><span>12 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="wednesday14" id="wednesday14"
                                                                          value="true"
@@ -194,16 +194,16 @@
                                                                          disabled><span>11 AM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="thursday12" id="thursday12" value="true"
-                                                                         disabled><span>12 AM</span></label></div>
+                                                                         disabled><span>12 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="thursday14" id="thursday14" value="true"
-                                                                         disabled><span>14 AM</span></label></div>
+                                                                         disabled><span>2 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="thursday15" id="thursday15" value="true"
-                                                                         disabled><span>15 AM</span></label></div>
+                                                                         disabled><span>3 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="thursday16" id="thursday16" value="true"
-                                                                         disabled><span>16 AM</span></label></div>
+                                                                         disabled><span>4 PM</span></label></div>
                                 </div>
                                 <div class="tab-pane container fade" style="padding: 0" id="friday">
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
@@ -214,16 +214,16 @@
                                                                          disabled><span>11 AM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="friday12" id="friday12" value="true"
-                                                                         disabled><span>12 AM</span></label></div>
+                                                                         disabled><span>12 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="friday14" id="friday14" value="true"
-                                                                         disabled><span>14 AM</span></label></div>
+                                                                         disabled><span>2 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="friday15" id="friday15" value="true"
-                                                                         disabled><span>15 AM</span></label></div>
+                                                                         disabled><span>3 PM</span></label></div>
                                     <div class="ck-button"><label><input class="resetToDisabled" type="checkbox"
                                                                          name="friday16" id="friday16" value="true"
-                                                                         disabled><span>16 AM</span></label></div>
+                                                                         disabled><span>4 PM</span></label></div>
                                 </div>
                             </div>
                         </div>
