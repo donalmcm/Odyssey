@@ -102,22 +102,22 @@
                                         <form role="form" action="../api/employees/create" method="post">
                                             <div class="form-group">
                                                 <label for="firstName">First Name</label>
-                                                <input type="text" class="form-control" id="firstName" name="firstName"
+                                                <input type="text" class="form-control" id="firstName" name="firstName" required
                                                        placeholder="Enter first name">
                                             </div>
                                             <div class="form-group">
                                                 <label for="lastName">Last Name</label>
-                                                <input type="text" class="form-control" id="lastName" name="lastName"
+                                                <input type="text" class="form-control" id="lastName" name="lastName" required
                                                        placeholder="Enter last name">
                                             </div>
                                             <div class="form-group">
                                                 <label for="email">Email</label>
-                                                <input type="text" class="form-control" id="email" name="email"
+                                                <input type="text" class="form-control" id="email" name="email" required
                                                        placeholder="Enter email">
                                             </div>
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input type="text" class="form-control" id="password"
+                                                <input type="text" class="form-control" id="password" required
                                                        name="password" placeholder="Enter password">
                                             </div>
                                             <button type="submit" class="btn btn-success btn-block">Create</button>
@@ -168,7 +168,7 @@
                                         <form role="form" action="../api/topics/create" method="post">
                                             <div class="form-group">
                                                 <label for="firstName">First Name</label>
-                                                <input type="text" class="form-control" id="topicName" name="topicName"
+                                                <input type="text" class="form-control" id="topicName" name="topicName" required
                                                        placeholder="Enter Topic name">
                                             </div>
                                             <button type="submit" class="btn btn-success btn-block">Create</button>
