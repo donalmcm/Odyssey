@@ -42,6 +42,7 @@ function getManagersTeam(managerId, isManager) {
                 mentorList.append(tr);
             })
         });
+        getMeetingsGraphInfo();
         getRadarGraphInfo();
         getGeoGraphInfo();
 
@@ -53,7 +54,7 @@ function getManagersTeam(managerId, isManager) {
 
 
 }
-
+// --------------------------------- RADAR GRAPH ----------------------------------------------
 function getRadarGraphInfo() {
     const topicCountByOdysseysURL = 'http://localhost:8080/api/odysseys';
     var allOdysseyTopics = [];
@@ -111,31 +112,104 @@ function loadRadarGraph(listOfLabels,labelCount) {
         }
     });
 }
-// values to be taken from database - hardcoded for demo
-new Chart(document.getElementById("line-chart"), {
-    type: 'line',
-    data: {
-        labels: [1, 2, 3, 4, 5, 6],
-        datasets: [{
-            data: [86, 114, 106, 106, 107, 111],
-            label: "Mentor",
-            borderColor: "#3e95cd",
-            fill: false
-        }, {
-            data: [282, 350, 411, 502, 635, 809],
-            label: "Mentee",
-            borderColor: "#8e5ea2",
-            fill: false
+// --------------------------------------- MEETINGS GRAPHS -------------------------------------
+function getMeetingsGraphInfo() {
+    const meetingCountURL = 'http://localhost:8080/api/odysseyMeetings';
+    var allOdysseyMeetings = [];
+    var allMeetingDays = [];
+    // Populate list of topics
+    $.getJSON(meetingCountURL, function (data) {
+        $.each(data, function (key, entry) {
+            allOdysseyMeetings.push(entry.date);
+            allMeetingDays.push(entry.day);
+        });
+        getMeetingsAndCount(allOdysseyMeetings);
+        getMeetingDaysAndCount(allMeetingDays);
+    });
+
+}
+
+function getMeetingsAndCount(list) {
+    var prev;
+    var dates = [], dateCount = [];
+
+    list.sort();
+    for (var i = 0; i < list.length; i++) {
+        if (list[i] !== prev) {
+            dates.push(list[i]);
+            dateCount.push(1);
+        } else {
+            dateCount[dateCount.length - 1]++;
         }
-        ]
-    },
-    options: {
-        title: {
-            display: true,
-            text: 'Your Teams Progress - This Year'
-        }
+        prev = list[i];
     }
-});
+
+    loadMeetingsGraph(dates,dateCount);
+}
+
+function getMeetingDaysAndCount(list) {
+    var prev;
+    var day = [], dayCount = [];
+
+    // change sort to monday -> friday
+    list.sort();
+    for (var i = 0; i < list.length; i++) {
+        if (list[i] !== prev) {
+            day.push(list[i]);
+            dayCount.push(1);
+        } else {
+            dayCount[dayCount.length - 1]++;
+        }
+        prev = list[i];
+    }
+
+    loadMeetingDayGraph(day,dayCount);
+}
+
+function loadMeetingDayGraph(days,dayCount) {
+    new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
+        data: {
+            labels: days,
+            datasets: [
+                {
+                    label: "Number of meetings on this day",
+                    backgroundColor: ["#3e95cd","#3cba9f","#3e95cd","#3cba9f","#3e95cd"],
+                    data: dayCount
+                }
+            ]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Number of Meetings By Day'
+            }
+        }
+    });
+}
+
+function loadMeetingsGraph(dates,meetingCount) {
+    new Chart(document.getElementById("line-chart"), {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                data: meetingCount,
+                label: "Number of Meetings",
+                borderColor: "#3e95cd",
+                fill: false
+            }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Meeting count by date'
+            }
+        }
+    });
+}
 
 //------------------------------------------------------------------------------------------------------------------------
 function getGeoGraphInfo() {
