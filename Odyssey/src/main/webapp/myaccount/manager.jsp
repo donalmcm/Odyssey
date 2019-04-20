@@ -116,6 +116,7 @@
                         </table>
                     </div>
                     <div id="reports" class="col-md-12 row tab-pane fade">
+                        <h3 class="margin16">Meeting Graphs</h3>
                         <div class="col-md-12 graph-container">
                             <div class="col-md-6">
                                 <canvas id="line-chart"></canvas>
@@ -124,6 +125,7 @@
                                 <canvas id="bar-chart"></canvas>
                             </div>
                         </div>
+                        <h3 class="margin16">Topic Graphs</h3>
                         <div class="col-md-12 graph-container">
                             <div class="col-md-6">
                                 <canvas id="radar-chart"></canvas>
@@ -132,14 +134,15 @@
                                 <canvas id="pie-chart"></canvas>
                             </div>
                         </div>
+                        <h3 class="margin16">Employee Graphs</h3>
                         <div class="col-md-12 graph-container">
                             <div class="col-md-12">
                                 <div id="regions_div"></div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 margin-top">
                                 <canvas id="polar-chart"></canvas>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 margin-top">
                                 <canvas id="employee-bar-chart"></canvas>
                             </div>
                         </div>

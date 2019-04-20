@@ -55,6 +55,7 @@ public class Odyssey {
         this.mentee = mentee;
         this.topic = mentor.getTopic();
         isActive = true;
+        this.mentee.setMentee(true);
     }
 
     // To be called after the last meeting of an odyssey
@@ -131,18 +132,26 @@ public class Odyssey {
     public Topic getTopic() {
         return topic;
     }
+
     public boolean isActive() {
-        return isActive;
+        if(!isActive) {
+            return isActive;
+        } else {
+            for(OdysseyMeeting o : odysseyMeetings) {
+                if(!o.getIsCompleted()){
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     public Employee getMentor() {
         return mentor;
     }
-
     public Employee getMentee() {
         return mentee;
     }
-
     public List<OdysseyMeeting> getOdysseyMeetings() {
         return odysseyMeetings;
     }
