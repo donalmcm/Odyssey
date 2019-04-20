@@ -332,4 +332,14 @@ html,body {
     margin: 16px;
 }
 
+.graph-container {
+    margin: 16px;
+    padding: 16px;
+    border : solid 2px darkgrey;
+    background-color: whitesmoke;
+    border-radius: 16px;
+}
 
+.margin-top {
+    margin-top: 16px;
+}

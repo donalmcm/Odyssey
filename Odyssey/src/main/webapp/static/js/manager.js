@@ -258,7 +258,7 @@ function getGeoGraphInfo() {
     $.getJSON(employeeURL, function (data) {
         $.each(data, function (key, entry) {
             allEmployeeLocations.push(entry.location);
-            allEmployeeLocations.push(entry.title);
+            allEmployeeTitles.push(entry.title);
             if(entry.mentor === true) { mentors ++;}
             if(entry.mentee === true) { mentees ++;}
             if(entry.manager === true) { managers ++;}
@@ -320,7 +320,7 @@ function loadPolarGraph(titles,titlesCount) {
             datasets: [
                 {
                     label: "number of employees for this title",
-                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    backgroundColor: ["blue", "green","green","orange","orange","green","green","orange","blue"],
                     data: titlesCount
                 }
             ]
