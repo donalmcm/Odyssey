@@ -116,14 +116,29 @@
                         </table>
                     </div>
                     <div id="reports" class="col-md-12 row tab-pane fade">
-                        <div class="col-md-6">
-                            <canvas id="line-chart" width="500" height="400"></canvas>
+                        <div class="col-md-12 graph-container">
+                            <div class="col-md-6">
+                                <canvas id="line-chart"></canvas>
+                            </div>
+                            <div class="col-md-6">
+                                <canvas id="bar-chart"></canvas>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <canvas id="radar-chart" width="500" height="400"></canvas>
+                        <div class="col-md-12 graph-container">
+                            <div class="col-md-6">
+                                <canvas id="radar-chart" width="500" height="400"></canvas>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
                         </div>
-                        <div class="col-md-12">
-                            <div id="regions_div" style="width:1000px;"></div>
+                        <div class="col-md-12 graph-container">
+                            <div class="col-md-12">
+                                <div id="regions_div" style="width:1000px;"></div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -131,8 +146,6 @@
         </div>
     </div>
 </div>
-</div>
 <script src="../static/js/manager.js"></script>
-
 </body>
 </html>

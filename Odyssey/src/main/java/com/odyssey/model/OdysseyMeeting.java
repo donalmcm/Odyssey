@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+@NamedQueries({ @NamedQuery(name = "OdysseyMeeting.findAllOdysseyMeetings", query = "select om from OdysseyMeeting om")})
+
 @XmlRootElement
 @Entity
 public class OdysseyMeeting {
