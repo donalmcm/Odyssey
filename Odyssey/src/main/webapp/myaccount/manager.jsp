@@ -134,11 +134,13 @@
                         </div>
                         <div class="col-md-12 graph-container">
                             <div class="col-md-12">
-                                <div id="regions_div" style="width:1000px;"></div>
+                                <div id="regions_div"></div>
                             </div>
                             <div class="col-md-6">
+                                <canvas id="polar-chart"></canvas>
                             </div>
                             <div class="col-md-6">
+                                <canvas id="employee-bar-chart"></canvas>
                             </div>
                         </div>
                     </div>
