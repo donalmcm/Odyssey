@@ -83,7 +83,7 @@ function loadTopicUsagePieChart(noOfUsedTopics, noOfAllTopics) {
         options: {
             title: {
                 display: true,
-                text: 'Predicted world population (millions) in 2050'
+                text: 'Used Vs Unused Topics'
             }
         }
     });
@@ -248,20 +248,93 @@ function loadMeetingsGraph(dates, meetingCount) {
     });
 }
 
-//-----------------------------------------------GEO GRAPH -------------------------------------------------------------
+//-----------------------------------------------GEO AND POLAR GRAPH ---------------------------------------------------
 function getGeoGraphInfo() {
     const employeeURL = 'http://localhost:8080/api/employees';
     var allEmployeeLocations = [];
+    var allEmployeeTitles = [];
+    var mentors=0,mentees=0,managers=0,admins=0;
     // Populate list of topics
     $.getJSON(employeeURL, function (data) {
         $.each(data, function (key, entry) {
             allEmployeeLocations.push(entry.location);
+            allEmployeeLocations.push(entry.title);
+            if(entry.mentor === true) { mentors ++;}
+            if(entry.mentee === true) { mentees ++;}
+            if(entry.manager === true) { managers ++;}
+            if(entry.admin === true) { admins ++;}
         });
         getCountriesAndCount(allEmployeeLocations);
+        getEmployeeTitlesAndCount(allEmployeeTitles);
+        graphEmployeeRoles(mentors,mentees,managers,admins);
     });
 
 }
 
+function graphEmployeeRoles(mentors,mentees,managers,admins) {
+    new Chart(document.getElementById("employee-bar-chart"), {
+        type: 'bar',
+        data: {
+            labels: ["Mentors", "Mentees", "Managers", "Admins"],
+            datasets: [
+                {
+                    label: "Number of employees in this role",
+                    backgroundColor: ["#3e95cd","#3cba9f","#8e5ea2","#c45850"],
+                    data: [mentors,mentees,managers,admins]
+                }
+            ]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Employee Role Count'
+            }
+        }
+    });
+}
+// POLAR GRAPH---------------------------
+function getEmployeeTitlesAndCount(list) {
+    var prev;
+    var labels = [], titleCount = [];
+
+    list.sort();
+    for (var i = 0; i < list.length; i++) {
+        if (list[i] !== prev) {
+            labels.push(list[i]);
+            titleCount.push(1);
+        } else {
+            titleCount[titleCount.length - 1]++;
+        }
+        prev = list[i];
+    }
+
+    loadPolarGraph(labels, titleCount);
+}
+
+function loadPolarGraph(titles,titlesCount) {
+    new Chart(document.getElementById("polar-chart"), {
+        type: 'polarArea',
+        data: {
+            labels: titles,
+            datasets: [
+                {
+                    label: "number of employees for this title",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: titlesCount
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Distribution of Job Titles'
+            }
+        }
+    });
+}
+
+// GEO GRAPH ------------------------
 function getCountriesAndCount(list) {
     var prev;
     var labels = [], countryCount = [];
