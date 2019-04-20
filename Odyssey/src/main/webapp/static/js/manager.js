@@ -54,7 +54,42 @@ function getManagersTeam(managerId, isManager) {
 
 
 }
-// --------------------------------- RADAR GRAPH ----------------------------------------------
+
+// --------------------------------- TOPIC PIE CHART -------------------------------------------------------------------
+function getTopicUsageInfo(usedTopics) {
+    const topicURL = 'http://localhost:8080/api/topics';
+    var allTopics = [];
+    // Populate list of topics
+    $.getJSON(topicURL, function (data) {
+        $.each(data, function (key, entry) {
+            allTopics.push(entry.name);
+        });
+        loadTopicUsagePieChart(usedTopics.length, allTopics.length);
+    });
+}
+
+function loadTopicUsagePieChart(noOfUsedTopics, noOfAllTopics) {
+    var noOfNotUsedTopics = noOfAllTopics - noOfUsedTopics;
+    new Chart(document.getElementById("pie-chart"), {
+        type: 'pie',
+        data: {
+            labels: ["Number of Used Topics", "Number of Unused Topics"],
+            datasets: [{
+                label: "Population (millions)",
+                backgroundColor: ["#3e95cd", "#c45850"],
+                data: [noOfUsedTopics, noOfNotUsedTopics]
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Predicted world population (millions) in 2050'
+            }
+        }
+    });
+}
+
+// --------------------------------- RADAR GRAPH -----------------------------------------------------------------------
 function getRadarGraphInfo() {
     const topicCountByOdysseysURL = 'http://localhost:8080/api/odysseys';
     var allOdysseyTopics = [];
@@ -83,10 +118,11 @@ function getLabelsAndCount(list) {
         prev = list[i];
     }
 
-    loadRadarGraph(labels,topicCount);
+    loadRadarGraph(labels, topicCount);
+    getTopicUsageInfo(labels);
 }
 
-function loadRadarGraph(listOfLabels,labelCount) {
+function loadRadarGraph(listOfLabels, labelCount) {
     new Chart(document.getElementById("radar-chart"), {
         type: 'radar',
         data: {
@@ -94,12 +130,12 @@ function loadRadarGraph(listOfLabels,labelCount) {
             labels: listOfLabels,
             datasets: [
                 {
-                    label: "Managers Employees",
+                    label: "Topics By Usage",
                     fill: true,
-                    backgroundColor: "rgba(179,181,198,0.2)",
-                    borderColor: "rgba(179,181,198,1)",
+                    backgroundColor: "#3cba9f",
+                    borderColor: "#3cba9f",
                     pointBorderColor: "#3e95cd",
-                    pointBackgroundColor: "rgba(179,181,198,1)",
+                    pointBackgroundColor: "#3e95cd",
                     data: labelCount
                 }
             ]
@@ -112,7 +148,8 @@ function loadRadarGraph(listOfLabels,labelCount) {
         }
     });
 }
-// --------------------------------------- MEETINGS GRAPHS -------------------------------------
+
+// --------------------------------------- MEETINGS GRAPHS -------------------------------------------------------------
 function getMeetingsGraphInfo() {
     const meetingCountURL = 'http://localhost:8080/api/odysseyMeetings';
     var allOdysseyMeetings = [];
@@ -144,7 +181,7 @@ function getMeetingsAndCount(list) {
         prev = list[i];
     }
 
-    loadMeetingsGraph(dates,dateCount);
+    loadMeetingsGraph(dates, dateCount);
 }
 
 function getMeetingDaysAndCount(list) {
@@ -163,10 +200,10 @@ function getMeetingDaysAndCount(list) {
         prev = list[i];
     }
 
-    loadMeetingDayGraph(day,dayCount);
+    loadMeetingDayGraph(day, dayCount);
 }
 
-function loadMeetingDayGraph(days,dayCount) {
+function loadMeetingDayGraph(days, dayCount) {
     new Chart(document.getElementById("bar-chart"), {
         type: 'bar',
         data: {
@@ -174,13 +211,13 @@ function loadMeetingDayGraph(days,dayCount) {
             datasets: [
                 {
                     label: "Number of meetings on this day",
-                    backgroundColor: ["#3e95cd","#3cba9f","#3e95cd","#3cba9f","#3e95cd"],
+                    backgroundColor: ["#3e95cd", "#3cba9f", "#3e95cd", "#3cba9f", "#3e95cd"],
                     data: dayCount
                 }
             ]
         },
         options: {
-            legend: { display: false },
+            legend: {display: false},
             title: {
                 display: true,
                 text: 'Number of Meetings By Day'
@@ -189,7 +226,7 @@ function loadMeetingDayGraph(days,dayCount) {
     });
 }
 
-function loadMeetingsGraph(dates,meetingCount) {
+function loadMeetingsGraph(dates, meetingCount) {
     new Chart(document.getElementById("line-chart"), {
         type: 'line',
         data: {
@@ -211,7 +248,7 @@ function loadMeetingsGraph(dates,meetingCount) {
     });
 }
 
-//------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------GEO GRAPH -------------------------------------------------------------
 function getGeoGraphInfo() {
     const employeeURL = 'http://localhost:8080/api/employees';
     var allEmployeeLocations = [];
@@ -240,13 +277,13 @@ function getCountriesAndCount(list) {
         prev = list[i];
     }
 
-    loadGeoGraph(labels,countryCount);
+    loadGeoGraph(labels, countryCount);
 }
 
 
 function loadGeoGraph(countries, countryCount) {
     google.charts.load('current', {
-        'packages':['geochart'],
+        'packages': ['geochart'],
         // Note: you will need to get a mapsApiKey for your project.
         // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
         'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'

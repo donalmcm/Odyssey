@@ -126,9 +126,10 @@
                         </div>
                         <div class="col-md-12 graph-container">
                             <div class="col-md-6">
-                                <canvas id="radar-chart" width="500" height="400"></canvas>
+                                <canvas id="radar-chart"></canvas>
                             </div>
                             <div class="col-md-6">
+                                <canvas id="pie-chart"></canvas>
                             </div>
                         </div>
                         <div class="col-md-12 graph-container">
