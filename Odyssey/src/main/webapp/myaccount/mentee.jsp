@@ -70,6 +70,7 @@
                         Mentee
                     </h2>
                     <form>
+                        <div id="no-mentors-error" class="error-message"></div>
                         <div class="form-group">
                             <label for="topic-filter">Select a topic</label>
                             <select onchange="getMentorsByTopic(this.value,<%=e.getId()%>)" class="form-control"
@@ -242,7 +243,7 @@
                             <div class="modal-content">
                                 <div class="modal-header new-odyssey-form-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h1><i class="far fa-user-circle fa-3x"></i> Create Odyssey</h1>
+                                    <h1><i class="far fa-user-circle fa-3x"></i> Confirm Odyssey Details</h1>
                                 </div>
                                 <div class="modal-body" style="padding:40px 50px;">
                                     <form role="form" action="../api/odysseys/create/<%=e.getId()%>" method="post">

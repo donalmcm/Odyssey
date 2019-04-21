@@ -45,24 +45,29 @@ let menteeDropdown = $('#topic-filter');
 menteeDropdown.empty();
 menteeDropdown.append('<option selected="true" disabled>Choose Topic</option>');
 menteeDropdown.prop('selectedIndex', 0);
-const topicMenteeUrl = 'http://localhost:8080/api/topics';
 
 // remove error message on click
 $(menteeDropdown).change(function () {
     document.getElementById("select-a-topic-error-space").innerHTML = "";
 });
 
-// Populate dropdown with list of topics
-$.getJSON(topicMenteeUrl, function (data) {
-    $.each(data, function (key, entry) {
-        //create input, add value, add name, add event listener and then append
-        var dropDownElement = document.createElement('option');
-        dropDownElement.value = entry.name;
-        dropDownElement.text = entry.name;
+function populateTopicDropdown(userId) {
+    const topicURL = 'http://localhost:8080/api/employees/mentors/awaiting/excludingUser/' + userId;
+    $.getJSON(topicURL, function (data) {
+        if (data.length === 0) {
+            document.getElementById("no-mentors-error").innerHTML = "Sorry there are no available mentors at this time";
+        } else {
+            $.each(data, function (key, entry) {
+                //create input, add value, add name, add event listener and then append
+                var dropDownElement = document.createElement('option');
+                dropDownElement.value = entry.topic.name;
+                dropDownElement.text = entry.topic.name;
 
-        menteeDropdown.append(dropDownElement);
-    })
-});
+                menteeDropdown.append(dropDownElement);
+            })
+        }
+    });
+}
 
 
 let durationDropdown = $('#duration-dropdown');
@@ -322,6 +327,7 @@ $(document).ready(function () {
 
 
 function getOdysseysByMentee(userId) {
+    populateTopicDropdown(userId);
     const menteeOdysseysURL = 'http://localhost:8080/api/odysseys/getOdysseysByMentee/' + userId;
     $.getJSON(menteeOdysseysURL, function (data) {
         if (!data.length) {

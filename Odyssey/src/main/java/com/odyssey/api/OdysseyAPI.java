@@ -178,210 +178,210 @@ public class OdysseyAPI {
             case "monday10":
                 for (Employee e : employees) {
                     if (e.getAvailability().isMonday10()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "monday11":
                 for (Employee e : employees) {
                     if (e.getAvailability().isMonday11()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "monday12":
                 for (Employee e : employees) {
                     if (e.getAvailability().isMonday12()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "monday14":
                 for (Employee e : employees) {
                     if (e.getAvailability().isMonday14()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "monday15":
                 for (Employee e : employees) {
                     if (e.getAvailability().isMonday15()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "monday16":
                 for (Employee e : employees) {
                     if (e.getAvailability().isMonday16()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "tuesday10":
                 for (Employee e : employees) {
                     if (e.getAvailability().isTuesday10()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "tuesday11":
                 for (Employee e : employees) {
                     if (e.getAvailability().isTuesday11()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "tuesday12":
                 for (Employee e : employees) {
                     if (e.getAvailability().isTuesday12()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "tuesday14":
                 for (Employee e : employees) {
                     if (e.getAvailability().isTuesday14()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "tuesday15":
                 for (Employee e : employees) {
                     if (e.getAvailability().isTuesday15()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "tuesday16":
                 for (Employee e : employees) {
                     if (e.getAvailability().isTuesday16()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "wednesday10":
                 for (Employee e : employees) {
                     if (e.getAvailability().isWednesday10()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "wednesday11":
                 for (Employee e : employees) {
                     if (e.getAvailability().isWednesday11()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "wednesday12":
                 for (Employee e : employees) {
                     if (e.getAvailability().isWednesday12()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "wednesday14":
                 for (Employee e : employees) {
                     if (e.getAvailability().isWednesday14()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "wednesday15":
                 for (Employee e : employees) {
                     if (e.getAvailability().isWednesday15()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "wednesday16":
                 for (Employee e : employees) {
                     if (e.getAvailability().isWednesday16()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "thursday10":
                 for (Employee e : employees) {
                     if (e.getAvailability().isThursday10()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "thursday11":
                 for (Employee e : employees) {
                     if (e.getAvailability().isThursday11()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "thursday12":
                 for (Employee e : employees) {
                     if (e.getAvailability().isThursday12()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "thursday14":
                 for (Employee e : employees) {
                     if (e.getAvailability().isThursday14()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "thursday15":
                 for (Employee e : employees) {
                     if (e.getAvailability().isThursday15()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "thursday16":
                 for (Employee e : employees) {
                     if (e.getAvailability().isThursday16()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "friday10":
                 for (Employee e : employees) {
                     if (e.getAvailability().isFriday10()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "friday11":
                 for (Employee e : employees) {
                     if (e.getAvailability().isFriday11()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "friday12":
                 for (Employee e : employees) {
                     if (e.getAvailability().isFriday12()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "friday14":
                 for (Employee e : employees) {
                     if (e.getAvailability().isFriday14()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "friday15":
                 for (Employee e : employees) {
                     if (e.getAvailability().isFriday15()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;
             case "friday16":
                 for (Employee e : employees) {
                     if (e.getAvailability().isFriday16()) {
-                        mentor = e;
+                        return e;
                     }
                 }
                 break;

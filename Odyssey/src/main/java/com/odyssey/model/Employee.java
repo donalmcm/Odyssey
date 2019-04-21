@@ -14,11 +14,12 @@ import java.util.List;
         @NamedQuery(name = "Employee.findById", query = "select e from Employee e where e.id=:id"),
         @NamedQuery(name="Employee.findMentors", query = "select e from Employee e where e.isMentor=true"),
         @NamedQuery(name="Employee.findMentees", query = "select e from Employee e where e.isMentee=true"),
-        @NamedQuery(name="Employee.findMentorsByTopic", query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic and e.id!=:id"),
-        @NamedQuery(name="Employee.findMentorsByTopicAndDuration", query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic and e.mentorDuration=:mentorDuration and e.id!=:id"),
+        @NamedQuery(name="Employee.findMentorsByTopic", query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic and e.awaitingMentee=true and e.id!=:id"),
+        @NamedQuery(name="Employee.findMentorsByAwaiting", query = "select e from Employee e where e.isMentor=true and e.awaitingMentee=true and e.id!=:id"),
+        @NamedQuery(name="Employee.findMentorsByTopicAndDuration", query = "select e from Employee e where e.isMentor=true and e.awaitingMentee=true and e.topic.name=:topic and e.mentorDuration=:mentorDuration and e.id!=:id"),
         @NamedQuery(name="Employee.findAvailability", query ="select e.availability from Employee e where e.id=:id" ),
         @NamedQuery(name="Employee.findByEmail",query = "select e from Employee e where e.email=:email"),
-        @NamedQuery(name="Employee.findMentorForMentee",query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic and mentorDuration=:mentorDuration and id!=:menteeId")})
+        @NamedQuery(name="Employee.findMentorForMentee",query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic and e.awaitingMentee=true and e.mentorDuration=:mentorDuration and e.id!=:menteeId")})
 
 @XmlRootElement
 @Entity
