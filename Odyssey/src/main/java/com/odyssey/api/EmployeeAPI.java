@@ -114,6 +114,24 @@ public class EmployeeAPI {
         return Response.ok(menteesByTopicList, MediaType.APPLICATION_JSON).build();
     }
 
+    // get all mentors awaiting excluding user
+    @GET
+    @Path("mentors/awaiting/excludingUser/{userId}")
+    @Produces("application/json")
+    public Response getMentorsByTopic(@PathParam("userId") int id) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Query<Employee> query = session.createNamedQuery("Employee.findMentorsByAwaiting", Employee.class);
+        query.setParameter("id", id);
+
+        List<Employee> menteesAwaiting = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return Response.ok(menteesAwaiting, MediaType.APPLICATION_JSON).build();
+    }
+
     // get all mentors by topic and duration
     @GET
     @Path("mentors/{topic}/duration/{duration}/excludingUser/{userId}")
