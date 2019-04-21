@@ -62,6 +62,9 @@ public class Employee {
     @Column
     private String location;
 
+    @Column
+    private boolean awaitingMentee = false;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
     private List<Odyssey> mentorOdyssey;
 
@@ -111,6 +114,7 @@ public class Employee {
         this.availability = availability;
         this.mentorDuration = mentorDuration;
         isMentor = true;
+        awaitingMentee = true;
     }
 
     public void becomeManager(List<Employee> employees) {
@@ -142,6 +146,14 @@ public class Employee {
 
     public String getLocation() {
         return location;
+    }
+
+    public boolean isAwaitingMentee() {
+        return awaitingMentee;
+    }
+
+    public void setAwaitingMentee(boolean awaitingMentee) {
+        this.awaitingMentee = awaitingMentee;
     }
 
     public List<Employee> getTeamMembers() {

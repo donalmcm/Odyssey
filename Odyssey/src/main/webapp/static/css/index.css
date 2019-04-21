@@ -348,3 +348,18 @@ html,body {
     color: red;
     margin: 16px;
 }
+
+.awaiting-mentee-card {
+    border : solid 2px #5cb85c;
+    background-color: #eeeeee;
+    display: flex;
+    height: fit-content;
+    padding: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+}
+
+.awaiting-mentee-topic {
+    width: 100%;
+}

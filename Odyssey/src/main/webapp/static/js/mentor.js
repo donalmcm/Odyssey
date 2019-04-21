@@ -37,7 +37,62 @@ function validateMentorModalInputs() {
     }
 }
 
-function getOdysseysByMentor(userId) {
+function getMentorAwaitingMentee(userId, userAwaitingMentee) {
+    if (!userAwaitingMentee) {
+        document.getElementById("mentor-awaiting-mentee-title").innerHTML = ""
+    } else {
+        const employeeURL = 'http://localhost:8080/api/employees/' + userId;
+        var mentorTopic, mentorDuration;
+        var mentorAvailability = [];
+        $.getJSON(employeeURL, function (data) {
+            document.getElementById("topic-value").innerHTML = data.topic.name;
+            document.getElementById("duration-value").innerHTML = data.mentorDuration;
+            mentorAvailability = checkAvailability(data);
+            for(var i =0; i<mentorAvailability.length; i++) {
+                var availableTime = document.createElement("h4");
+                availableTime.innerHTML = mentorAvailability[i];
+                availabilityDiv.appendChild(availableTime);
+            }
+        });
+
+        var awaitingMenteeCard = document.createElement("div"); // outer div
+        awaitingMenteeCard.className = "awaiting-mentee-card";
+
+        var topicDiv = document.createElement("div");
+        var topic = document.createElement("h3");
+        var topicValue = document.createElement("h4");
+        topicValue.id = "topic-value";
+        topicDiv.className = "awaiting-mentee-topic";
+        topic.innerHTML = "Topic: ";
+        topicDiv.appendChild(topic);
+        topicDiv.appendChild(topicValue);
+        awaitingMenteeCard.appendChild(topicDiv);
+
+        var durationDiv = document.createElement("div");
+        var duration = document.createElement("h3");
+        var durationValue = document.createElement("h4");
+        durationValue.id = "duration-value";
+        durationDiv.className = "col-md-12 awaiting-mentee-duration";
+        duration.innerHTML = "Duration in Weeks: ";
+        durationDiv.appendChild(duration);
+        durationDiv.appendChild(durationValue);
+        awaitingMenteeCard.appendChild(durationDiv);
+
+        var availabilityDiv = document.createElement("div");
+        var availability = document.createElement("h3");
+        availabilityDiv.className = "col-md-12 awaiting-mentee-duration";
+        availability.innerHTML = "Availability: ";
+        availabilityDiv.appendChild(availability);
+        awaitingMenteeCard.appendChild(availabilityDiv);
+
+        document.getElementById("mentor-awaiting-mentee-list").appendChild(awaitingMenteeCard);
+    }
+}
+
+function getOdysseysByMentor(userId, isAwaitingMentee) {
+
+
+    getMentorAwaitingMentee(userId, isAwaitingMentee);
     const mentorOdysseysUrl = 'http://localhost:8080/api/odysseys/getOdysseysByMentor/' + userId;
     $.getJSON(mentorOdysseysUrl, function (data) {
         if (!data.length) {
@@ -153,4 +208,105 @@ function getOdysseysByMentor(userId) {
             })
         }
     });
+}
+
+function checkAvailability(data) {
+    listOfTimes = [];
+
+    if (data.availability.monday10 === true) {
+        listOfTimes.push("Monday 10 AM");
+    }
+    if (data.availability.monday11 === true) {
+        listOfTimes.push("Monday 11 AM");
+    }
+    if (data.availability.monday12 === true) {
+        listOfTimes.push("Monday 12 AM");
+    }
+    if (data.availability.monday14 === true) {
+        listOfTimes.push("Monday 2 PM");
+    }
+    if (data.availability.monday15 === true) {
+        listOfTimes.push("Monday 3 PM");
+    }
+    if (data.availability.monday16 === true) {
+        listOfTimes.push("Monday 4 PM");
+    }
+// check what times on tuesday are available
+    if (data.availability.tuesday10 === true) {
+        listOfTimes.push("Tuesday 10 AM");
+    }
+    if (data.availability.tuesday11 === true) {
+        listOfTimes.push("Tuesday 11 AM");
+    }
+    if (data.availability.tuesday12 === true) {
+        listOfTimes.push("Tuesday 12 AM");
+    }
+    if (data.availability.tuesday14 === true) {
+        listOfTimes.push("Tuesday 2 PM");
+    }
+    if (data.availability.tuesday15 === true) {
+        listOfTimes.push("Tuesday 3 PM");
+    }
+    if (data.availability.tuesday16 === true) {
+        listOfTimes.push("Tuesday 4 PM");
+    }
+// check what times on wednesday are available
+    if (data.availability.wednesday10 === true) {
+        listOfTimes.push("Wednesday 10 AM");
+    }
+    if (data.availability.wednesday11 === true) {
+        listOfTimes.push("Wednesday 11 AM");
+    }
+    if (data.availability.wednesday12 === true) {
+        listOfTimes.push("Wednesday 12 AM");
+    }
+    if (data.availability.wednesday14 === true) {
+        listOfTimes.push("Wednesday 2 PM");
+    }
+    if (data.availability.wednesday15 === true) {
+        listOfTimes.push("Wednesday 3 PM");
+    }
+    if (data.availability.wednesday16 === true) {
+        listOfTimes.push("Wednesday 4 PM");
+    }
+// check what times on thursday are available
+    if (data.availability.thursday10 === true) {
+        listOfTimes.push("Thursday 10 AM");
+    }
+    if (data.availability.thursday11 === true) {
+        listOfTimes.push("Thursday 11 AM");
+    }
+    if (data.availability.thursday12 === true) {
+        listOfTimes.push("Thursday 12 AM");
+    }
+    if (data.availability.thursday14 === true) {
+        listOfTimes.push("Thursday 2 PM");
+    }
+    if (data.availability.thursday15 === true) {
+        listOfTimes.push("Thursday 3 PM");
+    }
+    if (data.availability.thursday16 === true) {
+        listOfTimes.push("Thursday 4 PM");
+    }
+// check what times on friday are available
+    if (data.availability.friday10 === true) {
+        listOfTimes.push("Friday 10 AM");
+    }
+    if (data.availability.friday11 === true) {
+        listOfTimes.push("Friday 11 AM");
+    }
+    if (data.availability.friday12 === true) {
+        listOfTimes.push("Friday 12 AM");
+    }
+    if (data.availability.friday14 === true) {
+        listOfTimes.push("Friday 2 PM");
+    }
+    if (data.availability.friday15 === true) {
+        listOfTimes.push("Friday 3 PM");
+    }
+    if (data.availability.friday16 === true) {
+        listOfTimes.push("Friday 4 PM");
+    }
+
+    return listOfTimes;
 }
