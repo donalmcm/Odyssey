@@ -101,6 +101,7 @@ public class OdysseyAPI {
             Query<Employee> mentorQuery = session.createNamedQuery("Employee.findMentorForMentee",Employee.class);
             mentorQuery.setParameter("topic",topicId);
             mentorQuery.setParameter("mentorDuration",mentorDuration);
+            mentorQuery.setParameter("menteeId",userId);
             List<Employee> employees = mentorQuery.getResultList();
 
             Employee mentor = findEmployeeByAvailability(dayAndTime,employees);

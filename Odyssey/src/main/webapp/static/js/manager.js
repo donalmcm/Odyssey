@@ -34,9 +34,10 @@ function getManagersTeam(managerId, isManager) {
                 isCurrentMentee.innerHTML = entry.mentee;
                 tr.append(isCurrentMentee);
 
+                var count = 5;
                 // count of odysseys
                 var odysseyCount = document.createElement('td');
-                odysseyCount.innerHTML = "SQL COUNT";
+                odysseyCount.innerHTML = count;
                 tr.append(odysseyCount);
 
                 mentorList.append(tr);
@@ -66,6 +67,11 @@ function getTopicUsageInfo(usedTopics) {
         });
         loadTopicUsagePieChart(usedTopics.length, allTopics.length);
     });
+}
+
+function getEmployeeOdysseyCount(employeeId) {
+    const odysseyURL = 'http://localhost:8080/api/odysseys/getEmployeeOdysseys/'+employeeId;
+    // count number of odysseys and return value to be displayed in row
 }
 
 function loadTopicUsagePieChart(noOfUsedTopics, noOfAllTopics) {
