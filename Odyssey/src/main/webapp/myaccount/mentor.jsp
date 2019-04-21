@@ -24,7 +24,7 @@
     Employee e = new Employee();
     e = Employee.getEmployeeByEmail(email);
 %>
-<body onload="getOdysseysByMentor(<%=e.getId()%>);">
+<body onload="getOdysseysByMentor(<%=e.getId()%>,<%=e.isAwaitingMentee()%>);">
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
@@ -250,6 +250,10 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-6" id="awaiting-mentee-cards">
+                    <h2 id="mentor-awaiting-mentee-title">You are awaiting a mentee for</h2>
+                    <div id="mentor-awaiting-mentee-list"></div>
+                </div>
                 <div class="col-md-12" id="mentor-odyssey-cards">
                     <h2 id="mentor-page-odyssey-title">Odysseys where you are a mentor</h2>
                     <div id="odyssey-list-by-mentor"></div>

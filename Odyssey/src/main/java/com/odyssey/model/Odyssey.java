@@ -56,6 +56,7 @@ public class Odyssey {
         this.topic = mentor.getTopic();
         isActive = true;
         this.mentee.setMentee(true);
+        this.mentor.setAwaitingMentee(false);
     }
 
     // To be called after the last meeting of an odyssey
