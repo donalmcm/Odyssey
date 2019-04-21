@@ -1,9 +1,9 @@
 
 package com.odyssey.api;
 
+import com.HibernateUtil;
 import com.odyssey.model.Availability;
 import com.odyssey.model.Employee;
-import com.HibernateUtil;
 import com.odyssey.model.Topic;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -50,13 +50,13 @@ public class EmployeeAPI {
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findById",Employee.class);
-        query.setParameter("id",id);
+        Query<Employee> query = session.createNamedQuery("Employee.findById", Employee.class);
+        query.setParameter("id", id);
         Employee employee = query.getSingleResult();
 
         session.getTransaction().commit();
         session.close();
-        return Response.ok(employee,MediaType.APPLICATION_JSON_TYPE).build();
+        return Response.ok(employee, MediaType.APPLICATION_JSON_TYPE).build();
 
         // catch - not employee exists with that id
     }
@@ -70,7 +70,7 @@ public class EmployeeAPI {
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findMentors",Employee.class);
+        Query<Employee> query = session.createNamedQuery("Employee.findMentors", Employee.class);
 
         List<Employee> mentorList = query.getResultList();
         session.getTransaction().commit();
@@ -87,7 +87,7 @@ public class EmployeeAPI {
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findMentees",Employee.class);
+        Query<Employee> query = session.createNamedQuery("Employee.findMentees", Employee.class);
 
         List<Employee> menteeList = query.getResultList();
         session.getTransaction().commit();
@@ -97,15 +97,16 @@ public class EmployeeAPI {
 
     // get all mentors by topic
     @GET
-    @Path("mentors/{topic}")
+    @Path("mentors/{topic}/excludingUser/{userId}")
     @Produces("application/json")
-    public Response getMentorsByTopic(@PathParam("topic") String topic) {
+    public Response getMentorsByTopic(@PathParam("topic") String topic, @PathParam("userId") int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findMentorsByTopic",Employee.class);
-        query.setParameter("topic",topic);
+        Query<Employee> query = session.createNamedQuery("Employee.findMentorsByTopic", Employee.class);
+        query.setParameter("id", id);
+        query.setParameter("topic", topic);
 
         List<Employee> menteesByTopicList = query.getResultList();
         session.getTransaction().commit();
@@ -115,15 +116,17 @@ public class EmployeeAPI {
 
     // get all mentors by topic and duration
     @GET
-    @Path("mentors/{topic}/duration/{duration}")
+    @Path("mentors/{topic}/duration/{duration}/excludingUser/{userId}")
     @Produces("application/json")
-    public Response getMentorsByTopic(@PathParam("topic") String topic, @PathParam("duration") int duration) {
+    public Response getMentorsByTopic(@PathParam("topic") String topic, @PathParam("duration") int duration, @PathParam("userId") int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findMentorsByTopic",Employee.class);
-        query.setParameter("topic",topic);
+        Query<Employee> query = session.createNamedQuery("Employee.findMentorsByTopicAndDuration", Employee.class);
+        query.setParameter("id", id);
+        query.setParameter("topic", topic);
+        query.setParameter("mentorDuration", duration);
 
         List<Employee> menteesByTopicList = query.getResultList();
         session.getTransaction().commit();
@@ -143,7 +146,7 @@ public class EmployeeAPI {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         URI location;
-        try{
+        try {
             session.getTransaction().begin();
 
             Employee newEmployee = new Employee();
@@ -170,46 +173,46 @@ public class EmployeeAPI {
     @Path("becomeMentor/{userId}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
-    public Response becomeMentor(@PathParam("userId")int userId, @FormParam("topic") String topic,
+    public Response becomeMentor(@PathParam("userId") int userId, @FormParam("topic") String topic,
                                  @FormParam("mentorDuration") int mentorDuration,
-                                 @FormParam("monday10") boolean monday10,@FormParam("monday11") boolean monday11,
-                                 @FormParam("monday12") boolean monday12,@FormParam("monday14") boolean monday14,
-                                 @FormParam("monday15") boolean monday15,@FormParam("monday16") boolean monday16,
-                                 @FormParam("tuesday10") boolean tuesday10,@FormParam("tuesday11") boolean tuesday11,
-                                 @FormParam("tuesday12") boolean tuesday12,@FormParam("tuesday14") boolean tuesday14,
-                                 @FormParam("tuesday15") boolean tuesday15,@FormParam("tuesday16") boolean tuesday16,
-                                 @FormParam("wednesday10") boolean wednesday10,@FormParam("wednesday11") boolean wednesday11,
-                                 @FormParam("wednesday12") boolean wednesday12,@FormParam("wednesday14") boolean wednesday14,
-                                 @FormParam("wednesday15") boolean wednesday15,@FormParam("wednesday16") boolean wednesday16,
+                                 @FormParam("monday10") boolean monday10, @FormParam("monday11") boolean monday11,
+                                 @FormParam("monday12") boolean monday12, @FormParam("monday14") boolean monday14,
+                                 @FormParam("monday15") boolean monday15, @FormParam("monday16") boolean monday16,
+                                 @FormParam("tuesday10") boolean tuesday10, @FormParam("tuesday11") boolean tuesday11,
+                                 @FormParam("tuesday12") boolean tuesday12, @FormParam("tuesday14") boolean tuesday14,
+                                 @FormParam("tuesday15") boolean tuesday15, @FormParam("tuesday16") boolean tuesday16,
+                                 @FormParam("wednesday10") boolean wednesday10, @FormParam("wednesday11") boolean wednesday11,
+                                 @FormParam("wednesday12") boolean wednesday12, @FormParam("wednesday14") boolean wednesday14,
+                                 @FormParam("wednesday15") boolean wednesday15, @FormParam("wednesday16") boolean wednesday16,
                                  @FormParam("thursday10") boolean thursday10, @FormParam("thursday11") boolean thursday11,
-                                 @FormParam("thursday12") boolean thursday12,@FormParam("thursday14") boolean thursday14,
-                                 @FormParam("thursday15") boolean thursday15,@FormParam("thursday16") boolean thursday16,
-                                 @FormParam("friday10") boolean friday10,@FormParam("friday11") boolean friday11,
-                                 @FormParam("friday12") boolean friday12,@FormParam("friday14") boolean friday14,
-                                 @FormParam("friday15") boolean friday15,@FormParam("friday16") boolean friday16) {
+                                 @FormParam("thursday12") boolean thursday12, @FormParam("thursday14") boolean thursday14,
+                                 @FormParam("thursday15") boolean thursday15, @FormParam("thursday16") boolean thursday16,
+                                 @FormParam("friday10") boolean friday10, @FormParam("friday11") boolean friday11,
+                                 @FormParam("friday12") boolean friday12, @FormParam("friday14") boolean friday14,
+                                 @FormParam("friday15") boolean friday15, @FormParam("friday16") boolean friday16) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         URI location;
-        try{
+        try {
             session.getTransaction().begin();
 
-            Query<Employee> query = session.createNamedQuery("Employee.findById",Employee.class);
-            query.setParameter("id",userId);
+            Query<Employee> query = session.createNamedQuery("Employee.findById", Employee.class);
+            query.setParameter("id", userId);
             Employee employee = query.getSingleResult();
 
-            Query<Topic> topicQuery = session.createNamedQuery("Topic.findById",Topic.class);
-            topicQuery.setParameter("id",topic);
+            Query<Topic> topicQuery = session.createNamedQuery("Topic.findById", Topic.class);
+            topicQuery.setParameter("id", topic);
             Topic topicIn = topicQuery.getSingleResult();
 
-            Availability employeeAvailability = new Availability(monday10,monday11,monday12,monday14,monday15,monday16,
-                                                                 tuesday10,tuesday11,tuesday12,tuesday14,tuesday15,tuesday16,
-                                                                 wednesday10,wednesday11,wednesday12,wednesday14,wednesday15,wednesday16,
-                                                                 thursday10,thursday11,thursday12,thursday14,thursday15,thursday16,
-                                                                 friday10,friday11,friday12,friday14,friday15,friday16);
+            Availability employeeAvailability = new Availability(monday10, monday11, monday12, monday14, monday15, monday16,
+                    tuesday10, tuesday11, tuesday12, tuesday14, tuesday15, tuesday16,
+                    wednesday10, wednesday11, wednesday12, wednesday14, wednesday15, wednesday16,
+                    thursday10, thursday11, thursday12, thursday14, thursday15, thursday16,
+                    friday10, friday11, friday12, friday14, friday15, friday16);
             session.persist(employeeAvailability);
 
-            employee.becomeMentor(topicIn,employeeAvailability,mentorDuration);
+            employee.becomeMentor(topicIn, employeeAvailability, mentorDuration);
 
             session.save(employee);
             session.getTransaction().commit();
@@ -234,8 +237,8 @@ public class EmployeeAPI {
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findById",Employee.class);
-        query.setParameter("id",userId);
+        Query<Employee> query = session.createNamedQuery("Employee.findById", Employee.class);
+        query.setParameter("id", userId);
         Employee manager = query.getSingleResult();
 
         List<Employee> teamMembers = manager.getTeamMembers();

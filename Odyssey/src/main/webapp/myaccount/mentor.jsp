@@ -86,8 +86,9 @@
                                 <form role="form" action="../api/employees/becomeMentor/<%=e.getId()%>" method="post">
                                     <div class="form-group">
                                         <label for="topic-dropdown">Select a topic to mentor In</label>
-                                        <select class="form-control" id="topic-dropdown" name="topic" required></select>
+                                        <select class="form-control" id="topic-dropdown" name="topic"></select>
                                     </div>
+                                    <div id="select-a-topic-error-space" class="error-message"></div>
                                     <div class="form-group">
                                         <label for="mentorDuration">Select the number of weeks to mentor</label>
                                         <select name="mentorDuration" class="form-control" id="mentorDuration" required>
@@ -129,118 +130,119 @@
                                         <!-- put in validation for one input -->
                                         <div class="tab-content" id="select-time">
                                             <div class="tab-pane container active" style="padding: 0" id="home">
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="monday10" id="monday10" value="true"
                                                 ><span>10 AM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="monday11" id="monday11" value="true"
                                                 ><span>11 AM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="monday12" id="monday12" value="true"
                                                 ><span>12 AM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="monday14" id="monday14" value="true"
                                                 ><span>2 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="monday15" id="monday15" value="true"
                                                 ><span>3 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="monday16" id="monday16" value="true"
                                                 ><span>4 PM</span></label></div>
                                             </div>
                                             <div class="tab-pane container fade" style="padding: 0" id="tuesday">
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="tuesday10" id="tuesday10" value="true"
                                                 ><span>10 AM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="tuesday11" id="tuesday11" value="true"
                                                 ><span>11 AM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="tuesday12" id="tuesday12" value="true"
                                                 ><span>12 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="tuesday14" id="tuesday14" value="true"
                                                 ><span>2 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="tuesday15" id="tuesday15" value="true"
                                                 ><span>3 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="tuesday16" id="tuesday16" value="true"
                                                 ><span>4 PM</span></label></div>
                                             </div>
                                             <div class="tab-pane container fade" style="padding: 0" id="wednesday">
-                                                <div class="ck-button"><label><input  type="checkbox"
+                                                <div class="ck-button"><label><input  class="checkInput" type="checkbox"
                                                                                       name="wednesday10" id="wednesday10"
                                                                                       value="true"
                                                 ><span>10 AM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="wednesday11" id="wednesday11"
                                                                                      value="true"
                                                 ><span>11 AM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="wednesday12" id="wednesday12"
                                                                                      value="true"
                                                 ><span>12 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="wednesday14" id="wednesday14"
                                                                                      value="true"
                                                 ><span>2 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="wednesday15" id="wednesday15"
                                                                                      value="true"
                                                 ><span>3 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="wednesday16" id="wednesday16"
                                                                                      value="true"
                                                 ><span>4 PM</span></label></div>
                                             </div>
                                             <div class="tab-pane container fade" style="padding: 0" id="thursday">
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="thursday10" id="thursday10" value="true"
                                                 ><span>10 AM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="thursday11" id="thursday11" value="true"
                                                 ><span>11 AM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="thursday12" id="thursday12" value="true"
                                                 ><span>12 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="thursday14" id="thursday14" value="true"
                                                 ><span>2 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="thursday15" id="thursday15" value="true"
                                                 ><span>3 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="thursday16" id="thursday16" value="true"
                                                 ><span>4 PM</span></label></div>
                                             </div>
                                             <div class="tab-pane container fade" style="padding: 0" id="friday">
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="friday10" id="friday10" value="true"
                                                 ><span>10 AM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="friday11" id="friday11" value="true"
                                                 ><span>11 AM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="friday12" id="friday12" value="true"
                                                 ><span>12 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="friday14" id="friday14" value="true"
                                                 ><span>2 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="friday15" id="friday15" value="true"
                                                 ><span>3 PM</span></label></div>
-                                                <div class="ck-button"><label><input type="checkbox"
+                                                <div class="ck-button"><label><input class="checkInput" type="checkbox"
                                                                                      name="friday16" id="friday16" value="true"
                                                 ><span>4 PM</span></label></div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div id="select-a-time-error-space" class="error-message"></div>
                                     <button type="submit" class="btn btn-success btn-block">Become Mentor</button>
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
+                                <button type="submit" onclick="validateMentorModalInputs()" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
                             </div>
                         </div>
 
