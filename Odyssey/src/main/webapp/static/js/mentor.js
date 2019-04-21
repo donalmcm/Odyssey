@@ -14,19 +14,42 @@ $.getJSON(topicMentorUrl, function (data) {
     })
 });
 
-$(document).ready(function(){
-    $("#become-mentor").click(function(){
+$(document).ready(function () {
+    $("#become-mentor").click(function () {
         $("#become-mentor-modal").modal();
+    });
+});
+
+$(function() {
+    $("#become-mentor-modal").validate({
+        rules: {
+            topic: {
+                required: true
+            },
+            action: "required",
+        },
+        messages: {
+            topic: {
+                required: "Please enter some data"
+            },
+            action: "Please provide some data"
+        }
     });
 });
 
 function getOdysseysByMentor(userId) {
     const mentorOdysseysUrl = 'http://localhost:8080/api/odysseys/getOdysseysByMentor/' + userId;
     $.getJSON(mentorOdysseysUrl, function (data) {
+        if (!data.length) {
+            document.getElementById("mentor-page-odyssey-title").innerHTML = "";
+        } else {
         $.each(data, function (key, entry) {
 
             var odysseyCard = document.createElement("div"); // outer div
             odysseyCard.className = "odyssey-card";
+            if(!entry.active){
+                odysseyCard.style.backgroundColor = "darkgrey";
+            }
 
             // Type - either Mentor or Mentee
             var odysseyType = document.createElement("div"); // left inner div
@@ -98,7 +121,7 @@ function getOdysseysByMentor(userId) {
             // Last meeting date
             var lastMeeting = document.createElement("h3");
             lastMeeting.className = "last-meeting";
-            lastMeeting.innerHTML = entry.odysseyMeetings[(entry.odysseyMeetings.length-1)].date;
+            lastMeeting.innerHTML = entry.odysseyMeetings[(entry.odysseyMeetings.length - 1)].date;
             odysseyProgress.appendChild(lastMeeting);
 
             // Labels for time & date and completed meetings
@@ -114,7 +137,7 @@ function getOdysseysByMentor(userId) {
             // Time and Day of meetings
             var meetingsDetails = document.createElement("h2");
             meetingsDetails.className = "meetings-details";
-            meetingsDetails.innerHTML = entry.odysseyMeetings[0].time + " on " +entry.odysseyMeetings[0].day + "'s";
+            meetingsDetails.innerHTML = entry.odysseyMeetings[0].time + " on " + entry.odysseyMeetings[0].day + "'s";
             odysseyProgress.appendChild(meetingsDetails);
 
             // Number of meetings complete vs Overall
@@ -127,6 +150,6 @@ function getOdysseysByMentor(userId) {
 
             // Add card to list
             document.getElementById("odyssey-list-by-mentor").appendChild(odysseyCard);
-        })
+        })}
     });
 }

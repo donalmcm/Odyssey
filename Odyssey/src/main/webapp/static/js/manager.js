@@ -379,11 +379,20 @@ function loadGeoGraph(countries, countryCount) {
             [countries[10], countryCount[10]]
         ]);
 
-        var options = {};
+        var options = {
+            chartArea: {
+                left: 40,
+                width: '100%'
+            },
+            legend: {
+                position: 'top'
+            },
+            width: '100%'
+        };
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
-        chart.draw(data, {});
+        chart.draw(data, options);
     }
 }
 

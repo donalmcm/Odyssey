@@ -17,7 +17,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
-    </title>
 </head>
 <%
     String email = null;
@@ -137,7 +136,7 @@
                         <h3 class="margin16">Employee Graphs</h3>
                         <div class="col-md-12 graph-container">
                             <div class="col-md-12">
-                                <div id="regions_div"></div>
+                                <div id="regions_div" style="width: 100%"></div>
                             </div>
                             <div class="col-md-6 margin-top">
                                 <canvas id="polar-chart"></canvas>

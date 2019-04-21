@@ -5,6 +5,9 @@ function getOdysseys(userId, userName) {
 
             var odysseyCard = document.createElement("div"); // outer div
             odysseyCard.className = "odyssey-card";
+            if(!entry.active){
+                odysseyCard.style.backgroundColor = "darkgrey";
+            }
 
             // Type - either Mentor or Mentee
             var odysseyType = document.createElement("div"); // left inner div
