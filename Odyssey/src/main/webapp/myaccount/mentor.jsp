@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="mentorDuration">Select the number of weeks to mentor</label>
-                                        <select name="mentorDuration" class="form-control" id="mentorDuration" placeholder="Enter last name" required>
+                                        <select name="mentorDuration" class="form-control" id="mentorDuration" required>
                                             <option value=1>1</option>
                                             <option value=2 >2</option>
                                             <option value=3>3</option>

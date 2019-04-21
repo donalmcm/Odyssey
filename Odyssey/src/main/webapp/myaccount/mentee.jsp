@@ -70,16 +70,19 @@
                         Mentee
                     </h2>
                     <form>
+
                         <div class="form-group">
                             <label for="topic-filter">Select a topic</label>
                             <select onchange="getMentorsByTopic(this.value)" class="form-control" id="topic-filter"
                                     name="topicFilter" required></select>
                         </div>
+                        <div id="select-a-topic-error-space" class="error-message"></div>
                         <div class="form-group">
                             <label for="duration-dropdown">Select duration in weeks</label>
                             <select onchange="getAvailabilitiesByTopicAndDuration(this.value)" class="form-control"
                                     id="duration-dropdown" name="duration" required></select>
                         </div>
+                        <div id="select-a-duration-error-space" class="error-message"></div>
                         <div class="col-md-12" id="mentor-list-by-topic"></div>
 
                         <!-- Days of weeks -->
@@ -227,6 +230,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="select-a-time-error-space" class="error-message"></div>
                         <button type="button" onclick="populateModal()" class="btn btn-success btn-block"
                                 id="begin-odyssey">Confirm
                         </button>

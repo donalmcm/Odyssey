@@ -343,3 +343,8 @@ html,body {
 .margin-top {
     margin-top: 16px;
 }
+
+.error-message {
+    color: red;
+    margin: 16px;
+}

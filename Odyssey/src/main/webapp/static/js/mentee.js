@@ -1,8 +1,12 @@
 function populateModal() {
 
-    if (document.getElementById("topic-filter").value === "Choose Topic" || document.getElementById("duration-dropdown").value === "Choose Duration") {
-        alert("Please select a topic and duration");
-
+    if (document.getElementById("topic-filter").value === "Choose Topic" && document.getElementById("duration-dropdown").value === "Choose Duration") {
+        document.getElementById("select-a-topic-error-space").innerHTML = "Please select a topic";
+        document.getElementById("select-a-duration-error-space").innerHTML = "Please select a duration";
+    } else if (document.getElementById("topic-filter").value === "Choose Topic") {
+        document.getElementById("select-a-topic-error-space").innerHTML = "Please select a topic";
+    } else if (document.getElementById("duration-dropdown").value === "Choose Duration") {
+        document.getElementById("select-a-duration-error-space").innerHTML = "Please select a duration";
     } else {
 
         let formValues = document.getElementsByClassName("resetToDisabled");
@@ -14,7 +18,7 @@ function populateModal() {
         }
 
         if (selectedValue === "") {
-            alert("Please select a time slot for your meetings")
+            document.getElementById("select-a-time-error-space").innerHTML = "Please select one time slot";
         } else {
 
             let topic = document.getElementById("topic-filter").value;
@@ -32,11 +36,21 @@ function populateModal() {
     }
 }
 
+// remove error message on click
+$('#select-a-time-error-space').change(function () {
+    document.getElementById("select-a-time-error-space").innerHTML = "";
+});
+
 let menteeDropdown = $('#topic-filter');
 menteeDropdown.empty();
 menteeDropdown.append('<option selected="true" disabled>Choose Topic</option>');
 menteeDropdown.prop('selectedIndex', 0);
 const topicMenteeUrl = 'http://localhost:8080/api/topics';
+
+// remove error message on click
+$(menteeDropdown).change(function () {
+    document.getElementById("select-a-topic-error-space").innerHTML = "";
+});
 
 // Populate dropdown with list of topics
 $.getJSON(topicMenteeUrl, function (data) {
@@ -55,6 +69,11 @@ let durationDropdown = $('#duration-dropdown');
 durationDropdown.empty();
 durationDropdown.append('<option selected="true" disabled>Choose Duration</option>');
 durationDropdown.prop('selectedIndex', 0);
+
+// remove error message on click
+$(durationDropdown).change(function () {
+    document.getElementById("select-a-duration-error-space").innerHTML = "";
+});
 
 function getMentorsByTopic(topic) {
 
@@ -303,14 +322,20 @@ $(document).ready(function () {
     });
 });
 
+
 function getOdysseysByMentee(userId) {
     const menteeOdysseysURL = 'http://localhost:8080/api/odysseys/getOdysseysByMentee/' + userId;
     $.getJSON(menteeOdysseysURL, function (data) {
+        if (!data.length) {
+            document.getElementById("mentee-page-odyssey-title").innerHTML = "";
+        } else {
         $.each(data, function (key, entry) {
 
             var odysseyCard = document.createElement("div"); // outer div
             odysseyCard.className = "odyssey-card";
-
+            if(!entry.active){
+                odysseyCard.style.backgroundColor = "darkgrey";
+            }
             // Type - either Mentor or Mentee
             var odysseyType = document.createElement("div"); // left inner div
             odysseyType.className = "col-md-2 odyssey-type";
@@ -410,7 +435,7 @@ function getOdysseysByMentee(userId) {
 
             // Add card to list
             document.getElementById("odyssey-list-by-mentee").appendChild(odysseyCard);
-        })
+        })}
     });
 }
 
