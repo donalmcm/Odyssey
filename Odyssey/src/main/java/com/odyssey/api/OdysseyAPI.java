@@ -36,6 +36,25 @@ public class OdysseyAPI {
     }
 
     @GET
+    @Path("{id}")
+    @Produces("application/json")
+    public Response getOdysseyById(@PathParam("id")int id) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        session.getTransaction().begin();
+
+        Query<Odyssey> query = session.createNamedQuery("Odyssey.findByOdysseyId",Odyssey.class);
+        query.setParameter("id",id);
+        Odyssey odyssey = query.getSingleResult();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return Response.ok(odyssey, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
     @Path("countTopicsByOdyssey")
     @Produces("application/json")
     public Response getTopicCountByOdysseys() {

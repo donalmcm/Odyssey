@@ -220,8 +220,14 @@ html,body {
     padding-right: 16px;
 }
 
+.odyssey-topic {
+    width: 50%;
+    float: right;
+}
+
 .odyssey-partner {
-    border-bottom: solid 1px darkgrey;
+    width: 50%;
+    float: left;
 }
 
 .odyssey-progress {
