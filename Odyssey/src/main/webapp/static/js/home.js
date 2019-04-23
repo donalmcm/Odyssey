@@ -175,7 +175,7 @@ function getOdysseys(userId, userName) {
                     meetingNoteButton.className = "btn btn-success btn-lg more-details-button";
                     meetingNoteButton.innerHTML = "Edit Note";
                     meetingNoteButton.onclick = function () {
-                        editMeetingNoteModal(entry.odysseyMeetings[i].id);
+                        editMeetingNoteModal(entry.odysseyMeetings[i].id,entry.odysseyMeetings[i].meetingNote);
                     };
 
                     if(entry.odysseyMeetings[i].isCompleted) {
@@ -203,11 +203,16 @@ function displayMoreDetails(odysseyId) {
     // unhide more details for a particular odyssey
 }
 
-function editMeetingNoteModal(meetingId) {
+function editMeetingNoteModal(meetingId,currentNote) {
     // create modal with post for a meetings notes
     $('#edit-meeting-note-modal').modal('show');
     var action = document.getElementById("edit-meeting-note-form");
     action.action = "../api/odysseyMeetings/"+meetingId+"/note";
+
+    if(currentNote != null || currentNote !== "") {
+        var existingNote = document.getElementById("meetingNote");
+        existingNote.innerHTML = currentNote;
+    }
     // disable button if meeting is not complete
 }
 
