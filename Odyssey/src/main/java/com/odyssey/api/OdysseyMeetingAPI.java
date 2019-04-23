@@ -35,11 +35,12 @@ public class OdysseyMeetingAPI {
 
     }
 
-    @PUT
+    @POST
     @Path("{id}/note")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
     public Response createMeetingNote(@FormParam("meetingNote") String meetingNote, @PathParam("id") int id) {
+        OdysseyMeeting odysseyMeeting = OdysseyMeeting.getOdysseyMeetingById(id);
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
@@ -47,10 +48,9 @@ public class OdysseyMeetingAPI {
         try{
             session.getTransaction().begin();
 
-            OdysseyMeeting odysseyMeeting = OdysseyMeeting.getOdysseyMeetingById(id);
             odysseyMeeting.setMeetingNote(meetingNote);
 
-            session.persist(odysseyMeeting);
+            session.update(odysseyMeeting);
             session.getTransaction().commit();
             session.close();
 
