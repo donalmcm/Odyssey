@@ -8,9 +8,9 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/odysseydb?useSSL=false</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">password</property>
+        <property name="connection.url">jdbc:mysql://aaom1rttqzqaby.cqojs0vqjoon.eu-west-1.rds.amazonaws.com:3306</property>
+        <property name="connection.username">homer</property>
+        <property name="connection.password">myPassword</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">10</property>
