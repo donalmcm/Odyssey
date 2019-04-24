@@ -100,10 +100,13 @@ function getOdysseysByMentor(userId, isAwaitingMentee) {
         } else {
             $.each(data, function (key, entry) {
 
-                var odysseyCard = document.createElement("div"); // outer div
+                var odysseyCard = document.createElement("div");
                 odysseyCard.className = "odyssey-card";
+
+                var odysseyCardMain = document.createElement("div");
+                odysseyCardMain.className = "odyssey-card-main";
                 if (!entry.active) {
-                    odysseyCard.style.backgroundColor = "darkgrey";
+                    // set text to active or not active
                 }
 
                 // Type - either Mentor or Mentee
@@ -112,12 +115,19 @@ function getOdysseysByMentor(userId, isAwaitingMentee) {
                 var odysseyTypeTitle = document.createElement("h1");
                 odysseyTypeTitle.innerHTML = "Mentor";
                 odysseyType.appendChild(odysseyTypeTitle);
-                odysseyCard.appendChild(odysseyType);
+                odysseyCardMain.appendChild(odysseyType);
+
+
+
 
                 // Details - show partner name and topic name
-                // Partners name
                 var odysseyDetails = document.createElement("div"); // middle inner div
                 odysseyDetails.className = " col-md-3 odyssey-details";
+
+                // Top Details - Name and topic
+                var odysseyPartnerAndTopic = document.createElement("div");
+                odysseyPartnerAndTopic.className = "odyssey-partner-and-topic";
+
                 // Partners name
                 var odysseyPartner = document.createElement("div");
                 odysseyPartner.className = "odyssey-partner";
@@ -127,7 +137,7 @@ function getOdysseysByMentor(userId, isAwaitingMentee) {
                 var odysseyPartnerTitle = document.createElement("h2");
                 odysseyPartnerTitle.innerHTML = entry.mentee.firstName;
                 odysseyPartner.appendChild(odysseyPartnerTitle);
-                odysseyDetails.appendChild(odysseyPartner);
+                odysseyPartnerAndTopic.appendChild(odysseyPartner);
 
                 // Topics name
                 var odysseyTopic = document.createElement("div");
@@ -138,9 +148,26 @@ function getOdysseysByMentor(userId, isAwaitingMentee) {
                 var odysseyTopicTitle = document.createElement("h2");
                 odysseyTopicTitle.innerHTML = entry.topic.name;
                 odysseyTopic.appendChild(odysseyTopicTitle);
-                odysseyDetails.appendChild(odysseyTopic);
-                // add partner name and topic to card
-                odysseyCard.appendChild(odysseyDetails);
+                odysseyPartnerAndTopic.appendChild(odysseyTopic);
+
+                // adding partner and topic to top details
+                odysseyDetails.appendChild(odysseyPartnerAndTopic);
+
+                // More details with button
+                var moreDetails = document.createElement("div");
+                moreDetails.className = "more-details";
+                var moreDetailsLabel = document.createElement("h4");
+                moreDetailsLabel.innerHTML = "For more details :";
+                moreDetails.appendChild(moreDetailsLabel);
+                var moreDetailsButton = document.createElement("button");
+                moreDetailsButton.className = "btn btn-success btn-lg more-details-button";
+                moreDetailsButton.innerHTML = "Click Here";
+                moreDetailsButton.onclick = function () {
+                    displayMoreDetails(entry.id);
+                };
+                moreDetails.appendChild(moreDetailsButton);
+                odysseyDetails.appendChild(moreDetails);
+                odysseyCardMain.appendChild(odysseyDetails);
 
                 // Progress
                 var odysseyProgress = document.createElement("div");
@@ -201,13 +228,99 @@ function getOdysseysByMentor(userId, isAwaitingMentee) {
                 meetingsComplete.innerHTML = entry.odysseyMeetingsCompleteVsOverall;
                 odysseyProgress.appendChild(meetingsComplete);
 
-                odysseyCard.appendChild(odysseyProgress);
+                odysseyCardMain.appendChild(odysseyProgress);
+
+                odysseyCard.appendChild(odysseyCardMain);
+
+                var odysseyMoreDetails = document.createElement("div");
+                odysseyMoreDetails.className = "odyssey-more-details";
+                odysseyMoreDetails.id = "odysseyMoreDetails"+entry.id;
+                odysseyMoreDetails.style.display = "none";
+
+                for (let i = 0; i < entry.odysseyMeetings.length; i++) {
+                    var odysseyMeeting = document.createElement("div");
+                    odysseyMeeting.className = "odyssey-meeting";
+
+                    var meetingHeader = document.createElement("h2");
+                    meetingHeader.innerHTML = "Meeting " + (i + 1);
+                    odysseyMeeting.appendChild(meetingHeader);
+
+                    var meetingDate = document.createElement("h4");
+                    meetingDate.innerHTML = "Date: " + entry.odysseyMeetings[i].date;
+                    odysseyMeeting.appendChild(meetingDate);
+
+                    var meetingDayAndTime = document.createElement("h4");
+                    meetingDayAndTime.innerHTML = "Time and Day: " + entry.odysseyMeetings[i].time + " " + entry.odysseyMeetings[i].day;
+                    odysseyMeeting.appendChild(meetingDayAndTime);
+
+                    var meetingCompleted = document.createElement("h4");
+                    odysseyMeeting.appendChild(meetingCompleted);
+
+                    var meetingNote = document.createElement("div");
+                    var meetingNoteLabel = document.createElement("h4");
+                    meetingNoteLabel.innerHTML = "Note: ";
+                    meetingNote.appendChild(meetingNoteLabel);
+                    var meetingNoteText = document.createElement("p");
+                    meetingNoteText.innerHTML = entry.odysseyMeetings[i].meetingNote;
+                    meetingNote.appendChild(meetingNoteText);
+
+                    var meetingNoteButton = document.createElement("button");
+                    meetingNoteButton.className = "btn btn-success btn-lg more-details-button";
+                    meetingNoteButton.innerHTML = "Edit Note";
+                    meetingNoteButton.onclick = function () {
+                        editMeetingNoteModal(entry.odysseyMeetings[i].id, entry.odysseyMeetings[i].meetingNote);
+                    };
+
+                    if (entry.odysseyMeetings[i].isCompleted) {
+                        meetingCompleted.innerHTML = "Completed: Yes";
+                    } else {
+                        meetingCompleted.innerHTML = "Completed: No";
+                        meetingNoteButton.disabled = true;
+                    }
+                    meetingNote.appendChild(meetingNoteButton);
+
+                    odysseyMeeting.appendChild(meetingNote);
+                    // last line
+                    odysseyMoreDetails.appendChild(odysseyMeeting);
+                }
+
+                var hideMoreDetailsButton = document.createElement("button");
+                hideMoreDetailsButton.className = "btn btn-danger btn-sm more-details-button margin-top";
+                hideMoreDetailsButton.innerHTML = "X";
+                hideMoreDetailsButton.onclick = function () {
+                    displayMoreDetails(entry.id);
+                };
+
+                odysseyMoreDetails.appendChild(hideMoreDetailsButton);
+
+                odysseyCard.appendChild(odysseyMoreDetails);
 
                 // Add card to list
                 document.getElementById("odyssey-list-by-mentor").appendChild(odysseyCard);
             })
         }
     });
+}
+
+function displayMoreDetails(odysseyId) {
+    if (document.getElementById("odysseyMoreDetails"+odysseyId).style.display === "none") {
+        document.getElementById("odysseyMoreDetails"+odysseyId).style.display = "block";
+    } else {
+        document.getElementById("odysseyMoreDetails"+odysseyId).style.display = "none";
+    }
+}
+
+function editMeetingNoteModal(meetingId, currentNote) {
+    // create modal with post for a meetings notes
+    $('#edit-meeting-note-modal').modal('show');
+    var action = document.getElementById("edit-meeting-note-form");
+    action.action = "../api/odysseyMeetings/" + meetingId + "/note";
+
+    if (currentNote != null || currentNote !== "") {
+        var existingNote = document.getElementById("meetingNote");
+        existingNote.innerHTML = currentNote;
+    }
+    // disable button if meeting is not complete
 }
 
 function checkAvailability(data) {

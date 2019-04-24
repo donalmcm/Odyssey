@@ -91,10 +91,15 @@ public class OdysseyMeeting {
         int timeOfDay = date.get(Calendar.AM_PM);
         int hour = date.get(Calendar.HOUR);
         String time = String.valueOf(hour);
+
         if (timeOfDay == 0) {
             return time + " AM";
         } else {
-            return time + " PM";
+            if(hour == 0) {
+                return "12 PM";
+            } else {
+                return time + " PM";
+            }
         }
     }
 

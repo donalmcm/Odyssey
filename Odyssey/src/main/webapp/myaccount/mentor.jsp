@@ -261,6 +261,33 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="edit-meeting-note-modal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header new-employee-form-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h1><i class="fa fa-edit fa-3x"></i> Edit Meeting Note</h1>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <form role="form" method="post" id="edit-meeting-note-form">
+                        <div class="form-group">
+                            <label for="meetingNote">Meeting Note</label>
+                            <textarea class="form-control" id="meetingNote" name="meetingNote" required
+                                      placeholder="Enter notes here" style="height: 200px"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger btn-default pull-left"
+                            data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="../static/js/mentor.js"></script>
 </body>
