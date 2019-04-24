@@ -1,13 +1,18 @@
 package com.odyssey.model;
 
+import com.HibernateUtil;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-@NamedQueries({ @NamedQuery(name = "OdysseyMeeting.findAllOdysseyMeetings", query = "select om from OdysseyMeeting om")})
+@NamedQueries({@NamedQuery(name = "OdysseyMeeting.findAllOdysseyMeetings", query = "select om from OdysseyMeeting om"),
+        @NamedQuery(name = "OdysseyMeeting.findOdysseyMeetingById", query = "select om from OdysseyMeeting om where om.id=:id")})
 
 @XmlRootElement
 @Entity
@@ -46,11 +51,19 @@ public class OdysseyMeeting {
         this.completed = completed;
     }
 
+    public void setMeetingNote(String meetingNote) {
+        this.meetingNote = meetingNote;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public boolean getIsCompleted() {
         if (completed) {
             return completed;
         }
-        
+
         Calendar currentTime = Calendar.getInstance();
         if (currentTime.after(date)) {
             setCompleted(true);
@@ -83,6 +96,20 @@ public class OdysseyMeeting {
         } else {
             return time + " PM";
         }
+    }
+
+    public static OdysseyMeeting getOdysseyMeetingById(int id) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Query<OdysseyMeeting> query = session.createNamedQuery("OdysseyMeeting.findOdysseyMeetingById", OdysseyMeeting.class);
+        query.setParameter("id", id);
+        OdysseyMeeting odysseyMeeting = query.getSingleResult();
+
+        session.getTransaction().commit();
+        session.close();
+        return odysseyMeeting;
     }
 
     private String getDayOfWeek(int value) {

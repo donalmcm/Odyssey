@@ -198,6 +198,7 @@ html,body {
     border : solid 2px #5cb85c;
     background-color: #eeeeee;
     display: flex;
+    flex-direction: column;
     height: fit-content;
     padding: 16px;
     margin: 16px;
@@ -220,8 +221,14 @@ html,body {
     padding-right: 16px;
 }
 
+.odyssey-topic {
+    width: 50%;
+    float: right;
+}
+
 .odyssey-partner {
-    border-bottom: solid 1px darkgrey;
+    width: 50%;
+    float: left;
 }
 
 .odyssey-progress {
@@ -331,17 +338,15 @@ html,body {
 .margin16 {
     margin: 16px;
 }
-
+.margin-top {
+    margin-top: 16px;
+}
 .graph-container {
     margin: 16px;
     padding: 16px;
     border : solid 2px darkgrey;
     background-color: whitesmoke;
     border-radius: 16px;
-}
-
-.margin-top {
-    margin-top: 16px;
 }
 
 .error-message {
