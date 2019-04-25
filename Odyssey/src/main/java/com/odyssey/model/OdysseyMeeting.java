@@ -36,7 +36,6 @@ public class OdysseyMeeting {
 
     @ManyToOne
     @JoinColumn
-    @JsonBackReference
     private Odyssey odyssey;
 
     public OdysseyMeeting() {
@@ -144,4 +143,6 @@ public class OdysseyMeeting {
         }
         return day;
     }
+
+
 }
