@@ -45,10 +45,6 @@ public class OdysseyMeeting {
         this.odyssey = odyssey;
     }
 
-    private void setCompleted() {
-        this.completed = true;
-    }
-
     public void setMeetingNote(String meetingNote) {
         this.meetingNote = meetingNote;
     }
@@ -57,14 +53,15 @@ public class OdysseyMeeting {
         return id;
     }
 
-    boolean getIsCompleted() {
+    // must remain public as it is used with api call
+    public boolean getIsCompleted() {
         if (completed) {
             return completed;
         }
-
         Calendar currentTime = Calendar.getInstance();
         if (currentTime.after(date)) {
-            setCompleted();
+            completed = true;
+            return completed;
         }
         return completed;
     }
