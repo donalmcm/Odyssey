@@ -18,8 +18,29 @@ function getOdysseys(userId, userName) {
                 // Type - either Mentor or Mentee
                 var odysseyType = document.createElement("div"); // left inner div
                 odysseyType.className = "col-md-2 odyssey-type";
+                var odysseyTypeTitleDiv = document.createElement("div");
                 var odysseyTypeTitle = document.createElement("h1");
-                odysseyType.appendChild(odysseyTypeTitle);
+                odysseyTypeTitleDiv.appendChild(odysseyTypeTitle);
+                odysseyType.appendChild(odysseyTypeTitleDiv);
+
+                // Review with button
+                var reviews = document.createElement("div");
+                reviews.className = "reviews";
+                if (!entry.complete) {
+                    reviews.style.display = "none";
+                }
+                var reviewsLabel = document.createElement("h4");
+                reviewsLabel.innerHTML = "For Reviews :";
+                reviews.appendChild(reviewsLabel);
+                var reviewsButton = document.createElement("button");
+                reviewsButton.className = "btn btn-primary btn-lg more-details-button";
+                reviewsButton.innerHTML = "Click Here";
+                reviewsButton.onclick = function () {
+                    displayReviews(entry.id);
+                };
+                reviews.appendChild(reviewsButton);
+
+                odysseyType.appendChild(reviews);
                 odysseyCardMain.appendChild(odysseyType);
 
                 // Details - show partner name and topic name
@@ -143,7 +164,7 @@ function getOdysseys(userId, userName) {
 
                 var odysseyMoreDetails = document.createElement("div");
                 odysseyMoreDetails.className = "odyssey-more-details";
-                odysseyMoreDetails.id = "odysseyMoreDetails"+entry.id;
+                odysseyMoreDetails.id = "odysseyMoreDetails" + entry.id;
                 odysseyMoreDetails.style.display = "none";
 
                 for (let i = 0; i < entry.odysseyMeetings.length; i++) {
@@ -203,6 +224,96 @@ function getOdysseys(userId, userName) {
                 odysseyMoreDetails.appendChild(hideMoreDetailsButton);
 
                 odysseyCard.appendChild(odysseyMoreDetails);
+
+                var odysseyReviews = document.createElement("div");
+                odysseyReviews.className = "odyssey-reviews";
+                odysseyReviews.id = "odysseyReviews" + entry.id;
+                odysseyReviews.style.display = "none";
+
+                // REVIEW HEADER - change to mentor or mentee
+                // HIDE EITHER course material or mentee engagement
+                for (let i = 0; i < entry.odysseyReviews.length; i++) {
+                    var odysseyReview = document.createElement("div");
+                    odysseyReview.className = "odyssey-review";
+
+                    var reviewHeader = document.createElement("h2");
+                    odysseyReview.appendChild(reviewHeader);
+
+                    var punctuality = document.createElement("h4");
+                    punctuality.innerHTML = "Punctuality: " + entry.odysseyReviews[i].punctuality + "/5 ";
+                    odysseyReview.appendChild(punctuality);
+
+                    var attendance = document.createElement("h4");
+                    attendance.innerHTML = "Attendance: " + entry.odysseyReviews[i].attendance + "/5 ";
+                    odysseyReview.appendChild(attendance);
+
+                    // Only display for mentee's
+                    var courseMaterial = document.createElement("h4");
+                    courseMaterial.innerHTML = "Course Material: " + entry.odysseyReviews[i].courseMaterial + "/5 ";
+                    odysseyReview.appendChild(courseMaterial);
+
+                    // Only display for mentor's
+                    var menteeEngagement = document.createElement("h4");
+                    menteeEngagement.innerHTML = "Mentee Engagement: " + entry.odysseyReviews[i].menteeEngagement + "/5 ";
+                    odysseyReview.appendChild(menteeEngagement);
+
+                    var rating = document.createElement("h4");
+                    rating.innerHTML = "rating: " + entry.odysseyReviews[i].rating + "/5 ";
+                    odysseyReview.appendChild(rating);
+
+                    var overallExperience = document.createElement("div");
+                    var overallExperienceLabel = document.createElement("h4");
+                    overallExperienceLabel.innerHTML = "Overall Experience: ";
+                    overallExperience.appendChild(overallExperienceLabel);
+                    var overallExperienceText = document.createElement("p");
+                    overallExperienceText.innerHTML = entry.odysseyReviews[i].overallExperience;
+                    overallExperience.appendChild(overallExperienceText);
+
+                    var reviewButton = document.createElement("button");
+                    reviewButton.className = "btn btn-primary btn-lg reviews-button";
+                    reviewButton.onclick = function () {
+                        editReviewModal(entry.odysseyReviews[i].id, entry.odysseyReviews[i].punctuality,
+                            entry.odysseyReviews[i].attendance, entry.odysseyReviews[i].courseMaterial,
+                            entry.odysseyReviews[i].menteeEngagement, entry.odysseyReviews[i].rating,
+                            entry.odysseyReviews[i].overallExperience, entry.odysseyReviews[i].menteeReview,
+                            entry.odysseyReviews[i].mentorReview);
+                    };
+
+                    if (entry.odysseyReviews[i].submitted) {
+                        reviewButton.innerHTML = "Edit Review";
+                    } else {
+                        reviewButton.innerHTML = "Add Review";
+                    }
+                    if (entry.odysseyReviews[i].mentorReview) {
+                        reviewHeader.innerHTML = "Mentor Review";
+                        courseMaterial.style.display = "none";
+                        if (userName === entry.mentee.firstName) {
+                            reviewButton.style.display = "none";
+                        }
+                    } else {
+                        reviewHeader.innerHTML = "Mentee Review";
+                        menteeEngagement.style.display = "none";
+                        if (userName === entry.mentor.firstName) {
+                            reviewButton.style.display = "none";
+                        }
+                    }
+                    overallExperience.appendChild(reviewButton);
+
+                    odysseyReview.appendChild(overallExperience);
+                    // last line
+                    odysseyReviews.appendChild(odysseyReview);
+                }
+
+                var hideReviewsButton = document.createElement("button");
+                hideReviewsButton.className = "btn btn-danger btn-sm review-button margin-top";
+                hideReviewsButton.innerHTML = "X";
+                hideReviewsButton.onclick = function () {
+                    displayReviews(entry.id);
+                };
+
+                odysseyReviews.appendChild(hideReviewsButton);
+
+                odysseyCard.appendChild(odysseyReviews);
                 // Add card to list
                 document.getElementById("odyssey-list").appendChild(odysseyCard);
             })
@@ -211,10 +322,18 @@ function getOdysseys(userId, userName) {
 }
 
 function displayMoreDetails(odysseyId) {
-    if (document.getElementById("odysseyMoreDetails"+odysseyId).style.display === "none") {
-        document.getElementById("odysseyMoreDetails"+odysseyId).style.display = "block";
+    if (document.getElementById("odysseyMoreDetails" + odysseyId).style.display === "none") {
+        document.getElementById("odysseyMoreDetails" + odysseyId).style.display = "block";
     } else {
-        document.getElementById("odysseyMoreDetails"+odysseyId).style.display = "none";
+        document.getElementById("odysseyMoreDetails" + odysseyId).style.display = "none";
+    }
+}
+
+function displayReviews(odysseyId) {
+    if (document.getElementById("odysseyReviews" + odysseyId).style.display === "none") {
+        document.getElementById("odysseyReviews" + odysseyId).style.display = "block";
+    } else {
+        document.getElementById("odysseyReviews" + odysseyId).style.display = "none";
     }
 }
 
@@ -228,7 +347,22 @@ function editMeetingNoteModal(meetingId, currentNote) {
         var existingNote = document.getElementById("meetingNote");
         existingNote.innerHTML = currentNote;
     }
-    // disable button if meeting is not complete
+}
+
+function editReviewModal(reviewId, currentPunctuality, currentAttendance, currentCourseMaterial, currentMenteeEngagement,
+                         currentRating, currentOverallExperience,menteeReview,mentorReview) {
+    // create modal with post for a meetings notes
+    $('#odyssey-review-modal').modal('show');
+    var action = document.getElementById("odyssey-review-form");
+    action.action = "../api/reviews/edit/" + reviewId;
+
+    if(menteeReview) {
+        document.getElementById("menteeEngagement").style.display = "none";
+    } else {
+        document.getElementById("courseMaterial").style.display = "none";
+    }
+
+    // populate fields if they exist and are not zero
 }
 
 
