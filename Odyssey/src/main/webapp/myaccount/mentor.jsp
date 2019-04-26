@@ -288,6 +288,53 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="odyssey-review-modal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header new-employee-form-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h1><i class="fa fa-edit fa-3x"></i> Edit Odyssey Review</h1>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <form role="form" method="post" id="odyssey-review-form">
+                        <div class="form-group">
+                            <label for="punctuality">Punctuality</label>
+                            <input class="form-control" type="range" id="punctuality" name="punctuality" min="1" max="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="attendance">Attendance</label>
+                            <input class="form-control" type="range" id="attendance" name="attendance" min="1" max="5" required>
+                        </div>
+                        <div class="form-group" id="course-material-section">
+                            <label for="courseMaterial">Course Material</label>
+                            <input class="form-control" type="range" id="courseMaterial" name="courseMaterial" min="1" max="5" required>
+                        </div>
+                        <div class="form-group" id="mentee-engagement-section">
+                            <label for="menteeEngagement">Mentee Engagement</label>
+                            <input class="form-control" type="range" id="menteeEngagement" name="menteeEngagement" min="1" max="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating">Rating</label>
+                            <input class="form-control" type="range" id="rating" name="rating" min="1" max="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="overallExperience">Overall Experience</label>
+                            <textarea class="form-control" id="overallExperience" name="overallExperience" required
+                                      placeholder="Enter your experience here" style="height: 200px"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger btn-default pull-left"
+                            data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="../static/js/mentor.js"></script>
 </body>

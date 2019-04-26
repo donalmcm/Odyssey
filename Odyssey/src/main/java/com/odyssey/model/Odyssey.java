@@ -1,8 +1,5 @@
 package com.odyssey.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -10,7 +7,6 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @NamedQueries({ @NamedQuery(name = "Odyssey.findAllOdysseys", query = "select o from Odyssey o"),
@@ -40,9 +36,16 @@ public class Odyssey {
     @Column
     private boolean isActive = false;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "odyssey",fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @Column
+    private boolean isComplete = false;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "odyssey")
     private List<OdysseyMeeting> odysseyMeetings;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "odysseyReview")
+    private List<Review> odysseyReviews;
 
     @OneToOne
     @JoinColumn
@@ -135,16 +138,27 @@ public class Odyssey {
     }
 
     public boolean isActive() {
-        if(!isActive) {
+        if(odysseyMeetings.get(0).getIsCompleted() && !odysseyMeetings.get(odysseyMeetings.size() - 1).getIsCompleted()) {
+            isActive = true;
             return isActive;
         } else {
-            for(OdysseyMeeting o : odysseyMeetings) {
-                if(!o.getIsCompleted()){
-                    return true;
-                }
+            isActive = false;
+            return isActive;
+        }
+    }
+
+    public boolean isComplete() {
+        if (isComplete) {
+            return isComplete;
+        } else {
+            if (odysseyMeetings.get(odysseyMeetings.size() - 1).getIsCompleted()) {
+                completedOdyssey();
+                isComplete = true;
+                return isComplete;
+            } else {
+                isComplete = false;
+                return isComplete;
             }
-            completedOdyssey();
-            return false;
         }
     }
 
@@ -156,5 +170,9 @@ public class Odyssey {
     }
     public List<OdysseyMeeting> getOdysseyMeetings() {
         return odysseyMeetings;
+    }
+
+    public List<Review> getOdysseyReviews() {
+        return odysseyReviews;
     }
 }
