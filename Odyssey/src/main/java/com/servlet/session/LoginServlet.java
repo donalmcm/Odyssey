@@ -25,57 +25,47 @@ public class LoginServlet extends HttpServlet {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        try{
-            session.getTransaction().begin();
+        session.getTransaction().begin();
 
-            Query<Employee> query = session.createNamedQuery("Employee.findByEmail", Employee.class);
-            query.setParameter("email", emailIn);
-            if (!query.getResultList().isEmpty()) {
-                Employee employee = query.getSingleResult();
-                session.getTransaction().commit();
-                session.close();
+        Query<Employee> query = session.createNamedQuery("Employee.findByEmail", Employee.class);
+        query.setParameter("email", emailIn);
+        if (!query.getResultList().isEmpty()) {
+            Employee employee = query.getSingleResult();
+            session.getTransaction().commit();
+            session.close();
 
-                final String email = employee.getEmail();
-                final String password = employee.getPassword();
+            final String email = employee.getEmail();
+            final String password = employee.getPassword();
 
-                if (email.equals(emailIn) && password.equals(passwordIn)) {
-                    //get the old session and invalidate
-                    HttpSession oldSession = request.getSession(false);
-                    if (oldSession != null) {
-                        oldSession.invalidate();
-                    }
-                    //generate a new session
-                    HttpSession newSession = request.getSession(true);
-
-                    //setting session to expiry in 15 mins
-                    newSession.setMaxInactiveInterval(15 * 60);
-
-                    Cookie userEmail = new Cookie("email", email);
-                    response.addCookie(userEmail);
-                    response.sendRedirect("myaccount/home.jsp");
-                    // For further security
-                    //cookie.setSecure(true); // will only send over https
-                    //cookie.setHttpOnly(true); // help with XSS attacks
-                } else {
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-                    PrintWriter out = response.getWriter();
-                    out.println("<font color=red>Either username or password is wrong.</font>");
-                    rd.include(request, response);
+            if (email.equals(emailIn) && password.equals(passwordIn)) {
+                //get the old session and invalidate
+                HttpSession oldSession = request.getSession(false);
+                if (oldSession != null) {
+                    oldSession.invalidate();
                 }
+                //generate a new session
+                HttpSession newSession = request.getSession(true);
+
+                //setting session to expiry in 15 mins
+                newSession.setMaxInactiveInterval(15 * 60);
+
+                Cookie userEmail = new Cookie("email", email);
+                response.addCookie(userEmail);
+                response.sendRedirect("myaccount/home.jsp");
+                // For further security
+                //cookie.setSecure(true); // will only send over https
+                //cookie.setHttpOnly(true); // help with XSS attacks
             } else {
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
                 PrintWriter out = response.getWriter();
                 out.println("<font color=red>Either username or password is wrong.</font>");
                 rd.include(request, response);
             }
-
-        }catch (Exception e) {
-            session.getTransaction().rollback();
-            e.printStackTrace();
+        } else {
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+            PrintWriter out = response.getWriter();
+            out.println("<font color=red>Either username or password is wrong.</font>");
+            rd.include(request, response);
         }
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-        PrintWriter out = response.getWriter();
-        out.println("<font color=red>Sorry something went wrong</font>");
-        rd.include(request, response);
     }
 }
