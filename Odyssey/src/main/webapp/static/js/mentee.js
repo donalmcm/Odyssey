@@ -104,98 +104,98 @@ function getMentorsByTopic(topic, userId) {
 
             // change this to loop through availability
             // check what times on monday are available
-            if (entry.availability.monday10 == true) {
+            if (entry.availability.monday10 === true) {
                 document.getElementById("monday10").disabled = false;
             }
-            if (entry.availability.monday11 == true) {
+            if (entry.availability.monday11 === true) {
                 document.getElementById("monday11").disabled = false;
             }
-            if (entry.availability.monday12 == true) {
+            if (entry.availability.monday12 === true) {
                 document.getElementById("monday12").disabled = false;
             }
-            if (entry.availability.monday14 == true) {
+            if (entry.availability.monday14 === true) {
                 document.getElementById("monday14").disabled = false;
             }
-            if (entry.availability.monday15 == true) {
+            if (entry.availability.monday15 === true) {
                 document.getElementById("monday15").disabled = false;
             }
-            if (entry.availability.monday16 == true) {
+            if (entry.availability.monday16 === true) {
                 document.getElementById("monday16").disabled = false;
             }
             // check what times on tuesday are available
-            if (entry.availability.tuesday10 == true) {
+            if (entry.availability.tuesday10 === true) {
                 document.getElementById("tuesday10").disabled = false;
             }
-            if (entry.availability.tuesday11 == true) {
+            if (entry.availability.tuesday11 === true) {
                 document.getElementById("tuesday11").disabled = false;
             }
-            if (entry.availability.tuesday12 == true) {
+            if (entry.availability.tuesday12 === true) {
                 document.getElementById("tuesday12").disabled = false;
             }
-            if (entry.availability.tuesday14 == true) {
+            if (entry.availability.tuesday14 === true) {
                 document.getElementById("tuesday14").disabled = false;
             }
-            if (entry.availability.tuesday15 == true) {
+            if (entry.availability.tuesday15 === true) {
                 document.getElementById("tuesday15").disabled = false;
             }
-            if (entry.availability.tuesday16 == true) {
+            if (entry.availability.tuesday16 === true) {
                 document.getElementById("tuesday16").disabled = false;
             }
             // check what times on wednesday are available
-            if (entry.availability.wednesday10 == true) {
+            if (entry.availability.wednesday10 === true) {
                 document.getElementById("wednesday10").disabled = false;
             }
-            if (entry.availability.wednesday11 == true) {
+            if (entry.availability.wednesday11 === true) {
                 document.getElementById("wednesday11").disabled = false;
             }
-            if (entry.availability.wednesday12 == true) {
+            if (entry.availability.wednesday12 === true) {
                 document.getElementById("wednesday12").disabled = false;
             }
-            if (entry.availability.wednesday14 == true) {
+            if (entry.availability.wednesday14 === true) {
                 document.getElementById("wednesday14").disabled = false;
             }
-            if (entry.availability.wednesday15 == true) {
+            if (entry.availability.wednesday15 === true) {
                 document.getElementById("wednesday15").disabled = false;
             }
-            if (entry.availability.wednesday16 == true) {
+            if (entry.availability.wednesday16 === true) {
                 document.getElementById("wednesday16").disabled = false;
             }
             // check what times on thursday are available
-            if (entry.availability.thursday10 == true) {
+            if (entry.availability.thursday10 === true) {
                 document.getElementById("thursday10").disabled = false;
             }
-            if (entry.availability.thursday11 == true) {
+            if (entry.availability.thursday11 === true) {
                 document.getElementById("thursday11").disabled = false;
             }
-            if (entry.availability.thursday12 == true) {
+            if (entry.availability.thursday12 === true) {
                 document.getElementById("thursday12").disabled = false;
             }
-            if (entry.availability.thursday14 == true) {
+            if (entry.availability.thursday14 === true) {
                 document.getElementById("thursday14").disabled = false;
             }
-            if (entry.availability.thursday15 == true) {
+            if (entry.availability.thursday15 === true) {
                 document.getElementById("thursday15").disabled = false;
             }
-            if (entry.availability.thursday16 == true) {
+            if (entry.availability.thursday16 === true) {
                 document.getElementById("thursday16").disabled = false;
             }
             // check what times on friday are available
-            if (entry.availability.friday10 == true) {
+            if (entry.availability.friday10 === true) {
                 document.getElementById("friday10").disabled = false;
             }
-            if (entry.availability.friday11 == true) {
+            if (entry.availability.friday11 === true) {
                 document.getElementById("friday11").disabled = false;
             }
-            if (entry.availability.friday12 == true) {
+            if (entry.availability.friday12 === true) {
                 document.getElementById("friday12").disabled = false;
             }
-            if (entry.availability.friday14 == true) {
+            if (entry.availability.friday14 === true) {
                 document.getElementById("friday14").disabled = false;
             }
-            if (entry.availability.friday15 == true) {
+            if (entry.availability.friday15 === true) {
                 document.getElementById("friday15").disabled = false;
             }
-            if (entry.availability.friday16 == true) {
+            if (entry.availability.friday16 === true) {
                 document.getElementById("friday16").disabled = false;
             }
         })
@@ -219,98 +219,98 @@ function getAvailabilitiesByTopicAndDuration(duration, userId) {
 
                 // change this to loop through availability
                 // check what times on monday are available
-                if (entry.availability.monday10 == true) {
+                if (entry.availability.monday10 === true) {
                     document.getElementById("monday10").disabled = false;
                 }
-                if (entry.availability.monday11 == true) {
+                if (entry.availability.monday11 === true) {
                     document.getElementById("monday11").disabled = false;
                 }
-                if (entry.availability.monday12 == true) {
+                if (entry.availability.monday12 === true) {
                     document.getElementById("monday12").disabled = false;
                 }
-                if (entry.availability.monday14 == true) {
+                if (entry.availability.monday14 === true) {
                     document.getElementById("monday14").disabled = false;
                 }
-                if (entry.availability.monday15 == true) {
+                if (entry.availability.monday15 === true) {
                     document.getElementById("monday15").disabled = false;
                 }
-                if (entry.availability.monday16 == true) {
+                if (entry.availability.monday16 === true) {
                     document.getElementById("monday16").disabled = false;
                 }
                 // check what times on tuesday are available
-                if (entry.availability.tuesday10 == true) {
+                if (entry.availability.tuesday10 === true) {
                     document.getElementById("tuesday10").disabled = false;
                 }
-                if (entry.availability.tuesday11 == true) {
+                if (entry.availability.tuesday11 === true) {
                     document.getElementById("tuesday11").disabled = false;
                 }
-                if (entry.availability.tuesday12 == true) {
+                if (entry.availability.tuesday12 === true) {
                     document.getElementById("tuesday12").disabled = false;
                 }
-                if (entry.availability.tuesday14 == true) {
+                if (entry.availability.tuesday14 === true) {
                     document.getElementById("tuesday14").disabled = false;
                 }
-                if (entry.availability.tuesday15 == true) {
+                if (entry.availability.tuesday15 === true) {
                     document.getElementById("tuesday15").disabled = false;
                 }
-                if (entry.availability.tuesday16 == true) {
+                if (entry.availability.tuesday16 === true) {
                     document.getElementById("tuesday16").disabled = false;
                 }
                 // check what times on wednesday are available
-                if (entry.availability.wednesday10 == true) {
+                if (entry.availability.wednesday10 === true) {
                     document.getElementById("wednesday10").disabled = false;
                 }
-                if (entry.availability.wednesday11 == true) {
+                if (entry.availability.wednesday11 === true) {
                     document.getElementById("wednesday11").disabled = false;
                 }
-                if (entry.availability.wednesday12 == true) {
+                if (entry.availability.wednesday12 === true) {
                     document.getElementById("wednesday12").disabled = false;
                 }
-                if (entry.availability.wednesday14 == true) {
+                if (entry.availability.wednesday14 === true) {
                     document.getElementById("wednesday14").disabled = false;
                 }
-                if (entry.availability.wednesday15 == true) {
+                if (entry.availability.wednesday15 === true) {
                     document.getElementById("wednesday15").disabled = false;
                 }
-                if (entry.availability.wednesday16 == true) {
+                if (entry.availability.wednesday16 === true) {
                     document.getElementById("wednesday16").disabled = false;
                 }
                 // check what times on thursday are available
-                if (entry.availability.thursday10 == true) {
+                if (entry.availability.thursday10 === true) {
                     document.getElementById("thursday10").disabled = false;
                 }
-                if (entry.availability.thursday11 == true) {
+                if (entry.availability.thursday11 === true) {
                     document.getElementById("thursday11").disabled = false;
                 }
-                if (entry.availability.thursday12 == true) {
+                if (entry.availability.thursday12 === true) {
                     document.getElementById("thursday12").disabled = false;
                 }
-                if (entry.availability.thursday14 == true) {
+                if (entry.availability.thursday14 === true) {
                     document.getElementById("thursday14").disabled = false;
                 }
-                if (entry.availability.thursday15 == true) {
+                if (entry.availability.thursday15 === true) {
                     document.getElementById("thursday15").disabled = false;
                 }
-                if (entry.availability.thursday16 == true) {
+                if (entry.availability.thursday16 === true) {
                     document.getElementById("thursday16").disabled = false;
                 }
                 // check what times on friday are available
-                if (entry.availability.friday10 == true) {
+                if (entry.availability.friday10 === true) {
                     document.getElementById("friday10").disabled = false;
                 }
-                if (entry.availability.friday11 == true) {
+                if (entry.availability.friday11 === true) {
                     document.getElementById("friday11").disabled = false;
                 }
-                if (entry.availability.friday12 == true) {
+                if (entry.availability.friday12 === true) {
                     document.getElementById("friday12").disabled = false;
                 }
-                if (entry.availability.friday14 == true) {
+                if (entry.availability.friday14 === true) {
                     document.getElementById("friday14").disabled = false;
                 }
-                if (entry.availability.friday15 == true) {
+                if (entry.availability.friday15 === true) {
                     document.getElementById("friday15").disabled = false;
                 }
-                if (entry.availability.friday16 == true) {
+                if (entry.availability.friday16 === true) {
                     document.getElementById("friday16").disabled = false;
                 }
             })
@@ -350,9 +350,27 @@ function getOdysseysByMentee(userId) {
                 var odysseyTypeTitle = document.createElement("h1");
                 odysseyTypeTitle.innerHTML = "Mentee";
                 odysseyType.appendChild(odysseyTypeTitle);
+
+                // Review with button
+                var reviews = document.createElement("div");
+                reviews.className = "reviews";
+                if (!entry.complete) {
+                    reviews.style.display = "none";
+                }
+                var reviewsLabel = document.createElement("h4");
+                reviewsLabel.innerHTML = "For Reviews :";
+                reviews.appendChild(reviewsLabel);
+                var reviewsButton = document.createElement("button");
+                reviewsButton.className = "btn btn-primary btn-lg more-details-button";
+                reviewsButton.innerHTML = "Click Here";
+                reviewsButton.onclick = function () {
+                    displayReviews(entry.id);
+                };
+                reviews.appendChild(reviewsButton);
+
+                odysseyType.appendChild(reviews);
+
                 odysseyCardMain.appendChild(odysseyType);
-
-
 
 
                 // Details - show partner name and topic name
@@ -469,7 +487,7 @@ function getOdysseysByMentee(userId) {
 
                 var odysseyMoreDetails = document.createElement("div");
                 odysseyMoreDetails.className = "odyssey-more-details";
-                odysseyMoreDetails.id = "odysseyMoreDetails"+entry.id;
+                odysseyMoreDetails.id = "odysseyMoreDetails" + entry.id;
                 odysseyMoreDetails.style.display = "none";
 
                 for (let i = 0; i < entry.odysseyMeetings.length; i++) {
@@ -527,8 +545,114 @@ function getOdysseysByMentee(userId) {
                 };
 
                 odysseyMoreDetails.appendChild(hideMoreDetailsButton);
-
                 odysseyCard.appendChild(odysseyMoreDetails);
+
+                // Review section
+                var odysseyReviews = document.createElement("div");
+                odysseyReviews.className = "odyssey-reviews";
+                odysseyReviews.id = "odysseyReviews" + entry.id;
+                odysseyReviews.style.display = "none";
+
+                for (let i = 0; i < entry.odysseyReviews.length; i++) {
+                    var odysseyReview = document.createElement("div");
+                    odysseyReview.className = "odyssey-review";
+
+                    var reviewHeader = document.createElement("h2");
+                    odysseyReview.appendChild(reviewHeader);
+                    if (entry.odysseyReviews[i].submitted) {
+                        var punctuality = document.createElement("h4");
+                        punctuality.innerHTML = "Punctuality: " + entry.odysseyReviews[i].punctuality + "/5 ";
+                        odysseyReview.appendChild(punctuality);
+
+                        var attendance = document.createElement("h4");
+                        attendance.innerHTML = "Attendance: " + entry.odysseyReviews[i].attendance + "/5 ";
+                        odysseyReview.appendChild(attendance);
+
+                        // Only display for mentee's
+                        var courseMaterial = document.createElement("h4");
+                        courseMaterial.innerHTML = "Course Material: " + entry.odysseyReviews[i].courseMaterial + "/5 ";
+                        odysseyReview.appendChild(courseMaterial);
+
+                        // Only display for mentor's
+                        var menteeEngagement = document.createElement("h4");
+                        menteeEngagement.innerHTML = "Mentee Engagement: " + entry.odysseyReviews[i].menteeEngagement + "/5 ";
+                        odysseyReview.appendChild(menteeEngagement);
+
+                        var rating = document.createElement("h4");
+                        rating.innerHTML = "rating: " + entry.odysseyReviews[i].rating + "/5 ";
+                        odysseyReview.appendChild(rating);
+
+                        var overallExperience = document.createElement("div");
+                        var overallExperienceLabel = document.createElement("h4");
+                        overallExperienceLabel.innerHTML = "Overall Experience: ";
+                        overallExperience.appendChild(overallExperienceLabel);
+                        var overallExperienceText = document.createElement("p");
+                        overallExperienceText.innerHTML = entry.odysseyReviews[i].overallExperience;
+                        overallExperience.appendChild(overallExperienceText);
+
+                        let reviewButton = document.createElement("button");
+                        reviewButton.className = "btn btn-primary btn-lg reviews-button";
+                        reviewButton.onclick = function () {
+                            editReviewModal(entry.odysseyReviews[i].id, entry.odysseyReviews[i].punctuality,
+                                entry.odysseyReviews[i].attendance, entry.odysseyReviews[i].courseMaterial,
+                                entry.odysseyReviews[i].menteeEngagement, entry.odysseyReviews[i].rating,
+                                entry.odysseyReviews[i].overallExperience, entry.odysseyReviews[i].menteeReview,
+                                entry.odysseyReviews[i].mentorReview);
+                        };
+
+                        reviewButton.innerHTML = "Edit Review";
+
+                        if (entry.odysseyReviews[i].mentorReview) {
+                            reviewHeader.innerHTML = "Mentor Review";
+                            courseMaterial.style.display = "none";
+                            reviewButton.style.display = "none";
+                        } else {
+                            reviewHeader.innerHTML = "Mentee Review";
+                            menteeEngagement.style.display = "none";
+                        }
+                        overallExperience.appendChild(reviewButton);
+
+                        odysseyReview.appendChild(overallExperience);
+                    } else {
+                        var noReview = document.createElement("h4");
+                        noReview.innerHTML = "No review has been left";
+                        odysseyReview.appendChild(noReview);
+
+                        let reviewButton = document.createElement("button");
+                        reviewButton.className = "btn btn-primary btn-lg reviews-button";
+                        reviewButton.onclick = function () {
+                            editReviewModal(entry.odysseyReviews[i].id, entry.odysseyReviews[i].punctuality,
+                                entry.odysseyReviews[i].attendance, entry.odysseyReviews[i].courseMaterial,
+                                entry.odysseyReviews[i].menteeEngagement, entry.odysseyReviews[i].rating,
+                                entry.odysseyReviews[i].overallExperience, entry.odysseyReviews[i].menteeReview,
+                                entry.odysseyReviews[i].mentorReview);
+                        };
+                        reviewButton.innerHTML = "Add Review";
+                        if (entry.odysseyReviews[i].mentorReview) {
+                            reviewHeader.innerHTML = "Mentor Review";
+                            reviewButton.style.display = "none";
+
+                        } else {
+                            reviewHeader.innerHTML = "Mentee Review";
+                        }
+
+                        odysseyReview.appendChild(reviewButton);
+                    }
+
+                    // last line
+                    odysseyReviews.appendChild(odysseyReview);
+                }
+
+                var hideReviewsButton = document.createElement("button");
+                hideReviewsButton.className = "btn btn-danger btn-sm review-button margin-top";
+                hideReviewsButton.innerHTML = "X";
+                hideReviewsButton.onclick = function () {
+                    displayReviews(entry.id);
+                };
+
+                odysseyReviews.appendChild(hideReviewsButton);
+
+                odysseyCard.appendChild(odysseyReviews);
 
                 // Add card to list
                 document.getElementById("odyssey-list-by-mentee").appendChild(odysseyCard);
@@ -538,10 +662,18 @@ function getOdysseysByMentee(userId) {
 }
 
 function displayMoreDetails(odysseyId) {
-    if (document.getElementById("odysseyMoreDetails"+odysseyId).style.display === "none") {
-        document.getElementById("odysseyMoreDetails"+odysseyId).style.display = "block";
+    if (document.getElementById("odysseyMoreDetails" + odysseyId).style.display === "none") {
+        document.getElementById("odysseyMoreDetails" + odysseyId).style.display = "block";
     } else {
-        document.getElementById("odysseyMoreDetails"+odysseyId).style.display = "none";
+        document.getElementById("odysseyMoreDetails" + odysseyId).style.display = "none";
+    }
+}
+
+function displayReviews(odysseyId) {
+    if (document.getElementById("odysseyReviews" + odysseyId).style.display === "none") {
+        document.getElementById("odysseyReviews" + odysseyId).style.display = "block";
+    } else {
+        document.getElementById("odysseyReviews" + odysseyId).style.display = "none";
     }
 }
 
@@ -556,6 +688,39 @@ function editMeetingNoteModal(meetingId, currentNote) {
         existingNote.innerHTML = currentNote;
     }
     // disable button if meeting is not complete
+}
+
+function editReviewModal(reviewId, currentPunctuality, currentAttendance, currentCourseMaterial, currentMenteeEngagement,
+                         currentRating, currentOverallExperience, menteeReview, mentorReview) {
+    // create modal with post for a meetings notes
+    $('#odyssey-review-modal').modal('show');
+    var action = document.getElementById("odyssey-review-form");
+    action.action = "../api/reviews/edit/" + reviewId;
+
+    if (menteeReview) {
+        document.getElementById("mentee-engagement-section").style.display = "none";
+    } else {
+        document.getElementById("course-material-section").style.display = "none";
+    }
+
+    if (currentPunctuality !== 0) {
+        document.getElementById("punctuality").value = currentPunctuality;
+    }
+    if (currentAttendance !== 0) {
+        document.getElementById("attendance").value = currentAttendance;
+    }
+    if (currentCourseMaterial !== 0) {
+        document.getElementById("courseMaterial").value = currentCourseMaterial;
+    }
+    if (currentMenteeEngagement !== 0) {
+        document.getElementById("menteeEngagement").value = currentMenteeEngagement;
+    }
+    if (currentRating !== 0) {
+        document.getElementById("rating").value = currentRating;
+    }
+    if (currentOverallExperience !== 0) {
+        document.getElementById("overallExperience").innerHTML = currentOverallExperience;
+    }
 }
 
 

@@ -278,7 +278,7 @@ function getOdysseys(userId, userName) {
                                 entry.odysseyReviews[i].mentorReview);
                         };
 
-                            reviewButton.innerHTML = "Edit Review";
+                        reviewButton.innerHTML = "Edit Review";
 
                         if (entry.odysseyReviews[i].mentorReview) {
                             reviewHeader.innerHTML = "Mentor Review";
@@ -379,7 +379,7 @@ function editReviewModal(reviewId, currentPunctuality, currentAttendance, curren
                          currentRating, currentOverallExperience, menteeReview, mentorReview) {
     // create modal with post for a meetings notes
     $('#odyssey-review-modal').modal('show');
-    var action = document.getElementById("odyssey-review-form");
+    let action = document.getElementById("odyssey-review-form");
     action.action = "../api/reviews/edit/" + reviewId;
 
     if (menteeReview) {
