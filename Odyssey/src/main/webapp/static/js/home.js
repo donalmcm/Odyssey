@@ -238,68 +238,95 @@ function getOdysseys(userId, userName) {
 
                     var reviewHeader = document.createElement("h2");
                     odysseyReview.appendChild(reviewHeader);
-
-                    var punctuality = document.createElement("h4");
-                    punctuality.innerHTML = "Punctuality: " + entry.odysseyReviews[i].punctuality + "/5 ";
-                    odysseyReview.appendChild(punctuality);
-
-                    var attendance = document.createElement("h4");
-                    attendance.innerHTML = "Attendance: " + entry.odysseyReviews[i].attendance + "/5 ";
-                    odysseyReview.appendChild(attendance);
-
-                    // Only display for mentee's
-                    var courseMaterial = document.createElement("h4");
-                    courseMaterial.innerHTML = "Course Material: " + entry.odysseyReviews[i].courseMaterial + "/5 ";
-                    odysseyReview.appendChild(courseMaterial);
-
-                    // Only display for mentor's
-                    var menteeEngagement = document.createElement("h4");
-                    menteeEngagement.innerHTML = "Mentee Engagement: " + entry.odysseyReviews[i].menteeEngagement + "/5 ";
-                    odysseyReview.appendChild(menteeEngagement);
-
-                    var rating = document.createElement("h4");
-                    rating.innerHTML = "rating: " + entry.odysseyReviews[i].rating + "/5 ";
-                    odysseyReview.appendChild(rating);
-
-                    var overallExperience = document.createElement("div");
-                    var overallExperienceLabel = document.createElement("h4");
-                    overallExperienceLabel.innerHTML = "Overall Experience: ";
-                    overallExperience.appendChild(overallExperienceLabel);
-                    var overallExperienceText = document.createElement("p");
-                    overallExperienceText.innerHTML = entry.odysseyReviews[i].overallExperience;
-                    overallExperience.appendChild(overallExperienceText);
-
-                    var reviewButton = document.createElement("button");
-                    reviewButton.className = "btn btn-primary btn-lg reviews-button";
-                    reviewButton.onclick = function () {
-                        editReviewModal(entry.odysseyReviews[i].id, entry.odysseyReviews[i].punctuality,
-                            entry.odysseyReviews[i].attendance, entry.odysseyReviews[i].courseMaterial,
-                            entry.odysseyReviews[i].menteeEngagement, entry.odysseyReviews[i].rating,
-                            entry.odysseyReviews[i].overallExperience, entry.odysseyReviews[i].menteeReview,
-                            entry.odysseyReviews[i].mentorReview);
-                    };
-
                     if (entry.odysseyReviews[i].submitted) {
-                        reviewButton.innerHTML = "Edit Review";
-                    } else {
-                        reviewButton.innerHTML = "Add Review";
-                    }
-                    if (entry.odysseyReviews[i].mentorReview) {
-                        reviewHeader.innerHTML = "Mentor Review";
-                        courseMaterial.style.display = "none";
-                        if (userName === entry.mentee.firstName) {
-                            reviewButton.style.display = "none";
-                        }
-                    } else {
-                        reviewHeader.innerHTML = "Mentee Review";
-                        menteeEngagement.style.display = "none";
-                        if (userName === entry.mentor.firstName) {
-                            reviewButton.style.display = "none";
-                        }
-                    }
-                    overallExperience.appendChild(reviewButton);
+                        var punctuality = document.createElement("h4");
+                        punctuality.innerHTML = "Punctuality: " + entry.odysseyReviews[i].punctuality + "/5 ";
+                        odysseyReview.appendChild(punctuality);
 
-                    odysseyReview.appendChild(overallExperience);
+                        var attendance = document.createElement("h4");
+                        attendance.innerHTML = "Attendance: " + entry.odysseyReviews[i].attendance + "/5 ";
+                        odysseyReview.appendChild(attendance);
+
+                        // Only display for mentee's
+                        var courseMaterial = document.createElement("h4");
+                        courseMaterial.innerHTML = "Course Material: " + entry.odysseyReviews[i].courseMaterial + "/5 ";
+                        odysseyReview.appendChild(courseMaterial);
+
+                        // Only display for mentor's
+                        var menteeEngagement = document.createElement("h4");
+                        menteeEngagement.innerHTML = "Mentee Engagement: " + entry.odysseyReviews[i].menteeEngagement + "/5 ";
+                        odysseyReview.appendChild(menteeEngagement);
+
+                        var rating = document.createElement("h4");
+                        rating.innerHTML = "rating: " + entry.odysseyReviews[i].rating + "/5 ";
+                        odysseyReview.appendChild(rating);
+
+                        var overallExperience = document.createElement("div");
+                        var overallExperienceLabel = document.createElement("h4");
+                        overallExperienceLabel.innerHTML = "Overall Experience: ";
+                        overallExperience.appendChild(overallExperienceLabel);
+                        var overallExperienceText = document.createElement("p");
+                        overallExperienceText.innerHTML = entry.odysseyReviews[i].overallExperience;
+                        overallExperience.appendChild(overallExperienceText);
+
+                        let reviewButton = document.createElement("button");
+                        reviewButton.className = "btn btn-primary btn-lg reviews-button";
+                        reviewButton.onclick = function () {
+                            editReviewModal(entry.odysseyReviews[i].id, entry.odysseyReviews[i].punctuality,
+                                entry.odysseyReviews[i].attendance, entry.odysseyReviews[i].courseMaterial,
+                                entry.odysseyReviews[i].menteeEngagement, entry.odysseyReviews[i].rating,
+                                entry.odysseyReviews[i].overallExperience, entry.odysseyReviews[i].menteeReview,
+                                entry.odysseyReviews[i].mentorReview);
+                        };
+
+                            reviewButton.innerHTML = "Edit Review";
+
+                        if (entry.odysseyReviews[i].mentorReview) {
+                            reviewHeader.innerHTML = "Mentor Review";
+                            courseMaterial.style.display = "none";
+                            if (userName === entry.mentee.firstName) {
+                                reviewButton.style.display = "none";
+                            }
+                        } else {
+                            reviewHeader.innerHTML = "Mentee Review";
+                            menteeEngagement.style.display = "none";
+                            if (userName === entry.mentor.firstName) {
+                                reviewButton.style.display = "none";
+                            }
+                        }
+                        overallExperience.appendChild(reviewButton);
+
+                        odysseyReview.appendChild(overallExperience);
+                    } else {
+                        var noReview = document.createElement("h4");
+                        noReview.innerHTML = "No review has been left";
+                        odysseyReview.appendChild(noReview);
+
+                        let reviewButton = document.createElement("button");
+                        reviewButton.className = "btn btn-primary btn-lg reviews-button";
+                        reviewButton.onclick = function () {
+                            editReviewModal(entry.odysseyReviews[i].id, entry.odysseyReviews[i].punctuality,
+                                entry.odysseyReviews[i].attendance, entry.odysseyReviews[i].courseMaterial,
+                                entry.odysseyReviews[i].menteeEngagement, entry.odysseyReviews[i].rating,
+                                entry.odysseyReviews[i].overallExperience, entry.odysseyReviews[i].menteeReview,
+                                entry.odysseyReviews[i].mentorReview);
+                        };
+                        reviewButton.innerHTML = "Add Review";
+                        if (entry.odysseyReviews[i].mentorReview) {
+                            reviewHeader.innerHTML = "Mentor Review";
+                            if (userName === entry.mentee.firstName) {
+                                reviewButton.style.display = "none";
+                            }
+                        } else {
+                            reviewHeader.innerHTML = "Mentee Review";
+                            if (userName === entry.mentor.firstName) {
+                                reviewButton.style.display = "none";
+                            }
+                        }
+
+                        odysseyReview.appendChild(reviewButton);
+                    }
+
                     // last line
                     odysseyReviews.appendChild(odysseyReview);
                 }
@@ -350,19 +377,36 @@ function editMeetingNoteModal(meetingId, currentNote) {
 }
 
 function editReviewModal(reviewId, currentPunctuality, currentAttendance, currentCourseMaterial, currentMenteeEngagement,
-                         currentRating, currentOverallExperience,menteeReview,mentorReview) {
+                         currentRating, currentOverallExperience, menteeReview, mentorReview) {
     // create modal with post for a meetings notes
     $('#odyssey-review-modal').modal('show');
     var action = document.getElementById("odyssey-review-form");
-    action.action = "../api/reviews/edit/" + reviewId;
+    action.action = "../api/reviews/edit/" + reviewId+"/home";
 
-    if(menteeReview) {
-        document.getElementById("menteeEngagement").style.display = "none";
+    if (menteeReview) {
+        document.getElementById("mentee-engagement-section").style.display = "none";
     } else {
-        document.getElementById("courseMaterial").style.display = "none";
+        document.getElementById("course-material-section").style.display = "none";
     }
 
-    // populate fields if they exist and are not zero
+    if (currentPunctuality !== 0) {
+        document.getElementById("punctuality").value = currentPunctuality;
+    }
+    if (currentAttendance !== 0) {
+        document.getElementById("attendance").value = currentAttendance;
+    }
+    if (currentCourseMaterial !== 0) {
+        document.getElementById("courseMaterial").value = currentCourseMaterial;
+    }
+    if (currentMenteeEngagement !== 0) {
+        document.getElementById("menteeEngagement").value = currentMenteeEngagement;
+    }
+    if (currentRating !== 0) {
+        document.getElementById("rating").value = currentRating;
+    }
+    if (currentOverallExperience !== 0) {
+        document.getElementById("overallExperience").innerHTML = currentOverallExperience;
+    }
 }
 
 
