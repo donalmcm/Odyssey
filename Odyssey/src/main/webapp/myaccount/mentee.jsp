@@ -1,5 +1,5 @@
 <%@ page import="com.odyssey.model.Employee" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Odyssey - Mentee</title>
@@ -22,8 +22,7 @@
             if (cookie.getName().equals("email")) email = cookie.getValue();
         }
     }
-    Employee e = new Employee();
-    e = Employee.getEmployeeByEmail(email);
+    Employee e = Employee.getEmployeeByEmail(email);
 %>
 <body onload="getOdysseysByMentee(<%=e.getId()%>);">
 <div class="container-fluid">
@@ -39,10 +38,12 @@
             </h1>
         </div>
         <div class="col-md-1 text-center profile-icon">
-            <a href="profile.jsp"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
+            <a href="profile.jsp"><i class="far fa-user-circle fa-3x rounded"></i></a>
         </div>
         <form action="LogoutServlet" method="post">
-            <input type="submit" value="Logout">
+            <button type="submit" class="col-md-1 text-center log-out-icon">
+                <i class="fas fa-sign-out-alt fa-3x rounded"></i>
+            </button>
         </form>
     </div>
     <div class="row main">
@@ -258,12 +259,12 @@
                                                    name="mentorDuration" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <label for="mentorDuration">Day of Meetings</label>
+                                            <label for="dayOfMeetings">Day of Meetings</label>
                                             <input class="form-control" id="dayOfMeetings"
                                                    name="dayOfMeetings" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <label for="mentorDuration">Time of Meetings</label>
+                                            <label for="timeOfMeetings">Time of Meetings</label>
                                             <input class="form-control" id="timeOfMeetings"
                                                    name="timeOfMeetings" readonly>
                                         </div>
@@ -330,19 +331,23 @@
                     <form role="form" method="post" id="odyssey-review-form">
                         <div class="form-group">
                             <label for="punctuality">Punctuality</label>
-                            <input class="form-control" type="range" id="punctuality" name="punctuality" min="1" max="5" required>
+                            <input class="form-control" type="range" id="punctuality" name="punctuality" min="1" max="5"
+                                   required>
                         </div>
                         <div class="form-group">
                             <label for="attendance">Attendance</label>
-                            <input class="form-control" type="range" id="attendance" name="attendance" min="1" max="5" required>
+                            <input class="form-control" type="range" id="attendance" name="attendance" min="1" max="5"
+                                   required>
                         </div>
                         <div class="form-group" id="course-material-section">
                             <label for="courseMaterial">Course Material</label>
-                            <input class="form-control" type="range" id="courseMaterial" name="courseMaterial" min="1" max="5" required>
+                            <input class="form-control" type="range" id="courseMaterial" name="courseMaterial" min="1"
+                                   max="5" required>
                         </div>
                         <div class="form-group" id="mentee-engagement-section">
                             <label for="menteeEngagement">Mentee Engagement</label>
-                            <input class="form-control" type="range" id="menteeEngagement" name="menteeEngagement" min="1" max="5" required>
+                            <input class="form-control" type="range" id="menteeEngagement" name="menteeEngagement"
+                                   min="1" max="5" required>
                         </div>
                         <div class="form-group">
                             <label for="rating">Rating</label>

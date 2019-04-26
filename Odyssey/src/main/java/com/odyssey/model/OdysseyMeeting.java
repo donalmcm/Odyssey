@@ -1,7 +1,6 @@
 package com.odyssey.model;
 
 import com.HibernateUtil;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -41,13 +40,13 @@ public class OdysseyMeeting {
     public OdysseyMeeting() {
     }
 
-    public OdysseyMeeting(Calendar date, Odyssey odyssey) {
+    OdysseyMeeting(Calendar date, Odyssey odyssey) {
         this.date = date;
         this.odyssey = odyssey;
     }
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    private void setCompleted() {
+        this.completed = true;
     }
 
     public void setMeetingNote(String meetingNote) {
@@ -58,14 +57,14 @@ public class OdysseyMeeting {
         return id;
     }
 
-    public boolean getIsCompleted() {
+    boolean getIsCompleted() {
         if (completed) {
             return completed;
         }
 
         Calendar currentTime = Calendar.getInstance();
         if (currentTime.after(date)) {
-            setCompleted(true);
+            setCompleted();
         }
         return completed;
     }

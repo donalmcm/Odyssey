@@ -1,5 +1,5 @@
 <%@ page import="com.odyssey.model.Employee" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Odyssey - Home</title>
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../static/css/index.css">
     <link rel="stylesheet" type="text/css" href="../static/css/home.css">
-    <link rel="shortcut icon" type="image/x-icon" href="../static/img/odysseyLogo.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/odysseyLogo.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -17,20 +17,19 @@
 <%
     String email = null;
     Cookie[] cookies = request.getCookies();
-    if(cookies != null){
-        for(Cookie cookie : cookies){
-            if(cookie.getName().equals("email")) email = cookie.getValue();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("email")) email = cookie.getValue();
         }
     }
-    Employee e = new Employee();
-    e = Employee.getEmployeeByEmail(email);
+    Employee e = Employee.getEmployeeByEmail(email);
 %>
 <body onload="getOdysseys(<%=e.getId()%>,'<%=e.getFirstName()%>');">
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
             <a href="home.jsp">
-                <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded" />
+                <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded"/>
             </a>
         </div>
         <div class="col-md-8 banner-title">
@@ -39,10 +38,12 @@
             </h1>
         </div>
         <div class="col-md-1 text-center profile-icon">
-            <a href="profile.jsp"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
+            <a href="profile.jsp"><i class="far fa-user-circle fa-3x rounded"></i></a>
         </div>
         <form action="LogoutServlet" method="post">
-            <input type="submit" value="Logout" >
+            <button type="submit" class="col-md-1 text-center log-out-icon">
+                <i class="fas fa-sign-out-alt fa-3x rounded"></i>
+            </button>
         </form>
     </div>
     <div class="row main">
@@ -111,19 +112,23 @@
                     <form role="form" method="post" id="odyssey-review-form">
                         <div class="form-group">
                             <label for="punctuality">Punctuality</label>
-                            <input class="form-control" type="range" id="punctuality" name="punctuality" min="1" max="5" required>
+                            <input class="form-control" type="range" id="punctuality" name="punctuality" min="1" max="5"
+                                   required>
                         </div>
                         <div class="form-group">
                             <label for="attendance">Attendance</label>
-                            <input class="form-control" type="range" id="attendance" name="attendance" min="1" max="5" required>
+                            <input class="form-control" type="range" id="attendance" name="attendance" min="1" max="5"
+                                   required>
                         </div>
                         <div class="form-group" id="course-material-section">
                             <label for="courseMaterial">Course Material</label>
-                            <input class="form-control" type="range" id="courseMaterial" name="courseMaterial" min="1" max="5" required>
+                            <input class="form-control" type="range" id="courseMaterial" name="courseMaterial" min="1"
+                                   max="5" required>
                         </div>
                         <div class="form-group" id="mentee-engagement-section">
                             <label for="menteeEngagement">Mentee Engagement</label>
-                            <input class="form-control" type="range" id="menteeEngagement" name="menteeEngagement" min="1" max="5" required>
+                            <input class="form-control" type="range" id="menteeEngagement" name="menteeEngagement"
+                                   min="1" max="5" required>
                         </div>
                         <div class="form-group">
                             <label for="rating">Rating</label>

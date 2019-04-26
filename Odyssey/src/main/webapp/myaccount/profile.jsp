@@ -1,12 +1,12 @@
 <%@ page import="com.odyssey.model.Employee" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Odyssey - Profile</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../static/css/index.css">
-    <link rel="shortcut icon" type="image/x-icon" href="../static/img/odysseyLogo.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/odysseyLogo.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
@@ -18,19 +18,18 @@
 <%
     String email = null;
     Cookie[] cookies = request.getCookies();
-    if(cookies != null){
-        for(Cookie cookie : cookies){
-            if(cookie.getName().equals("email")) email = cookie.getValue();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("email")) email = cookie.getValue();
         }
     }
-    Employee e = new Employee();
-     e = Employee.getEmployeeByEmail(email);
+    Employee e = Employee.getEmployeeByEmail(email);
 %>
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
             <a href="home.jsp">
-                <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded" />
+                <img alt="Odyssey Logo" src="../static/img/odysseyLogo.png" class="rounded"/>
             </a>
         </div>
         <div class="col-md-8 banner-title">
@@ -39,10 +38,12 @@
             </h1>
         </div>
         <div class="col-md-1 text-center profile-icon">
-            <a href="profile.jsp"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
+            <a href="profile.jsp"><i class="far fa-user-circle fa-3x rounded"></i></a>
         </div>
         <form action="LogoutServlet" method="post">
-            <input type="submit" value="Logout" >
+            <button type="submit" class="col-md-1 text-center log-out-icon">
+                <i class="fas fa-sign-out-alt fa-3x rounded"></i>
+            </button>
         </form>
     </div>
     <div class="row main">
@@ -65,11 +66,12 @@
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-2">
-                    <img alt="Default Profile Image" src="../static/img/odysseyLogo.png" />
+                    <img alt="Default Profile Image" src="../static/img/odysseyLogo.png"/>
                 </div>
                 <div class="col-md-10">
                     <h3>
-                        <strong><%=e.getFirstName() +" "+ e.getLastName()%></strong>
+                        <strong><%=e.getFirstName() + " " + e.getLastName()%>
+                        </strong>
                     </h3>
                     <h3>
                         <%=e.getTitle()%>

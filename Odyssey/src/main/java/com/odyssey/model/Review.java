@@ -1,7 +1,6 @@
 package com.odyssey.model;
 
 import com.HibernateUtil;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
