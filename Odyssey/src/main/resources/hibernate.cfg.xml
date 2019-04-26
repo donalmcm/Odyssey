@@ -8,7 +8,7 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://odysseydb.cqojs0vqjoon.eu-west-1.rds.amazonaws.com:3306/odysseydb</property>
+        <property name="connection.url">jdbc:mysql://odysseydb.cqojs0vqjoon.eu-west-1.rds.amazonaws.com:3306/odysseydb?useSSL=false</property>
         <property name="connection.username">homer</property>
         <property name="connection.password">myPassword</property>
 
