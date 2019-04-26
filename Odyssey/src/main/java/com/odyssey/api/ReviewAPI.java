@@ -15,21 +15,26 @@ import java.util.List;
 @Path("/reviews")
 public class ReviewAPI {
 
-
     @GET
     @Produces("application/json")
     public Response getAllReviews() {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
-        session.getTransaction().begin();
+        try {
+            session.getTransaction().begin();
+            Query<Review> query = session.createNamedQuery("Review.findAllReviews",Review.class);
+            List<Review> reviews = query.getResultList();
 
-        Query<Review> query = session.createNamedQuery("Review.findAllReviews",Review.class);
-        List<Review> reviews = query.getResultList();
-
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(reviews, MediaType.APPLICATION_JSON).build();
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(reviews, MediaType.APPLICATION_JSON).build();
+        }
+        catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

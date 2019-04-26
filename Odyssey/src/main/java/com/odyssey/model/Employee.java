@@ -10,16 +10,16 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@NamedQueries({ @NamedQuery(name = "Employee.findAllEmployees", query = "select e from Employee e"),
+@NamedQueries({@NamedQuery(name = "Employee.findAllEmployees", query = "select e from Employee e"),
         @NamedQuery(name = "Employee.findById", query = "select e from Employee e where e.id=:id"),
-        @NamedQuery(name="Employee.findMentors", query = "select e from Employee e where e.isMentor=true"),
-        @NamedQuery(name="Employee.findMentees", query = "select e from Employee e where e.isMentee=true"),
-        @NamedQuery(name="Employee.findMentorsByTopic", query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic and e.awaitingMentee=true and e.id!=:id"),
-        @NamedQuery(name="Employee.findMentorsByAwaiting", query = "select e from Employee e where e.isMentor=true and e.awaitingMentee=true and e.id!=:id"),
-        @NamedQuery(name="Employee.findMentorsByTopicAndDuration", query = "select e from Employee e where e.isMentor=true and e.awaitingMentee=true and e.topic.name=:topic and e.mentorDuration=:mentorDuration and e.id!=:id"),
-        @NamedQuery(name="Employee.findAvailability", query ="select e.availability from Employee e where e.id=:id" ),
-        @NamedQuery(name="Employee.findByEmail",query = "select e from Employee e where e.email=:email"),
-        @NamedQuery(name="Employee.findMentorForMentee",query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic and e.awaitingMentee=true and e.mentorDuration=:mentorDuration and e.id!=:menteeId")})
+        @NamedQuery(name = "Employee.findMentors", query = "select e from Employee e where e.isMentor=true"),
+        @NamedQuery(name = "Employee.findMentees", query = "select e from Employee e where e.isMentee=true"),
+        @NamedQuery(name = "Employee.findMentorsByTopic", query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic and e.awaitingMentee=true and e.id!=:id"),
+        @NamedQuery(name = "Employee.findMentorsByAwaiting", query = "select e from Employee e where e.isMentor=true and e.awaitingMentee=true and e.id!=:id"),
+        @NamedQuery(name = "Employee.findMentorsByTopicAndDuration", query = "select e from Employee e where e.isMentor=true and e.awaitingMentee=true and e.topic.name=:topic and e.mentorDuration=:mentorDuration and e.id!=:id"),
+        @NamedQuery(name = "Employee.findAvailability", query = "select e.availability from Employee e where e.id=:id"),
+        @NamedQuery(name = "Employee.findByEmail", query = "select e from Employee e where e.email=:email"),
+        @NamedQuery(name = "Employee.findMentorForMentee", query = "select e from Employee e where e.isMentor=true and e.topic.name=:topic and e.awaitingMentee=true and e.mentorDuration=:mentorDuration and e.id!=:menteeId")})
 
 @XmlRootElement
 @Entity
@@ -72,7 +72,7 @@ public class Employee {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentee")
     private List<Odyssey> menteeOdyssey;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn
     @JsonIgnore
     private Employee manager;
@@ -87,7 +87,8 @@ public class Employee {
     @OneToOne
     private Availability availability;
 
-    public Employee(){}
+    public Employee() {
+    }
 
     public Employee(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
@@ -118,14 +119,8 @@ public class Employee {
         awaitingMentee = true;
     }
 
-    public void becomeManager(List<Employee> employees) {
-        // create relationship between a manager and their employees
-        isManager = true;
-    }
-
-
     public static Employee getEmployeeByEmail(String email) {
-        if(email == null) {
+        if (email == null) {
             return null;
         } else {
             SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -144,7 +139,6 @@ public class Employee {
 
     // ------------- GETTERS AND SETTERS ----------------------------
 
-
     public String getLocation() {
         return location;
     }
@@ -153,73 +147,95 @@ public class Employee {
         return awaitingMentee;
     }
 
-    public void setAwaitingMentee(boolean awaitingMentee) {
-        this.awaitingMentee = awaitingMentee;
+    void setAwaitingMentee() {
+        this.awaitingMentee = false;
     }
 
     public List<Employee> getTeamMembers() {
         return teamMembers;
     }
+
     public void setManager(Employee manager) {
         this.manager = manager;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
+
     public Availability getAvailability() {
         return availability;
     }
-    public void setMentorToFalse() {
+
+    void setMentorToFalse() {
         isMentor = false;
     }
+
     public Topic getTopic() {
         return topic;
     }
+
     public int getId() {
         return id;
     }
+
     public void setMentee(boolean mentee) {
         isMentee = mentee;
     }
+
     public String getFirstName() {
         return firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public String getFullName() {
         return firstName + " " + lastName;
     }
+
     public String getEmail() {
         return email;
     }
+
     public String getTitle() {
         return title;
     }
+
     public boolean isAdmin() {
         return isAdmin;
     }
+
     public boolean isMentee() {
         return isMentee;
     }
+
     public boolean isMentor() {
         return isMentor;
     }
-    public boolean isManager() {return isManager;}
+
+    public boolean isManager() {
+        return isManager;
+    }
+
     public int getMentorDuration() {
         return mentorDuration;
     }
-
 }

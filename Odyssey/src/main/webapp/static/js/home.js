@@ -370,7 +370,7 @@ function editMeetingNoteModal(meetingId, currentNote) {
     action.action = "../api/odysseyMeetings/" + meetingId + "/note";
 
     if (currentNote != null || currentNote !== "") {
-        var existingNote = document.getElementById("meetingNote");
+        let existingNote = document.getElementById("meetingNote");
         existingNote.innerHTML = currentNote;
     }
 }

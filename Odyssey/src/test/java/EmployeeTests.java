@@ -3,16 +3,16 @@ import com.odyssey.model.Employee;
 import com.odyssey.model.Topic;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeTests {
-    Employee employee = new Employee("Joe", "Bloggs","joebloggs@email.com","12345");
-    Availability availability = new Availability(true,true,true,true,
-            true,true,true,true,true,true,true,
-            true,true,true,true,true,true,
-            true,true,true,true,true,true,
-            true,true,true,true,true,true,true);
-    Topic topic = new Topic("Java");
+    private Employee employee = new Employee("Joe", "Bloggs", "joebloggs@email.com", "12345");
+    private Availability availability = new Availability(true, true, true, true,
+            true, true, true, true, true, true, true,
+            true, true, true, true, true, true,
+            true, true, true, true, true, true,
+            true, true, true, true, true, true, true);
+    private Topic topic = new Topic("Java");
 
     @Test
     void testGetDisplayName() {
@@ -40,18 +40,18 @@ class EmployeeTests {
 
     @Test
     void testBecomeMentor() {
-        employee.becomeMentor(topic,availability,4);
-        assertEquals(true,employee.isMentor());
+        employee.becomeMentor(topic, availability, 4);
+        assertTrue(employee.isMentor());
     }
 
     @Test
     void testGetMentorDuration() {
-        employee.becomeMentor(topic,availability,4);
-        assertEquals(4,employee.getMentorDuration());
+        employee.becomeMentor(topic, availability, 4);
+        assertEquals(4, employee.getMentorDuration());
     }
 
     @Test
     void testGetIsManager() {
-        assertEquals(false,employee.isManager());
+        assertFalse(employee.isManager());
     }
 }

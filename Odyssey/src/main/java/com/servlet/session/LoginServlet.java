@@ -6,22 +6,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
@@ -34,10 +27,9 @@ public class LoginServlet extends HttpServlet {
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
-
-        Query<Employee> query = session.createNamedQuery("Employee.findByEmail",Employee.class);
-        query.setParameter("email",emailIn);
-        if(!query.getResultList().isEmpty()) {
+        Query<Employee> query = session.createNamedQuery("Employee.findByEmail", Employee.class);
+        query.setParameter("email", emailIn);
+        if (!query.getResultList().isEmpty()) {
             Employee employee = query.getSingleResult();
 
             final String email = employee.getEmail();
@@ -55,9 +47,9 @@ public class LoginServlet extends HttpServlet {
                 HttpSession newSession = request.getSession(true);
 
                 //setting session to expiry in 15 mins
-                newSession.setMaxInactiveInterval(15*60);
+                newSession.setMaxInactiveInterval(15 * 60);
 
-                Cookie userEmail = new Cookie("email",email);
+                Cookie userEmail = new Cookie("email", email);
                 response.addCookie(userEmail);
                 response.sendRedirect("myaccount/home.jsp");
                 // For further security
@@ -75,7 +67,5 @@ public class LoginServlet extends HttpServlet {
             out.println("<font color=red>Either username or password is wrong.</font>");
             rd.include(request, response);
         }
-
-
     }
 }

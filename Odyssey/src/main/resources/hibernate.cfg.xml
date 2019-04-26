@@ -29,13 +29,12 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
 
-        <mapping class="com.odyssey.model.Employee" />
-        <mapping class="com.odyssey.model.Odyssey" />
-        <mapping class="com.odyssey.model.Topic" />
-        <mapping class="com.odyssey.model.OdysseyMeeting" />
-        <mapping class="com.odyssey.model.Availability" />
-        <mapping class="com.odyssey.model.Review" />
+        <mapping class="com.odyssey.model.Employee"/>
+        <mapping class="com.odyssey.model.Odyssey"/>
+        <mapping class="com.odyssey.model.Topic"/>
+        <mapping class="com.odyssey.model.OdysseyMeeting"/>
+        <mapping class="com.odyssey.model.Availability"/>
+        <mapping class="com.odyssey.model.Review"/>
 
     </session-factory>
-
 </hibernate-configuration>

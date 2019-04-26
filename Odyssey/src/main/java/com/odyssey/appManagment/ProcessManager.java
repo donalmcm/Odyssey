@@ -14,10 +14,8 @@ public class ProcessManager implements ServletContextListener {
         // Startup tasks go here
     }
 
-
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
 
     }
-
 }
