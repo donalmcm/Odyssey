@@ -1,5 +1,5 @@
 <%@ page import="com.odyssey.model.Employee" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Odyssey - Management</title>
@@ -26,8 +26,7 @@
             if (cookie.getName().equals("email")) email = cookie.getValue();
         }
     }
-    Employee e = new Employee();
-    e = Employee.getEmployeeByEmail(email);
+    Employee e = Employee.getEmployeeByEmail(email);
 
 %>
 <body onload="getManagersTeam(<%=e.getId()%>,<%=e.isManager()%>);">
@@ -44,11 +43,11 @@
             </h1>
         </div>
         <div class="col-md-1 text-center profile-icon">
-            <a href="profile.jsp"><i class="far fa-user-circle fa-3x" class="rounded"></i></a>
+            <a href="profile.jsp"><i class="far fa-user-circle fa-3x rounded"></i></a>
         </div>
         <form action="LogoutServlet" method="post">
             <button type="submit" class="col-md-1 text-center log-out-icon">
-                <i class="fas fa-sign-out-alt fa-3x" class="rounded"></i>
+                <i class="fas fa-sign-out-alt fa-3x rounded"></i>
             </button>
         </form>
     </div>

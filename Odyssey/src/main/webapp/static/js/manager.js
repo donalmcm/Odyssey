@@ -43,9 +43,9 @@ function getManagersTeam(managerId, isManager) {
                 mentorList.append(tr);
             })
         });
+        getGeoGraphInfo();
         getMeetingsGraphInfo();
         getRadarGraphInfo();
-        getGeoGraphInfo();
 
     } else {
         document.getElementById("manager-page-title").innerHTML = "NOT AUTHORIZED";
@@ -59,7 +59,7 @@ function getManagersTeam(managerId, isManager) {
 // --------------------------------- TOPIC PIE CHART -------------------------------------------------------------------
 function getTopicUsageInfo(usedTopics) {
     const topicURL = 'http://localhost:8080/api/topics';
-    var allTopics = [];
+    let allTopics = [];
     // Populate list of topics
     $.getJSON(topicURL, function (data) {
         $.each(data, function (key, entry) {
@@ -70,12 +70,12 @@ function getTopicUsageInfo(usedTopics) {
 }
 
 function getEmployeeOdysseyCount(employeeId) {
-    const odysseyURL = 'http://localhost:8080/api/odysseys/getEmployeeOdysseys/'+employeeId;
+    const odysseyURL = 'http://localhost:8080/api/odysseys/getEmployeeOdysseys/' + employeeId;
     // count number of odysseys and return value to be displayed in row
 }
 
 function loadTopicUsagePieChart(noOfUsedTopics, noOfAllTopics) {
-    var noOfNotUsedTopics = noOfAllTopics - noOfUsedTopics;
+    let noOfNotUsedTopics = noOfAllTopics - noOfUsedTopics;
     new Chart(document.getElementById("pie-chart"), {
         type: 'pie',
         data: {
@@ -110,11 +110,11 @@ function getRadarGraphInfo() {
 }
 
 function getLabelsAndCount(list) {
-    var prev;
-    var labels = [], topicCount = [];
+    let prev;
+    let labels = [], topicCount = [];
 
     list.sort();
-    for (var i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
         if (list[i] !== prev) {
             labels.push(list[i]);
             topicCount.push(1);
@@ -158,8 +158,8 @@ function loadRadarGraph(listOfLabels, labelCount) {
 // --------------------------------------- MEETINGS GRAPHS -------------------------------------------------------------
 function getMeetingsGraphInfo() {
     const meetingCountURL = 'http://localhost:8080/api/odysseyMeetings';
-    var allOdysseyMeetings = [];
-    var allMeetingDays = [];
+    let allOdysseyMeetings = [];
+    let allMeetingDays = [];
     // Populate list of topics
     $.getJSON(meetingCountURL, function (data) {
         $.each(data, function (key, entry) {
@@ -169,15 +169,14 @@ function getMeetingsGraphInfo() {
         getMeetingsAndCount(allOdysseyMeetings);
         getMeetingDaysAndCount(allMeetingDays);
     });
-
 }
 
 function getMeetingsAndCount(list) {
-    var prev;
-    var dates = [], dateCount = [];
+    let prev;
+    let dates = [], dateCount = [];
 
     list.sort();
-    for (var i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
         if (list[i] !== prev) {
             dates.push(list[i]);
             dateCount.push(1);
@@ -186,17 +185,16 @@ function getMeetingsAndCount(list) {
         }
         prev = list[i];
     }
-
     loadMeetingsGraph(dates, dateCount);
 }
 
 function getMeetingDaysAndCount(list) {
-    var prev;
-    var day = [], dayCount = [];
+    let prev;
+    let day = [], dayCount = [];
 
     // change sort to monday -> friday
     list.sort();
-    for (var i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
         if (list[i] !== prev) {
             day.push(list[i]);
             dayCount.push(1);
@@ -205,7 +203,6 @@ function getMeetingDaysAndCount(list) {
         }
         prev = list[i];
     }
-
     loadMeetingDayGraph(day, dayCount);
 }
 
@@ -257,27 +254,34 @@ function loadMeetingsGraph(dates, meetingCount) {
 //-----------------------------------------------GEO AND POLAR GRAPH ---------------------------------------------------
 function getGeoGraphInfo() {
     const employeeURL = 'http://localhost:8080/api/employees';
-    var allEmployeeLocations = [];
-    var allEmployeeTitles = [];
-    var mentors=0,mentees=0,managers=0,admins=0;
+    let allEmployeeLocations = [];
+    let allEmployeeTitles = [];
+    let mentors = 0, mentees = 0, managers = 0, admins = 0;
     // Populate list of topics
     $.getJSON(employeeURL, function (data) {
         $.each(data, function (key, entry) {
             allEmployeeLocations.push(entry.location);
             allEmployeeTitles.push(entry.title);
-            if(entry.mentor === true) { mentors ++;}
-            if(entry.mentee === true) { mentees ++;}
-            if(entry.manager === true) { managers ++;}
-            if(entry.admin === true) { admins ++;}
+            if (entry.mentor === true) {
+                mentors++;
+            }
+            if (entry.mentee === true) {
+                mentees++;
+            }
+            if (entry.manager === true) {
+                managers++;
+            }
+            if (entry.admin === true) {
+                admins++;
+            }
         });
         getCountriesAndCount(allEmployeeLocations);
         getEmployeeTitlesAndCount(allEmployeeTitles);
-        graphEmployeeRoles(mentors,mentees,managers,admins);
+        graphEmployeeRoles(mentors, mentees, managers, admins);
     });
-
 }
 
-function graphEmployeeRoles(mentors,mentees,managers,admins) {
+function graphEmployeeRoles(mentors, mentees, managers, admins) {
     new Chart(document.getElementById("employee-bar-chart"), {
         type: 'bar',
         data: {
@@ -285,13 +289,13 @@ function graphEmployeeRoles(mentors,mentees,managers,admins) {
             datasets: [
                 {
                     label: "Number of employees in this role",
-                    backgroundColor: ["#3e95cd","#3cba9f","#8e5ea2","#c45850"],
-                    data: [mentors,mentees,managers,admins]
+                    backgroundColor: ["#3e95cd", "#3cba9f", "#8e5ea2", "#c45850"],
+                    data: [mentors, mentees, managers, admins]
                 }
             ]
         },
         options: {
-            legend: { display: false },
+            legend: {display: false},
             title: {
                 display: true,
                 text: 'Employee Role Count'
@@ -299,13 +303,14 @@ function graphEmployeeRoles(mentors,mentees,managers,admins) {
         }
     });
 }
+
 // POLAR GRAPH---------------------------
 function getEmployeeTitlesAndCount(list) {
-    var prev;
-    var labels = [], titleCount = [];
+    let prev;
+    let labels = [], titleCount = [];
 
     list.sort();
-    for (var i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
         if (list[i] !== prev) {
             labels.push(list[i]);
             titleCount.push(1);
@@ -318,7 +323,7 @@ function getEmployeeTitlesAndCount(list) {
     loadPolarGraph(labels, titleCount);
 }
 
-function loadPolarGraph(titles,titlesCount) {
+function loadPolarGraph(titles, titlesCount) {
     new Chart(document.getElementById("polar-chart"), {
         type: 'polarArea',
         data: {
@@ -326,7 +331,7 @@ function loadPolarGraph(titles,titlesCount) {
             datasets: [
                 {
                     label: "number of employees for this title",
-                    backgroundColor: ["blue", "green","green","orange","orange","green","green","orange","blue"],
+                    backgroundColor: ["blue", "green", "green", "orange", "orange", "green", "green", "orange", "blue"],
                     data: titlesCount
                 }
             ]
@@ -342,11 +347,11 @@ function loadPolarGraph(titles,titlesCount) {
 
 // GEO GRAPH ------------------------
 function getCountriesAndCount(list) {
-    var prev;
-    var labels = [], countryCount = [];
+    let prev;
+    let labels = [], countryCount = [];
 
     list.sort();
-    for (var i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
         if (list[i] !== prev) {
             labels.push(list[i]);
             countryCount.push(1);
@@ -359,7 +364,6 @@ function getCountriesAndCount(list) {
     loadGeoGraph(labels, countryCount);
 }
 
-
 function loadGeoGraph(countries, countryCount) {
     google.charts.load('current', {
         'packages': ['geochart'],
@@ -370,7 +374,7 @@ function loadGeoGraph(countries, countryCount) {
     google.charts.setOnLoadCallback(drawRegionsMap);
 
     function drawRegionsMap() {
-        var data = google.visualization.arrayToDataTable([
+        let data = google.visualization.arrayToDataTable([
             ['Country', 'Employees'],
             [countries[0], countryCount[0]],
             [countries[1], countryCount[1]],
@@ -385,7 +389,7 @@ function loadGeoGraph(countries, countryCount) {
             [countries[10], countryCount[10]]
         ]);
 
-        var options = {
+        let options = {
             chartArea: {
                 left: 40,
                 width: '100%'
@@ -396,10 +400,8 @@ function loadGeoGraph(countries, countryCount) {
             width: '100%'
         };
 
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        let chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
         chart.draw(data, options);
     }
 }
-
-

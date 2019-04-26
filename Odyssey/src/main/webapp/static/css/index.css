@@ -1,4 +1,4 @@
-html,body {
+html, body {
     height: 100%;
 }
 
@@ -12,7 +12,7 @@ html,body {
     height: inherit;
 }
 
-.side-nav li{
+.side-nav li {
     width: 100%;
     margin-top: 2em;
     text-align: center;
@@ -36,32 +36,32 @@ html,body {
     width: 85%;
 }
 
-.banner-title h1{
+.banner-title h1 {
     color: white;
 }
 
-.profile-icon{
+.profile-icon {
     height: 5em;
     padding-top: .75em;
     background-color: #2196F3;
 }
+
 .profile-icon i {
     color: white;
 }
 
 .log-out-icon {
     height: 5em;
-    padding-top: .75em;
     background-color: #2196F3;
     border: #2196F3;
     padding: 0;
 }
 
-.log-out-icon i{
+.log-out-icon i {
     color: white;
 }
 
-.login-form input[type=text], input[type=password]{
+.login-form input[type=text], input[type=password] {
     border: 0;
     outline: 0;
     background: transparent;
@@ -71,8 +71,9 @@ html,body {
     font-size: x-large;
     margin-bottom: 1em;
 }
+
 .login-logo {
-   margin-top: 5em;
+    margin-top: 5em;
 }
 
 .login-button {
@@ -83,7 +84,7 @@ html,body {
     color: white;
 }
 
-.forgot-password a{
+.forgot-password a {
     margin-top: 2em;
     float: right;
     color: #2196F3;
@@ -96,13 +97,13 @@ html,body {
 }
 
 .new-employee-form-header {
-     padding:35px 50px;
-     background-color: #2196F3;
-     color: white;
- }
+    padding: 35px 50px;
+    background-color: #2196F3;
+    color: white;
+}
 
 .new-odyssey-form-header {
-    padding:35px 50px;
+    padding: 35px 50px;
     background-color: #2196F3;
     color: white;
 }
@@ -111,7 +112,7 @@ html,body {
     width: 100%;
 }
 
-.mentor-availability-table th, td{
+.mentor-availability-table th, td {
     text-align: center;
 }
 
@@ -122,9 +123,11 @@ html,body {
     padding: .5em;
     list-style: none;
 }
-.profile-card li{
+
+.profile-card li {
     padding: .5em;
 }
+
 .edit-button {
     background-color: greenyellow;
     border: none;
@@ -132,7 +135,7 @@ html,body {
     cursor: pointer;
 }
 
-.edit-button:hover{
+.edit-button:hover {
     background-color: white;
     color: greenyellow;
 }
@@ -149,33 +152,33 @@ html,body {
 }
 
 .ck-button {
-    margin:4px;
+    margin: 4px;
     border: solid green 2px;
     color: green;
-    overflow:auto;
-    float:left;
+    overflow: auto;
+    float: left;
 }
 
 .ck-button label {
-    float:left;
-    width:5.0em;
+    float: left;
+    width: 5.0em;
     margin: 0;
 }
 
 .ck-button label span {
-    text-align:center;
-    padding:.5em;
-    display:block;
+    text-align: center;
+    padding: .5em;
+    display: block;
 }
 
 .ck-button label input {
-    position:absolute;
-    top:-9999px;
+    position: absolute;
+    top: -9999px;
 }
 
 .ck-button input:checked + span {
-    background-color:green;
-    color:#fff;
+    background-color: green;
+    color: #fff;
 }
 
 .ck-button input:disabled + span {
@@ -199,7 +202,7 @@ html,body {
 }
 
 .odyssey-card {
-    border : solid 2px #5cb85c;
+    border: solid 2px #5cb85c;
     background-color: #eeeeee;
     display: flex;
     flex-direction: column;
@@ -208,6 +211,7 @@ html,body {
     margin: 16px;
     border-radius: 16px;
 }
+
 .odyssey-type {
     display: flex;
     flex-direction: column;
@@ -246,6 +250,7 @@ html,body {
     width: 50%;
     float: left;
 }
+
 .first-meeting {
     width: 50%;
     float: left;
@@ -254,12 +259,13 @@ html,body {
 
 
 .last-meeting-label {
-    width:  50%;
+    width: 50%;
     float: right;
     text-align: right;
 }
+
 .last-meeting {
-    width:  50%;
+    width: 50%;
     float: right;
     text-align: right;
     margin-top: 0;
@@ -269,6 +275,7 @@ html,body {
     width: 50%;
     float: left;
 }
+
 .meetings-details {
     width: 50%;
     float: left;
@@ -291,9 +298,11 @@ html,body {
 #home-page-title {
     margin: 16px;
 }
+
 #mentor-page-odyssey-title {
     margin: 16px;
 }
+
 #mentor-odyssey-cards {
     padding: 0;
 }
@@ -324,9 +333,13 @@ html,body {
     text-align: left;
 }
 
-.employee-table tr:nth-child(even){background-color: #f2f2f2;}
+.employee-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
 
-.employee-table tr:hover {background-color: #ddd;}
+.employee-table tr:hover {
+    background-color: #ddd;
+}
 
 .employee-table th {
     padding-top: 12px;
@@ -343,13 +356,15 @@ html,body {
 .margin16 {
     margin: 16px;
 }
+
 .margin-top {
     margin-top: 16px;
 }
+
 .graph-container {
     margin: 16px;
     padding: 16px;
-    border : solid 2px darkgrey;
+    border: solid 2px darkgrey;
     background-color: whitesmoke;
     border-radius: 16px;
 }
@@ -360,7 +375,7 @@ html,body {
 }
 
 .awaiting-mentee-card {
-    border : solid 2px #5cb85c;
+    border: solid 2px #5cb85c;
     background-color: #eeeeee;
     display: flex;
     height: fit-content;

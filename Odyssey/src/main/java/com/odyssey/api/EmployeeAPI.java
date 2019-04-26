@@ -1,4 +1,3 @@
-
 package com.odyssey.api;
 
 import com.HibernateUtil;
@@ -24,21 +23,20 @@ public class EmployeeAPI {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
 
-        session.getTransaction().begin();
+            Query<Employee> query = session.createNamedQuery("Employee.findAllEmployees", Employee.class);
+            List<Employee> employees = query.getResultList();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findAllEmployees", Employee.class);
-        List<Employee> employees = query.getResultList();
-
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(employees, MediaType.APPLICATION_JSON).build();
-
-//        } catch (Exception e) {
-//
-//            return e.printStackTrace();
-//            session.getTransaction().rollback();
-//        }
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(employees, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // Get an Employee by id
@@ -48,17 +46,22 @@ public class EmployeeAPI {
     public Response getEmployeeById(@PathParam("id") int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        session.getTransaction().begin();
+        try {
+            session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findById", Employee.class);
-        query.setParameter("id", id);
-        Employee employee = query.getSingleResult();
+            Query<Employee> query = session.createNamedQuery("Employee.findById", Employee.class);
+            query.setParameter("id", id);
+            Employee employee = query.getSingleResult();
 
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(employee, MediaType.APPLICATION_JSON_TYPE).build();
+            session.getTransaction().commit();
+            session.close();
 
-        // catch - not employee exists with that id
+            return Response.ok(employee, MediaType.APPLICATION_JSON_TYPE).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // get all mentors
@@ -68,14 +71,21 @@ public class EmployeeAPI {
     public Response getMentors() {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        session.getTransaction().begin();
+        try {
+            session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findMentors", Employee.class);
+            Query<Employee> query = session.createNamedQuery("Employee.findMentors", Employee.class);
+            List<Employee> mentorList = query.getResultList();
 
-        List<Employee> mentorList = query.getResultList();
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(mentorList, MediaType.APPLICATION_JSON).build();
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(mentorList, MediaType.APPLICATION_JSON).build();
+
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // get all mentees
@@ -85,14 +95,20 @@ public class EmployeeAPI {
     public Response getMentees() {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        session.getTransaction().begin();
+        try{
+            session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findMentees", Employee.class);
+            Query<Employee> query = session.createNamedQuery("Employee.findMentees", Employee.class);
 
-        List<Employee> menteeList = query.getResultList();
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(menteeList, MediaType.APPLICATION_JSON).build();
+            List<Employee> menteeList = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(menteeList, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // get all mentors by topic
@@ -102,16 +118,23 @@ public class EmployeeAPI {
     public Response getMentorsByTopic(@PathParam("topic") String topic, @PathParam("userId") int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        session.getTransaction().begin();
+        try{
+            session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findMentorsByTopic", Employee.class);
-        query.setParameter("id", id);
-        query.setParameter("topic", topic);
+            Query<Employee> query = session.createNamedQuery("Employee.findMentorsByTopic", Employee.class);
+            query.setParameter("id", id);
+            query.setParameter("topic", topic);
 
-        List<Employee> menteesByTopicList = query.getResultList();
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(menteesByTopicList, MediaType.APPLICATION_JSON).build();
+            List<Employee> menteesByTopicList = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
+
+            return Response.ok(menteesByTopicList, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // get all mentors awaiting excluding user
@@ -121,15 +144,21 @@ public class EmployeeAPI {
     public Response getMentorsByTopic(@PathParam("userId") int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        session.getTransaction().begin();
+        try{
+            session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findMentorsByAwaiting", Employee.class);
-        query.setParameter("id", id);
+            Query<Employee> query = session.createNamedQuery("Employee.findMentorsByAwaiting", Employee.class);
+            query.setParameter("id", id);
 
-        List<Employee> menteesAwaiting = query.getResultList();
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(menteesAwaiting, MediaType.APPLICATION_JSON).build();
+            List<Employee> menteesAwaiting = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(menteesAwaiting, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // get all mentors by topic and duration
@@ -139,17 +168,24 @@ public class EmployeeAPI {
     public Response getMentorsByTopic(@PathParam("topic") String topic, @PathParam("duration") int duration, @PathParam("userId") int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        session.getTransaction().begin();
+        try{
+            session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findMentorsByTopicAndDuration", Employee.class);
-        query.setParameter("id", id);
-        query.setParameter("topic", topic);
-        query.setParameter("mentorDuration", duration);
+            Query<Employee> query = session.createNamedQuery("Employee.findMentorsByTopicAndDuration", Employee.class);
+            query.setParameter("id", id);
+            query.setParameter("topic", topic);
+            query.setParameter("mentorDuration", duration);
 
-        List<Employee> menteesByTopicList = query.getResultList();
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(menteesByTopicList, MediaType.APPLICATION_JSON).build();
+            List<Employee> menteesByTopicList = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
+
+            return Response.ok(menteesByTopicList, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // create an employee
@@ -253,15 +289,22 @@ public class EmployeeAPI {
     public Response getManagersTeamMembers(@PathParam("userId") int userId) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        session.getTransaction().begin();
 
-        Query<Employee> query = session.createNamedQuery("Employee.findById", Employee.class);
-        query.setParameter("id", userId);
-        Employee manager = query.getSingleResult();
+        try {
+            session.getTransaction().begin();
+            Query<Employee> query = session.createNamedQuery("Employee.findById", Employee.class);
+            query.setParameter("id", userId);
+            Employee manager = query.getSingleResult();
 
-        List<Employee> teamMembers = manager.getTeamMembers();
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(teamMembers, MediaType.APPLICATION_JSON).build();
+            List<Employee> teamMembers = manager.getTeamMembers();
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(teamMembers, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
+
     }
 }

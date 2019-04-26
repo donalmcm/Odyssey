@@ -1,8 +1,7 @@
 package com.odyssey.api;
 
-
-import com.odyssey.model.Topic;
 import com.HibernateUtil;
+import com.odyssey.model.Topic;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -24,15 +23,20 @@ public class TopicAPI {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
+        try {
             session.getTransaction().begin();
 
-            Query<Topic> query = session.createNamedQuery("Topic.findAll",Topic.class);
+            Query<Topic> query = session.createNamedQuery("Topic.findAll", Topic.class);
             List<Topic> topics = query.getResultList();
 
             session.getTransaction().commit();
             session.close();
             return Response.ok(topics, MediaType.APPLICATION_JSON).build();
-
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // Get a topic by id
@@ -42,17 +46,21 @@ public class TopicAPI {
     public Response getEmployeeById(@PathParam("id") String id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        session.getTransaction().begin();
+        try {
+            session.getTransaction().begin();
 
-        Query<Topic> query = session.createNamedQuery("Topic.findById",Topic.class);
-        query.setParameter("id",id);
-        Topic topic = query.getSingleResult();
+            Query<Topic> query = session.createNamedQuery("Topic.findById", Topic.class);
+            query.setParameter("id", id);
+            Topic topic = query.getSingleResult();
 
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(topic,MediaType.APPLICATION_JSON_TYPE).build();
-
-        // catch - not employee exists with that id
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(topic, MediaType.APPLICATION_JSON_TYPE).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @POST
@@ -64,10 +72,10 @@ public class TopicAPI {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         URI location;
-        try{
+        try {
             session.getTransaction().begin();
 
-            Topic newTopic= new Topic();
+            Topic newTopic = new Topic();
             newTopic.setName(name);
 
             session.persist(newTopic);
@@ -82,5 +90,4 @@ public class TopicAPI {
         }
         return null;
     }
-
 }

@@ -1,10 +1,8 @@
 package com.odyssey.api;
 
-import com.google.gson.JsonObject;
+import com.HibernateUtil;
 import com.odyssey.model.Employee;
 import com.odyssey.model.Odyssey;
-import com.HibernateUtil;
-import com.odyssey.model.Topic;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -18,40 +16,50 @@ import java.util.List;
 @Path("/odysseys")
 public class OdysseyAPI {
 
-
     @GET
     @Produces("application/json")
     public Response getAllOdysseys() {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
-        session.getTransaction().begin();
+        try {
+            session.getTransaction().begin();
 
-        Query<Odyssey> query = session.createNamedQuery("Odyssey.findAllOdysseys",Odyssey.class);
-        List<Odyssey> odysseys = query.getResultList();
+            Query<Odyssey> query = session.createNamedQuery("Odyssey.findAllOdysseys", Odyssey.class);
+            List<Odyssey> odysseys = query.getResultList();
 
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(odysseys, MediaType.APPLICATION_JSON).build();
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(odysseys, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @GET
     @Path("{id}")
     @Produces("application/json")
-    public Response getOdysseyById(@PathParam("id")int id) {
+    public Response getOdysseyById(@PathParam("id") int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
 
-        session.getTransaction().begin();
+            Query<Odyssey> query = session.createNamedQuery("Odyssey.findByOdysseyId", Odyssey.class);
+            query.setParameter("id", id);
+            Odyssey odyssey = query.getSingleResult();
 
-        Query<Odyssey> query = session.createNamedQuery("Odyssey.findByOdysseyId",Odyssey.class);
-        query.setParameter("id",id);
-        Odyssey odyssey = query.getSingleResult();
+            session.getTransaction().commit();
+            session.close();
 
-        session.getTransaction().commit();
-        session.close();
-
-        return Response.ok(odyssey, MediaType.APPLICATION_JSON).build();
+            return Response.ok(odyssey, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @GET
@@ -60,18 +68,22 @@ public class OdysseyAPI {
     public Response getTopicCountByOdysseys() {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
 
-        session.getTransaction().begin();
+            Query<Odyssey> query = session.createNamedQuery("Odyssey.findTopicCountByOdyssey", Odyssey.class);
+            List<Odyssey> odysseys = query.getResultList();
 
-        Query<Odyssey> query = session.createNamedQuery("Odyssey.findTopicCountByOdyssey",Odyssey.class);
-        List<Odyssey> odysseys = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
 
-        session.getTransaction().commit();
-        session.close();
-
-        return Response.ok(odysseys, MediaType.APPLICATION_JSON).build();
+            return Response.ok(odysseys, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
-
 
     @GET
     @Path("percentageComplete/{id}")
@@ -79,17 +91,22 @@ public class OdysseyAPI {
     public double getPercentageCompleteOfOdysseys(@PathParam("id") int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
 
-        session.getTransaction().begin();
+            Query<Odyssey> query = session.createNamedQuery("Odyssey.findByOdysseyId", Odyssey.class);
+            query.setParameter("id", id);
+            Odyssey odyssey = query.getSingleResult();
 
-        Query<Odyssey> query = session.createNamedQuery("Odyssey.findByOdysseyId",Odyssey.class);
-        query.setParameter("id",id);
-        Odyssey odyssey = query.getSingleResult();
+            session.getTransaction().commit();
+            session.close();
 
-        session.getTransaction().commit();
-        session.close();
-
-        return odyssey.getPercentageCompleteOfOdyssey();
+            return odyssey.getPercentageCompleteOfOdyssey();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return -1;
     }
 
 
@@ -98,35 +115,35 @@ public class OdysseyAPI {
     @Path("create/{userId}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
-    public Response createOdyssey(@PathParam("userId")int userId, // CHANGE TO EMAIL
-                                  @FormParam("topicId")String topicId,
-                                   @FormParam("mentorDuration") int mentorDuration,
-                                   @FormParam("dayOfMeetings") String dayOfMeetings,
-                                   @FormParam("timeOfMeetings") int timeOfMeetings) {
+    public Response createOdyssey(@PathParam("userId") int userId, // CHANGE TO EMAIL
+                                  @FormParam("topicId") String topicId,
+                                  @FormParam("mentorDuration") int mentorDuration,
+                                  @FormParam("dayOfMeetings") String dayOfMeetings,
+                                  @FormParam("timeOfMeetings") int timeOfMeetings) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         URI location;
         String timeAsString = String.valueOf(timeOfMeetings);
         String dayAndTime = dayOfMeetings + timeAsString;
-        try{
+        try {
             session.getTransaction().begin();
 
             // GET FROM EMAIL------------------------------------------------------------------------------------------------
-            Query<Employee> userQuery = session.createNamedQuery("Employee.findById",Employee.class);
-            userQuery.setParameter("id",userId);
+            Query<Employee> userQuery = session.createNamedQuery("Employee.findById", Employee.class);
+            userQuery.setParameter("id", userId);
             Employee user = userQuery.getSingleResult();
 
             // find employee with matching availability - if multiple pick random
-            Query<Employee> mentorQuery = session.createNamedQuery("Employee.findMentorForMentee",Employee.class);
-            mentorQuery.setParameter("topic",topicId);
-            mentorQuery.setParameter("mentorDuration",mentorDuration);
-            mentorQuery.setParameter("menteeId",userId);
+            Query<Employee> mentorQuery = session.createNamedQuery("Employee.findMentorForMentee", Employee.class);
+            mentorQuery.setParameter("topic", topicId);
+            mentorQuery.setParameter("mentorDuration", mentorDuration);
+            mentorQuery.setParameter("menteeId", userId);
             List<Employee> employees = mentorQuery.getResultList();
 
-            Employee mentor = findEmployeeByAvailability(dayAndTime,employees);
+            Employee mentor = findEmployeeByAvailability(dayAndTime, employees);
 
-            Odyssey newOdyssey = new Odyssey(mentor,user);
-            newOdyssey.generateOdysseyMeetings(mentorDuration,dayOfMeetings,timeOfMeetings);
+            Odyssey newOdyssey = new Odyssey(mentor, user);
+            newOdyssey.generateOdysseyMeetings(mentorDuration, dayOfMeetings, timeOfMeetings);
 
             session.persist(newOdyssey);
             session.getTransaction().commit();
@@ -146,15 +163,21 @@ public class OdysseyAPI {
     public Response getOdysseysByEmployee(@PathParam("userId") int userId) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        session.getTransaction().begin();
 
-        Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByEmployee",Odyssey.class);
-        query.setParameter("id",userId);
+        try {
+            session.getTransaction().begin();
+            Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByEmployee", Odyssey.class);
+            query.setParameter("id", userId);
 
-        List<Odyssey> odysseysByEmployee= query.getResultList();
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(odysseysByEmployee, MediaType.APPLICATION_JSON).build();
+            List<Odyssey> odysseysByEmployee = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(odysseysByEmployee, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @GET
@@ -162,15 +185,21 @@ public class OdysseyAPI {
     public Response getOdysseysByMentor(@PathParam("userId") int userId) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        session.getTransaction().begin();
+        try {
+            session.getTransaction().begin();
 
-        Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByMentor",Odyssey.class);
-        query.setParameter("id",userId);
+            Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByMentor", Odyssey.class);
+            query.setParameter("id", userId);
 
-        List<Odyssey> odysseysByEmployee= query.getResultList();
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(odysseysByEmployee, MediaType.APPLICATION_JSON).build();
+            List<Odyssey> odysseysByEmployee = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(odysseysByEmployee, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @GET
@@ -178,19 +207,25 @@ public class OdysseyAPI {
     public Response getOdysseysByMentee(@PathParam("userId") int userId) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        session.getTransaction().begin();
+        try {
+            session.getTransaction().begin();
 
-        Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByMentee",Odyssey.class);
-        query.setParameter("id",userId);
+            Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByMentee", Odyssey.class);
+            query.setParameter("id", userId);
 
-        List<Odyssey> odysseysByEmployee= query.getResultList();
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(odysseysByEmployee, MediaType.APPLICATION_JSON).build();
+            List<Odyssey> odysseysByEmployee = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(odysseysByEmployee, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // look into reflection to improve this function
-    private Employee findEmployeeByAvailability(String dayTime,List<Employee> employees) {
+    private Employee findEmployeeByAvailability(String dayTime, List<Employee> employees) {
         Employee mentor = new Employee();
 
         switch (dayTime) {
@@ -407,5 +442,4 @@ public class OdysseyAPI {
         }
         return mentor;
     }
-
 }

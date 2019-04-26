@@ -16,29 +16,25 @@ import java.util.List;
 @Path("/availabilities")
 public class AvailabilityAPI {
 
-
     @GET
     @Produces("application/json")
     public Response getAllEmployees() {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        //try{
-        session.getTransaction().begin();
+        try {
+            session.getTransaction().begin();
 
-        Query<Availability> query = session.createNamedQuery("Availability.findAllAvailabilities",Availability.class);
-        List<Availability> availabilities = query.getResultList();
+            Query<Availability> query = session.createNamedQuery("Availability.findAllAvailabilities", Availability.class);
+            List<Availability> availabilities = query.getResultList();
 
-        session.getTransaction().commit();
-        session.close();
-        return Response.ok(availabilities, MediaType.APPLICATION_JSON).build();
-
-//        } catch (Exception e) {
-//
-//            return e.printStackTrace();
-//            session.getTransaction().rollback();
-//        }
-
-
+            session.getTransaction().commit();
+            session.close();
+            return Response.ok(availabilities, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 }
