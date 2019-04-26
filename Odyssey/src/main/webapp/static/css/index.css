@@ -43,6 +43,7 @@ html,body {
 .profile-icon{
     height: 5em;
     padding-top: .75em;
+    background-color: #2196F3;
 }
 .profile-icon i {
     color: white;
@@ -51,6 +52,9 @@ html,body {
 .log-out-icon {
     height: 5em;
     padding-top: .75em;
+    background-color: #2196F3;
+    border: #2196F3;
+    padding: 0;
 }
 
 .log-out-icon i{
