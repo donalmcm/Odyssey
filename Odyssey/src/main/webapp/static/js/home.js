@@ -225,13 +225,12 @@ function getOdysseys(userId, userName) {
 
                 odysseyCard.appendChild(odysseyMoreDetails);
 
+                // Review section
                 var odysseyReviews = document.createElement("div");
                 odysseyReviews.className = "odyssey-reviews";
                 odysseyReviews.id = "odysseyReviews" + entry.id;
                 odysseyReviews.style.display = "none";
 
-                // REVIEW HEADER - change to mentor or mentee
-                // HIDE EITHER course material or mentee engagement
                 for (let i = 0; i < entry.odysseyReviews.length; i++) {
                     var odysseyReview = document.createElement("div");
                     odysseyReview.className = "odyssey-review";
@@ -381,7 +380,7 @@ function editReviewModal(reviewId, currentPunctuality, currentAttendance, curren
     // create modal with post for a meetings notes
     $('#odyssey-review-modal').modal('show');
     var action = document.getElementById("odyssey-review-form");
-    action.action = "../api/reviews/edit/" + reviewId+"/home";
+    action.action = "../api/reviews/edit/" + reviewId;
 
     if (menteeReview) {
         document.getElementById("mentee-engagement-section").style.display = "none";
