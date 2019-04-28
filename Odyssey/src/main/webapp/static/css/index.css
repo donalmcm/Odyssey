@@ -388,3 +388,37 @@ html, body {
 .awaiting-mentee-topic {
     width: 100%;
 }
+
+.profile-mentor-card {
+    border: solid 2px #5cb85c;
+    background-color: #eeeeee;
+    height: fit-content;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 16px;
+}
+
+.profile-mentee-card {
+    border: solid 2px #5cb85c;
+    background-color: #eeeeee;
+    height: fit-content;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 16px;
+}
+
+.profile-mentor-title {
+    border-bottom: solid 1px darkgrey;
+}
+
+.profile-mentee-card {
+    border-bottom: solid 1px darkgrey;
+}
+
+.mentor-rating {
+    text-align: right;
+}
+
+.mentee-rating {
+    text-align: right;
+}

@@ -14,7 +14,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body>
 <%
     String email = null;
     Cookie[] cookies = request.getCookies();
@@ -25,6 +24,7 @@
     }
     Employee e = Employee.getEmployeeByEmail(email);
 %>
+<body onload="getEmployeeStats(<%=e.getId()%>)">
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-2 text-center banner-logo">
@@ -63,108 +63,74 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-10">
-            <div class="row">
-                <div class="col-md-2">
-                    <img alt="Default Profile Image" src="../static/img/odysseyLogo.png"/>
-                </div>
-                <div class="col-md-10">
-                    <h3>
-                        <strong><%=e.getFirstName() + " " + e.getLastName()%>
-                        </strong>
-                    </h3>
-                    <h3>
-                        <%=e.getTitle()%>
-                    </h3>
+        <div class="row col-md-10">
+            <div>
+                <div class="col-md-12">
+                    <h2>
+                        <strong>Name: </strong><%=e.getFirstName() + " " + e.getLastName()%>
+                    </h2>
+                    <h4>
+                        <strong>Title: </strong><%=e.getTitle()%>
+                    </h4>
+                    <h4>
+                        <strong>Email: </strong><%=e.getEmail()%>
+                    </h4>
+                    <h4>
+                        <strong>Location: </strong><%=e.getLocation()%>
+                    </h4>
                 </div>
             </div>
-            <div class="row justify-content-between">
-                <div class="col-md-5 profile-card">
-                    <div class="row profile-card-title">
-                        <div class="col-md-10">
-                            Specialities
+            <div id="mentor-stats">
+                <div class="col-md-12 profile-mentor-card">
+                    <div class="col-md-12 profile-mentor-title">
+                        <div class="col-md-4">
+                        <h1>Mentor Odysseys</h1>
                         </div>
-                        <div class="col-md-2">
-                            <button class="edit-button"><i class="fa fa-edit"></i></button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <li>Git</li>
-                        <li>Gosu</li>
-                    </div>
-                </div>
-                <div class="col-md-5 profile-card">
-                    <div class="row profile-card-title">
-                        <div class="col-md-10">
-                            Personal Goals
-                        </div>
-                        <div class="col-md-2">
-                            <button class="edit-button"><i class="fa fa-edit"></i></button>
+                        <div class="col-md-8 mentor-rating">
+                            <h1 id="mentor-rating"></h1>
                         </div>
                     </div>
-                    <div class="row">
-                        <li>JPA</li>
-                        <li>Javascript</li>
+                    <div class="col-md-4">
+                        <h3>Total Count</h3>
+                        <h1 id="mentor-odyssey-count"></h1>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Total Hours of Meetings</h3>
+                        <h1 id="mentor-hour-count"></h1>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>All Topics Mentored</h3>
+                        <div id="mentor-topic-list"></div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-11 profile-card">
-                    <div class="row profile-card-title">
-                        <div class="col-md-11">
-                            Mentoring Odysseys
+            <div id="mentee-stats">
+                <div class="col-md-12 profile-mentee-card">
+                    <div class="col-md-12 profile-mentor-title">
+                        <div class="col-md-4">
+                            <h1>Mentee Odysseys</h1>
                         </div>
-                        <div class="col-md-1">
-                            <button class="edit-button"><i class="fa fa-edit"></i></button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 profile-subcard">
-                            TOTAL<br>
-                            5 ODYSSEYS
-                        </div>
-                        <div class="col-md-3 profile-subcard">
-                            TOTAL HOURS<br>
-                            37
-                        </div>
-                        <div class="col-md-3 profile-subcard">
-                            TOPICS<br>
-                            <li>Git</li>
-                            <li>Gosu</li>
+                        <div class="col-md-8 mentee-rating">
+                            <h1 id="mentee-rating"></h1>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-11 profile-card">
-                    <div class="row profile-card-title">
-                        <div class="col-md-11">
-                            Mentee Odysseys
-                        </div>
-                        <div class="col-md-1">
-                            <button class="edit-button"><i class="fa fa-edit"></i></button>
-                        </div>
+                    <div class="col-md-4">
+                        <h3>Total Count</h3>
+                        <h1 id="mentee-odyssey-count"></h1>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3 profile-subcard">
-                            TOTAL<br>
-                            3 ODYSSEYS
-                        </div>
-                        <div class="col-md-3 profile-subcard">
-                            TOTAL HOURS<br>
-                            21
-                        </div>
-                        <div class="col-md-3 profile-subcard">
-                            TOPICS
-                            <li>JPA</li>
-                            <li>Javascript</li>
-                        </div>
+                    <div class="col-md-4">
+                        <h3>Total Hours of Meetings</h3>
+                        <h1 id="mentee-hour-count"></h1>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>All Topics Menteed</h3>
+                        <div id="mentee-topic-list"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="../static/js/admin.js"></script>
+<script src="../static/js/profile.js"></script>
 </body>
 </html>

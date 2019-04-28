@@ -1,12 +1,12 @@
 package com.odyssey.api;
 
 import com.HibernateUtil;
-import com.odyssey.model.Availability;
-import com.odyssey.model.Employee;
-import com.odyssey.model.Topic;
+import com.odyssey.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -306,5 +306,179 @@ public class EmployeeAPI {
         }
         return null;
 
+    }
+
+    @GET
+    @Path("getOdysseyCountWhereMentor/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOdysseyCountWhereMentor(@PathParam("userId") int userId) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        int odysseyCountWhereMentor=0;
+        try {
+            session.getTransaction().begin();
+
+            Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByMentor", Odyssey.class);
+            query.setParameter("id", userId);
+
+            List<Odyssey> odysseysByEmployee = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
+
+            JSONObject obj = new JSONObject();
+            JSONArray topics = new JSONArray();
+
+            int odysseyCount = odysseysByEmployee.size();
+            int meetingsHours=0;
+            for (Odyssey odyssey : odysseysByEmployee) {
+                int noOfMeetings = odyssey.getOdysseyMeetings().size();
+                for(int i=0;i<noOfMeetings;i++) {
+                    if(odyssey.getOdysseyMeetings().get(i).getIsCompleted()) {
+                        meetingsHours++;
+                    }
+                }
+                topics.add(odyssey.getTopic().getName());
+            }
+
+            obj.put("odysseyCount",odysseyCount);
+            obj.put("meetingHours",meetingsHours);
+            obj.put("topics",topics);
+
+
+            return Response.ok(obj, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @GET
+    @Path("getOdysseyCountWhereMentee/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOdysseyCountWhereMentee(@PathParam("userId") int userId) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        int odysseyCountWhereMentee=0;
+        try {
+            session.getTransaction().begin();
+
+            Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByMentee", Odyssey.class);
+            query.setParameter("id", userId);
+
+            List<Odyssey> odysseysByEmployee = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
+
+            JSONObject obj = new JSONObject();
+            JSONArray topics = new JSONArray();
+
+            int odysseyCount = odysseysByEmployee.size();
+            int meetingsHours=0;
+            for (Odyssey odyssey : odysseysByEmployee) {
+                int noOfMeetings = odyssey.getOdysseyMeetings().size();
+                for(int i=0;i<noOfMeetings;i++) {
+                    if(odyssey.getOdysseyMeetings().get(i).getIsCompleted()) {
+                        meetingsHours++;
+                    }
+                }
+                topics.add(odyssey.getTopic().getName());
+            }
+
+            obj.put("odysseyCount",odysseyCount);
+            obj.put("meetingHours",meetingsHours);
+            obj.put("topics",topics);
+
+
+            return Response.ok(obj, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @GET
+    @Path("getMenteeRating/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMenteeRating(@PathParam("userId") int userId) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        double menteeRating=0;
+        try {
+            session.getTransaction().begin();
+
+            Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByMentee", Odyssey.class);
+            query.setParameter("id", userId);
+
+            List<Odyssey> odysseysByEmployee = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
+
+            JSONObject obj = new JSONObject();
+
+            for(int i =0; i <odysseysByEmployee.size();i++) {
+                for(int j =0; j< odysseysByEmployee.get(i).getOdysseyReviews().size();j++) {
+                    if(odysseysByEmployee.get(i).getOdysseyReviews().get(j).isMentorReview()) {
+                        Review r = odysseysByEmployee.get(i).getOdysseyReviews().get(j);
+                        menteeRating += r.getRating();
+                        menteeRating += r.getAttendance();
+                        menteeRating += r.getPunctuality();
+                        menteeRating += r.getMenteeEngagement();
+                    }
+                }
+            }
+
+            double averagedRating = menteeRating/4;
+            obj.put("menteeRating",averagedRating);
+
+            return Response.ok(obj, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @GET
+    @Path("getMentorRating/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMentorRating(@PathParam("userId") int userId) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        double mentorRating=0;
+        try {
+            session.getTransaction().begin();
+
+            Query<Odyssey> query = session.createNamedQuery("Odyssey.findOdysseysByMentor", Odyssey.class);
+            query.setParameter("id", userId);
+
+            List<Odyssey> odysseysByEmployee = query.getResultList();
+            session.getTransaction().commit();
+            session.close();
+
+            JSONObject obj = new JSONObject();
+
+            for(int i =0; i <odysseysByEmployee.size();i++) {
+                for(int j =0; j< odysseysByEmployee.get(i).getOdysseyReviews().size();j++) {
+                    if(odysseysByEmployee.get(i).getOdysseyReviews().get(j).isMenteeReview()) {
+                        Review r = odysseysByEmployee.get(i).getOdysseyReviews().get(j);
+                        mentorRating += r.getRating();
+                        mentorRating += r.getAttendance();
+                        mentorRating += r.getPunctuality();
+                        mentorRating += r.getCourseMaterial();
+                    }
+                }
+            }
+
+            double averagedRating = mentorRating/4;
+            obj.put("mentorRating",averagedRating);
+
+            return Response.ok(obj, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return null;
     }
 }
