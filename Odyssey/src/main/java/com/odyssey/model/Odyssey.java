@@ -37,11 +37,11 @@ public class Odyssey {
     private boolean isComplete = false;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "odyssey")
+    @OneToMany(mappedBy = "odyssey", cascade = CascadeType.ALL)
     private List<OdysseyMeeting> odysseyMeetings;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "odysseyReview")
+    @OneToMany(mappedBy = "odysseyReview", cascade = CascadeType.ALL)
     private List<Review> odysseyReviews;
 
     @OneToOne
