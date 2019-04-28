@@ -82,7 +82,7 @@ public class TopicAPI {
             session.getTransaction().commit();
             session.close();
 
-            location = new URI("http://localhost:8080/myaccount/admin.jsp");
+            location = new URI("http://odyssey-aws.eu-west-1.elasticbeanstalk.com/myaccount/admin.jsp");
             return Response.temporaryRedirect(location).build();
         } catch (Exception e) {
             session.getTransaction().rollback();

@@ -52,7 +52,7 @@ $(menteeDropdown).change(function () {
 });
 
 function populateTopicDropdown(userId) {
-    const topicURL = 'http://localhost:8080/api/employees/mentors/awaiting/excludingUser/' + userId;
+    const topicURL = '/api/employees/mentors/awaiting/excludingUser/' + userId;
     $.getJSON(topicURL, function (data) {
         if (data.length === 0) {
             document.getElementById("no-mentors-error").innerHTML = "Sorry there are no available mentors at this time";
@@ -93,7 +93,7 @@ function getMentorsByTopic(topic, userId) {
         times[i].disabled = true;
     }
     let durationOptions = [];
-    const menteeUrl = 'http://localhost:8080/api/employees/mentors/' + topic + '/excludingUser/' + userId;
+    const menteeUrl = '/api/employees/mentors/' + topic + '/excludingUser/' + userId;
     $.getJSON(menteeUrl, function (data) {
         $.each(data, function (key, entry) {
 
@@ -212,7 +212,7 @@ function getAvailabilitiesByTopicAndDuration(duration, userId) {
         for (let i = 0; i < times.length; i++) {
             times[i].disabled = true;
         }
-        const menteeUrl = 'http://localhost:8080/api/employees/mentors/' + topicChoice + '/duration/' + duration + '/excludingUser/' + userId;
+        const menteeUrl = '/api/employees/mentors/' + topicChoice + '/duration/' + duration + '/excludingUser/' + userId;
         $.getJSON(menteeUrl, function (data) {
             $.each(data, function (key, entry) {
 
@@ -328,7 +328,7 @@ $(document).ready(function () {
 
 function getOdysseysByMentee(userId) {
     populateTopicDropdown(userId);
-    const menteeOdysseysURL = 'http://localhost:8080/api/odysseys/getOdysseysByMentee/' + userId;
+    const menteeOdysseysURL = '/api/odysseys/getOdysseysByMentee/' + userId;
     $.getJSON(menteeOdysseysURL, function (data) {
         if (!data.length) {
             document.getElementById("mentee-page-odyssey-title").innerHTML = "";

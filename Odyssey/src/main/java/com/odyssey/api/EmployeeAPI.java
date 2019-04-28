@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
 
-@Path("/employees")
+@Path("employees")
 public class EmployeeAPI {
 
     @GET
@@ -213,7 +213,7 @@ public class EmployeeAPI {
             session.getTransaction().commit();
             session.close();
 
-            location = new URI("http://localhost:8080/myaccount/admin.jsp");
+            location = new URI("http://odyssey-aws.eu-west-1.elasticbeanstalk.com/myaccount/admin.jsp");
             return Response.temporaryRedirect(location).build();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -272,7 +272,7 @@ public class EmployeeAPI {
             session.getTransaction().commit();
             session.close();
 
-            location = new URI("http://localhost:8080/myaccount/mentor.jsp");
+            location = new URI("http://odyssey-aws.eu-west-1.elasticbeanstalk.com/myaccount/mentor.jsp");
             return Response.temporaryRedirect(location).build();
         } catch (Exception e) {
             session.getTransaction().rollback();

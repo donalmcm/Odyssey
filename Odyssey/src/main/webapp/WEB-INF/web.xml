@@ -28,6 +28,5 @@
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/myaccount/*</url-pattern>
-        <url-pattern>/api/*</url-pattern>
     </filter-mapping>
 </web-app>

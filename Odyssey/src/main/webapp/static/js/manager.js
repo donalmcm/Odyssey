@@ -5,7 +5,7 @@ function getManagersTeam(managerId, isManager) {
 
         document.getElementById("manager-page-title").innerHTML = "Management";
 
-        const managersEmployeesUrl = 'http://localhost:8080/api/employees/getTeamMembers/manager/' + managerId;
+        const managersEmployeesUrl = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/employees/getTeamMembers/manager/' + managerId;
 
         let isCurrentMentee = "No";
         let isCurrentMentor = "No";
@@ -58,7 +58,7 @@ function getManagersTeam(managerId, isManager) {
 
 // --------------------------------- TOPIC PIE CHART -------------------------------------------------------------------
 function getTopicUsageInfo(usedTopics) {
-    const topicURL = 'http://localhost:8080/api/topics';
+    const topicURL = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/topics';
     let allTopics = [];
     // Populate list of topics
     $.getJSON(topicURL, function (data) {
@@ -70,7 +70,7 @@ function getTopicUsageInfo(usedTopics) {
 }
 
 function getEmployeeOdysseyCount(employeeId) {
-    const odysseyURL = 'http://localhost:8080/api/odysseys/getEmployeeOdysseys/' + employeeId;
+    const odysseyURL = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/odysseys/getEmployeeOdysseys/' + employeeId;
     // count number of odysseys and return value to be displayed in row
 }
 
@@ -97,7 +97,7 @@ function loadTopicUsagePieChart(noOfUsedTopics, noOfAllTopics) {
 
 // --------------------------------- RADAR GRAPH -----------------------------------------------------------------------
 function getRadarGraphInfo() {
-    const topicCountByOdysseysURL = 'http://localhost:8080/api/odysseys';
+    const topicCountByOdysseysURL = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/odysseys';
     var allOdysseyTopics = [];
     // Populate list of topics
     $.getJSON(topicCountByOdysseysURL, function (data) {
@@ -157,7 +157,7 @@ function loadRadarGraph(listOfLabels, labelCount) {
 
 // --------------------------------------- MEETINGS GRAPHS -------------------------------------------------------------
 function getMeetingsGraphInfo() {
-    const meetingCountURL = 'http://localhost:8080/api/odysseyMeetings';
+    const meetingCountURL = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/odysseyMeetings';
     let allOdysseyMeetings = [];
     let allMeetingDays = [];
     // Populate list of topics
@@ -253,7 +253,7 @@ function loadMeetingsGraph(dates, meetingCount) {
 
 //-----------------------------------------------GEO AND POLAR GRAPH ---------------------------------------------------
 function getGeoGraphInfo() {
-    const employeeURL = 'http://localhost:8080/api/employees';
+    const employeeURL = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/employees';
     let allEmployeeLocations = [];
     let allEmployeeTitles = [];
     let mentors = 0, mentees = 0, managers = 0, admins = 0;

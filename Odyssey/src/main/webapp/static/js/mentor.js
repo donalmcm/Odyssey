@@ -5,7 +5,7 @@ mentorDropdown.empty();
 mentorDropdown.append('<option selected="true" disabled>Choose Topic</option>');
 mentorDropdown.prop('selectedIndex', 0);
 
-const topicMentorUrl = 'http://localhost:8080/api/topics';
+const topicMentorUrl = '/api/topics';
 
 // Populate dropdown with list of topics
 $.getJSON(topicMentorUrl, function (data) {
@@ -41,7 +41,7 @@ function getMentorAwaitingMentee(userId, userAwaitingMentee) {
     if (!userAwaitingMentee) {
         document.getElementById("mentor-awaiting-mentee-title").innerHTML = ""
     } else {
-        const employeeURL = 'http://localhost:8080/api/employees/' + userId;
+        const employeeURL = '/api/employees/' + userId;
         var mentorTopic, mentorDuration;
         var mentorAvailability = [];
         $.getJSON(employeeURL, function (data) {
@@ -92,7 +92,7 @@ function getMentorAwaitingMentee(userId, userAwaitingMentee) {
 function getOdysseysByMentor(userId, isAwaitingMentee) {
 
     getMentorAwaitingMentee(userId, isAwaitingMentee);
-    const mentorOdysseysUrl = 'http://localhost:8080/api/odysseys/getOdysseysByMentor/' + userId;
+    const mentorOdysseysUrl = '/api/odysseys/getOdysseysByMentor/' + userId;
     $.getJSON(mentorOdysseysUrl, function (data) {
         if (!data.length) {
             document.getElementById("mentor-page-odyssey-title").innerHTML = "";
