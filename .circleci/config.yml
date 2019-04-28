@@ -11,4 +11,4 @@ jobs:
       - image: circleci/mysql:latest
     steps:
     - checkout
-    - run: echo "A first hello"
+    - run: echo "Odyssey Tests"
