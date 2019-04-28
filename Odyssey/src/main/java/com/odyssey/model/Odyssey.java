@@ -34,17 +34,14 @@ public class Odyssey {
     private Employee mentee;
 
     @Column
-    private boolean isActive = false;
-
-    @Column
     private boolean isComplete = false;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "odyssey")
+    @OneToMany(mappedBy = "odyssey",cascade = CascadeType.ALL)
     private List<OdysseyMeeting> odysseyMeetings;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "odysseyReview")
+    @OneToMany(mappedBy = "odysseyReview",cascade = CascadeType.ALL)
     private List<Review> odysseyReviews;
 
     @OneToOne
@@ -58,14 +55,12 @@ public class Odyssey {
         this.mentor = mentor;
         this.mentee = mentee;
         this.topic = mentor.getTopic();
-        isActive = true;
         this.mentee.setMentee(true);
         this.mentor.setAwaitingMentee();
     }
 
     // To be called after the last meeting of an odyssey
     private void completedOdyssey() {
-        isActive = false;
         mentor.setMentorToFalse();
         mentee.setMentee(false);
     }
@@ -135,16 +130,6 @@ public class Odyssey {
 
     public Topic getTopic() {
         return topic;
-    }
-
-    public boolean isActive() {
-        if (odysseyMeetings.get(0).getIsCompleted() && !odysseyMeetings.get(odysseyMeetings.size() - 1).getIsCompleted()) {
-            isActive = true;
-            return isActive;
-        } else {
-            isActive = false;
-            return isActive;
-        }
     }
 
     public boolean isComplete() {
