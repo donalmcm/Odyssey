@@ -92,7 +92,7 @@
                         <div class="form-group">
                             <label for="select-day">Select A Day</label>
                             <ul class="nav nav-pills" id="select-day">
-                                <li class="nav-item">
+                                <li class="nav-item active">
                                     <a class="nav-link active" data-toggle="pill"
                                        style="border: solid 2px cornflowerblue;margin-right: 4px"
                                        href="#home">Monday</a>

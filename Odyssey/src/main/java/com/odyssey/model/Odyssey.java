@@ -34,9 +34,6 @@ public class Odyssey {
     private Employee mentee;
 
     @Column
-    private boolean isActive = false;
-
-    @Column
     private boolean isComplete = false;
 
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -58,14 +55,12 @@ public class Odyssey {
         this.mentor = mentor;
         this.mentee = mentee;
         this.topic = mentor.getTopic();
-        isActive = true;
         this.mentee.setMentee(true);
         this.mentor.setAwaitingMentee();
     }
 
     // To be called after the last meeting of an odyssey
     private void completedOdyssey() {
-        isActive = false;
         mentor.setMentorToFalse();
         mentee.setMentee(false);
     }
@@ -103,6 +98,18 @@ public class Odyssey {
         this.odysseyMeetings = odysseyMeetings;
     }
 
+    public void generateDefaultReviews() {
+        List<Review> reviews = new ArrayList<>();
+
+        Review mentorReview = new Review(0,0,0,0,0,null,true,false,false);
+        Review menteeReview = new Review(0,0,0,0,0,null,false,true,false);
+
+        reviews.add(mentorReview);
+        reviews.add(menteeReview);
+
+        this.odysseyReviews = reviews;
+    }
+
     public int getPercentageCompleteOfOdyssey() {
 
         double noOfCompletedMeetings = 0.0, noOfMeetings = odysseyMeetings.size();
@@ -135,16 +142,6 @@ public class Odyssey {
 
     public Topic getTopic() {
         return topic;
-    }
-
-    public boolean isActive() {
-        if (odysseyMeetings.get(0).getIsCompleted() && !odysseyMeetings.get(odysseyMeetings.size() - 1).getIsCompleted()) {
-            isActive = true;
-            return isActive;
-        } else {
-            isActive = false;
-            return isActive;
-        }
     }
 
     public boolean isComplete() {

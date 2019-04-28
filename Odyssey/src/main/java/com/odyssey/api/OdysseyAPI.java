@@ -144,6 +144,7 @@ public class OdysseyAPI {
 
             Odyssey newOdyssey = new Odyssey(mentor, user);
             newOdyssey.generateOdysseyMeetings(mentorDuration, dayOfMeetings, timeOfMeetings);
+            newOdyssey.generateDefaultReviews();
 
             session.persist(newOdyssey);
             session.getTransaction().commit();

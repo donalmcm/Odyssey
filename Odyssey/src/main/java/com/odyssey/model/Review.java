@@ -53,6 +53,18 @@ public class Review {
     public Review() {
     }
 
+    public Review(int punctuality, int attendance, int courseMaterial, int menteeEngagement, int rating,
+                  String overallExperience, boolean mentorReview, boolean menteeReview, boolean submitted) {
+        this.punctuality = punctuality;
+        this.attendance = attendance;
+        this.courseMaterial = courseMaterial;
+        this.menteeEngagement = menteeEngagement;
+        this.rating = rating;
+        this.overallExperience = overallExperience;
+        this.mentorReview = mentorReview;
+        this.menteeReview = menteeReview;
+        this.submitted = submitted;
+    }
 
     public static Review getReviewById(int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
