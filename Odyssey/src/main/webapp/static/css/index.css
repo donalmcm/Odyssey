@@ -422,3 +422,8 @@ html, body {
 .mentee-rating {
     text-align: right;
 }
+
+.login-error-message {
+    text-align: center;
+    color: red;
+}

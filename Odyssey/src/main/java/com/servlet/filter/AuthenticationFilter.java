@@ -31,7 +31,7 @@ public class AuthenticationFilter implements Filter {
 
         if (session == null) {   //checking whether the session exists
             this.context.log("Unauthorized access request");
-            res.sendRedirect(req.getContextPath() + "/index.html");
+            res.sendRedirect(req.getContextPath() + "/index.jsp");
         } else {
             // pass the request along the filter chain
             chain.doFilter(request, response);
