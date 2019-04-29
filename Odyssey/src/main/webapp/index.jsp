@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="en">
 <head>
     <title>Odyssey - Log In</title>
@@ -24,6 +24,11 @@
                         <img src="static/img/odysseyLogoWithTitle.png" class="rounded" alt="Odyssey">
                     </div>
                     <div class="col-md-2">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="color: red; text-align: center">${message}</p>
                     </div>
                 </div>
                 <div class="row">

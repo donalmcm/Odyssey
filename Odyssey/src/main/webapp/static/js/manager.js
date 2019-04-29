@@ -7,8 +7,6 @@ function getManagersTeam(managerId, isManager) {
 
         const managersEmployeesUrl = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/employees/getTeamMembers/manager/' + managerId;
 
-        let isCurrentMentee = "No";
-        let isCurrentMentor = "No";
         // Populate dropdown with list of topics
         $.getJSON(managersEmployeesUrl, function (data) {
             $.each(data, function (key, entry) {
@@ -26,19 +24,21 @@ function getManagersTeam(managerId, isManager) {
 
                 // Is employee a mentor
                 var isCurrentMentor = document.createElement('td');
-                isCurrentMentor.innerHTML = entry.mentor;
+                if(entry.mentor) {
+                    isCurrentMentor.innerHTML = "Yes";
+                } else {
+                    isCurrentMentor.innerHTML = "No";
+                }
                 tr.append(isCurrentMentor);
 
                 // Is employee a mentee
                 var isCurrentMentee = document.createElement('td');
-                isCurrentMentee.innerHTML = entry.mentee;
+                if(entry.mentee) {
+                    isCurrentMentee.innerHTML = "Yes";
+                } else {
+                    isCurrentMentee.innerHTML = "No";
+                }
                 tr.append(isCurrentMentee);
-
-                var count = 5;
-                // count of odysseys
-                var odysseyCount = document.createElement('td');
-                odysseyCount.innerHTML = count;
-                tr.append(odysseyCount);
 
                 mentorList.append(tr);
             })
