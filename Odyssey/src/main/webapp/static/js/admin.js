@@ -7,7 +7,7 @@ function loadAdminPage(isAdmin) {
     } else {
         document.getElementById("admin-page-title").innerHTML = "Administration";
         let adminEmployeeList = $('#employee-list');
-        const adminEmployeeUrl = 'http://localhost:8080/api/employees';
+        const adminEmployeeUrl = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/employees';
         $.getJSON(adminEmployeeUrl, function (data) {
             $.each(data, function (key, entry) {
                 var tr = document.createElement('tr');
@@ -38,7 +38,7 @@ function loadAdminPage(isAdmin) {
 
         // Populate table with list of topics with id, topic name - subtopic yet to be added
         let adminTopicList = $('#topic-list');
-        const employeeUrl = 'http://localhost:8080/api/topics';
+        const employeeUrl = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/topics';
         $.getJSON(employeeUrl, function (data) {
             $.each(data, function (key, entry) {
                 var tr = document.createElement('tr');

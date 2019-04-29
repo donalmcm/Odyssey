@@ -1,8 +1,8 @@
 function getEmployeeStats(userId) {
-    const odysseyCountWhereMentorURL = 'http://localhost:8080/api/employees/getOdysseyCountWhereMentor/' + userId;
-    const odysseyCountWhereMenteeURL = 'http://localhost:8080/api/employees/getOdysseyCountWhereMentee/' + userId;
-    const mentorRatingURL = 'http://localhost:8080/api/employees/getMentorRating/' + userId;
-    const menteeRatingURL = 'http://localhost:8080/api/employees/getMenteeRating/' + userId;
+    const odysseyCountWhereMentorURL = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/employees/getOdysseyCountWhereMentor/' + userId;
+    const odysseyCountWhereMenteeURL = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/employees/getOdysseyCountWhereMentee/' + userId;
+    const mentorRatingURL = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/employees/getMentorRating/' + userId;
+    const menteeRatingURL = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/employees/getMenteeRating/' + userId;
 
     // Get mentor rating
     $.getJSON(mentorRatingURL, function (data) {

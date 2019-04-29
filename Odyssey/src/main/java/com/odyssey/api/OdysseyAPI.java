@@ -149,7 +149,7 @@ public class OdysseyAPI {
             session.getTransaction().commit();
             session.close();
 
-            location = new URI("http://localhost:8080/myaccount/home.jsp");
+            location = new URI("http://odyssey-aws.eu-west-1.elasticbeanstalk.com/myaccount/home.jsp");
             return Response.temporaryRedirect(location).build();
         } catch (Exception e) {
             session.getTransaction().rollback();

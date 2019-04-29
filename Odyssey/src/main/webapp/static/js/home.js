@@ -1,5 +1,5 @@
 function getOdysseys(userId, userName) {
-    const adminEmployeeUrl = 'http://localhost:8080/api/odysseys/getEmployeeOdysseys/' + userId;
+    const adminEmployeeUrl = 'http://odyssey-aws.eu-west-1.elasticbeanstalk.com/api/odysseys/getEmployeeOdysseys/' + userId;
     $.getJSON(adminEmployeeUrl, function (data) {
         if (data.length === 0) {
             document.getElementById("home-page-title").innerHTML = "Currently you have no Odysseys";
