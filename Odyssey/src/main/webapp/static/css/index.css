@@ -427,3 +427,14 @@ html, body {
     text-align: center;
     color: red;
 }
+
+.rating-number-left {
+    float: left;
+    padding-left: 14px;
+}
+
+.rating-number-right {
+    float: right;
+    padding-right: 15px;
+}
+

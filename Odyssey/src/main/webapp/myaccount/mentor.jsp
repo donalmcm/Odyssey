@@ -328,32 +328,37 @@
             <div class="modal-content">
                 <div class="modal-header new-employee-form-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h1><i class="fa fa-edit fa-3x"></i> Edit Odyssey Review</h1>
+                    <h1><i class="fa fa-edit fa-2x"></i> Edit Odyssey Review</h1>
                 </div>
                 <div class="modal-body" style="padding:40px 50px;">
                     <form role="form" method="post" id="odyssey-review-form">
                         <div class="form-group">
-                            <label for="punctuality">Punctuality</label>
+                            <label for="punctuality">Punctuality</label><br>
+                            <span class="rating-number-left">1</span><span class="rating-number-right">5</span>
                             <input class="form-control" type="range" id="punctuality" name="punctuality" min="1" max="5"
                                    required>
                         </div>
                         <div class="form-group">
-                            <label for="attendance">Attendance</label>
+                            <label for="attendance">Attendance</label><br>
+                            <span class="rating-number-left">1</span><span class="rating-number-right">5</span>
                             <input class="form-control" type="range" id="attendance" name="attendance" min="1" max="5"
                                    required>
                         </div>
                         <div class="form-group" id="course-material-section">
-                            <label for="courseMaterial">Course Material</label>
+                            <label for="courseMaterial">Course Material</label><br>
+                            <span class="rating-number-left">1</span><span class="rating-number-right">5</span>
                             <input class="form-control" type="range" id="courseMaterial" name="courseMaterial" min="1"
                                    max="5" required>
                         </div>
                         <div class="form-group" id="mentee-engagement-section">
-                            <label for="menteeEngagement">Mentee Engagement</label>
+                            <label for="menteeEngagement">Mentee Engagement</label><br>
+                            <span class="rating-number-left">1</span><span class="rating-number-right">5</span>
                             <input class="form-control" type="range" id="menteeEngagement" name="menteeEngagement"
                                    min="1" max="5" required>
                         </div>
                         <div class="form-group">
-                            <label for="rating">Rating</label>
+                            <label for="rating">Rating</label><br>
+                            <span class="rating-number-left">1</span><span class="rating-number-right">5</span>
                             <input class="form-control" type="range" id="rating" name="rating" min="1" max="5" required>
                         </div>
                         <div class="form-group">
